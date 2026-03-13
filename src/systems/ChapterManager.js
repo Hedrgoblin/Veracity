@@ -4,6 +4,8 @@
  */
 import gameStateManager from './GameStateManager.js';
 
+const BASE = import.meta.env.BASE_URL;
+
 class ChapterManager {
   constructor() {
     this.currentChapter = null;
@@ -20,7 +22,7 @@ class ChapterManager {
     }
 
     try {
-      const response = await fetch(`/data/chapters/chapter_${String(chapterNumber).padStart(2, '0')}.json`);
+      const response = await fetch(`${BASE}data/chapters/chapter_${String(chapterNumber).padStart(2, '0')}.json`);
 
       if (!response.ok) {
         throw new Error(`Failed to load chapter ${chapterNumber}: ${response.statusText}`);
