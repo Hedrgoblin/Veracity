@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "dialogue:export": "node extract-dialogue.cjs",
     "dialogue:import": "node sync-dialogue.cjs import",
-    "dialogue:watch": "node sync-dialogue.cjs watch"
+    "dialogue:watch": "node sync-dialogue.cjs watch",
+    "deploy": "npm run build && git checkout --orphan gh-pages-temp && git rm -rf . && cp -r dist/. . && rm -rf dist && git add -A && git commit -m 'Deploy to GitHub Pages' && git push origin gh-pages-temp:gh-pages --force && git checkout main && git branch -D gh-pages-temp"
   },
   "dependencies": {
     "phaser": "^3.80.1"
