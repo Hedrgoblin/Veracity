@@ -1,0 +1,167 @@
+{
+  "chapterNumber": 9,
+  "title": "The Activation",
+  "act": 3,
+  "description": "The Grand Architect demands completion. A choice must be made.",
+  "assets": {
+    "background": "placeholder_bg",
+    "music": null,
+    "characters": [
+      "vera",
+      "addie",
+      "rainie",
+      "da_default"
+    ]
+  },
+  "companions": [
+    "addie",
+    "rainie"
+  ],
+  "dialogue": {
+    "opening": [
+      {
+        "speaker": "Veracity",
+        "text": "what happened?"
+      },
+      {
+        "speaker": "Rainie",
+        "text": "What didn't happen! That old lady was the master of the entire Guild! and also, she thinks she is your mother."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "My Mother died when I was a baby."
+      },
+      {
+        "speaker": "Rainie",
+        "text": "I guess she didn't! and her staff was some kind of... I don't know, some kind of life suction device, only she did not expect to start sucking the life out of you but it did Vera! It did! We almost lost you!"
+      },
+      {
+        "speaker": "Veracity",
+        "text": "I was lost there for a minute, wasn't I?"
+      },
+      {
+        "speaker": "Rainie",
+        "text": "yes! But then Addie went all BEAR, did you she could do that? she went absolutely feral, and knocked the staff out of the Guildmaster's hands. You went flying, the Guildmaster went flying, Addie scared all those cultists, they'd never seen anything like her before! I tell you Vera, I haven't either!"
+      },
+      {
+        "speaker": "Veracity",
+        "text": "How did we end up here?"
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Addie grabbed you, and the professor like you were nothing. I grabbed all the notes I could find bcause, you know, and I ran after. MOST of the cult guys ran away but there was one with a staff and he threw it at Addie and hit her dead in the shoulder!"
+      },
+      {
+        "speaker": "Narrator",
+        "text": "Suddenly, the world comes into very sharp focus"
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Where is Addie? Is she ok? I need to see her, right now!"
+      },
+      {
+        "speaker": "Rainie",
+        "text": "The professor said I was to tell you to stay right.... aaand there she goes. WAIT UP!"
+      },
+      {
+        "speaker": "Narrator",
+        "text": "You wander downstairs to your father's laboratory in the basement. And there she is. The Bear you have loved all your life, who has always been by your side."
+      },
+      {
+        "speaker": "Father",
+        "text": "I told you to keep her out of here today."
+      },
+      {
+        "speaker": "Rainie",
+        "text": "I tried"
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Da, I can help..."
+      }
+    ],
+    "closing": [
+      {
+        "speaker": "Veracity",
+        "text": "Someday, I will need to go back to her"
+      },
+      {
+        "speaker": "Father",
+        "text": "But you have everything you need, here"
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Some things can't be changed. Some losses... we have to carry them. But that doesn't mean we stop living."
+      },
+      {
+        "speaker": "Narrator",
+        "text": "Father grabs your hand. Your companions flank you. You wait."
+      }
+    ]
+  },
+  "choices": [
+    {
+      "text": "Use a false core. Buy time for father to sabotage the device from within.",
+      "companion": "addie",
+      "consequences": {
+        "sabotage_plan": true
+      }
+    },
+    {
+      "text": "Pretend to use a companion's core, but switch it at the last second with a decoy.",
+      "companion": "rainie",
+      "consequences": {
+        "deception_plan": true
+      }
+    }
+  ],
+  "puzzle": {
+    "type": "connection",
+    "title": "The Failsafe Deception",
+    "instructions": "Secretly rewire the device while pretending to install the core. Create a failsafe.",
+    "points": [
+      {
+        "id": "core1",
+        "x": -200,
+        "y": -100,
+        "pair": "failsafe1"
+      },
+      {
+        "id": "failsafe1",
+        "x": 0,
+        "y": -100,
+        "pair": "core1"
+      },
+      {
+        "id": "core2",
+        "x": -200,
+        "y": 0,
+        "pair": "failsafe2"
+      },
+      {
+        "id": "failsafe2",
+        "x": 0,
+        "y": 0,
+        "pair": "core2"
+      },
+      {
+        "id": "core3",
+        "x": -200,
+        "y": 100,
+        "pair": "shutdown"
+      },
+      {
+        "id": "shutdown",
+        "x": 200,
+        "y": 0,
+        "pair": "core3"
+      }
+    ]
+  },
+  "storyFlags": {
+    "chapter9_complete": true,
+    "device_sabotaged": true,
+    "girl_taking_charge": true
+  },
+  "nextChapter": 10
+}

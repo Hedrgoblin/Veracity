@@ -1,0 +1,154 @@
+{
+  "chapterNumber": 13,
+  "title": "New Beginnings",
+  "act": 3,
+  "description": "Life moves forward. You've changed. The world notices.",
+  "assets": {
+    "background": "placeholder_bg",
+    "music": null,
+    "characters": [
+      "vera",
+      "addie",
+      "rainie"
+    ]
+  },
+  "companions": [
+    "addie",
+    "rainie"
+  ],
+  "dialogue": {
+    "opening": [
+      {
+        "speaker": "Narrator",
+        "text": "Weeks pass. The workshop returns to its rhythms. You're different now—confident, aware of your strength."
+      },
+      {
+        "speaker": "Addie",
+        "text": "Vera, you've been working on your own project all morning. What is it?"
+      },
+      {
+        "speaker": "Veracity",
+        "text": "A repair kit. For you and Rainie. So if anything happens, I can fix you myself."
+      },
+      {
+        "speaker": "Rainie",
+        "text": "You're learning your father's work!"
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Someone has to carry it forward. And... I think I want to. Not the dangerous stuff. But the good things. The helpful things."
+      },
+      {
+        "speaker": "Narrator",
+        "text": "A knock interrupts. The stranger from the train."
+      }
+    ],
+    "closing": [
+      {
+        "speaker": "Gentleman_paper",
+        "text": "You exposed the Order. You saved your father. And you showed that a girl and her companions could stand against forces much greater than themselves."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "I just did what I had to do."
+      },
+      {
+        "speaker": "Gentleman_paper",
+        "text": "That's what heroes always say. I came to give you this."
+      },
+      {
+        "speaker": "Narrator",
+        "text": "He hands you a brass token—a gear symbol."
+      },
+      {
+        "speaker": "Gentleman_paper",
+        "text": "If you ever need help, or if others need your help, this will open doors. The underground protects its own."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Thank you. But... I hope I won't need it."
+      },
+      {
+        "speaker": "Gentleman_paper",
+        "text": "*smiles* We always hope that, don't we? But the world keeps turning. And sometimes, it needs people like you."
+      }
+    ]
+  },
+  "choices": [
+    {
+      "text": "Accept the responsibility. Promise to help if needed.",
+      "companion": "addie",
+      "consequences": {
+        "accepted_responsibility": true
+      }
+    },
+    {
+      "text": "Accept gratefully, but make it clear—family comes first.",
+      "companion": "rainie",
+      "consequences": {
+        "prioritized_family": true
+      }
+    }
+  ],
+  "puzzle": {
+    "type": "connection",
+    "title": "The Apprentice's First Work",
+    "instructions": "Wire the repair kit correctly. Show what you've learned.",
+    "points": [
+      {
+        "id": "tool1",
+        "x": -250,
+        "y": -100,
+        "pair": "socket1"
+      },
+      {
+        "id": "socket1",
+        "x": 0,
+        "y": -100,
+        "pair": "tool1"
+      },
+      {
+        "id": "tool2",
+        "x": -250,
+        "y": 0,
+        "pair": "socket2"
+      },
+      {
+        "id": "socket2",
+        "x": 0,
+        "y": 0,
+        "pair": "tool2"
+      },
+      {
+        "id": "tool3",
+        "x": -250,
+        "y": 100,
+        "pair": "socket3"
+      },
+      {
+        "id": "socket3",
+        "x": 0,
+        "y": 100,
+        "pair": "tool3"
+      },
+      {
+        "id": "power",
+        "x": 150,
+        "y": 0,
+        "pair": "core"
+      },
+      {
+        "id": "core",
+        "x": 250,
+        "y": 0,
+        "pair": "power"
+      }
+    ]
+  },
+  "storyFlags": {
+    "chapter13_complete": true,
+    "gained_recognition": true,
+    "learned_to_build": true
+  },
+  "nextChapter": 14
+}

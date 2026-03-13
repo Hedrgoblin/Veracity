@@ -1,0 +1,112 @@
+{
+  "chapterNumber": 7,
+  "title": "Shadows and Gears",
+  "act": 2,
+  "description": "Deeper into the sanctuary, closer to father, closer to danger.",
+  "assets": {
+    "background": "placeholder_bg",
+    "music": null,
+    "characters": [
+      "vera",
+      "addie",
+      "rainie",
+      "da_default",
+      "cultist_guard_staff"
+    ]
+  },
+  "companions": [
+    "addie",
+    "rainie"
+  ],
+  "dialogue": {
+    "opening": [
+      {
+        "speaker": "Narrator",
+        "text": "Through the corridors, heart pounding. Blue-uniformed workers pass without noticing."
+      },
+      {
+        "speaker": "Addie",
+        "text": "There. That door has extra guards. Whatever they're protecting, it must be important."
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Or it's where they're keeping your father!"
+      },
+      {
+        "speaker": "Veracity",
+        "text": "We need to get past those guards."
+      },
+      {
+        "speaker": "Narrator",
+        "text": "Alarms blare. Red lights flash."
+      },
+      {
+        "speaker": "Guard",
+        "text": "Intruder alert! Sector seven! All units respond!"
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Uh oh. That might be my fault. I may have knocked something over in the vent..."
+      },
+      {
+        "speaker": "Narrator",
+        "text": "The guards jump up, look at each other, and run towards the sounds."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Well done Rainie!"
+      }
+    ],
+    "closing": [
+      {
+        "speaker": "Narrator",
+        "text": "Through the chaos, into a... lovely warm cozy study. There, at a bench\u2014your father."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Da!"
+      },
+      {
+        "speaker": "Father",
+        "text": "My clever girl, as soon as I saw the moth, I knew you'd find me."
+      }
+    ]
+  },
+  "choices": [
+    {
+      "text": "Stand between father and the cultists. Protect him, no matter what.",
+      "companion": "addie",
+      "consequences": {
+        "protective_stance": true,
+        "addie_damaged": true
+      }
+    },
+    {
+      "text": "Create a distraction. Knock over equipment, cause chaos, give father time to escape!",
+      "companion": "rainie",
+      "consequences": {
+        "chaos_distraction": true,
+        "rainie_damaged": true
+      }
+    }
+  ],
+  "puzzle": {
+    "type": "rhythm",
+    "title": "The Breath Between Chaos",
+    "instructions": "In the chaos, find your center. Breathe. Think. Act.",
+    "pattern": [
+      1000,
+      2000,
+      3000,
+      4000,
+      5000
+    ]
+  },
+  "storyFlags": {
+    "chapter7_complete": true,
+    "found_father": true,
+    "confronted_grand_architect": true,
+    "companion_injured": true
+  },
+  "nextChapter": 8
+}
