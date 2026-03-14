@@ -1,0 +1,207 @@
+{
+  "chapterNumber": 8,
+  "title": "The Missing Piece",
+  "act": 2,
+  "description": "Captured, but not defeated. The truth begins to emerge.",
+  "assets": {
+    "background": "placeholder_bg",
+    "music": null,
+    "characters": [
+      "vera",
+      "addie",
+      "rainie",
+      "da_default",
+      "guildmaster"
+    ]
+  },
+  "companions": [
+    "addie",
+    "rainie"
+  ],
+  "dialogue": {
+    "opening": [
+      {
+        "speaker": "Narrator",
+        "text": "Discovered."
+      },
+      {
+        "speaker": "Father",
+        "text": "I'm so sorry. I never wanted you involved in this. The Order... they're obsessed with controlling time itself."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "The device\u2014the Temporal Resonance Device. Can it really work?"
+      },
+      {
+        "speaker": "Father",
+        "text": "No. Maybe. No. It was a thought experiment, nothing more. But I made the mistake of showing my ideas to the wrong person. The Order believes it can reshape history, undo their regrets."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Why do they think they can force you to build it?"
+      },
+      {
+        "speaker": "Father",
+        "text": "Because they don't understand. The device needs a stabilizing core\u2014something that exists outside of time's flow. I wrote about a theoretical component, but it doesn't exist."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "What kind of component?"
+      },
+      {
+        "speaker": "Narrator",
+        "text": "His eyes flit to the door, then to you."
+      },
+      {
+        "speaker": "Father",
+        "text": "We dont have time to talk about this now...We must be quick. They're  trying to forcing me to complete the device, but I can't. If they realize\u2014"
+      },
+      {
+        "speaker": "Narrator",
+        "text": "The door bursts open. Cultists surround you."
+      },
+      {
+        "speaker": "Guildmaster",
+        "text": "How touching. A family reunion."
+      },
+      {
+        "speaker": "Addie",
+        "text": "Vera, behind me. Now."
+      },
+      {
+        "speaker": "Narrator",
+        "text": "The woman standing in the doorway smiles at you. She looks familiar."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "I... know you."
+      },
+      {
+        "speaker": "Guildmaster",
+        "text": "I would think you might."
+      },
+      {
+        "speaker": "Father",
+        "text": "Liona, no."
+      },
+      {
+        "speaker": "Guildmaster",
+        "text": "Come closer my love. My eyes are not what they once where..."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "You're the old woman we met in front of the Clockworker's Guild. I gave you a penny."
+      },
+      {
+        "speaker": "Guildmaster",
+        "text": "You did. What a kind young woman you have turned out to be."
+      },
+      {
+        "speaker": "Narrator",
+        "text": "You find yourself strangely drawn towards this woman."
+      },
+      {
+        "speaker": "Narrator",
+        "text": "Suddenly, the crystal in her walking stick illuminates. The light is blinding. You can hear your father and friends shouting in the distance, and then everything goes black."
+      },
+      {
+        "speaker": "Guildmaster",
+        "text": "Listen to me."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "I'm listening..."
+      },
+      {
+        "speaker": "Guildmaster",
+        "text": "Once upon a time, there was a little girl. She had a mother and a father..."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "and a Bear to protect her, and a raccoon to love her..."
+      },
+      {
+        "speaker": "Guildmaster",
+        "text": "She had a mother that loved her very much. The father took something from the mother, and sent her far far away..."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "I'm far far away..."
+      },
+      {
+        "speaker": "Narrator",
+        "text": "In the distance, you can hear Addie. She's roaring. You can hear screaming, who is screaming? Everything is so black"
+      },
+      {
+        "speaker": "Addie",
+        "text": "If ANY of you touch her again. I will kill you all."
+      },
+      {
+        "speaker": "Narrator",
+        "text": "you fade to black again"
+      }
+    ],
+    "closing": [
+      {
+        "speaker": "Father",
+        "text": "Something untouched by time's passage. Something that remains constant while everything else changes. In my paper, I called it a 'temporal anchor.'"
+      },
+      {
+        "speaker": "Narrator",
+        "text": "Your companion sparks again. Something strange\u2014the pattern's consistent. Unchanging. A heartbeat that never varies."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Da... my companions. You built them. What did you use for their core processors?"
+      },
+      {
+        "speaker": "Father",
+        "text": "A crystalline matrix I discovered years ago. Very rare. It maintains perfect consistency in all conditions\u2014"
+      },
+      {
+        "speaker": "Narrator",
+        "text": "His face pales."
+      },
+      {
+        "speaker": "Father",
+        "text": "No. No, that's why you came with them. The Order doesn't know. They can't know."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "My companions... they're the missing piece?"
+      }
+    ]
+  },
+  "choices": [
+    {
+      "text": "We protect them both. We find another way out of this that doesn't sacrifice anyone.",
+      "companion": "addie",
+      "consequences": {
+        "protective_choice": true
+      }
+    },
+    {
+      "text": "We use this knowledge. Make the Order think we'll cooperate, then turn their own device against them.",
+      "companion": "rainie",
+      "consequences": {
+        "deceptive_cooperation": true
+      }
+    }
+  ],
+  "puzzle": {
+    "type": "gather_sort",
+    "title": "Mending a Metal Heart",
+    "instructions": "Gather tools and parts to repair your injured companion. They need you now.",
+    "slots": [
+      "tools",
+      "parts",
+      "power"
+    ]
+  },
+  "storyFlags": {
+    "chapter8_complete": true,
+    "discovered_truth": true,
+    "companions_are_key": true
+  },
+  "nextChapter": 9
+}

@@ -1,0 +1,124 @@
+{
+  "chapterNumber": 10,
+  "title": "Temporal Resonance",
+  "act": 3,
+  "description": "The device activates. Reality trembles. Everything hangs in the balance.",
+  "assets": {
+    "background": "placeholder_bg",
+    "music": null,
+    "characters": [
+      "vera",
+      "addie",
+      "rainie",
+      "da_default",
+      "guildmaster"
+    ]
+  },
+  "companions": [
+    "addie",
+    "rainie"
+  ],
+  "dialogue": {
+    "opening": [
+      {
+        "speaker": "Narrator",
+        "text": "The device hums to life. Gears spin faster. The air shimmers and bends."
+      },
+      {
+        "speaker": "Grand Architect",
+        "text": "Yes! YES! The temporal resonance is building! We will reshape history itself!"
+      },
+      {
+        "speaker": "Father",
+        "text": "*whispers* The failsafe. When I give the signal, activate it."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "*whispers* I'm ready."
+      },
+      {
+        "speaker": "Narrator",
+        "text": "Something's wrong. The hum becomes a scream. Cultists look around in confusion and fear."
+      },
+      {
+        "speaker": "Cultist",
+        "text": "Grand Architect! The readings! The temporal field is destabilizing!"
+      },
+      {
+        "speaker": "Grand Architect",
+        "text": "Impossible! The core should stabilize\u2014"
+      },
+      {
+        "speaker": "Narrator",
+        "text": "He turns to you, eyes furious."
+      },
+      {
+        "speaker": "Grand Architect",
+        "text": "What did you do?!"
+      }
+    ],
+    "closing": [
+      {
+        "speaker": "Veracity",
+        "text": "I gave you exactly what you asked for. A device that can affect time. Just not in the way you wanted."
+      },
+      {
+        "speaker": "Father",
+        "text": "The resonance feedback will destroy the device and everything within a hundred meters. We have minutes. Everyone, evacuate!"
+      },
+      {
+        "speaker": "Narrator",
+        "text": "Chaos. Cultists flee. Alarms blare. The Grand Architect stands frozen, staring at his collapsing dream."
+      },
+      {
+        "speaker": "Grand Architect",
+        "text": "No. NO! This was supposed to save us! To give us back what we lost!"
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Some things can't be changed. Some losses... we have to carry them. But that doesn't mean we stop living."
+      },
+      {
+        "speaker": "Narrator",
+        "text": "Father grabs your hand. Your companions flank you. You run."
+      }
+    ]
+  },
+  "choices": [
+    {
+      "text": "Try to save the Grand Architect. Even now, a life is a life.",
+      "companion": "addie",
+      "consequences": {
+        "saved_architect": true,
+        "compassionate_ending": true
+      }
+    },
+    {
+      "text": "Focus on escape. He made his choice. We make ours.",
+      "companion": "rainie",
+      "consequences": {
+        "left_architect": true,
+        "pragmatic_ending": true
+      }
+    }
+  ],
+  "puzzle": {
+    "type": "rhythm",
+    "title": "Racing the Collapse",
+    "instructions": "Match your pace to your heartbeat. Don't panic. Keep moving.",
+    "pattern": [
+      600,
+      1200,
+      1800,
+      2400,
+      3000,
+      3600
+    ]
+  },
+  "storyFlags": {
+    "chapter10_complete": true,
+    "device_destroyed": true,
+    "escaped_sanctuary": true
+  },
+  "nextChapter": 11
+}

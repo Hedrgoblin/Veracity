@@ -1,0 +1,142 @@
+{
+  "chapterNumber": 6,
+  "title": "The Northern Sanctuary",
+  "act": 2,
+  "description": "A fortress of stone and steam guards its secrets jealously.",
+  "assets": {
+    "background": "placeholder_bg",
+    "music": null,
+    "characters": [
+      "vera",
+      "addie",
+      "rainie"
+    ]
+  },
+  "companions": [
+    "addie",
+    "rainie"
+  ],
+  "dialogue": {
+    "opening": [
+      {
+        "speaker": "Narrator",
+        "text": "The sanctuary rises from the mountainside, wreathed in steam and shadow."
+      },
+      {
+        "speaker": "Rainie",
+        "text": "That's it? That's where they're holding your father? It's huge!"
+      },
+      {
+        "speaker": "Addie",
+        "text": "And heavily guarded, Vera. Look—patrol routes, watchtowers. We can't just walk in."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Then we find another way. Da's in there. The moth compass is clear."
+      },
+      {
+        "speaker": "Narrator",
+        "text": "From the rocks, you study the sanctuary. Steam vents line the walls. Machinery clangs in the distance."
+      },
+      {
+        "speaker": "Addie",
+        "text": "There. A service entrance on the east side. It's used by workers. Maybe we can blend in."
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Or we use these steam vents! Climb up through the ventilation system!"
+      }
+    ],
+    "closing": [
+      {
+        "speaker": "Narrator",
+        "text": "Inside—a maze of corridors and workshops. Construction echoes everywhere."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "What are they building?"
+      },
+      {
+        "speaker": "Addie",
+        "text": "Look at these blueprints on the wall. It's... some kind of massive device. Like a clock, but wrong."
+      },
+      {
+        "speaker": "Rainie",
+        "text": "The Temporal Resonance Device. That's what they called it, right, Vera?"
+      },
+      {
+        "speaker": "Narrator",
+        "text": "A blueprint fragment catches your eye. Father's handwriting: 'Component missing. Core will not stabilize without—' The rest torn away."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Da knew it wouldn't work. He was trying to stop them all along."
+      }
+    ]
+  },
+  "choices": [
+    {
+      "text": "Take the worker entrance. Disguise ourselves, move slowly, avoid suspicion.",
+      "companion": "addie",
+      "consequences": {
+        "disguised_entry": true
+      }
+    },
+    {
+      "text": "Climb through the vents. Fast, direct, and we can scout from above.",
+      "companion": "rainie",
+      "consequences": {
+        "vent_infiltration": true
+      }
+    }
+  ],
+  "puzzle": {
+    "type": "connection",
+    "title": "Threading the Watchful Eye",
+    "instructions": "Rewire the security panel to disable the alarms without being detected.",
+    "points": [
+      {
+        "id": "power1",
+        "x": -250,
+        "y": -80,
+        "pair": "bypass1"
+      },
+      {
+        "id": "bypass1",
+        "x": -50,
+        "y": -80,
+        "pair": "power1"
+      },
+      {
+        "id": "power2",
+        "x": -250,
+        "y": 0,
+        "pair": "bypass2"
+      },
+      {
+        "id": "bypass2",
+        "x": -50,
+        "y": 0,
+        "pair": "power2"
+      },
+      {
+        "id": "power3",
+        "x": -250,
+        "y": 80,
+        "pair": "bypass3"
+      },
+      {
+        "id": "bypass3",
+        "x": -50,
+        "y": 80,
+        "pair": "power3"
+      }
+    ]
+  },
+  "storyFlags": {
+    "chapter6_complete": true,
+    "infiltrated_sanctuary": true,
+    "found_blueprint_fragment": true
+  },
+  "nextChapter": 7
+}

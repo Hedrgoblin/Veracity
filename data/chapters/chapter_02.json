@@ -1,0 +1,225 @@
+{
+  "chapterNumber": 2,
+  "title": "Empty Rooms",
+  "act": 1,
+  "description": "Father is gone. His study holds secrets you've never seen before.",
+  "assets": {
+    "background": "home_office_ransacked_day",
+    "music": null,
+    "characters": [
+      "vera",
+      "addie",
+      "rainie"
+    ],
+    "characterFolders": {
+      "addie": "addie_home"
+    }
+  },
+  "companions": [
+    "addie",
+    "rainie"
+  ],
+  "dialogue": {
+    "opening": [
+      {
+        "speaker": "Narrator",
+        "text": "The door gives way. Everything is in chaos.",
+        "showOnlyVera": true
+      },
+      {
+        "speaker": "Addie",
+        "text": "This isn't right. The professor would never leave the room like this.",
+        "expression": {
+          "addie_home": "sad",
+          "vera": "sad",
+          "rainie": "sad"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Look at all these papers! Someone was looking for something."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "I see a piece of paper with my name on it."
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Here's another one! it looks like a note!",
+        "expression": {
+          "rainie": "surprised"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "You search carefully. More torn pieces lie scattered across the floor."
+      }
+    ],
+    "midpoint": [
+      {
+        "speaker": "Rainie",
+        "text": "Vera, what did he mean?",
+        "expression": {
+          "rainie": "surprised"
+        },
+        "background": "home_office_ransacked_day_revealed"
+      },
+      {
+        "speaker": "Veracity",
+        "text": "I don't know, but someone has kidnapped Da.",
+        "expression": {
+          "vera": "sad",
+          "rainie": "sad",
+          "addie_home": "sad"
+        }
+      },
+      {
+        "speaker": "Addie",
+        "text": "Let's leave this room. It's not safe.",
+        "expression": {
+          "addie_home": "neutral",
+          "vera": "neutral"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "You all sit in silence for a moment.",
+        "expression": {
+          "vera": "sad",
+          "rainie": "sad",
+          "addie_home": "sad"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "What do you think the professor was talking about in the note?"
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Da showed me a secret panel once... let's see if it's still there...",
+        "expression": {
+          "vera": "neutral"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "You walk through the room and look down at the front panel on your father's desk. What was the secret combination again? If only you could remember it..."
+      }
+    ],
+    "closing": [
+      {
+        "speaker": "Narrator",
+        "text": "You pull out what looks like a well-worn journal and a small cedar box with the symbol of a moth on it.",
+        "expression": {
+          "rainie": "neutral"
+        },
+        "showItem": "notebook_01",
+        "hideCharacters": true,
+        "background": "home_office_ransacked_day_revealed"
+      },
+      {
+        "speaker": "Rainie",
+        "text": "a secret panel?!",
+        "expression": {
+          "rainie": "surprised"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "What do we do now?",
+        "expression": {
+          "rainie": "sad"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "I guess we read the journal.",
+        "expression": {
+          "vera": "neutral"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "You carefully open the worn leather journal. There aer pages of diagrams, calculations, and notes. But tucked inside—a folded letter addressed to you."
+      },
+      {
+        "speaker": "Addie",
+        "text": "Wait, Vera. There's another note here.",
+        "expression": {
+          "addie_home": "surprised"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "Addie unfolds it carefully. The handwriting is your father's."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Addie, we have to find him.",
+        "expression": {
+          "vera": "neutral",
+          "addie_home": "sad"
+        },
+        "showItem": "note_dear_vera_02"
+      },
+      {
+        "speaker": "Addie",
+        "text": "It's dangerous out there, Vera. To say nothing of the quality of tea one finds while traveling... But yes. We have to find the professor.",
+        "expression": {
+          "addie_home": "neutral",
+          "vera": "sad"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Adventure! We'll find him, Vera. Don't worry!",
+        "expression": {
+          "rainie": "happy",
+          "vera": "neutral"
+        }
+      },
+      {
+        "speaker": "Addie",
+        "text": "I'll start packing.",
+        "expression": {
+          "addie_home": "neutral"
+        }
+      }
+    ]
+  },
+  "puzzle": {
+    "type": "puzzle_pieces",
+    "title": "Piece Together the Note",
+    "instructions": "Arrange the torn pieces to read the full message.",
+    "pieceCount": 7,
+    "finalImage": "note_dear_vera"
+  },
+  "deskPuzzle": {
+    "type": "sequence",
+    "title": "The Secret Panel",
+    "instructions": "Follow Da's secret sequence to open the hidden compartment.",
+    "steps": [
+      {
+        "action": "kick",
+        "count": 3,
+        "label": "Kick"
+      },
+      {
+        "action": "hum",
+        "count": 3,
+        "label": "Hum"
+      },
+      {
+        "action": "kick",
+        "count": 1,
+        "label": "Kick"
+      }
+    ]
+  },
+  "storyFlags": {
+    "chapter2_complete": true,
+    "discovered_cult": true,
+    "found_map": true
+  },
+  "nextChapter": 3
+}

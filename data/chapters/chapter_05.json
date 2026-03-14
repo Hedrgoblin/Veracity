@@ -1,0 +1,136 @@
+{
+  "chapterNumber": 5,
+  "title": "The Clockwork Train",
+  "act": 2,
+  "description": "A journey north begins, racing against time.",
+  "assets": {
+    "background": "placeholder_bg",
+    "music": null,
+    "characters": [
+      "vera",
+      "addie",
+      "rainie",
+      "gentleman_paper"
+    ]
+  },
+  "companions": [
+    "addie",
+    "rainie"
+  ],
+  "dialogue": {
+    "opening": [
+      {
+        "speaker": "Narrator",
+        "text": "Dawn. The northern train departs."
+      },
+      {
+        "speaker": "Addie",
+        "text": "Vera, we should rest while we can. The journey will take all day."
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Rest? How can you rest? We're on an adventure! Save the Professor, find out with the creepers want with his pocket watch, save the day!"
+      },
+      {
+        "speaker": "Addie",
+        "text": "ht mkee you think it's a pocket watch?"
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Everything the professor does, involves a pocket watch. I have one right here... so do you, somewhere..."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Every time I close my eyes, I see Da in danger."
+      },
+      {
+        "speaker": "Rainie",
+        "text": "I know a trick. Close your.."
+      },
+      {
+        "speaker": "Addie",
+        "text": "So do I. Tea. It never fails."
+      },
+      {
+        "speaker": "Narrator",
+        "text": "A gentleman in fine clothes sits across from you, reading. He glances over the pages."
+      },
+      {
+        "speaker": "Gentleman",
+        "text": "Traveling alone, young miss? That's quite unusual. Do your parents know where you are?"
+      },
+      {
+        "speaker": "Addie",
+        "text": "Sir. She's hardly alone."
+      },
+      {
+        "speaker": "Gentleman",
+        "text": "Beg your pardon..."
+      }
+    ],
+    "closing": [
+      {
+        "speaker": "Veracity",
+        "text": "I'm visiting my aunt up north. My... my companions keep me safe."
+      },
+      {
+        "speaker": "Gentleman",
+        "text": "Ah, clockwork companions. Marvelous craftsmanship. Your father must be quite skilled."
+      },
+      {
+        "speaker": "Narrator",
+        "text": "His tone unsettles you. You say nothing."
+      },
+      {
+        "speaker": "Gentleman",
+        "text": "You know, I once met an inventor who specialized in temporal mechanics. Brilliant man. Tragic that such minds attract... unwanted attention."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Some might say the tragedy is the unwanted attention from lesser minds."
+      },
+      {
+        "speaker": "Gentleman",
+        "text": "Certain types of knowledge are dangerous, child. Be careful which doors you open. And what you do with the time you have at your disposal."
+      },
+      {
+        "speaker": "Narrator",
+        "text": "He returns to his newspaper. You settle back into your seat and look at the scenery for a long time."
+      }
+    ]
+  },
+  "choices": [
+    {
+      "text": "Keep to ourselves and stay quiet. Don't draw attention.",
+      "companion": "addie",
+      "consequences": {
+        "cautious_travel": true
+      }
+    },
+    {
+      "text": "Ask the gentleman directly if he knows about the Order. He clearly knows something.",
+      "companion": "rainie",
+      "consequences": {
+        "confronted_gentleman": true
+      }
+    }
+  ],
+  "puzzle": {
+    "type": "rhythm",
+    "title": "The Heartbeat Engine",
+    "instructions": "The train's mechanical heart beats in a pattern. Breathe with it to calm your nerves.",
+    "pattern": [
+      800,
+      1600,
+      2400,
+      3200,
+      4000
+    ]
+  },
+  "storyFlags": {
+    "chapter5_complete": true,
+    "met_mysterious_gentleman": true,
+    "traveling_north": true
+  },
+  "nextChapter": 6
+}

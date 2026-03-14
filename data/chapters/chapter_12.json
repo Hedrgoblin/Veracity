@@ -1,0 +1,125 @@
+{
+  "chapterNumber": 12,
+  "title": "Home Again",
+  "act": 3,
+  "description": "The workshop welcomes you back, but everything has changed.",
+  "assets": {
+    "background": "placeholder_bg",
+    "music": null,
+    "characters": [
+      "vera",
+      "addie",
+      "rainie",
+      "da_default"
+    ]
+  },
+  "companions": [
+    "addie",
+    "rainie"
+  ],
+  "dialogue": {
+    "opening": [
+      {
+        "speaker": "Narrator",
+        "text": "The workshop unchanged\u2014gears on tables, tools on racks, half-finished projects gathering dust."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "It feels like we've been gone for years."
+      },
+      {
+        "speaker": "Father",
+        "text": "Only a week. But you're right. Everything feels different now."
+      },
+      {
+        "speaker": "Narrator",
+        "text": "He cleans up, putting away his temporal research."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "What will you work on now?"
+      },
+      {
+        "speaker": "Father",
+        "text": "Simple things. Useful things. No more playing with forces I don't fully understand."
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Does this mean no more adventures?"
+      },
+      {
+        "speaker": "Father",
+        "text": "*laughs* I think you've all had quite enough adventure for a while."
+      }
+    ],
+    "closing": [
+      {
+        "speaker": "Narrator",
+        "text": "Evening. Sunset through the workshop windows. Father calls you to his workbench."
+      },
+      {
+        "speaker": "Father",
+        "text": "I have something for you. I've been working on it for months, but... I think now is the right time."
+      },
+      {
+        "speaker": "Narrator",
+        "text": "A small music box. Intricate, beautiful."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "It's beautiful."
+      },
+      {
+        "speaker": "Father",
+        "text": "It was your mother's favorite melody. I've been trying to recreate it from memory. I'm not sure I got it right, but..."
+      },
+      {
+        "speaker": "Narrator",
+        "text": "He winds it up. Gentle melody fills the workshop. Never heard before, yet familiar. Safe. Home."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Tell me about her?"
+      },
+      {
+        "speaker": "Father",
+        "text": "I'd like that."
+      }
+    ]
+  },
+  "choices": [
+    {
+      "text": "Listen quietly as father shares memories of mother.",
+      "companion": "addie",
+      "consequences": {
+        "learned_about_mother": true
+      }
+    },
+    {
+      "text": "Ask questions, learn everything you can about who she was.",
+      "companion": "rainie",
+      "consequences": {
+        "many_questions_asked": true
+      }
+    }
+  ],
+  "puzzle": {
+    "type": "rhythm",
+    "title": "Echoes of Yesterday",
+    "instructions": "The music box plays. Listen. Remember. This is part of who you are.",
+    "pattern": [
+      1000,
+      2000,
+      2500,
+      3500,
+      4500,
+      5000
+    ]
+  },
+  "storyFlags": {
+    "chapter12_complete": true,
+    "received_music_box": true,
+    "learned_mothers_story": true
+  },
+  "nextChapter": 13
+}
