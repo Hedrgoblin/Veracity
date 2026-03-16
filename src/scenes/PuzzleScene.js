@@ -84,6 +84,32 @@ export default class PuzzleScene extends Phaser.Scene {
         this.load.image(item, `${BASE}assets/images/puzzles/tea/${item}.png`);
       }
     });
+
+    // Load tea service equipment and ingredient icons
+    ['icon_faucet', 'icon_ice', 'icon_trash',
+     'icon_tea_black', 'icon_trea_herbal', 'icon_creamer', 'icon_lemon', 'icon_sugar',
+     'icon_teapot_bear', 'icon_teapot_bird', 'icon_teapot_green'].forEach(key => {
+      if (!this.textures.exists(key)) {
+        this.load.image(key, `${BASE}assets/images/puzzles/tea_items/${key}.png`);
+      }
+    });
+    ['addie', 'cultist_bookkeeper', 'cultist_enforcer',
+     'cultist_guard', 'cultist_guard_staff', 'da',
+     'gentleman_paper', 'guildmaster', 'rainie', 'vera'].forEach(char => {
+      const key = `tea_teacup_${char}`;
+      if (!this.textures.exists(key)) {
+        this.load.image(key, `${BASE}assets/images/puzzles/tea_items/icon_teacup_${char}.png`);
+      }
+    });
+    ['addie_default', 'cultist_bookkeeper', 'cultist_enforcer', 'cultist_guard',
+     'cultist_guard_staff', 'da_default', 'genlteman_paper', 'rainie_default', 'vera_default'].forEach(char => {
+      ['happy', 'neutral', 'irritated'].forEach(state => {
+        const key = `tea_char_${char}_${state}`;
+        if (!this.textures.exists(key)) {
+          this.load.image(key, `${BASE}assets/images/puzzles/tea_character_icons/icon_${char}_${state}.png`);
+        }
+      });
+    });
   }
 
   create() {
@@ -1909,12 +1935,17 @@ export default class PuzzleScene extends Phaser.Scene {
       cust.patienceBarFill.scaleX = frac;
       cust.patienceBarFill.setFillStyle(frac > 0.66 ? 0x4caf50 : frac > 0.33 ? 0xffc107 : 0xf44336);
       const prevHappy = cust.happiness;
-      if (frac > 0.66) cust.happiness = 'happy';
-      else if (frac > 0.33) cust.happiness = 'neutral';
+      if (frac > 0.33) cust.happiness = 'neutral';
       else cust.happiness = 'mad';
       if (cust.happiness !== prevHappy) {
-        const emojis = { happy: '😊', neutral: '😐', mad: '😠' };
-        cust.happinessText.setText(emojis[cust.happiness]);
+        const vis = this.ts.customerVisuals[slot];
+        if (vis.custIcon._isImage) {
+          const iconState = cust.happiness === 'mad' ? 'irritated' : cust.happiness;
+          vis.custIcon.setTexture(`tea_char_${cust.charName}_${iconState}`).setDisplaySize(80, 130);
+        } else {
+          const emojis = { neutral: '😐', mad: '😠' };
+          cust.happinessText.setText(emojis[cust.happiness] || '');
+        }
       }
     }
   }
@@ -1945,13 +1976,19 @@ export default class PuzzleScene extends Phaser.Scene {
       inventory:        Object.assign({ black_tea: 10, herbal: 8, cream: 6, lemon: 6, sugar: 6 }, pd.inventory || {}),
       recipes:          allRecipes,
       cups:             Array.from({ length: pd.startingCups || 1 }, () => ({
-        state: 'empty', cold: false, recipe: null
+        state: 'empty', cold: false, recipe: null, charName: null
       })),
       customers:        [null, null, null],
       teapot:           { state: 'empty', cold: false },
       nextSpawnMs:      5000,
       spawnStopped:     false,
       score:            { teacupsEarned: 0, served: 0, missed: 0, totalCustomers: 0 },
+      custChars:        ['addie_default', 'cultist_bookkeeper', 'cultist_enforcer',
+                         'cultist_guard', 'cultist_guard_staff', 'da_default',
+                         'genlteman_paper', 'rainie_default', 'vera_default'],
+      teacupChars:      ['addie', 'cultist_bookkeeper', 'cultist_enforcer',
+                         'cultist_guard', 'cultist_guard_staff', 'da',
+                         'gentleman_paper', 'guildmaster', 'rainie', 'vera'],
       // Visual refs filled below
       timerText: null, timerBar: null, scoreText: null,
       cupVisuals: [], customerVisuals: [], invTexts: {},
@@ -1975,9 +2012,8 @@ export default class PuzzleScene extends Phaser.Scene {
       stroke: '#000', strokeThickness: 2, align: 'center'
     }).setOrigin(0.5).setDepth(160);
 
-    // Start session
-    this.ts.sessionActive = true;
-    this.tsScheduleSpawn();
+    // Start tutorial
+    this.tsTutInit(w, h);
   }
 
   tsBuildHUD(w, h) {
@@ -2009,23 +2045,23 @@ export default class PuzzleScene extends Phaser.Scene {
     const lbl = (x, y, text) => this.add.text(x, y, text, {
       fontSize: '10px', fontFamily: 'Courier New', color: '#8b7355'
     }).setOrigin(0.5).setDepth(160);
-    const btn = (x, y, icon, onTap) => {
-      const t = this.add.text(x, y, icon, { fontSize: '32px' })
-        .setOrigin(0.5).setDepth(160).setInteractive({ useHandCursor: true });
-      t.on('pointerdown', onTap);
-      t.on('pointerover', () => t.setScale(1.15));
-      t.on('pointerout', () => t.setScale(1));
-      return t;
+    const btnImg = (x, y, texKey, onTap) => {
+      const img = this.add.image(x, y, texKey)
+        .setDisplaySize(96, 96).setOrigin(0.5).setDepth(160).setInteractive({ useHandCursor: true });
+      img.on('pointerdown', onTap);
+      img.on('pointerover', () => img.setScale(img.scaleX * 1.15, img.scaleY * 1.15));
+      img.on('pointerout',  () => img.setDisplaySize(96, 96));
+      return img;
     };
 
     const equipY = 130;
 
     // Faucet
-    btn(70, equipY, '🚰', () => this.tsTapFaucet());
+    btnImg(70, equipY, 'icon_faucet', () => this.tsTapFaucet());
     lbl(70, equipY + 30, 'Faucet');
 
     // Teapot
-    this.ts.teapotIcon = btn(w / 2, equipY, '🫖', () => this.tsTapTeapot());
+    this.ts.teapotIcon = btnImg(w / 2, equipY, 'icon_teapot_bear', () => this.tsTapTeapot());
     lbl(w / 2, equipY + 30, 'Teapot');
     this.ts.teapotWaterLabel = this.add.text(w / 2, equipY - 28, '', {
       fontSize: '14px'
@@ -2041,49 +2077,65 @@ export default class PuzzleScene extends Phaser.Scene {
       .setOrigin(0, 0.5).setDepth(161).setAlpha(0);
 
     // Ice bucket
-    btn(w - 70, equipY, '🧊', () => this.tsTapIce());
+    btnImg(w - 70, equipY, 'icon_ice', () => this.tsTapIce());
     lbl(w - 70, equipY + 30, 'Ice');
 
-    // Trash
-    btn(w - 40, h - 230, '🗑️', () => this.tsTapTrash());
-    lbl(w - 40, h - 200, 'Discard');
+    // Trash — sits above the ingredient bar
+    btnImg(w - 40, h - 310, 'icon_trash', () => this.tsTapTrash());
+    lbl(w - 40, h - 265, 'Discard');
 
     // Teacup slots
     const cupCount = this.ts.cups.length;
-    const cupY = 310;
+    const cupY = 370;
     const cupXs = cupCount === 1 ? [w / 2] :
                   cupCount === 2 ? [w / 2 - 70, w / 2 + 70] :
                                    [w / 2 - 120, w / 2, w / 2 + 120];
 
     this.ts.cupVisuals = cupXs.map((cx, i) => {
-      const icon = this.add.text(cx, cupY, '☕', { fontSize: '36px' })
-        .setOrigin(0.5).setDepth(160).setInteractive({ useHandCursor: true });
+      const charName = 'vera'; // default; updates dynamically when a customer is assigned
+      const texKey = `tea_teacup_${charName}`;
+      const iconTexKey = this.textures.exists(texKey) ? texKey : null;
+      let icon;
+      if (iconTexKey) {
+        icon = this.add.image(cx, cupY, iconTexKey)
+          .setDisplaySize(192, 192).setOrigin(0.5).setDepth(160).setInteractive({ useHandCursor: true });
+      } else {
+        icon = this.add.text(cx, cupY, '☕', { fontSize: '72px' })
+          .setOrigin(0.5).setDepth(160).setInteractive({ useHandCursor: true });
+      }
       icon.on('pointerdown', () => this.tsTapCup(i));
-      icon.on('pointerover', () => icon.setScale(1.1));
-      icon.on('pointerout', () => icon.setScale(1));
+      icon.on('pointerover', () => icon.setScale(icon.scaleX * 1.1, icon.scaleY * 1.1));
+      icon.on('pointerout',  () => { if (icon.setDisplaySize) icon.setDisplaySize(192, 192); else icon.setScale(1); });
+      icon._isImage = !!iconTexKey;
+      icon._charName = charName;
 
-      const stateLbl = this.add.text(cx, cupY + 32, 'Empty', {
+      const stateLbl = this.add.text(cx, cupY + 106, 'Empty', {
         fontSize: '10px', fontFamily: 'Courier New', color: '#8b7355'
       }).setOrigin(0.5).setDepth(160);
 
-      const barBg = this.add.rectangle(cx, cupY + 45, 56, 6, 0x333333).setDepth(160).setAlpha(0);
-      const barFill = this.add.rectangle(cx - 28, cupY + 45, 56, 6, 0xffb74d)
+      const barBg = this.add.rectangle(cx, cupY + 120, 56, 6, 0x333333).setDepth(160).setAlpha(0);
+      const barFill = this.add.rectangle(cx - 28, cupY + 120, 56, 6, 0xffb74d)
         .setOrigin(0, 0.5).setDepth(161).setAlpha(0);
 
-      const waterIcon = this.add.text(cx, cupY - 28, '', { fontSize: '14px' })
+      const waterIcon = this.add.text(cx, cupY - 106, '', { fontSize: '14px' })
         .setOrigin(0.5).setDepth(161);
 
       return { icon, stateLbl, barBg, barFill, waterIcon };
     });
 
     // Inventory bar
-    const invY = h - 215;
-    const invKeys = ['black_tea', 'herbal', 'cream', 'lemon', 'sugar'];
-    const invIcons = ['🍃', '🌿', '🥛', '🍋', '🍬'];
+    const invY = h - 195;
+    const invKeys    = ['black_tea',      'herbal',          'cream',        'lemon',        'sugar'];
+    const invTexKeys = ['icon_tea_black', 'icon_trea_herbal','icon_creamer', 'icon_lemon',   'icon_sugar'];
+    const invIcons   = ['🍃',             '🌿',              '🥛',           '🍋',           '🍬'];
     const invSpacing = (w - 30) / invKeys.length;
     invKeys.forEach((k, i) => {
       const ix = 15 + invSpacing * i + invSpacing / 2;
-      this.add.text(ix, invY - 10, invIcons[i], { fontSize: '16px' }).setOrigin(0.5).setDepth(160);
+      if (this.textures.exists(invTexKeys[i])) {
+        this.add.image(ix, invY - 10, invTexKeys[i]).setDisplaySize(56, 56).setOrigin(0.5).setDepth(160);
+      } else {
+        this.add.text(ix, invY - 10, invIcons[i], { fontSize: '16px' }).setOrigin(0.5).setDepth(160);
+      }
       this.ts.invTexts[k] = this.add.text(ix, invY + 10, `${this.ts.inventory[k]}`, {
         fontSize: '11px', fontFamily: 'Courier New', color: '#c4a575'
       }).setOrigin(0.5).setDepth(160);
@@ -2092,18 +2144,22 @@ export default class PuzzleScene extends Phaser.Scene {
 
   tsBuildCustomerArea(w, h) {
     const areaY = h - 100;
-    this.add.rectangle(w / 2, areaY, w, 120, 0x1a0f08, 0.9)
+    this.add.rectangle(w / 2, areaY, w, 150, 0x1a0f08, 0.9)
       .setStrokeStyle(1, 0x4a3020).setDepth(150);
 
     const slotXs = [w * 0.17, w * 0.5, w * 0.83];
     this.ts.customerVisuals = slotXs.map((cx, i) => {
       // Slot background
-      this.add.rectangle(cx, areaY, w * 0.3, 110, 0x2a1810, 0.5)
+      this.add.rectangle(cx, areaY, w * 0.3, 140, 0x2a1810, 0.5)
         .setStrokeStyle(1, 0x3a2015).setDepth(151);
 
-      // Customer emoji
-      const custIcon = this.add.text(cx, areaY + 12, '💺', { fontSize: '28px' })
-        .setOrigin(0.5).setDepth(155).setAlpha(0.3);
+      // Customer icon (image, hidden until customer spawns)
+      const firstChar = this.ts.custChars[0];
+      const custIconKey = `tea_char_${firstChar}_neutral`;
+      const custIcon = this.textures.exists(custIconKey)
+        ? this.add.image(cx, areaY, custIconKey).setDisplaySize(80, 130).setOrigin(0.5).setDepth(155).setAlpha(0)
+        : this.add.text(cx, areaY, '💺', { fontSize: '28px' }).setOrigin(0.5).setDepth(155).setAlpha(0);
+      custIcon._isImage = this.textures.exists(custIconKey);
 
       // Order bubble
       const orderBubble = this.add.text(cx, areaY - 32, '', {
@@ -2122,11 +2178,120 @@ export default class PuzzleScene extends Phaser.Scene {
         .setOrigin(0.5).setDepth(156);
 
       // Hit area
-      const hit = this.add.rectangle(cx, areaY, w * 0.3, 110, 0xffffff, 0)
+      const hit = this.add.rectangle(cx, areaY, w * 0.3, 140, 0xffffff, 0)
         .setDepth(157).setInteractive({ useHandCursor: true });
       hit.on('pointerdown', () => this.tsTapCustomer(i));
 
       return { cx, custIcon, orderBubble, patienceBarFill, happinessText, hit, active: false };
+    });
+  }
+
+  tsTutInit(w, h) {
+    this.ts.tut = {
+      active: true, step: 0, w, h,
+      brewedRecipeId: null,
+      highlightCircle: null, highlightTween: null, tooltipObjs: [],
+    };
+    // Vera waits from the very start
+    this.tsTutSpawnCustomer();
+    this.tsTutShow();
+  }
+
+  tsTutShow() {
+    const { tut } = this.ts;
+    const { w, h } = tut;
+    this.tsTutClear();
+
+    const equipY = 130, cupY = 370, areaY = h - 100;
+    const steps = [
+      { x: 70,    y: equipY, r: 38,  text: 'Step 1 of 6 — Tap the FAUCET\nto fill the teapot with water.' },
+      { x: w / 2, y: equipY, r: 38,  text: 'Filling... wait for the teapot to be ready.' },
+      { x: w / 2, y: equipY, r: 38,  text: 'Step 2 of 6 — Tap the TEAPOT\nto pour water into a cup.' },
+      { x: w / 2, y: cupY,   r: 100, text: 'Step 3 of 6 — Tap the CUP\nto choose a recipe.' },
+      { x: 0,     y: 0,      r: 0,   text: 'Step 4 of 6 — Choose a recipe from the list\nto start brewing.' },
+      { x: w / 2, y: cupY,   r: 100, text: 'Brewing... wait for the drink to be ready.' },
+      { x: w / 2, y: cupY,   r: 100, text: 'Step 5 of 6 — The drink is ready!\nTap the CUP to prepare to serve.' },
+      { x: w * 0.5, y: areaY, r: 45, text: 'Step 6 of 6 — A customer is waiting!\nTap the CUSTOMER to deliver the drink.' },
+    ];
+
+    const data = steps[tut.step];
+    if (!data) { this.tsTutComplete(); return; }
+
+    if (data.r > 0) {
+      tut.highlightCircle = this.add.circle(data.x, data.y, data.r, 0xffd700, 0)
+        .setStrokeStyle(3, 0xffd700).setDepth(170);
+      tut.highlightTween = this.tweens.add({
+        targets: tut.highlightCircle,
+        scaleX: 1.3, scaleY: 1.3, alpha: 0.2,
+        duration: 650, yoyo: true, repeat: -1, ease: 'Sine.easeInOut'
+      });
+    }
+
+    const tipY = 221;
+    const bg = this.add.rectangle(w / 2, tipY, w - 16, 50, 0x000000, 0.9)
+      .setStrokeStyle(1, 0xffd700).setDepth(170);
+    const txt = this.add.text(w / 2, tipY, data.text, {
+      fontSize: '11px', fontFamily: 'Courier New', color: '#ffd700', align: 'center'
+    }).setOrigin(0.5).setDepth(171);
+    tut.tooltipObjs = [bg, txt];
+  }
+
+  tsTutClear() {
+    const { tut } = this.ts;
+    if (!tut) return;
+    if (tut.highlightTween) { tut.highlightTween.stop(); tut.highlightTween = null; }
+    if (tut.highlightCircle) { tut.highlightCircle.destroy(); tut.highlightCircle = null; }
+    tut.tooltipObjs.forEach(o => o.destroy());
+    tut.tooltipObjs = [];
+  }
+
+  tsTutAdvance() {
+    const { tut } = this.ts;
+    tut.step++;
+    this.tsTutShow();
+  }
+
+  tsTutSpawnCustomer() {
+    const slot = 1;
+    if (this.ts.customers[slot]) return;
+    const recipeId = this.ts.tut?.brewedRecipeId || 'tea';
+    const recipe = this.ts.recipes[recipeId] || this.ts.recipes.tea;
+    const isCold = false;
+    const charName = 'vera_default';
+    const cust = {
+      active: true, recipeId, recipe, isCold, charName,
+      patienceMs: this.ts.customerPatienceMs,
+      happiness: 'neutral',
+      patienceBarFill: this.ts.customerVisuals[slot].patienceBarFill,
+      happinessText:   this.ts.customerVisuals[slot].happinessText,
+    };
+    this.ts.customers[slot] = cust;
+    this.ts.score.totalCustomers = (this.ts.score.totalCustomers || 0) + 1;
+    const vis = this.ts.customerVisuals[slot];
+    vis.active = true;
+    if (vis.custIcon._isImage) {
+      vis.custIcon.setTexture(`tea_char_${charName}_neutral`).setDisplaySize(80, 130).setAlpha(1);
+    } else {
+      vis.custIcon.setText('👤').setAlpha(1);
+    }
+    vis.orderBubble.setText(`${recipe.label}\n${isCold ? '❄️' : '🔥'}`).setAlpha(1);
+    vis.patienceBarFill.scaleX = 1;
+    vis.happinessText.setText('');
+    this.tweens.add({ targets: [vis.custIcon, vis.orderBubble], alpha: 1, y: '-=6', duration: 300, ease: 'Back.out' });
+  }
+
+  tsTutComplete() {
+    this.tsTutClear();
+    this.ts.tut.active = false;
+    const { w, h } = this.ts.tut;
+    const msg = this.add.text(w / 2, h / 2, 'Well done!\nNow serve as many customers\nas you can!', {
+      fontSize: '15px', fontFamily: 'Courier New', color: '#ffd700',
+      align: 'center', stroke: '#000000', strokeThickness: 3
+    }).setOrigin(0.5).setDepth(180);
+    this.time.delayedCall(2500, () => {
+      msg.destroy();
+      this.ts.sessionActive = true;
+      this.tsScheduleSpawn();
     });
   }
 
@@ -2158,10 +2323,11 @@ export default class PuzzleScene extends Phaser.Scene {
     const [recipeId, recipe] = craftable[Math.floor(Math.random() * craftable.length)];
     const isCold = Math.random() < 0.5;
 
+    const charName = this.ts.custChars[Math.floor(Math.random() * this.ts.custChars.length)];
     const cust = {
-      active: true, recipeId, recipe, isCold,
+      active: true, recipeId, recipe, isCold, charName,
       patienceMs: this.ts.customerPatienceMs,
-      happiness: 'happy',
+      happiness: 'neutral',
       patienceBarFill: this.ts.customerVisuals[emptySlot].patienceBarFill,
       happinessText:   this.ts.customerVisuals[emptySlot].happinessText,
     };
@@ -2170,10 +2336,14 @@ export default class PuzzleScene extends Phaser.Scene {
 
     const vis = this.ts.customerVisuals[emptySlot];
     vis.active = true;
-    vis.custIcon.setText('👤').setAlpha(1);
+    if (vis.custIcon._isImage) {
+      vis.custIcon.setTexture(`tea_char_${charName}_neutral`).setDisplaySize(80, 130).setAlpha(1);
+    } else {
+      vis.custIcon.setText('👤').setAlpha(1);
+    }
     vis.orderBubble.setText(`${recipe.label}\n${isCold ? '❄️' : '🔥'}`).setAlpha(1);
     vis.patienceBarFill.scaleX = 1;
-    vis.happinessText.setText('😊');
+    vis.happinessText.setText('');
 
     this.tweens.add({ targets: [vis.custIcon, vis.orderBubble], alpha: 1, y: '-=6', duration: 300, ease: 'Back.out' });
   }
@@ -2184,18 +2354,34 @@ export default class PuzzleScene extends Phaser.Scene {
 
     if (!satisfied) this.ts.score.missed++;
     const vis = this.ts.customerVisuals[slot];
-    this.tweens.add({
-      targets: [vis.custIcon, vis.orderBubble, vis.happinessText],
-      alpha: 0, y: '+=10', duration: 400,
-      onComplete: () => {
-        vis.active = false;
-        vis.custIcon.setText('💺').setAlpha(0.3).setY(vis.custIcon.y + 10); // restore position
-        vis.orderBubble.setAlpha(0);
-        vis.happinessText.setText('');
-        vis.patienceBarFill.scaleX = 1;
-        vis.patienceBarFill.setFillStyle(0x4caf50);
-      }
-    });
+
+    const doLeave = () => {
+      this.tweens.add({
+        targets: [vis.custIcon, vis.orderBubble, vis.happinessText],
+        alpha: 0, y: '+=10', duration: 400,
+        onComplete: () => {
+          vis.active = false;
+          vis.custIcon.setAlpha(0).setY(vis.custIcon.y + 10); // restore position
+          vis.orderBubble.setAlpha(0);
+          vis.happinessText.setText('');
+          vis.patienceBarFill.scaleX = 1;
+          vis.patienceBarFill.setFillStyle(0x4caf50);
+        }
+      });
+    };
+
+    if (satisfied && vis.custIcon._isImage && cust?.charName) {
+      // Flash happy: switch to happy texture, scale up 10%, then fade out
+      vis.custIcon.setTexture(`tea_char_${cust.charName}_happy`).setDisplaySize(80, 130);
+      this.tweens.add({
+        targets: vis.custIcon,
+        scaleX: vis.custIcon.scaleX * 1.1, scaleY: vis.custIcon.scaleY * 1.1,
+        duration: 250, yoyo: true, ease: 'Sine.easeOut',
+        onComplete: doLeave
+      });
+    } else {
+      doLeave();
+    }
 
     if (!satisfied) {
       const msgY = this.cameras.main.height - 145;
@@ -2242,7 +2428,9 @@ export default class PuzzleScene extends Phaser.Scene {
       this.ts.teapotFillBarBg.setAlpha(0);
       this.ts.teapotFillBar.setAlpha(0);
       this.tsUpdateTeapotVis();
+      if (this.ts.tut?.active && this.ts.tut.step === 1) this.tsTutAdvance();
     });
+    if (this.ts.tut?.active && this.ts.tut.step === 0) this.tsTutAdvance();
   }
 
   tsTapIce() {
@@ -2263,6 +2451,9 @@ export default class PuzzleScene extends Phaser.Scene {
     if (emptyIdx === -1) { this.tsFlash('No empty teacup!'); return; }
     this.ts.cups[emptyIdx].state = 'withWater';
     this.ts.cups[emptyIdx].cold = tp.cold;
+    // Assign teacup character from first waiting customer
+    const firstCust = this.ts.customers.find(c => c && c.active);
+    this.ts.cups[emptyIdx].charName = firstCust ? this.tsCustToTeacup(firstCust.charName) : 'vera';
     tp.state = 'empty'; tp.cold = false;
     this.ts.teapotFillBarBg.setAlpha(0);
     this.ts.teapotFillBar.setAlpha(0);
@@ -2270,12 +2461,13 @@ export default class PuzzleScene extends Phaser.Scene {
     this.tsUpdateCupVis(emptyIdx);
     const cv = this.ts.cupVisuals[emptyIdx];
     this.tweens.add({ targets: cv.icon, scaleX: 1.3, scaleY: 1.3, duration: 120, yoyo: true });
+    if (this.ts.tut?.active && this.ts.tut.step === 2) this.tsTutAdvance();
   }
 
   tsTapCup(i) {
     const cup = this.ts.cups[i];
     if (cup.state === 'empty') return;
-    if (cup.state === 'withWater') { this.tsShowRecipePopup(i); return; }
+    if (cup.state === 'withWater') { this.tsShowRecipePopup(i); if (this.ts.tut?.active && this.ts.tut.step === 3) this.tsTutAdvance(); return; }
     if (cup.state === 'brewing') {
       const secLeft = Math.ceil((cup.recipe.brewMs - cup.brewElapsed) / 1000);
       this.tsFlash(`Brewing... ${secLeft}s left`);
@@ -2283,13 +2475,14 @@ export default class PuzzleScene extends Phaser.Scene {
     }
     if (cup.state === 'ready') {
       if (this.ts.serveMode && this.ts.selectedCup === i) this.tsExitServeMode();
-      else this.tsEnterServeMode(i);
+      else { this.tsEnterServeMode(i); if (this.ts.tut?.active && this.ts.tut.step === 6) this.tsTutAdvance(); }
     }
   }
 
   tsTapCustomer(slot) {
     if (!this.ts.serveMode) return;
     if (!this.ts.customers[slot]) { this.tsFlash('No customer here!'); return; }
+    if (this.ts.tut?.active && this.ts.tut.step === 7) this.tsTutAdvance();
     this.tsServe(slot);
   }
 
@@ -2377,6 +2570,7 @@ export default class PuzzleScene extends Phaser.Scene {
     cup.recipe = { ...recipe, id: recipeId };
     cup.brewElapsed = 0;
     this.tsUpdateCupVis(cupIndex);
+    if (this.ts.tut?.active && this.ts.tut.step === 4) this.tsTutAdvance();
 
     // Brew timer using time event (updates elapsed for display)
     const vis = this.ts.cupVisuals[cupIndex];
@@ -2393,6 +2587,7 @@ export default class PuzzleScene extends Phaser.Scene {
       vis.barFill.setAlpha(0);
       this.tsUpdateCupVis(cupIndex);
       this.tweens.add({ targets: vis.icon, scaleX: 1.2, scaleY: 1.2, duration: 200, yoyo: true });
+      if (this.ts.tut?.active && this.ts.tut.step === 5) this.tsTutAdvance();
     });
   }
 
@@ -2443,7 +2638,7 @@ export default class PuzzleScene extends Phaser.Scene {
 
     // Reset cup
     const ci = this.ts.selectedCup;
-    this.ts.cups[ci] = { state: 'empty', cold: false, recipe: null };
+    this.ts.cups[ci] = { state: 'empty', cold: false, recipe: null, charName: null };
     this.tsUpdateCupVis(ci);
     this.tsExitServeMode();
 
@@ -2462,32 +2657,68 @@ export default class PuzzleScene extends Phaser.Scene {
         if (this.ts.invTexts[k]) this.ts.invTexts[k].setText(`${this.ts.inventory[k]}`);
       });
     }
-    this.ts.cups[i] = { state: 'empty', cold: false, recipe: null };
+    this.ts.cups[i] = { state: 'empty', cold: false, recipe: null, charName: null };
     this.tsUpdateCupVis(i);
+  }
+
+  tsCustToTeacup(custChar) {
+    const map = {
+      addie_default: 'addie', da_default: 'da',
+      rainie_default: 'rainie', vera_default: 'vera',
+      genlteman_paper: 'gentleman_paper',
+      cultist_bookkeeper: 'cultist_bookkeeper',
+      cultist_enforcer: 'cultist_enforcer',
+      cultist_guard: 'cultist_guard',
+      cultist_guard_staff: 'cultist_guard_staff',
+    };
+    return map[custChar] || 'vera';
   }
 
   tsUpdateTeapotVis() {
     const tp = this.ts.teapot || { state: 'empty', cold: false };
     const icon = this.ts.teapotIcon;
     const waterLbl = this.ts.teapotWaterLabel;
-    if (tp.state === 'empty')   { icon.setText('🫖'); waterLbl.setText(''); }
-    if (tp.state === 'filling') { icon.setText('🫖'); waterLbl.setText(tp.cold ? '❄️' : '🔥'); }
-    if (tp.state === 'ready')   { icon.setText('🫖'); waterLbl.setText(tp.cold ? '❄️' : '🔥'); }
+    if (icon.setTexture) {
+      // Image-based teapot icon
+      if (tp.state === 'empty')   { icon.setTexture('icon_teapot_bear'); waterLbl.setText(''); }
+      if (tp.state === 'filling') { icon.setTexture('icon_teapot_bear'); waterLbl.setText(tp.cold ? '❄️' : '🔥'); }
+      if (tp.state === 'ready')   { icon.setTexture(tp.cold ? 'icon_teapot_green' : 'icon_teapot_bird'); waterLbl.setText(tp.cold ? '❄️' : '🔥'); }
+    } else {
+      if (tp.state === 'empty')   { icon.setText('🫖'); waterLbl.setText(''); }
+      if (tp.state === 'filling') { icon.setText('🫖'); waterLbl.setText(tp.cold ? '❄️' : '🔥'); }
+      if (tp.state === 'ready')   { icon.setText('🫖'); waterLbl.setText(tp.cold ? '❄️' : '🔥'); }
+    }
   }
 
   tsUpdateCupVis(i) {
     const cup = this.ts.cups[i];
     const vis = this.ts.cupVisuals[i];
-    const states = {
-      empty:     { icon: '☕', label: 'Empty',              tint: 0xffffff, water: '' },
-      withWater: { icon: '☕', label: 'Tap to brew',        tint: cup.cold ? 0x88ccff : 0xffaa88, water: cup.cold ? '❄️' : '🔥' },
-      brewing:   { icon: '☕', label: cup.recipe?.label || 'Brewing', tint: 0xffaa44, water: cup.cold ? '❄️' : '🔥' },
-      ready:     { icon: '🍵', label: 'Ready! Tap to serve', tint: 0x88ff99, water: cup.cold ? '❄️' : '🔥' },
+    const tints = {
+      empty:     0xffffff,
+      withWater: cup.cold ? 0x88ccff : 0xffaa88,
+      brewing:   0xffaa44,
+      ready:     0x88ff99,
     };
-    const s = states[cup.state];
-    vis.icon.setText(s.icon).setTint(s.tint);
-    vis.stateLbl.setText(s.label);
-    vis.waterIcon.setText(s.water);
+    const alphas = { empty: 1, withWater: 1, brewing: 1, ready: 1 };
+    const labels = {
+      empty:     'Empty',
+      withWater: 'Tap to brew',
+      brewing:   cup.recipe?.label || 'Brewing',
+      ready:     'Ready! Tap to serve',
+    };
+    const water = cup.state === 'empty' ? '' : (cup.cold ? '❄️' : '🔥');
+
+    if (vis.icon._isImage) {
+      const teacupChar = cup.charName || 'vera';
+      const texKey = `tea_teacup_${teacupChar}`;
+      if (this.textures.exists(texKey)) vis.icon.setTexture(texKey);
+      vis.icon.setTint(tints[cup.state]).setAlpha(alphas[cup.state]);
+    } else {
+      const textIcon = cup.state === 'ready' ? '🍵' : '☕';
+      vis.icon.setText(textIcon).setTint(tints[cup.state]);
+    }
+    vis.stateLbl.setText(labels[cup.state]);
+    vis.waterIcon.setText(water);
     if (cup.state !== 'brewing') { vis.barBg.setAlpha(0); vis.barFill.setAlpha(0); }
   }
 

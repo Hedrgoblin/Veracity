@@ -1562,10 +1562,10 @@ export default class ChapterScene extends Phaser.Scene {
           { id: 'spring2', x: 200, y: 100, pair: 'spring1' }
         ]
       }},
-      { name: 'Tea Merge Game', type: 'match_three', data: {
-        type: 'match_three',
+      { name: 'Tea Game', type: 'tea_service', data: {
+        type: 'tea_service',
         title: 'Brewing Comfort',
-        instructions: 'Merge items to create tea ingredients!',
+        instructions: 'Serve tea to the guests!',
         gridSize: 5,
         collectibles: { teacup: 1, tea_leaf: 1, sugar: 1, cream: 1 }
       }},

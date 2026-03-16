@@ -77,7 +77,7 @@
         "speaker": "Addie",
         "text": "Let's leave this room. It's not safe.",
         "expression": {
-          "addie_home": "calm",
+          "addie_home": "neutral",
           "vera": "neutral"
         }
       },
@@ -166,7 +166,7 @@
         "speaker": "Addie",
         "text": "It's dangerous out there, Vera. To say nothing of the quality of tea one finds while traveling... But yes. We have to find the professor.",
         "expression": {
-          "addie_home": "calm",
+          "addie_home": "neutral",
           "vera": "sad"
         }
       },
