@@ -86,7 +86,7 @@ export default class PuzzleScene extends Phaser.Scene {
     });
 
     // Load tea service equipment and ingredient icons
-    ['icon_faucet', 'icon_ice', 'icon_trash',
+    ['icon_faucet', 'icon_ice',
      'icon_tea_black', 'icon_trea_herbal', 'icon_creamer', 'icon_lemon', 'icon_sugar',
      'icon_teapot_bear', 'icon_teapot_bird', 'icon_teapot_green'].forEach(key => {
       if (!this.textures.exists(key)) {
@@ -1990,7 +1990,7 @@ export default class PuzzleScene extends Phaser.Scene {
                          'cultist_guard', 'cultist_guard_staff', 'da',
                          'gentleman_paper', 'guildmaster', 'rainie', 'vera'],
       // Visual refs filled below
-      timerText: null, timerBar: null, scoreText: null,
+      timerText: null, timerBar: null,
       cupVisuals: [], customerVisuals: [], invTexts: {},
       serveModeLabel: null,
     };
@@ -2031,9 +2031,6 @@ export default class PuzzleScene extends Phaser.Scene {
       fontSize: '11px', fontFamily: 'Courier New', color: '#fff'
     }).setOrigin(0.5).setDepth(153);
 
-    this.ts.scoreText = this.add.text(w - 10, y, '☕ 0', {
-      fontSize: '13px', fontFamily: 'Courier New', color: '#c4a575'
-    }).setOrigin(1, 0.5).setDepth(153);
   }
 
   tsBuildStation(w, h) {
@@ -2080,10 +2077,6 @@ export default class PuzzleScene extends Phaser.Scene {
     btnImg(w - 70, equipY, 'icon_ice', () => this.tsTapIce());
     lbl(w - 70, equipY + 30, 'Ice');
 
-    // Trash — sits above the ingredient bar
-    btnImg(w - 40, h - 310, 'icon_trash', () => this.tsTapTrash());
-    lbl(w - 40, h - 265, 'Discard');
-
     // Teacup slots
     const cupCount = this.ts.cups.length;
     const cupY = 370;
@@ -2104,7 +2097,7 @@ export default class PuzzleScene extends Phaser.Scene {
           .setOrigin(0.5).setDepth(160).setInteractive({ useHandCursor: true });
       }
       icon.on('pointerdown', () => this.tsTapCup(i));
-      icon.on('pointerover', () => icon.setScale(icon.scaleX * 1.1, icon.scaleY * 1.1));
+      icon.on('pointerover', () => { if (icon.setDisplaySize) icon.setDisplaySize(192 * 1.1, 192 * 1.1); else icon.setScale(1.1); });
       icon.on('pointerout',  () => { if (icon.setDisplaySize) icon.setDisplaySize(192, 192); else icon.setScale(1); });
       icon._isImage = !!iconTexKey;
       icon._charName = charName;
@@ -2189,7 +2182,6 @@ export default class PuzzleScene extends Phaser.Scene {
   tsTutInit(w, h) {
     this.ts.tut = {
       active: true, step: 0, w, h,
-      brewedRecipeId: null,
       highlightCircle: null, highlightTween: null, tooltipObjs: [],
     };
     // Vera waits from the very start
@@ -2254,10 +2246,11 @@ export default class PuzzleScene extends Phaser.Scene {
   tsTutSpawnCustomer() {
     const slot = 1;
     if (this.ts.customers[slot]) return;
-    const recipeId = this.ts.tut?.brewedRecipeId || 'tea';
-    const recipe = this.ts.recipes[recipeId] || this.ts.recipes.tea;
-    const isCold = false;
     const charName = 'vera_default';
+    const fav = this.ts.custFavorites[charName] || { recipeId: 'tea', isCold: false };
+    const recipeId = fav.recipeId;
+    const recipe = this.ts.recipes[recipeId] || this.ts.recipes.tea;
+    const isCold = fav.isCold;
     const cust = {
       active: true, recipeId, recipe, isCold, charName,
       patienceMs: this.ts.customerPatienceMs,
@@ -2284,7 +2277,7 @@ export default class PuzzleScene extends Phaser.Scene {
     this.tsTutClear();
     this.ts.tut.active = false;
     const { w, h } = this.ts.tut;
-    const msg = this.add.text(w / 2, h / 2, 'Well done!\nNow serve as many customers\nas you can!', {
+    const msg = this.add.text(w / 2, h / 2, 'Well Done!\nNow serve the rest of the\ncharacters in this chapter!', {
       fontSize: '15px', fontFamily: 'Courier New', color: '#ffd700',
       align: 'center', stroke: '#000000', strokeThickness: 3
     }).setOrigin(0.5).setDepth(180);
@@ -2315,15 +2308,18 @@ export default class PuzzleScene extends Phaser.Scene {
     const emptySlot = this.ts.customers.findIndex(c => !c);
     if (emptySlot === -1) return;
 
-    const craftable = Object.entries(this.ts.recipes).filter(([, r]) =>
-      Object.entries(r.ingredients).every(([k, v]) => (this.ts.inventory[k] || 0) >= v)
-    );
-    if (craftable.length === 0) return;
+    const waitingChars = new Set(this.ts.customers.filter(Boolean).map(c => c.charName));
+    const availableChars = this.ts.custChars.filter(c => !this.ts.usedChars.has(c) && !waitingChars.has(c));
+    if (availableChars.length === 0) return; // all characters served or currently waiting
+    const charName = availableChars[Math.floor(Math.random() * availableChars.length)];
 
-    const [recipeId, recipe] = craftable[Math.floor(Math.random() * craftable.length)];
-    const isCold = Math.random() < 0.5;
+    // Always use the character's favorite recipe
+    const fav = this.ts.custFavorites[charName] || { recipeId: 'tea', isCold: false };
+    const recipeId = fav.recipeId;
+    const recipe = this.ts.recipes[recipeId];
+    const isCold = fav.isCold;
+    if (!recipe) return; // safety: skip if recipe doesn't exist
 
-    const charName = this.ts.custChars[Math.floor(Math.random() * this.ts.custChars.length)];
     const cust = {
       active: true, recipeId, recipe, isCold, charName,
       patienceMs: this.ts.customerPatienceMs,
@@ -2361,7 +2357,7 @@ export default class PuzzleScene extends Phaser.Scene {
         alpha: 0, y: '+=10', duration: 400,
         onComplete: () => {
           vis.active = false;
-          vis.custIcon.setAlpha(0).setY(vis.custIcon.y + 10); // restore position
+          vis.custIcon.setAlpha(0).setY(vis.custIcon.y - 10); // undo tween drift
           vis.orderBubble.setAlpha(0);
           vis.happinessText.setText('');
           vis.patienceBarFill.scaleX = 1;
@@ -2467,7 +2463,7 @@ export default class PuzzleScene extends Phaser.Scene {
   tsTapCup(i) {
     const cup = this.ts.cups[i];
     if (cup.state === 'empty') return;
-    if (cup.state === 'withWater') { this.tsShowRecipePopup(i); if (this.ts.tut?.active && this.ts.tut.step === 3) this.tsTutAdvance(); return; }
+    if (cup.state === 'withWater') { if (this.ts.tut?.active && this.ts.tut.step === 3) this.tsTutAdvance(); return; }
     if (cup.state === 'brewing') {
       const secLeft = Math.ceil((cup.recipe.brewMs - cup.brewElapsed) / 1000);
       this.tsFlash(`Brewing... ${secLeft}s left`);
@@ -2484,79 +2480,6 @@ export default class PuzzleScene extends Phaser.Scene {
     if (!this.ts.customers[slot]) { this.tsFlash('No customer here!'); return; }
     if (this.ts.tut?.active && this.ts.tut.step === 7) this.tsTutAdvance();
     this.tsServe(slot);
-  }
-
-  tsTapTrash() {
-    if (this.ts.serveMode) {
-      this.tsDiscardCup(this.ts.selectedCup);
-      this.tsExitServeMode();
-      return;
-    }
-    // Try to discard the first non-empty cup
-    const idx = this.ts.cups.findIndex(c => c.state !== 'empty');
-    if (idx === -1) { this.tsFlash('Nothing to discard'); return; }
-    if (this.ts.cups.length === 1) { this.tsDiscardCup(0); return; }
-    this.tsFlash('Tap a ready cup first, then trash');
-  }
-
-  tsShowRecipePopup(cupIndex) {
-    const w = this.cameras.main.width;
-    const h = this.cameras.main.height;
-    this.ts.recipePopupIdx = cupIndex;
-
-    const overlay = this.add.rectangle(w / 2, h / 2, w, h, 0x000000, 0.75)
-      .setDepth(200).setInteractive();
-    const panelH = Math.min(480, h - 80);
-    const panel = this.add.rectangle(w / 2, h / 2, w - 20, panelH, 0x1a0f08)
-      .setStrokeStyle(2, 0x8b5c31).setDepth(201);
-
-    const title = this.add.text(w / 2, h / 2 - panelH / 2 + 22, 'Choose a Recipe', {
-      fontSize: '15px', fontFamily: 'Courier New', color: '#c4a575', fontStyle: 'bold'
-    }).setOrigin(0.5).setDepth(202);
-
-    const closeBtn = this.add.text(w - 22, h / 2 - panelH / 2 + 22, '✕', {
-      fontSize: '18px', fontFamily: 'Courier New', color: '#f44336'
-    }).setOrigin(0.5).setDepth(202).setInteractive({ useHandCursor: true });
-
-    const objs = [overlay, panel, title, closeBtn];
-
-    const startY = h / 2 - panelH / 2 + 55;
-    const rowH = 58;
-    Object.entries(this.ts.recipes).forEach(([id, recipe], ri) => {
-      const ry = startY + ri * rowH;
-      const canCraft = Object.entries(recipe.ingredients).every(([k, v]) => (this.ts.inventory[k] || 0) >= v);
-      const rowBg = this.add.rectangle(w / 2, ry + rowH / 2, w - 30, rowH - 4, canCraft ? 0x2a1810 : 0x111111)
-        .setStrokeStyle(1, canCraft ? 0x4a3020 : 0x222222).setDepth(202);
-      const nameT = this.add.text(18, ry + rowH / 2 - 9, recipe.label, {
-        fontSize: '13px', fontFamily: 'Courier New', color: canCraft ? '#c4a575' : '#555'
-      }).setOrigin(0, 0.5).setDepth(203);
-      const ingStr = Object.entries(recipe.ingredients)
-        .map(([k, v]) => `${k.replace('_', ' ')}:${this.ts.inventory[k] || 0}/${v}`).join(' ');
-      const ingT = this.add.text(18, ry + rowH / 2 + 10, ingStr, {
-        fontSize: '9px', fontFamily: 'Courier New', color: canCraft ? '#8b7355' : '#444'
-      }).setOrigin(0, 0.5).setDepth(203);
-      const timeT = this.add.text(w - 14, ry + rowH / 2, `${recipe.brewMs / 1000}s`, {
-        fontSize: '11px', fontFamily: 'Courier New', color: canCraft ? '#8b7355' : '#444'
-      }).setOrigin(1, 0.5).setDepth(203);
-      objs.push(rowBg, nameT, ingT, timeT);
-      if (canCraft) {
-        rowBg.setInteractive({ useHandCursor: true });
-        rowBg.on('pointerdown', () => { this.tsCloseRecipePopup(); this.tsSelectRecipe(cupIndex, id, recipe); });
-        rowBg.on('pointerover', () => rowBg.setFillStyle(0x3a2820));
-        rowBg.on('pointerout', () => rowBg.setFillStyle(0x2a1810));
-      }
-    });
-
-    this.ts._recipePopup = objs;
-    overlay.on('pointerdown', () => this.tsCloseRecipePopup());
-    closeBtn.on('pointerdown', () => this.tsCloseRecipePopup());
-  }
-
-  tsCloseRecipePopup() {
-    if (this.ts._recipePopup) {
-      this.ts._recipePopup.forEach(o => o.destroy());
-      this.ts._recipePopup = null;
-    }
   }
 
   tsSelectRecipe(cupIndex, recipeId, recipe) {
@@ -2595,7 +2518,7 @@ export default class PuzzleScene extends Phaser.Scene {
     this.ts.serveMode = true;
     this.ts.selectedCup = cupIndex;
     this.ts.cupVisuals.forEach((cv, i) => cv.icon.setAlpha(i === cupIndex ? 1 : 0.45));
-    this.ts.serveModeLabel.setText('Tap a customer to serve  |  Tap 🗑️ to discard');
+    this.ts.serveModeLabel.setText('Tap a customer to serve');
     this.ts.customerVisuals.forEach(cv => {
       if (cv.active) this.tweens.add({ targets: cv.custIcon, scaleX: 1.15, scaleY: 1.15, duration: 200 });
     });
@@ -2625,7 +2548,6 @@ export default class PuzzleScene extends Phaser.Scene {
     this.ts.score.teacupsEarned += earned;
     if (isCorrect) this.ts.score.served++;
     else this.ts.score.missed++;
-    this.ts.scoreText.setText(`☕ ${this.ts.score.teacupsEarned}`);
 
     // Feedback float
     const vis = this.ts.customerVisuals[slot];
@@ -2733,9 +2655,9 @@ export default class PuzzleScene extends Phaser.Scene {
   }
 
   tsEndSession() {
-    // Dismiss all remaining customers
+    // Dismiss all remaining customers (satisfied=true so score.missed isn't affected)
     for (let i = 0; i < 3; i++) {
-      if (this.ts.customers[i]) this.tsCustomerLeave(i, false);
+      if (this.ts.customers[i]) this.tsCustomerLeave(i, true);
     }
     this.time.delayedCall(1200, () => this.tsShowSummary());
   }
