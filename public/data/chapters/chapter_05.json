@@ -11,7 +11,12 @@
       "addie",
       "rainie",
       "gentleman_paper"
-    ]
+    ],
+    "characterFolders": {
+      "vera": "vera_default",
+      "addie": "addie_default",
+      "rainie": "rainie_default"
+    }
   },
   "companions": [
     "addie",

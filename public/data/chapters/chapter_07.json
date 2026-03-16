@@ -12,7 +12,12 @@
       "rainie",
       "da_default",
       "cultist_guard_staff"
-    ]
+    ],
+    "characterFolders": {
+      "vera": "vera_default",
+      "addie": "addie_default",
+      "rainie": "rainie_default"
+    }
   },
   "companions": [
     "addie",

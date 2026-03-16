@@ -10,7 +10,12 @@
       "vera",
       "addie",
       "rainie"
-    ]
+    ],
+    "characterFolders": {
+      "vera": "vera_default",
+      "addie": "addie_default",
+      "rainie": "rainie_default"
+    }
   },
   "companions": [
     "addie",
@@ -20,7 +25,7 @@
     "opening": [
       {
         "speaker": "Narrator",
-        "text": "Weeks pass. The workshop returns to its rhythms. You're different now—confident, aware of your strength."
+        "text": "Weeks pass. The workshop returns to its rhythms. You're different now\u2014confident, aware of your strength."
       },
       {
         "speaker": "Addie",
@@ -58,7 +63,7 @@
       },
       {
         "speaker": "Narrator",
-        "text": "He hands you a brass token—a gear symbol."
+        "text": "He hands you a brass token\u2014a gear symbol."
       },
       {
         "speaker": "Gentleman_paper",
@@ -83,7 +88,7 @@
       }
     },
     {
-      "text": "Accept gratefully, but make it clear—family comes first.",
+      "text": "Accept gratefully, but make it clear\u2014family comes first.",
       "companion": "rainie",
       "consequences": {
         "prioritized_family": true

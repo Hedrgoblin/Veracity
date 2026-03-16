@@ -10,7 +10,12 @@
       "vera",
       "addie",
       "rainie"
-    ]
+    ],
+    "characterFolders": {
+      "vera": "vera_default",
+      "addie": "addie_default",
+      "rainie": "rainie_default"
+    }
   },
   "companions": [
     "addie",
@@ -28,7 +33,7 @@
       },
       {
         "speaker": "Addie",
-        "text": "And heavily guarded, Vera. Look—patrol routes, watchtowers. We can't just walk in."
+        "text": "And heavily guarded, Vera. Look\u2014patrol routes, watchtowers. We can't just walk in."
       },
       {
         "speaker": "Veracity",
@@ -50,7 +55,7 @@
     "closing": [
       {
         "speaker": "Narrator",
-        "text": "Inside—a maze of corridors and workshops. Construction echoes everywhere."
+        "text": "Inside\u2014a maze of corridors and workshops. Construction echoes everywhere."
       },
       {
         "speaker": "Veracity",
@@ -66,7 +71,7 @@
       },
       {
         "speaker": "Narrator",
-        "text": "A blueprint fragment catches your eye. Father's handwriting: 'Component missing. Core will not stabilize without—' The rest torn away."
+        "text": "A blueprint fragment catches your eye. Father's handwriting: 'Component missing. Core will not stabilize without\u2014' The rest torn away."
       },
       {
         "speaker": "Veracity",

@@ -1,8 +1,8 @@
 {
   "chapterNumber": 3,
-  "title": "Into the Old District",
+  "title": "Leaving Home",
   "act": 1,
-  "description": "The city's forgotten quarter holds shadows and secrets.",
+  "description": "The city holds shadows and secrets.",
   "assets": {
     "background": "london_alley",
     "music": null,
@@ -11,7 +11,12 @@
       "addie",
       "rainie",
       "crone_default"
-    ]
+    ],
+    "characterFolders": {
+      "vera": "vera_default",
+      "addie": "addie_default",
+      "rainie": "rainie_default"
+    }
   },
   "companions": [
     "addie",
@@ -43,19 +48,19 @@
       },
       {
         "speaker": "Rainie",
-        "text": "Whoa! Look at the inside of the lid!",
+        "text": "Look at the inside of the lid!",
         "expression": {
           "rainie": "surprised"
         }
       },
       {
         "speaker": "Narrator",
-        "text": "Etched into the lid is a simple compass. Four lights glow softly\u2014north, south, east, and west. The northern light pulses brighter.",
+        "text": "Etched into the lid is a simple compass. Four dark lights for south, east, and west. The northern light pulses brightly.",
         "showItem": "lide_compass"
       },
       {
         "speaker": "Veracity",
-        "text": "The lid must track the moth. Da always thinks of everything.",
+        "text": "This must track the moth. Da always thinks of everything.",
         "expression": {
           "vera": "happy"
         }
@@ -91,7 +96,7 @@
       },
       {
         "speaker": "Addie",
-        "text": "Stay close. These streets are not safe, especially for a young girl and two small companions.",
+        "text": "Stay close. These streets are not safe, especially for a young girl and two companions.",
         "expression": {
           "addie_home": "sad",
           "rainie": "neutral"
@@ -109,11 +114,12 @@
       },
       {
         "speaker": "Narrator",
-        "text": "You find yourself in front of the watchmaker's guild. You've been here before. 47 Clockmaker's Lane\u2014an old church, dark stained glass, a strange symbol on the door: a spiral wrapped around a gear. Standing on the steps, you a see a blind old woman, begging."
+        "text": "You find yourself in front of the watchmaker's guild. You've been here before. 47 Clockmaker's Lane. An old church, dark stained glass, a strange symbol on the door: a spiral wrapped around a gear. Standing on the steps, you a see a blind old woman, begging."
       },
       {
         "speaker": "Crone",
         "text": "Spare a penny for an old lady?",
+        "showCharacters": ["crone"],
         "expression": {
           "crone": "happy"
         }

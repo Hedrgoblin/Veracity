@@ -12,6 +12,7 @@ class GameStateManager {
       currentChapter: 1,
       completedChapters: [],
       subscribed: false, // Track subscription status
+      teacups: 0, // Currency earned from tea service minigame
       companions: {
         addie: {
           name: 'Addie',
@@ -149,6 +150,7 @@ class GameStateManager {
       currentChapter: 1,
       completedChapters: [],
       subscribed: false,
+      teacups: 0,
       companions: {
         addie: { name: 'Addie', health: 100, isDamaged: false, personality: 'cautious' },
         rainie: { name: 'Rainie', health: 100, isDamaged: false, personality: 'adventurous' }
@@ -159,6 +161,23 @@ class GameStateManager {
       inventory: [],
       completedPuzzles: []
     };
+  }
+
+  // Add teacups (earned from tea service)
+  addTeacups(n) {
+    this.state.teacups = (this.state.teacups || 0) + n;
+  }
+
+  // Get current teacup count
+  getTeacups() {
+    return this.state.teacups || 0;
+  }
+
+  // Spend teacups (returns false if insufficient)
+  spendTeacups(n) {
+    if (this.state.teacups < n) return false;
+    this.state.teacups -= n;
+    return true;
   }
 }
 

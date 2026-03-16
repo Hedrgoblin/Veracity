@@ -23,8 +23,15 @@
     "opening": [
       {
         "speaker": "Narrator",
-        "text": "The door gives way. Everything is in chaos.",
+        "text": "Addie made you change for the day because, as she says, NO ONE should have to face a crises in bedroom slippers. Fortified with tea and a scone, you return to your father's ruined study.",
         "showOnlyVera": true
+      },
+      {
+        "speaker": "Veracity",
+        "text": "It doesn't seem real.",
+        "expression": {
+          "vera": "sad"
+        }
       },
       {
         "speaker": "Addie",
@@ -37,7 +44,7 @@
       },
       {
         "speaker": "Rainie",
-        "text": "Look at all these papers! Someone was looking for something."
+        "text": "Look at all these ripped up papers! Someone was looking for something."
       },
       {
         "speaker": "Veracity",
@@ -58,52 +65,18 @@
     "midpoint": [
       {
         "speaker": "Rainie",
-        "text": "Vera, what did he mean?",
-        "expression": {
-          "rainie": "surprised"
-        },
-        "background": "home_office_ransacked_day_revealed"
+        "text": "What do you think the note meant?"
       },
       {
         "speaker": "Veracity",
-        "text": "I don't know, but someone has kidnapped Da.",
-        "expression": {
-          "vera": "sad",
-          "rainie": "sad",
-          "addie_home": "sad"
-        }
-      },
-      {
-        "speaker": "Addie",
-        "text": "Let's leave this room. It's not safe.",
-        "expression": {
-          "addie_home": "neutral",
-          "vera": "neutral"
-        }
-      },
-      {
-        "speaker": "Narrator",
-        "text": "You all sit in silence for a moment.",
-        "expression": {
-          "vera": "sad",
-          "rainie": "sad",
-          "addie_home": "sad"
-        }
-      },
-      {
-        "speaker": "Rainie",
-        "text": "What do you think the professor was talking about in the note?"
-      },
-      {
-        "speaker": "Veracity",
-        "text": "Da showed me a secret panel once... let's see if it's still there...",
+        "text": "Da was trying to warn me. He showed me a secret panel once... let's see if it's still there...",
         "expression": {
           "vera": "neutral"
         }
       },
       {
         "speaker": "Narrator",
-        "text": "You walk through the room and look down at the front panel on your father's desk. What was the secret combination again? If only you could remember it..."
+        "text": "You walk over to the front panel on your father's desk. What was the secret combination again? If only you could remember it..."
       }
     ],
     "closing": [
@@ -140,7 +113,7 @@
       },
       {
         "speaker": "Narrator",
-        "text": "You carefully open the worn leather journal. There aer pages of diagrams, calculations, and notes. But tucked inside—a folded letter addressed to you."
+        "text": "You carefully open the worn leather journal. There are pages of diagrams, calculations, and notes. But tucked inside, a folded letter addressed to you."
       },
       {
         "speaker": "Addie",
@@ -164,7 +137,7 @@
       },
       {
         "speaker": "Addie",
-        "text": "It's dangerous out there, Vera. To say nothing of the quality of tea one finds while traveling... But yes. We have to find the professor.",
+        "text": "It's dangerous out there, for clockwork animals like Rainie and myself. To say nothing of the quality of tea one finds while traveling... But yes. We can't leave him alone out there.",
         "expression": {
           "addie_home": "neutral",
           "vera": "sad"

@@ -261,12 +261,10 @@ export default class ChapterScene extends Phaser.Scene {
         this.audioManager.playMusic(this.chapterData.assets.music);
       }
 
-      // Fade in
-      this.cameras.main.fadeIn(1000, 0, 0, 0);
-
-      // Start narrative
-      this.time.delayedCall(1000, () => {
-        this.startNarrative();
+      // Fade in, then show chapter title card
+      this.cameras.main.fadeIn(800, 0, 0, 0);
+      this.time.delayedCall(800, () => {
+        this.showChapterTitle(() => this.startNarrative());
       });
     }).catch(error => {
       console.error('Error loading chapter:', error);
@@ -494,15 +492,20 @@ export default class ChapterScene extends Phaser.Scene {
       }
     });
 
-    // Fade in characters
+    // Fade in companion/vera characters only — NPCs appear via showCharacters in dialogue
+    const autoShowKeys = ['vera_body', 'vera_expression', 'vera',
+                          'addie_body', 'addie_expression', 'addie',
+                          'rainie_body', 'rainie_expression', 'rainie'];
     Object.keys(this.characters).forEach(key => {
-      const char = this.characters[key];
-      this.tweens.add({
-        targets: char,
-        alpha: 1,
-        duration: 1000,
-        ease: 'Power2'
-      });
+      if (autoShowKeys.includes(key)) {
+        const char = this.characters[key];
+        this.tweens.add({
+          targets: char,
+          alpha: 1,
+          duration: 1000,
+          ease: 'Power2'
+        });
+      }
     });
   }
 
@@ -907,6 +910,54 @@ export default class ChapterScene extends Phaser.Scene {
     this.dialogueBox = null;
   }
 
+  showChapterTitle(onDismiss) {
+    const w = this.cameras.main.width;
+    const h = this.cameras.main.height;
+
+    const overlay = this.add.container(0, 0).setDepth(500).setAlpha(0);
+
+    const bg = this.add.rectangle(w / 2, h / 2, w, h, 0x000000, 0.95);
+    overlay.add(bg);
+
+    // Decorative lines flanking the chapter label
+    const lineW = w * 0.35;
+    overlay.add(this.add.rectangle(w / 2 - lineW / 2 - 60, h / 2 - 55, lineW, 1, 0x8b5c31));
+    overlay.add(this.add.rectangle(w / 2 + lineW / 2 + 60, h / 2 - 55, lineW, 1, 0x8b5c31));
+
+    // Chapter number label
+    overlay.add(this.add.text(w / 2, h / 2 - 55, `— Chapter ${this.chapterNumber} —`, {
+      fontSize: '13px', fontFamily: 'Courier New', color: '#8b5c31', fontStyle: 'italic'
+    }).setOrigin(0.5));
+
+    // Chapter title
+    overlay.add(this.add.text(w / 2, h / 2 - 5, this.chapterData.title, {
+      fontSize: '26px', fontFamily: 'Courier New', color: '#c4a575', fontStyle: 'bold'
+    }).setOrigin(0.5));
+
+    // Bottom divider
+    overlay.add(this.add.rectangle(w / 2, h / 2 + 38, w * 0.5, 1, 0x8b5c31));
+
+    // Tap to continue (blinking)
+    const tapText = this.add.text(w / 2, h - 60, 'Tap to continue', {
+      fontSize: '12px', fontFamily: 'Courier New', color: '#665544'
+    }).setOrigin(0.5);
+    overlay.add(tapText);
+    this.tweens.add({ targets: tapText, alpha: 0, duration: 900, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
+
+    // Fade in overlay
+    this.tweens.add({ targets: overlay, alpha: 1, duration: 600 });
+
+    // Tap anywhere to dismiss
+    const hitZone = this.add.rectangle(w / 2, h / 2, w, h, 0x000000, 0).setDepth(501).setInteractive();
+    hitZone.once('pointerdown', () => {
+      hitZone.destroy();
+      this.tweens.add({
+        targets: overlay, alpha: 0, duration: 500,
+        onComplete: () => { overlay.destroy(); this.time.delayedCall(1200, onDismiss); }
+      });
+    });
+  }
+
   startNarrative() {
     if (!this.chapterData.dialogue || !this.chapterData.dialogue.opening) {
       // No opening dialogue, go straight to puzzle or choices
@@ -1074,7 +1125,11 @@ export default class ChapterScene extends Phaser.Scene {
 
     // Ensure speaking character is visible (unless explicitly hidden)
     const speaker = line.speaker.toLowerCase();
-    if (speaker !== 'narrator' && line.hideCharacters !== true && line.showOnlyVera !== true) {
+    const speakerExplicitlyHidden = line.hideCharacters === true ||
+      (Array.isArray(line.hideCharacters) && line.hideCharacters.includes(speaker));
+    const isNpc = !['veracity', 'vera', 'addie', 'rainie', 'narrator'].includes(speaker);
+    // NPCs (crone, cultists, etc.) must be shown via showCharacters in JSON — not auto-shown
+    if (speaker !== 'narrator' && !speakerExplicitlyHidden && line.showOnlyVera !== true && !isNpc) {
       this.ensureSpeakerVisible(speaker);
     }
 
@@ -1335,11 +1390,160 @@ export default class ChapterScene extends Phaser.Scene {
     this.scene.resume();
     this.scene.stop('PuzzleScene');
 
-    // Now show closing dialogue
-    if (this.chapterData.dialogue?.closing) {
-      this.showDialogue(this.chapterData.dialogue.closing, () => {
-        this.completeChapter();
+    // Check if there's a gear (connection) puzzle that hasn't been solved
+    const gearPuzzle = this.chapterData.choices?.find(c => c.puzzle?.type === 'connection')?.puzzle;
+    const gearPuzzleId = `ch${this.chapterNumber}_connection`;
+    const gearSolved = gameStateManager.getState().completedPuzzles.includes(gearPuzzleId);
+
+    if (gearPuzzle && !gearSolved) {
+      this.showGearBypassScreen(gearPuzzle);
+    } else {
+      this.proceedAfterGearPuzzle();
+    }
+  }
+
+  showGearBypassScreen(gearPuzzle) {
+    const w = this.cameras.main.width;
+    const h = this.cameras.main.height;
+    const teacups = gameStateManager.getTeacups();
+    const cost = 3;
+    const canAfford = teacups >= cost;
+
+    const overlay = this.add.container(w / 2, h / 2);
+    overlay.setAlpha(0);
+    overlay.setDepth(200);
+
+    const bg = this.add.rectangle(0, 0, w, h, 0x000000, 0.88);
+    overlay.add(bg);
+
+    const panel = this.add.rectangle(0, 0, w - 40, 380, 0x1a0f08);
+    panel.setStrokeStyle(2, 0x8b5c31);
+    overlay.add(panel);
+
+    const question = this.add.text(0, -145, 'Would you like to solve the\ngear puzzle and open the door,\nor bypass it for 3 teacups?', {
+      fontSize: '14px', fontFamily: 'Courier New', color: '#ffffff', align: 'center', lineSpacing: 4
+    }).setOrigin(0.5);
+    overlay.add(question);
+
+    const balance = this.add.text(0, -70, `☕ Your teacups: ${teacups}`, {
+      fontSize: '13px', fontFamily: 'Courier New', color: '#c4a575'
+    }).setOrigin(0.5);
+    overlay.add(balance);
+
+    // Button 1: Solve the gear puzzle
+    const btn1Bg = this.add.rectangle(0, 10, w - 60, 65, 0x333333);
+    btn1Bg.setStrokeStyle(2, 0x8b5c31);
+    btn1Bg.setInteractive({ useHandCursor: true });
+    const btn1Text = this.add.text(0, 10, 'Solve the Gear Puzzle', {
+      fontSize: '14px', fontFamily: 'Courier New', color: '#ffffff'
+    }).setOrigin(0.5);
+    overlay.add([btn1Bg, btn1Text]);
+
+    btn1Bg.on('pointerover', () => btn1Bg.setFillStyle(0x8b5c31));
+    btn1Bg.on('pointerout', () => btn1Bg.setFillStyle(0x333333));
+    btn1Bg.on('pointerdown', () => {
+      overlay.destroy();
+      this.scene.launch('PuzzleScene', {
+        puzzleData: gearPuzzle,
+        chapterNumber: this.chapterNumber,
+        onComplete: () => this.proceedAfterGearPuzzle()
       });
+      this.scene.pause();
+    });
+
+    // Button 2: Spend teacups to bypass
+    const btn2Color = canAfford ? 0x333333 : 0x1a1a1a;
+    const btn2BorderColor = canAfford ? 0xc4a575 : 0x444444;
+    const btn2TextColor = canAfford ? '#ffd700' : '#555555';
+    const btn2Bg = this.add.rectangle(0, 105, w - 60, 65, btn2Color);
+    btn2Bg.setStrokeStyle(2, btn2BorderColor);
+    if (canAfford) btn2Bg.setInteractive({ useHandCursor: true });
+    const btn2Text = this.add.text(0, 105, `Spend ${cost} ☕ to bypass the puzzle`, {
+      fontSize: '14px', fontFamily: 'Courier New', color: btn2TextColor
+    }).setOrigin(0.5);
+    overlay.add([btn2Bg, btn2Text]);
+
+    if (!canAfford) {
+      const notEnough = this.add.text(0, 148, `(Not enough teacups)`, {
+        fontSize: '11px', fontFamily: 'Courier New', color: '#664444', fontStyle: 'italic'
+      }).setOrigin(0.5);
+      overlay.add(notEnough);
+    } else {
+      btn2Bg.on('pointerover', () => btn2Bg.setFillStyle(0x5a4010));
+      btn2Bg.on('pointerout', () => btn2Bg.setFillStyle(0x333333));
+      btn2Bg.on('pointerdown', () => {
+        overlay.destroy();
+        this.showTeacupCountdown(cost, () => this.proceedAfterGearPuzzle());
+      });
+    }
+
+    this.tweens.add({ targets: overlay, alpha: 1, duration: 500 });
+  }
+
+  showTeacupCountdown(cost, onComplete) {
+    const w = this.cameras.main.width;
+    const h = this.cameras.main.height;
+
+    gameStateManager.spendTeacups(cost);
+    const gearPuzzleId = `ch${this.chapterNumber}_connection`;
+    gameStateManager.completePuzzle(gearPuzzleId);
+
+    const overlay = this.add.container(w / 2, h / 2);
+    overlay.setDepth(200);
+    overlay.setAlpha(0);
+
+    const bg = this.add.rectangle(0, 0, w, h, 0x000000, 0.92);
+    overlay.add(bg);
+
+    const label = this.add.text(0, -80, 'Spending teacups...', {
+      fontSize: '16px', fontFamily: 'Courier New', color: '#c4a575', fontStyle: 'bold'
+    }).setOrigin(0.5);
+    overlay.add(label);
+
+    const countText = this.add.text(0, 10, `☕ ×${cost}`, {
+      fontSize: '52px', fontFamily: 'Courier New', color: '#ffd700', fontStyle: 'bold',
+      stroke: '#000', strokeThickness: 4
+    }).setOrigin(0.5);
+    overlay.add(countText);
+
+    this.tweens.add({
+      targets: overlay, alpha: 1, duration: 400,
+      onComplete: () => {
+        let remaining = cost;
+        const step = () => {
+          remaining--;
+          if (remaining <= 0) {
+            countText.setText('☕ ×0');
+            this.tweens.add({
+              targets: countText, scaleX: 1.3, scaleY: 1.3, duration: 120, yoyo: true,
+              onComplete: () => {
+                const doneText = this.add.text(w / 2, h / 2 + 80, 'The door swings open!', {
+                  fontSize: '14px', fontFamily: 'Courier New', color: '#4caf50'
+                }).setOrigin(0.5).setDepth(201);
+                this.time.delayedCall(900, () => {
+                  this.tweens.add({
+                    targets: overlay, alpha: 0, duration: 400,
+                    onComplete: () => { overlay.destroy(); doneText.destroy(); onComplete(); }
+                  });
+                });
+              }
+            });
+            return;
+          }
+          countText.setText(`☕ ×${remaining}`);
+          this.tweens.add({
+            targets: countText, scaleX: 1.25, scaleY: 1.25, duration: 130, yoyo: true,
+            onComplete: () => { this.time.delayedCall(250, step); }
+          });
+        };
+        this.time.delayedCall(400, step);
+      }
+    });
+  }
+
+  proceedAfterGearPuzzle() {
+    if (this.chapterData.dialogue?.closing) {
+      this.showDialogue(this.chapterData.dialogue.closing, () => this.completeChapter());
     } else {
       this.completeChapter();
     }

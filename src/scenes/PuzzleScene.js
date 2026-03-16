@@ -70,46 +70,47 @@ export default class PuzzleScene extends Phaser.Scene {
       this.load.image('whistle_vera', `${BASE}assets/images/items/whistle_vera.png`);
     }
 
-    // Load tea puzzle items
-    const teaItems = [
-      'cream_01', 'cream_02', 'cream_03',
-      'sugar_01', 'sugar_02', 'sugar_03',
-      'tealeaves_01', 'tealeaves_02', 'tealeaves_03',
-      'teacup_white', 'teacup_metal', 'teacup_floral',
-      'lemon_slice', 'lemon_slice2', 'lemon_pile'
-    ];
+    // Load tea service assets only when needed
+    if (this.puzzleData?.type === 'tea_service') {
+      const teaItems = [
+        'cream_01', 'cream_02', 'cream_03',
+        'sugar_01', 'sugar_02', 'sugar_03',
+        'tealeaves_01', 'tealeaves_02', 'tealeaves_03',
+        'teacup_white', 'teacup_metal', 'teacup_floral',
+        'lemon_slice', 'lemon_slice2', 'lemon_pile'
+      ];
 
-    teaItems.forEach(item => {
-      if (!this.textures.exists(item)) {
-        this.load.image(item, `${BASE}assets/images/puzzles/tea/${item}.png`);
-      }
-    });
-
-    // Load tea service equipment and ingredient icons
-    ['icon_faucet', 'icon_ice',
-     'icon_tea_black', 'icon_trea_herbal', 'icon_creamer', 'icon_lemon', 'icon_sugar',
-     'icon_teapot_bear', 'icon_teapot_bird', 'icon_teapot_green'].forEach(key => {
-      if (!this.textures.exists(key)) {
-        this.load.image(key, `${BASE}assets/images/puzzles/tea_items/${key}.png`);
-      }
-    });
-    ['addie', 'cultist_bookkeeper', 'cultist_enforcer',
-     'cultist_guard', 'cultist_guard_staff', 'da',
-     'gentleman_paper', 'guildmaster', 'rainie', 'vera'].forEach(char => {
-      const key = `tea_teacup_${char}`;
-      if (!this.textures.exists(key)) {
-        this.load.image(key, `${BASE}assets/images/puzzles/tea_items/icon_teacup_${char}.png`);
-      }
-    });
-    ['addie_default', 'cultist_bookkeeper', 'cultist_enforcer', 'cultist_guard',
-     'cultist_guard_staff', 'da_default', 'genlteman_paper', 'rainie_default', 'vera_default'].forEach(char => {
-      ['happy', 'neutral', 'irritated'].forEach(state => {
-        const key = `tea_char_${char}_${state}`;
-        if (!this.textures.exists(key)) {
-          this.load.image(key, `${BASE}assets/images/puzzles/tea_character_icons/icon_${char}_${state}.png`);
+      teaItems.forEach(item => {
+        if (!this.textures.exists(item)) {
+          this.load.image(item, `${BASE}assets/images/puzzles/tea/${item}.png`);
         }
       });
-    });
+
+      ['icon_faucet', 'icon_ice',
+       'icon_tea_black', 'icon_trea_herbal', 'icon_creamer', 'icon_lemon', 'icon_sugar',
+       'icon_teapot_bear', 'icon_teapot_bird', 'icon_teapot_green'].forEach(key => {
+        if (!this.textures.exists(key)) {
+          this.load.image(key, `${BASE}assets/images/puzzles/tea_items/${key}.png`);
+        }
+      });
+      ['addie', 'cultist_bookkeeper', 'cultist_enforcer',
+       'cultist_guard', 'cultist_guard_staff', 'da',
+       'gentleman_paper', 'guildmaster', 'rainie', 'vera'].forEach(char => {
+        const key = `tea_teacup_${char}`;
+        if (!this.textures.exists(key)) {
+          this.load.image(key, `${BASE}assets/images/puzzles/tea_items/icon_teacup_${char}.png`);
+        }
+      });
+      ['addie_default', 'cultist_bookkeeper', 'cultist_enforcer', 'cultist_guard',
+       'cultist_guard_staff', 'da_default', 'genlteman_paper', 'rainie_default', 'vera_default'].forEach(char => {
+        ['happy', 'neutral', 'irritated'].forEach(state => {
+          const key = `tea_char_${char}_${state}`;
+          if (!this.textures.exists(key)) {
+            this.load.image(key, `${BASE}assets/images/puzzles/tea_character_icons/icon_${char}_${state}.png`);
+          }
+        });
+      });
+    }
   }
 
   create() {
@@ -2666,39 +2667,32 @@ export default class PuzzleScene extends Phaser.Scene {
     const w = this.cameras.main.width;
     const h = this.cameras.main.height;
     const { served, missed } = this.ts.score;
-    const total = served + missed;
-    const pct = total > 0 ? served / total : 0;
-    const grade = pct >= 0.95 ? 'S' : pct >= 0.80 ? 'A' : pct >= 0.60 ? 'B' : pct >= 0.40 ? 'C' : 'D';
-    const gradeColors = { S: '#ffd700', A: '#4caf50', B: '#2196f3', C: '#ff9800', D: '#f44336' };
 
     this.add.rectangle(w / 2, h / 2, w, h, 0x000000, 0.88).setDepth(300);
-    const panelH = 320;
+    const panelH = 260;
     this.add.rectangle(w / 2, h / 2, w - 30, panelH, 0x1a0f08).setStrokeStyle(2, 0x8b5c31).setDepth(301);
 
     const py = h / 2;
-    this.add.text(w / 2, py - 130, 'Tea Service Complete!', {
+    this.add.text(w / 2, py - 95, 'Tea Service Complete!', {
       fontSize: '17px', fontFamily: 'Courier New', color: '#c4a575', fontStyle: 'bold'
     }).setOrigin(0.5).setDepth(302);
-    this.add.text(w / 2, py - 90, `☕ Teacups Earned: ${this.ts.score.teacupsEarned}`, {
-      fontSize: '14px', fontFamily: 'Courier New', color: '#ffffff'
+    this.add.text(w / 2, py - 55, `☕ Teacups Earned: ${served}`, {
+      fontSize: '16px', fontFamily: 'Courier New', color: '#ffd700', fontStyle: 'bold'
     }).setOrigin(0.5).setDepth(302);
-    this.add.text(w / 2, py - 55, `Served: ${served}   Missed: ${missed}`, {
+    this.add.text(w / 2, py - 18, `Served: ${served}   Missed: ${missed}`, {
       fontSize: '12px', fontFamily: 'Courier New', color: '#aaaaaa'
     }).setOrigin(0.5).setDepth(302);
-    this.add.text(w / 2, py - 5, grade, {
-      fontSize: '52px', fontFamily: 'Courier New', color: gradeColors[grade],
-      fontStyle: 'bold', stroke: '#000', strokeThickness: 4
-    }).setOrigin(0.5).setDepth(302);
 
-    const btn = this.add.rectangle(w / 2, py + 100, 160, 46, 0x8b5c31)
+    const btn = this.add.rectangle(w / 2, py + 70, 160, 46, 0x8b5c31)
       .setStrokeStyle(2, 0xc4a575).setDepth(302).setInteractive({ useHandCursor: true });
-    this.add.text(w / 2, py + 100, 'Continue', {
+    this.add.text(w / 2, py + 70, 'Continue', {
       fontSize: '17px', fontFamily: 'Courier New', color: '#fff'
     }).setOrigin(0.5).setDepth(303);
 
     btn.on('pointerover', () => btn.setFillStyle(0xaa7344));
     btn.on('pointerout', () => btn.setFillStyle(0x8b5c31));
     btn.on('pointerdown', () => {
+      gameStateManager.addTeacups(served);
       const puzzleId = `ch${this.chapterNumber}_${this.puzzleData.type}`;
       gameStateManager.completePuzzle(puzzleId);
       this.scene.stop('PuzzleScene');
@@ -3125,7 +3119,7 @@ export default class PuzzleScene extends Phaser.Scene {
     if (!step) return 'Complete!';
 
     const remaining = step.count - this.currentStepProgress;
-    return `${step.label} ${remaining} more time${remaining === 1 ? '' : 's'}`;
+    return `${step.label} ${remaining} time${remaining === 1 ? '' : 's'}`;
   }
 
   updateSequenceButtons() {

@@ -107,8 +107,8 @@
   },
   "choices": [
     {
-      "text": "We should check the house carefully and make sure everything is secure before searching.",
-      "companion": "addie",
+      "text": "We should reconnect the gear system open the door",
+      "companion": "rainie",
       "consequences": {
         "careful_approach": true
       },
@@ -146,7 +146,7 @@
     },
     {
       "text": "But first, a cup of tea would be nice.",
-      "companion": "rainie",
+      "companion": "addie",
       "consequences": {
         "tea_break": true
       },
