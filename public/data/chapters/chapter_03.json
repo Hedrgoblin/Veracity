@@ -98,7 +98,7 @@
       },
       {
         "speaker": "Rainie",
-        "text": "Oh. I guess it's lucky we have that lid.",
+        "text": "Oh no... I guess it's lucky we have that lid.",
         "expression": {
           "rainie": "sad"
         }
@@ -113,13 +113,13 @@
       },
       {
         "speaker": "Narrator",
-        "placeholder": "This place will have a simple maze puzzle.\nFor now, click here to continue.",
-        "hideCharacters": true,
-        "background": "clockmakers_guild_door"
+        "launchMothPuzzle": true,
+        "hideCharacters": true
       },
       {
         "speaker": "Narrator",
-        "text": "You find yourself in front of the Watchmaker's Guild. Your father used to bring you here when you were little. Standing on the steps, you a see a blind old woman, begging."
+        "text": "You find yourself in front of the Watchmaker's Guild. Your father used to bring you here when you were little. Standing on the steps, you a see a blind old woman, begging.",
+        "background": "clockmakers_guild_door"
       },
       {
         "speaker": "Crone",
@@ -138,39 +138,46 @@
         "text": "what a lovely young woman you've turned out to be.",
         "expression": {
           "crone": "thinking"
-        },
-        "hideCharacters": [
-          "crone"
-        ]
+        }
       },
       {
         "speaker": "Vera",
-        "text": "Do I know you?.",
+        "text": "Do I know you?",
         "expression": {
-          "vera_default": "thinking"
+          "vera": "thinking"
+        },
+        "hideCharacters": ["crone"]
+      },
+      {
+        "speaker": "Narrator",
+        "text": "the woman smiles sweetly at you, and wanders away.",
+        "showCharacters": ["crone"],
+        "hideCharacters": ["vera", "addie", "rainie"],
+        "expression": {
+          "crone": "happy"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "why does she feel so familiar?",
+        "hideCharacters": ["crone"]
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Come on! the moth is in there.",
+        "expression": {
+          "vera": "neutral"
         }
       },
       {
         "speaker": "Narrator",
-        "text": "the woman smiles sweetly at you, and wanders away."
-      },
-      {
-        "speaker": "Veracity",
-        "text": "why does she feel so familiar?"
-      },
-      {
-        "speaker": "Rainie",
-        "text": "Come on! the moth is in there."
-      },
-      {
-        "speaker": "Narrator",
-        "text": "you carefully try the door. It's locked, but you recognize the lock. It looks just like the lock on your father's study at home. or almost like."
+        "text": "you carefully try the door. It's locked, but you recognize the lock. It looks just like the kind of lock your father makes."
       }
     ],
     "midpoint": [
       {
-        "speaker": "Rainie",
-        "text": "Wow, this place is creepy! I love it!",
+        "speaker": "Veracity",
+        "text": "I know how to open this!",
         "expression": {
           "rainie": "happy"
         }
@@ -243,64 +250,10 @@
       }
     ]
   },
-  "choices": [
-    {
-      "text": "Find a hiding spot and watch the building. Learn their patterns before entering.",
-      "companion": "addie",
-      "consequences": {
-        "scouted_location": true
-      }
-    },
-    {
-      "text": "Solve the door puzzle and go in now. We can't waste time watching.",
-      "companion": "rainie",
-      "consequences": {
-        "direct_entry": true
-      }
-    }
-  ],
   "puzzle": {
-    "type": "connection",
+    "type": "gear_clockmakers",
     "title": "The Spiral Lock",
-    "instructions": "Connect the gears in the correct sequence to unlock the door.",
-    "points": [
-      {
-        "id": "outer1",
-        "x": -200,
-        "y": -100,
-        "pair": "inner1"
-      },
-      {
-        "id": "inner1",
-        "x": 0,
-        "y": -100,
-        "pair": "outer1"
-      },
-      {
-        "id": "outer2",
-        "x": -200,
-        "y": 100,
-        "pair": "inner2"
-      },
-      {
-        "id": "inner2",
-        "x": 0,
-        "y": 100,
-        "pair": "outer2"
-      },
-      {
-        "id": "center1",
-        "x": 100,
-        "y": 0,
-        "pair": "center2"
-      },
-      {
-        "id": "center2",
-        "x": 200,
-        "y": 0,
-        "pair": "center1"
-      }
-    ]
+    "instructions": "Connect the gears to unlock the door."
   },
   "storyFlags": {
     "chapter3_complete": true,

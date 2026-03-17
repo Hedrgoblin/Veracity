@@ -430,7 +430,7 @@ export default class ChapterScene extends Phaser.Scene {
 
     // Crone (if in chapter assets)
     if (this.chapterData.assets?.characters?.includes('crone_default')) {
-      const croneScale = 0.299;
+      const croneScale = 0.359;
       const croneX = width / 2;
       const croneY = girlY;
 
@@ -1115,6 +1115,22 @@ export default class ChapterScene extends Phaser.Scene {
       return;
     }
 
+    if (line.launchMothPuzzle && this.chapterData.mothPuzzle) {
+      if (line.background && this.backgroundImage) this.changeBackground(line.background);
+      if (line.hideCharacters === true) this.hideAllCharacters();
+      this.mothPuzzleDone = true;
+      this.scene.launch('MazeScene', {
+        chapterNumber: this.chapterNumber,
+        onComplete: () => {
+          this.scene.resume();
+          this.scene.stop('MazeScene');
+          if (onComplete) onComplete();
+        }
+      });
+      this.scene.pause();
+      return;
+    }
+
     this.speakerText.setText(line.speaker || '');
     this.dialogueText.setText('');
 
@@ -1126,8 +1142,10 @@ export default class ChapterScene extends Phaser.Scene {
         alpha: 0,
         duration: 400,
         onComplete: () => {
-          this.itemOverlay.destroy();
-          this.itemOverlay = null;
+          if (this.itemOverlay) {
+            this.itemOverlay.destroy();
+            this.itemOverlay = null;
+          }
         }
       });
     }
@@ -1155,14 +1173,16 @@ export default class ChapterScene extends Phaser.Scene {
       this.hideAllCharacters();
     } else if (line.hideCharacters === false) {
       this.showAllCharacters();
-    } else if (Array.isArray(line.hideCharacters)) {
-      // Hide specific characters
-      line.hideCharacters.forEach(charName => this.hideCharacter(charName));
-    } else if (Array.isArray(line.showCharacters)) {
-      // Show specific characters
-      line.showCharacters.forEach(charName => this.showCharacter(charName));
-    } else if (line.showOnlyVera === true) {
-      this.showOnlyVera();
+    } else {
+      if (Array.isArray(line.hideCharacters)) {
+        line.hideCharacters.forEach(charName => this.hideCharacter(charName));
+      }
+      if (Array.isArray(line.showCharacters)) {
+        line.showCharacters.forEach(charName => this.showCharacter(charName));
+      }
+      if (line.showOnlyVera === true) {
+        this.showOnlyVera();
+      }
     }
 
     // Check if expressions should change
@@ -1350,12 +1370,24 @@ export default class ChapterScene extends Phaser.Scene {
 
   checkForPuzzle() {
     if (this.chapterData.puzzle) {
-      // Launch puzzle scene
-      this.scene.launch('PuzzleScene', {
-        puzzleData: this.chapterData.puzzle,
-        chapterNumber: this.chapterNumber,
-        onComplete: () => this.onPuzzleComplete()
-      });
+      const puzzleType = this.chapterData.puzzle.type;
+
+      if (puzzleType === 'gear_clockmakers') {
+        this.scene.launch('GearPuzzleScene', {
+          chapterNumber: this.chapterNumber,
+          onComplete: () => {
+            this.scene.stop('GearPuzzleScene');
+            this.scene.resume();
+            this.checkForDeskPuzzle();
+          }
+        });
+      } else {
+        this.scene.launch('PuzzleScene', {
+          puzzleData: this.chapterData.puzzle,
+          chapterNumber: this.chapterNumber,
+          onComplete: () => this.onPuzzleComplete()
+        });
+      }
       this.scene.pause();
     } else {
       this.completeChapter();
@@ -1604,7 +1636,7 @@ export default class ChapterScene extends Phaser.Scene {
   }
 
   checkForMothPuzzle() {
-    if (this.chapterData.mothPuzzle) {
+    if (this.chapterData.mothPuzzle && !this.mothPuzzleDone) {
       // Launch moth puzzle scene
       this.scene.launch('PuzzleScene', {
         puzzleData: this.chapterData.mothPuzzle,
@@ -1613,7 +1645,7 @@ export default class ChapterScene extends Phaser.Scene {
       });
       this.scene.pause();
     } else {
-      // No moth puzzle, continue with normal flow
+      // Already triggered mid-dialogue or no moth puzzle — continue
       this.checkForChoices();
     }
   }
@@ -1843,7 +1875,9 @@ export default class ChapterScene extends Phaser.Scene {
           { action: 'hum', count: 3, label: 'Whistle' },
           { action: 'kick', count: 1, label: 'Kick' }
         ]
-      }}
+      }},
+      { name: 'Follow the Moth', type: 'mothPuzzle', data: {} },
+      { name: 'Unlock Guild Door', type: 'gear_clockmakers', data: { type: 'gear_clockmakers' } }
     ];
 
     // Dropdown menu
@@ -1908,6 +1942,38 @@ export default class ChapterScene extends Phaser.Scene {
     // Close dropdown
     this.puzzleDropdown.setVisible(false);
     this.puzzleDropdown.setAlpha(0);
+
+    // Show placeholder screen instead of launching a real puzzle
+    if (puzzleData.type === 'placeholder') {
+      this.showPlaceholderScreen(puzzleData, () => {});
+      return;
+    }
+
+    // Launch the guild door gear puzzle
+    if (puzzleData.type === 'gear_clockmakers') {
+      this.scene.launch('GearPuzzleScene', {
+        chapterNumber: this.chapterNumber,
+        onComplete: () => {
+          this.scene.stop('GearPuzzleScene');
+          this.scene.resume();
+        }
+      });
+      this.scene.pause();
+      return;
+    }
+
+    // Launch the chapter's moth maze
+    if (puzzleData.type === 'mothPuzzle') {
+      this.scene.launch('MazeScene', {
+        chapterNumber: this.chapterNumber,
+        onComplete: () => {
+          this.scene.stop('MazeScene');
+          this.scene.resume();
+        }
+      });
+      this.scene.pause();
+      return;
+    }
 
     // Launch puzzle scene
     this.scene.launch('PuzzleScene', {

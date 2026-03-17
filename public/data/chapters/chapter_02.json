@@ -12,7 +12,7 @@
       "rainie"
     ],
     "characterFolders": {
-      "addie": "addie_home"
+      "addie": "addie_default"
     }
   },
   "companions": [
@@ -37,7 +37,7 @@
         "speaker": "Addie",
         "text": "This isn't right. The professor would never leave the room like this.",
         "expression": {
-          "addie_home": "sad",
+          "addie": "sad",
           "vera": "sad",
           "rainie": "sad"
         }
@@ -119,7 +119,7 @@
         "speaker": "Addie",
         "text": "Wait, Vera. There's another note here.",
         "expression": {
-          "addie_home": "surprised"
+          "addie": "surprised"
         }
       },
       {
@@ -131,7 +131,7 @@
         "text": "Addie, we have to find him.",
         "expression": {
           "vera": "neutral",
-          "addie_home": "sad"
+          "addie": "sad"
         },
         "showItem": "note_dear_vera_02"
       },
@@ -139,7 +139,7 @@
         "speaker": "Addie",
         "text": "It's dangerous out there, for clockwork animals like Rainie and myself. To say nothing of the quality of tea one finds while traveling... But yes. We can't leave him alone out there.",
         "expression": {
-          "addie_home": "neutral",
+          "addie": "neutral",
           "vera": "sad"
         }
       },
@@ -155,7 +155,7 @@
         "speaker": "Addie",
         "text": "I'll start packing.",
         "expression": {
-          "addie_home": "neutral"
+          "addie": "neutral"
         }
       }
     ]

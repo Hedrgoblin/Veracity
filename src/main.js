@@ -7,6 +7,8 @@ import BootScene from './scenes/BootScene.js';
 import MainMenuScene from './scenes/MainMenuScene.js';
 import ChapterScene from './scenes/ChapterScene.js';
 import PuzzleScene from './scenes/PuzzleScene.js';
+import MazeScene from './scenes/MazeScene.js';
+import GearPuzzleScene from './scenes/GearPuzzleScene.js';
 import SettingsScene from './scenes/SettingsScene.js';
 import EndingScene from './scenes/EndingScene.js';
 import SubscriptionScene from './scenes/SubscriptionScene.js';
@@ -36,6 +38,8 @@ const config = {
     MainMenuScene,
     ChapterScene,
     PuzzleScene,
+    MazeScene,
+    GearPuzzleScene,
     SettingsScene,
     EndingScene,
     SubscriptionScene,
