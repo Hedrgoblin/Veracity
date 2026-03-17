@@ -4,7 +4,7 @@
   "act": 1,
   "description": "Inside the cult's meeting house, you learn the terrible truth.",
   "assets": {
-    "background": "placeholder_bg",
+    "background": "clockmakers_guild_hall_01",
     "music": null,
     "characters": [
       "vera",
@@ -27,7 +27,7 @@
     "opening": [
       {
         "speaker": "Narrator",
-        "text": "The door opens."
+        "text": "The door opens. You enter cautiously."
       },
       {
         "speaker": "Rainie",
@@ -39,52 +39,76 @@
       },
       {
         "speaker": "Addie",
-        "text": "Shh! I hear voices. Hide!"
+        "text": "(whispering) I hear voices. Hide!"
       },
       {
         "speaker": "Narrator",
-        "text": "You duck behind a pillar. Two robed figures walk down the corridor near you. They speak in hushed tones."
+        "text": "You duck behind a pillar.",
+        "background": "clockmakers_guild_hall_01_hide",
+        "hideCharacters": true
+      },
+      {
+        "speaker": "Narrator",
+        "text": "Two robed figures walk down the corridor near you. They speak in hushed tones.",
+        "background": "clockmakers_guild_hall_01"
       },
       {
         "speaker": "Cultist_enforcer",
-        "text": "Does he have the device?"
+        "text": "Does he have the device?",
+        "background": "clockmakers_guild_hall_01",
+        "showCharacters": ["cultist_enforcer"],
+        "hideCharacters": ["cultist_bookkeeper"]
       },
       {
         "speaker": "Cultist_bookkeeper",
-        "text": "He refuses to cooperate. We found pieces of the device but he refuses to tell us how to use them. He claims the Temporal Resonance Device is incomplete."
+        "text": "He refuses to cooperate. He claims the Temporal Resonance Device is an impossible theoretical.",
+        "showCharacters": ["cultist_bookkeeper"],
+        "hideCharacters": ["cultist_enforcer"]
       },
       {
         "speaker": "Cultist_enforcer",
-        "text": "He lies. It MUST be completed. We will force him if necessary.",
+        "text": "He lies. We know that it is not. It MUST be completed. We will force him if necessary.",
+        "showCharacters": ["cultist_enforcer"],
+        "hideCharacters": ["cultist_bookkeeper"],
         "expression": {
           "cultist_enforcer": "angry"
         }
       },
       {
         "speaker": "Veracity",
-        "text": "*whispers* They have him. They really have him."
+        "text": "*whispers* They have him. They really have him.",
+        "background": "clockmakers_guild_hall_01_hide",
+        "hideCharacters": ["cultist_enforcer", "cultist_bookkeeper"]
       },
       {
         "speaker": "Cultist_enforcer",
-        "text": "We're moving him to the northern sanctuary tonight. There, he will have no choice but to finish the device.",
+        "text": "We're moving him to the northern sanctuary as we speak. There, he will have no choice but to finish the device.",
+        "background": "clockmakers_guild_hall_01",
+        "showCharacters": ["cultist_enforcer"],
+        "hideCharacters": ["cultist_bookkeeper"],
         "expression": {
           "cultist_enforcer": "smirk"
         }
       },
       {
         "speaker": "Cultist_bookkeeper",
-        "text": "And if he refuses?"
+        "text": "And if he refuses?",
+        "showCharacters": ["cultist_bookkeeper"],
+        "hideCharacters": ["cultist_enforcer", "vera"]
       },
       {
         "speaker": "Cultist_enforcer",
         "text": "Then we take what he has already built and find someone else to complete it. The device will reshape time itself.",
+        "showCharacters": ["cultist_enforcer"],
+        "hideCharacters": ["cultist_bookkeeper"],
         "expression": {
           "cultist_enforcer": "disgust"
         }
       },
       {
         "speaker": "Narrator",
-        "text": "The men continue walking. They don't see you. Your mind races."
+        "text": "The men continue walking. They don't see you. Your mind races.",
+        "hideCharacters": true
       },
       {
         "speaker": "Veracity",
@@ -100,11 +124,11 @@
       },
       {
         "speaker": "Addie",
-        "text": "The moth will travel as a moth travels... we need to go the old fashioned route."
+        "text": "The moth will travel through the air... we are more earthbound."
       },
       {
         "speaker": "Veracity",
-        "text": "If only they had an old map lying around with a big red x on it, showing where the Sanctuary is..."
+        "text": "If only we had a map..."
       },
       {
         "speaker": "Rainie",
@@ -116,19 +140,13 @@
       },
       {
         "speaker": "Narrator",
-        "text": "Rainie points to a small room filled with maps. The door is open."
+        "text": "Rainie points to a small room filled with maps. The door is open.",
+        "background": "clockmakers_guild_maproom",
+        "hideCharacters": true
       },
       {
         "speaker": "Veracity",
         "text": "That works."
-      },
-      {
-        "speaker": "Narrator",
-        "text": "there should be a map room and a mini puzzle that is map related here"
-      },
-      {
-        "speaker": "Narrator",
-        "text": "Once map puzzle is completed..."
       },
       {
         "speaker": "Rainie",
@@ -154,62 +172,6 @@
         "speaker": "Veracity",
         "text": "Let's get out of here!"
       }
-    ],
-    "closing": [
-      {
-        "speaker": "Cultist 1",
-        "text": "Tomorrow, we move him to the northern sanctuary. There, he will have no choice but to finish the device."
-      },
-      {
-        "speaker": "Cultist 2",
-        "text": "And if he refuses?"
-      },
-      {
-        "speaker": "Cultist 1",
-        "text": "Then we take what he has already built and find someone else to complete it. The device will reshape time itself."
-      },
-      {
-        "speaker": "Narrator",
-        "text": "The cultists leave. Alone in the dim church, your mind races."
-      },
-      {
-        "speaker": "Veracity",
-        "text": "Northern sanctuary. We have to get there first."
-      },
-      {
-        "speaker": "Addie",
-        "text": "But we don't know where it is, Vera. We need to find a map, or someone who knows."
-      },
-      {
-        "speaker": "Rainie",
-        "text": "Look! There's a door behind the altar. Maybe there are clues in there!"
-      }
-    ]
-  },
-  "choices": [
-    {
-      "text": "Search carefully and quietly. Leave no trace that we were here.",
-      "companion": "addie",
-      "consequences": {
-        "stealthy_search": true
-      }
-    },
-    {
-      "text": "Search quickly and take everything useful. They'll know someone was here, but we'll be long gone.",
-      "companion": "rainie",
-      "consequences": {
-        "obvious_intrusion": true
-      }
-    }
-  ],
-  "puzzle": {
-    "type": "gather_sort",
-    "title": "Secrets in Shadow",
-    "instructions": "Gather useful items and organize them to find clues about the northern sanctuary.",
-    "slots": [
-      "maps",
-      "letters",
-      "keys"
     ]
   },
   "storyFlags": {

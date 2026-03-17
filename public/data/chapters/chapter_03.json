@@ -118,7 +118,7 @@
       },
       {
         "speaker": "Narrator",
-        "text": "You find yourself in front of the Watchmaker's Guild. Your father used to bring you here when you were little. Standing on the steps, you a see a blind old woman, begging.",
+        "text": "You find yourself in front of the Watchmaker's Guild. Standing on the steps, you a see a blind old woman, begging.",
         "background": "clockmakers_guild_door"
       },
       {
@@ -137,7 +137,7 @@
         "speaker": "Crone",
         "text": "what a lovely young woman you've turned out to be.",
         "expression": {
-          "crone": "thinking"
+          "crone": "happy"
         }
       },
       {
@@ -150,7 +150,7 @@
       },
       {
         "speaker": "Narrator",
-        "text": "the woman smiles sweetly at you, and wanders away.",
+        "text": "the woman stares blankly and wanders away.",
         "showCharacters": ["crone"],
         "hideCharacters": ["vera", "addie", "rainie"],
         "expression": {
@@ -171,7 +171,7 @@
       },
       {
         "speaker": "Narrator",
-        "text": "you carefully try the door. It's locked, but you recognize the lock. It looks just like the kind of lock your father makes."
+        "text": "you carefully try the door. It's locked, but you recognize the lock. It looks like the kind of lock your father makes."
       }
     ],
     "midpoint": [
@@ -180,75 +180,21 @@
         "text": "I know how to open this!",
         "expression": {
           "rainie": "happy"
-        }
-      },
-      {
-        "speaker": "Addie",
-        "text": "Stay close. These streets are not safe, especially for a young girl and two small companions.",
-        "expression": {
-          "addie_home": "sad",
-          "rainie": "neutral"
-        }
-      },
-      {
-        "speaker": "Narrator",
-        "text": "You follow the moth's path, checking the compass. The light leads you deeper into the old district."
-      },
-      {
-        "speaker": "Narrator",
-        "text": "A figure emerges from the mist\u2014an old woman with a clockwork walking stick."
-      },
-      {
-        "speaker": "Old Woman",
-        "text": "Lost, little one? These streets eat the unwary. What brings you to this forgotten place?"
-      },
-      {
-        "speaker": "Veracity",
-        "text": "I'm looking for my father. He... he might be in danger.",
-        "expression": {
-          "vera": "sad"
-        }
-      },
-      {
-        "speaker": "Old Woman",
-        "text": "Following the moth, are you? Ah. You seek the Order's meeting house. Clockmaker's Lane is ahead, but child... once you step into their world, nothing is ever the same."
+        },
+        "launchGearPuzzle": true
       }
     ],
     "closing": [
       {
-        "speaker": "Veracity",
-        "text": "The door is locked. But the lock is like the ones father builds."
-      },
-      {
         "speaker": "Narrator",
-        "text": "Your heart races. You've been here before."
+        "text": "The lock clicks. The door swings open."
       }
     ]
   },
   "mothPuzzle": {
     "type": "maze",
     "title": "Follow the Moth",
-    "instructions": "The moth darts ahead into the fog. Choose the correct path to follow it.",
-    "paths": [
-      {
-        "id": "left",
-        "label": "Left Path - Narrow alley between buildings",
-        "correct": false,
-        "failMessage": "The moth's light disappears into the fog. You've lost it!"
-      },
-      {
-        "id": "center",
-        "label": "Center Path - Main cobblestone street",
-        "correct": true,
-        "successMessage": "The moth's glow remains steady ahead. You're on the right path!"
-      },
-      {
-        "id": "right",
-        "label": "Right Path - Through an old courtyard",
-        "correct": false,
-        "failMessage": "The moth's light disappears into the fog. You've lost it!"
-      }
-    ]
+    "instructions": "The moth darts ahead into the fog. Follow its glow through the streets."
   },
   "puzzle": {
     "type": "gear_clockmakers",

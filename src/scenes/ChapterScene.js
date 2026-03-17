@@ -21,6 +21,10 @@ export default class ChapterScene extends Phaser.Scene {
     this.currentDialogueIndex = 0;
     this.audioManager = new AudioManager(this);
     this.teaPuzzleCompleted = false; // Track if tea puzzle has been done
+    this.gearPuzzleDone = false;
+    this.mothPuzzleDone = false;
+    this.midpointShown = false;
+    this.deskPuzzleCompleted = false;
     this.characterFolders = {}; // Will be populated in preload
 
     // Clear cached chapter data to ensure fresh JSON is used (avoids stale characterFolders)
@@ -56,6 +60,7 @@ export default class ChapterScene extends Phaser.Scene {
       'london_alley',
       'clockmakers_guild_door',
       'clockmakers_guild_hall_01',
+      'clockmakers_guild_hall_01_hide',
       'clockmakers_guild_hall_02',
       'clockmakers_guild_maproom',
       'northern_sanctuary_ext',
@@ -460,10 +465,13 @@ export default class ChapterScene extends Phaser.Scene {
 
     // Other NPCs (cultists, gentleman, da, guildmaster, etc.)
     const npcs = ['cultist_bookkeeper', 'cultist_enforcer', 'cultist_guard_staff', 'gentleman_paper', 'da_default', 'da_moth', 'guildmaster'];
+    const npcPositions = {
+      'cultist_bookkeeper': width * 0.65,
+    };
     npcs.forEach(npcName => {
       if (this.chapterData.assets?.characters?.includes(npcName)) {
         const npcScale = 0.299;
-        const npcX = width / 2;
+        const npcX = npcPositions[npcName] ?? width / 2;
         const npcY = girlY;
 
         if (this.textures.exists(`${npcName}_body`)) {
@@ -1131,6 +1139,22 @@ export default class ChapterScene extends Phaser.Scene {
       return;
     }
 
+    if (line.launchGearPuzzle && this.chapterData.puzzle?.type === 'gear_clockmakers') {
+      this.gearPuzzleDone = true;
+      console.log('[GearPuzzle] launching mid-dialogue, chapter:', this.chapterNumber);
+      this.scene.launch('GearPuzzleScene', {
+        chapterNumber: this.chapterNumber,
+        onComplete: () => {
+          console.log('[GearPuzzle] complete, stopping + resuming');
+          this.scene.stop('GearPuzzleScene');
+          this.scene.resume();
+          if (onComplete) onComplete();
+        }
+      });
+      this.scene.pause();
+      return;
+    }
+
     this.speakerText.setText(line.speaker || '');
     this.dialogueText.setText('');
 
@@ -1373,6 +1397,11 @@ export default class ChapterScene extends Phaser.Scene {
       const puzzleType = this.chapterData.puzzle.type;
 
       if (puzzleType === 'gear_clockmakers') {
+        if (this.gearPuzzleDone) {
+          // Already launched mid-dialogue — skip straight to next step
+          this.checkForDeskPuzzle();
+          return;
+        }
         this.scene.launch('GearPuzzleScene', {
           chapterNumber: this.chapterNumber,
           onComplete: () => {
@@ -1644,8 +1673,14 @@ export default class ChapterScene extends Phaser.Scene {
         onComplete: () => this.onMothPuzzleComplete()
       });
       this.scene.pause();
+    } else if (this.mothPuzzleDone && this.chapterData.dialogue?.midpoint && !this.midpointShown) {
+      // Moth puzzle ran mid-dialogue — show midpoint now before continuing
+      this.midpointShown = true;
+      this.showDialogue(this.chapterData.dialogue.midpoint, () => {
+        this.checkForChoices();
+      });
     } else {
-      // Already triggered mid-dialogue or no moth puzzle — continue
+      // No moth puzzle or midpoint — continue
       this.checkForChoices();
     }
   }
@@ -1676,8 +1711,9 @@ export default class ChapterScene extends Phaser.Scene {
     // Fade out
     this.cameras.main.fadeOut(1000, 0, 0, 0);
 
-    // Determine next chapter
-    const nextChapter = chapterManager.getNextChapter();
+    // Determine next chapter — use chapterData directly to avoid stale manager state
+    const nextChapter = this.chapterData?.nextChapter ?? (this.chapterNumber + 1);
+    console.log('[completeChapter] chapter:', this.chapterNumber, '→ nextChapter:', nextChapter, 'subscribed:', gameStateManager.isSubscribed());
 
     this.time.delayedCall(1000, () => {
       if (nextChapter <= 14) {

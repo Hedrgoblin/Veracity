@@ -4,7 +4,7 @@ const BASE      = import.meta.env.BASE_URL;
 const GEAR_PATH = `${BASE}assets/images/puzzles/gears/`;
 const BG_PATH   = `${BASE}assets/images/backgrounds/`;
 
-// Exact debug-map colours with ±30 tolerance
+// Exact debug-map colours with ±40 tolerance
 const COLOURS = {
   yellow:  { r: 222, g: 255, b: 0   }, // #deff00 → gear_light indicator
   magenta: { r: 210, g: 0,   b: 255 }, // #d200ff → gear_light_purple (decoration)
@@ -53,8 +53,8 @@ function findBlobs(imageData, imgW, colorName, clusterRadius = 80) {
   return clusters
     .filter(c => c.count >= 20)
     .map(c => ({
-      cx: c.sumX / c.count,
-      cy: c.sumY / c.count,
+      cx: (c.minX + c.maxX) / 2,  // bbox center — matches how setDisplaySize fills minX→maxX
+      cy: (c.minY + c.maxY) / 2,
       w:  c.maxX - c.minX,
       h:  c.maxY - c.minY,
     }))
@@ -104,14 +104,12 @@ export default class GearPuzzleScene extends Phaser.Scene {
     ctx.drawImage(src, 0, 0);
     const debugData = ctx.getImageData(0, 0, src.width, src.height);
     const debugW    = src.width;
-    const debugH    = src.height;
 
-    // Debug image may differ in size from the background — compute its own scale
-    // so blob positions map to the same screen area as the background
-    const bgScreenW = bg.width  * this.imgScale;
-    const bgScreenH = bg.height * this.imgScale;
+    // Map debug-image pixel coords to screen coords
+    const bgScreenW   = bg.width  * this.imgScale;
+    const bgScreenH   = bg.height * this.imgScale;
     const debugScaleX = bgScreenW / debugW;
-    const debugScaleY = bgScreenH / debugH;
+    const debugScaleY = bgScreenH / src.height;
 
     // ── Blob detection ───────────────────────────────────────────────
     const blobs = (color) =>
@@ -126,46 +124,43 @@ export default class GearPuzzleScene extends Phaser.Scene {
     const magentaBlobs = blobs('magenta');
     // Interactive gears: exactly one each — take the largest blob
     const largest = (list) => list.length === 0 ? [] : [list.reduce((a, b) => (a.w * a.h > b.w * b.h ? a : b))];
-    const greenBlobs   = largest(blobs('green'));
-    const blueBlobs    = largest(blobs('blue'));
-    const purpleBlobs  = largest(blobs('purple'));
+    const greenBlobs  = largest(blobs('green'));
+    const blueBlobs   = largest(blobs('blue'));
+    const purpleBlobs = largest(blobs('purple'));
 
     console.log('GearPuzzle blobs:', {
-      yellow: yellowBlobs.map(b => `(${Math.round(b.x)},${Math.round(b.y)}) ${Math.round(b.w)}×${Math.round(b.h)}`),
-      magenta: magentaBlobs.map(b => `(${Math.round(b.x)},${Math.round(b.y)})`),
-      green:  greenBlobs.map(b => `(${Math.round(b.x)},${Math.round(b.y)})`),
-      blue:   blueBlobs.map(b => `(${Math.round(b.x)},${Math.round(b.y)})`),
-      purple: purpleBlobs.map(b => `(${Math.round(b.x)},${Math.round(b.y)})`),
+      yellow:  yellowBlobs.map(b  => `(${Math.round(b.x)},${Math.round(b.y)}) ${Math.round(b.w)}×${Math.round(b.h)}`),
+      magenta: magentaBlobs.map(b => `(${Math.round(b.x)},${Math.round(b.y)}) ${Math.round(b.w)}×${Math.round(b.h)}`),
+      green:   greenBlobs.map(b  => `(${Math.round(b.x)},${Math.round(b.y)}) ${Math.round(b.w)}×${Math.round(b.h)}`),
+      blue:    blueBlobs.map(b   => `(${Math.round(b.x)},${Math.round(b.y)}) ${Math.round(b.w)}×${Math.round(b.h)}`),
+      purple:  purpleBlobs.map(b => `(${Math.round(b.x)},${Math.round(b.y)}) ${Math.round(b.w)}×${Math.round(b.h)}`),
     });
 
-    // ── Place gear_light_purple decorations (magenta, static, no interaction) ──
+    // ── Place gear_light_purple decorations (magenta, behind gears) ──
     magentaBlobs.forEach(b => {
       this.add.image(b.x, b.y, 'gear_light_purple')
-        .setDisplaySize(88 * this.imgScale, 88 * this.imgScale)
-        .setDepth(2);
+        .setScale(this.imgScale)
+        .setDepth(1);
     });
 
     // ── Place gear_light indicators (yellow, top-most layer) ─────────
     this.indicators = yellowBlobs.map(b =>
       this.add.image(b.x, b.y, 'gear_light_off')
-        .setDisplaySize(b.w, b.h)
-        .setDepth(10)   // top-most
+        .setScale(this.imgScale * 0.5)
+        .setDepth(10)
     );
 
     // ── Rotating interactive gears ────────────────────────────────────
-    const GEAR_SIZES = {
-      gear_04: { w: 400, h: 400 },
-      gear_05: { w: 394, h: 393 },
-      gear_06: { w: 225, h: 225 },
-    };
-
+    const GEAR_Y_OFFSET = 30;
     const makeGear = (key, blobList, depth) =>
       blobList.map(b => {
-        const img = this.add.image(b.x, b.y, key).setDepth(depth).setInteractive({ useHandCursor: true });
-        const size = GEAR_SIZES[key];
-        img.setDisplaySize(size.w * this.imgScale, size.h * this.imgScale);
+        const x = b.x, y = b.y + GEAR_Y_OFFSET;
+        const img = this.add.image(x, y, key)
+          .setDepth(depth)
+          .setInteractive({ useHandCursor: true });
+        img.setScale(this.imgScale);
         this.tweens.add({ targets: img, angle: 360, duration: 4000, repeat: -1, ease: 'Linear' });
-        return { img, key, pos: { x: b.x, y: b.y } };
+        return { img, key, pos: { x, y }, baseScale: this.imgScale };
       });
 
     this.gear04s = makeGear('gear_04', blueBlobs,   4);
@@ -179,17 +174,42 @@ export default class GearPuzzleScene extends Phaser.Scene {
     ];
 
     // ── Connection state ──────────────────────────────────────────────
-    this.sequence       = ['gear_04', 'gear_05', 'gear_06'];
-    this.completedSteps = 0;
-    this.selected       = null;
-    this.lineGraphics   = this.add.graphics().setDepth(6);
-    this.solved         = false;
+    this.sequence            = ['gear_04', 'gear_05', 'gear_06'];
+    this.completedSteps      = 0;
+    this.completedConnections = [];
+    this.currentLine         = null; // { fromGear, startX, startY }
+    this.lineGraphics        = this.add.graphics().setDepth(6);
+    this.solved              = false;
 
-    // ── Input ─────────────────────────────────────────────────────────
+    // ── Input — drag to connect ───────────────────────────────────────
     this.allGears.forEach(g => {
-      g.img.on('pointerdown', () => this.onGearClick(g));
-      g.img.on('pointerover', () => { if (this.selected !== g) g.img.setTint(0xffffaa); });
-      g.img.on('pointerout',  () => { if (this.selected !== g) g.img.clearTint(); });
+      g.img.on('pointerdown', () => {
+        if (this.solved) return;
+        this.currentLine = { fromGear: g, startX: g.pos.x, startY: g.pos.y };
+        g.img.setTint(0x00ffff);
+      });
+      g.img.on('pointerover', () => { if (!this.currentLine) g.img.setTint(0xffffaa); });
+      g.img.on('pointerout',  () => { if (!this.currentLine || this.currentLine.fromGear !== g) g.img.clearTint(); });
+    });
+
+    this.input.on('pointermove', (pointer) => {
+      if (!this.currentLine) return;
+      this.redrawLines(pointer.x, pointer.y);
+    });
+
+    this.input.on('pointerup', (pointer) => {
+      if (!this.currentLine) return;
+      const from = this.currentLine.fromGear;
+      from.img.clearTint();
+      this.currentLine = null;
+
+      const target = this.allGears.find(g =>
+        g !== from &&
+        Phaser.Math.Distance.Between(pointer.x, pointer.y, g.pos.x, g.pos.y) < 80
+      );
+
+      if (target) this.attemptConnection(from, target);
+      this.redrawLines();
     });
 
     // ── UI ────────────────────────────────────────────────────────────
@@ -202,25 +222,21 @@ export default class GearPuzzleScene extends Phaser.Scene {
     }).setOrigin(0.5).setDepth(11);
   }
 
-  onGearClick(gear) {
-    if (this.solved) return;
-    if (!this.selected) {
-      this.selected = gear;
-      gear.img.setTint(0x00ffff);
-      this.statusText.setText(`Selected: ${gear.id}`);
-      return;
+  redrawLines(curX, curY) {
+    this.lineGraphics.clear();
+    this.completedConnections.forEach(c => this.drawGlowLine(c.x1, c.y1, c.x2, c.y2));
+    if (this.currentLine && curX !== undefined) {
+      this.drawGlowLine(this.currentLine.startX, this.currentLine.startY, curX, curY);
     }
-    if (this.selected === gear) {
-      gear.img.clearTint();
-      this.selected = null;
-      this.statusText.setText('');
-      return;
-    }
-    const from = this.selected;
-    const to   = gear;
-    from.img.clearTint();
-    this.selected = null;
-    this.attemptConnection(from, to);
+  }
+
+  drawGlowLine(x1, y1, x2, y2) {
+    this.lineGraphics.lineStyle(12, 0x87ceeb, 0.3);
+    this.lineGraphics.lineBetween(x1, y1, x2, y2);
+    this.lineGraphics.lineStyle(6, 0x87ceeb, 0.6);
+    this.lineGraphics.lineBetween(x1, y1, x2, y2);
+    this.lineGraphics.lineStyle(3, 0xadd8e6, 1.0);
+    this.lineGraphics.lineBetween(x1, y1, x2, y2);
   }
 
   attemptConnection(from, to) {
@@ -230,11 +246,20 @@ export default class GearPuzzleScene extends Phaser.Scene {
 
     if (correct) {
       this.completedSteps++;
-      this.lineGraphics.lineStyle(3, 0x00ff88, 0.8);
-      this.lineGraphics.beginPath();
-      this.lineGraphics.moveTo(from.pos.x, from.pos.y);
-      this.lineGraphics.lineTo(to.pos.x, to.pos.y);
-      this.lineGraphics.strokePath();
+      this.completedConnections.push({ x1: from.pos.x, y1: from.pos.y, x2: to.pos.x, y2: to.pos.y });
+      this.redrawLines();
+
+      // Pulse both gears — relative to base scale
+      [from, to].forEach(g => {
+        this.tweens.add({
+          targets: g.img,
+          scale: g.baseScale * 1.1,
+          duration: 150,
+          yoyo: true,
+          ease: 'Quad.easeOut',
+          onComplete: () => g.img.setScale(g.baseScale),
+        });
+      });
 
       const idx = this.completedSteps - 1;
       if (this.indicators[idx]) this.indicators[idx].setTexture('gear_light_green');
