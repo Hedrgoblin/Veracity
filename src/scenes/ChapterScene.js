@@ -261,11 +261,8 @@ export default class ChapterScene extends Phaser.Scene {
         this.audioManager.playMusic(this.chapterData.assets.music);
       }
 
-      // Fade in, then show chapter title card
-      this.cameras.main.fadeIn(800, 0, 0, 0);
-      this.time.delayedCall(800, () => {
-        this.showChapterTitle(() => this.startNarrative());
-      });
+      // Show chapter title card immediately (covers background/characters), then start narrative on dismiss
+      this.showChapterTitle(() => this.startNarrative());
     }).catch(error => {
       console.error('Error loading chapter:', error);
       this.loadingText.setText('Failed to load chapter. Returning to menu...');
@@ -914,7 +911,7 @@ export default class ChapterScene extends Phaser.Scene {
     const w = this.cameras.main.width;
     const h = this.cameras.main.height;
 
-    const overlay = this.add.container(0, 0).setDepth(500).setAlpha(0);
+    const overlay = this.add.container(0, 0).setDepth(500).setAlpha(1);
 
     const bg = this.add.rectangle(w / 2, h / 2, w, h, 0x000000, 0.95);
     overlay.add(bg);
@@ -943,9 +940,6 @@ export default class ChapterScene extends Phaser.Scene {
     }).setOrigin(0.5);
     overlay.add(tapText);
     this.tweens.add({ targets: tapText, alpha: 0, duration: 900, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
-
-    // Fade in overlay
-    this.tweens.add({ targets: overlay, alpha: 1, duration: 600 });
 
     // Tap anywhere to dismiss
     const hitZone = this.add.rectangle(w / 2, h / 2, w, h, 0x000000, 0).setDepth(501).setInteractive();
@@ -1060,7 +1054,67 @@ export default class ChapterScene extends Phaser.Scene {
     this.dialogueBox.add([bg, this.speakerText, this.dialogueText, this.continueIndicator]);
   }
 
+  showPlaceholderScreen(line, onComplete) {
+    const width = this.cameras.main.width;
+    const height = this.cameras.main.height;
+
+    if (line.background && this.backgroundImage) {
+      this.changeBackground(line.background);
+    }
+
+    if (line.hideCharacters === true) {
+      this.hideAllCharacters();
+    }
+
+    const overlay = this.add.rectangle(width / 2, height / 2, width, height, 0x000000, 0.92)
+      .setDepth(600)
+      .setInteractive();
+
+    const text = this.add.text(width / 2, height / 2 - 40, line.placeholder, {
+      fontSize: '28px',
+      fontFamily: 'Courier New',
+      color: '#c4a575',
+      align: 'center',
+      wordWrap: { width: width - 120 }
+    }).setOrigin(0.5).setDepth(601);
+
+    const clickHint = this.add.text(width / 2, height / 2 + 80, '[ Click to continue ]', {
+      fontSize: '20px',
+      fontFamily: 'Courier New',
+      color: '#888888',
+      fontStyle: 'italic'
+    }).setOrigin(0.5).setDepth(601);
+
+    // Blink the hint
+    this.tweens.add({
+      targets: clickHint,
+      alpha: 0,
+      duration: 700,
+      yoyo: true,
+      repeat: -1
+    });
+
+    overlay.once('pointerdown', () => {
+      this.tweens.add({
+        targets: [overlay, text, clickHint],
+        alpha: 0,
+        duration: 400,
+        onComplete: () => {
+          overlay.destroy();
+          text.destroy();
+          clickHint.destroy();
+          if (onComplete) onComplete();
+        }
+      });
+    });
+  }
+
   displayDialogueLine(line, onComplete) {
+    if (line.placeholder) {
+      this.showPlaceholderScreen(line, onComplete);
+      return;
+    }
+
     this.speakerText.setText(line.speaker || '');
     this.dialogueText.setText('');
 

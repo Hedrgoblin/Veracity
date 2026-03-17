@@ -15,7 +15,9 @@
     "characterFolders": {
       "vera": "vera_default",
       "addie": "addie_default",
-      "rainie": "rainie_default"
+      "addie_home": "addie_home",
+      "rainie": "rainie_default",
+      "crone": "crone_default"
     }
   },
   "companions": [
@@ -55,7 +57,7 @@
       },
       {
         "speaker": "Narrator",
-        "text": "Etched into the lid is a simple compass. Four dark lights for south, east, and west. The northern light pulses brightly.",
+        "text": "Etched into the lid is a simple compass. Three dark lights for south, east, and west. The northern light pulses brightly.",
         "showItem": "lide_compass"
       },
       {
@@ -91,42 +93,45 @@
       },
       {
         "speaker": "Narrator",
-        "text": "The moth immediately disappears into the night sky. Luckily, you have a way to track it.",
+        "text": "The moth immediately disappears into the night sky.",
         "hideCharacters": true
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Oh. I guess it's lucky we have that lid.",
+        "expression": {
+          "rainie": "sad"
+        }
       },
       {
         "speaker": "Addie",
         "text": "Stay close. These streets are not safe, especially for a young girl and two companions.",
         "expression": {
           "addie_home": "sad",
-          "rainie": "neutral"
+          "rainie": "sad"
         }
       },
       {
         "speaker": "Narrator",
-        "text": "You follow the moth's path, checking the compass. The light leads you deeper into the old district."
-      },
-      {
-        "speaker": "Narrator",
-        "text": "There should be a maze game here, where you follow the moth to the Clockmaker's Guild.",
+        "placeholder": "This place will have a simple maze puzzle.\nFor now, click here to continue.",
         "hideCharacters": true,
         "background": "clockmakers_guild_door"
       },
       {
         "speaker": "Narrator",
-        "text": "You find yourself in front of the watchmaker's guild. You've been here before. 47 Clockmaker's Lane. An old church, dark stained glass, a strange symbol on the door: a spiral wrapped around a gear. Standing on the steps, you a see a blind old woman, begging."
+        "text": "You find yourself in front of the Watchmaker's Guild. Your father used to bring you here when you were little. Standing on the steps, you a see a blind old woman, begging."
       },
       {
         "speaker": "Crone",
-        "text": "Spare a penny for an old lady?",
+        "text": "Spare a penny?",
         "showCharacters": ["crone"],
         "expression": {
-          "crone": "happy"
+          "crone": "neutral"
         }
       },
       {
         "speaker": "Narrator",
-        "text": "You pull a penny out of your bag and put it in the woman's hand. She looks at you thoughtfully."
+        "text": "You pull a penny out of your bag and put it in the woman's hand. Her blind eyes feel like they are looking right through you."
       },
       {
         "speaker": "Crone",
@@ -139,16 +144,19 @@
         ]
       },
       {
-        "speaker": "Narrator",
-        "text": "She can't see you but it feels as if she can see right through you. Then she smiles sweetly at you, and wanders away."
+        "speaker": "Vera",
+        "text": "Do I know you?.",
+        "expression": {
+          "vera_default": "thinking"
+        }
       },
       {
         "speaker": "Narrator",
-        "text": "She smiles sweetly at you, and wanders away."
+        "text": "the woman smiles sweetly at you, and wanders away."
       },
       {
         "speaker": "Veracity",
-        "text": "why does she feel so familiar to me?"
+        "text": "why does she feel so familiar?"
       },
       {
         "speaker": "Rainie",
