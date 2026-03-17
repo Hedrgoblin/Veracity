@@ -86,9 +86,10 @@ export default class PuzzleScene extends Phaser.Scene {
         }
       });
 
-      ['icon_faucet', 'icon_ice',
+      ['icon_faucet',
        'icon_tea_black', 'icon_trea_herbal', 'icon_creamer', 'icon_lemon', 'icon_sugar',
-       'icon_teapot_bear', 'icon_teapot_bird', 'icon_teapot_green'].forEach(key => {
+       'icon_teapot_bear', 'icon_teapot_bird', 'icon_teapot_green',
+       'icon_teacup_empty', 'icon_teacup_one', 'icon_teacup_two', 'icon_teacup_full'].forEach(key => {
         if (!this.textures.exists(key)) {
           this.load.image(key, `${BASE}assets/images/puzzles/tea_items/${key}.png`);
         }
@@ -102,7 +103,7 @@ export default class PuzzleScene extends Phaser.Scene {
         }
       });
       ['addie_default', 'cultist_bookkeeper', 'cultist_enforcer', 'cultist_guard',
-       'cultist_guard_staff', 'da_default', 'genlteman_paper', 'rainie_default', 'vera_default'].forEach(char => {
+       'cultist_guard_staff', 'da_default', 'gentleman_paper', 'rainie_default', 'vera_default'].forEach(char => {
         ['happy', 'neutral', 'irritated'].forEach(state => {
           const key = `tea_char_${char}_${state}`;
           if (!this.textures.exists(key)) {
@@ -1926,12 +1927,8 @@ export default class PuzzleScene extends Phaser.Scene {
     for (let slot = 0; slot < 3; slot++) {
       const cust = this.ts.customers[slot];
       if (!cust || !cust.active) continue;
-      cust.patienceMs -= delta;
-      if (cust.patienceMs <= 0) {
-        cust.patienceMs = 0;
-        this.tsCustomerLeave(slot, false);
-        continue;
-      }
+      if (cust.patienceMs > 0) cust.patienceMs -= delta;
+      if (cust.patienceMs < 0) cust.patienceMs = 0;
       const frac = cust.patienceMs / this.ts.customerPatienceMs;
       cust.patienceBarFill.scaleX = frac;
       cust.patienceBarFill.setFillStyle(frac > 0.66 ? 0x4caf50 : frac > 0.33 ? 0xffc107 : 0xf44336);
@@ -1974,7 +1971,7 @@ export default class PuzzleScene extends Phaser.Scene {
       sessionEnded:     false,
       serveMode:        false,
       selectedCup:      -1,
-      inventory:        Object.assign({ black_tea: 10, herbal: 8, cream: 6, lemon: 6, sugar: 6 }, pd.inventory || {}),
+      inventory:        { black_tea: Infinity, herbal: Infinity, cream: Infinity, lemon: Infinity, sugar: Infinity },
       recipes:          allRecipes,
       cups:             Array.from({ length: pd.startingCups || 1 }, () => ({
         state: 'empty', cold: false, recipe: null, charName: null
@@ -1984,12 +1981,23 @@ export default class PuzzleScene extends Phaser.Scene {
       nextSpawnMs:      5000,
       spawnStopped:     false,
       score:            { teacupsEarned: 0, served: 0, missed: 0, totalCustomers: 0 },
-      custChars:        ['addie_default', 'cultist_bookkeeper', 'cultist_enforcer',
-                         'cultist_guard', 'cultist_guard_staff', 'da_default',
-                         'genlteman_paper', 'rainie_default', 'vera_default'],
+      custChars:        ['addie_default', 'rainie_default', 'vera_default'],
+      usedChars: new Set(),
+      custFavorites: {
+        addie_default:         { recipeId: 'cream_tea',    isCold: false },
+        cultist_bookkeeper:    { recipeId: 'tea',          isCold: false },
+        cultist_enforcer:      { recipeId: 'sweet_tea',    isCold: false },
+        cultist_guard:         { recipeId: 'tea',          isCold: false },
+        cultist_guard_staff:   { recipeId: 'tea',          isCold: false },
+        da_default:            { recipeId: 'lemon_tea',    isCold: false },
+        gentleman_paper:       { recipeId: 'herbal_cream', isCold: false },
+        rainie_default:        { recipeId: 'herbal',       isCold: false },
+        vera_default:          { recipeId: 'tea',          isCold: false },
+      },
       teacupChars:      ['addie', 'cultist_bookkeeper', 'cultist_enforcer',
                          'cultist_guard', 'cultist_guard_staff', 'da',
                          'gentleman_paper', 'guildmaster', 'rainie', 'vera'],
+      summaryShown: false,
       // Visual refs filled below
       timerText: null, timerBar: null,
       cupVisuals: [], customerVisuals: [], invTexts: {},
@@ -2074,9 +2082,10 @@ export default class PuzzleScene extends Phaser.Scene {
     this.ts.teapotFillBar = this.add.rectangle(w / 2 - fbw / 2, equipY + 22, fbw, 6, 0x4fc3f7)
       .setOrigin(0, 0.5).setDepth(161).setAlpha(0);
 
-    // Ice bucket
-    btnImg(w - 70, equipY, 'icon_ice', () => this.tsTapIce());
-    lbl(w - 70, equipY + 30, 'Ice');
+    // Teacup counter
+    this.ts.teacupCounterIcon = this.add.image(w - 70, equipY, 'icon_teacup_empty')
+      .setDisplaySize(96, 96).setOrigin(0.5).setDepth(160);
+    lbl(w - 70, equipY + 30, 'Teacups');
 
     // Teacup slots
     const cupCount = this.ts.cups.length;
@@ -2123,16 +2132,23 @@ export default class PuzzleScene extends Phaser.Scene {
     const invTexKeys = ['icon_tea_black', 'icon_trea_herbal','icon_creamer', 'icon_lemon',   'icon_sugar'];
     const invIcons   = ['🍃',             '🌿',              '🥛',           '🍋',           '🍬'];
     const invSpacing = (w - 30) / invKeys.length;
+    this.ts.invIconImgs = {};
+    this.ts.invCheckmarks = {};
     invKeys.forEach((k, i) => {
       const ix = 15 + invSpacing * i + invSpacing / 2;
       if (this.textures.exists(invTexKeys[i])) {
-        this.add.image(ix, invY - 10, invTexKeys[i]).setDisplaySize(56, 56).setOrigin(0.5).setDepth(160);
+        const img = this.add.image(ix, invY - 10, invTexKeys[i]).setDisplaySize(56, 56).setOrigin(0.5).setDepth(160)
+          .setInteractive({ useHandCursor: true });
+        img.on('pointerdown', () => this.tsTapIngredient(k));
+        this.ts.invIconImgs[k] = img;
       } else {
         this.add.text(ix, invY - 10, invIcons[i], { fontSize: '16px' }).setOrigin(0.5).setDepth(160);
       }
-      this.ts.invTexts[k] = this.add.text(ix, invY + 10, `${this.ts.inventory[k]}`, {
-        fontSize: '11px', fontFamily: 'Courier New', color: '#c4a575'
-      }).setOrigin(0.5).setDepth(160);
+      this.ts.invTexts[k] = null; // no inventory counts displayed
+      // Checkmark shown when ingredient is selected
+      this.ts.invCheckmarks[k] = this.add.text(ix + 20, invY - 28, '✓', {
+        fontSize: '14px', fontFamily: 'Courier New', color: '#00ff88', stroke: '#000', strokeThickness: 2
+      }).setOrigin(0.5).setDepth(161).setAlpha(0);
     });
   }
 
@@ -2147,36 +2163,42 @@ export default class PuzzleScene extends Phaser.Scene {
       this.add.rectangle(cx, areaY, w * 0.3, 140, 0x2a1810, 0.5)
         .setStrokeStyle(1, 0x3a2015).setDepth(151);
 
-      // Customer icon (image, hidden until customer spawns)
+      // Customer icon (image, hidden until customer spawns) — 3px lower for vertical centering
       const firstChar = this.ts.custChars[0];
       const custIconKey = `tea_char_${firstChar}_neutral`;
       const custIcon = this.textures.exists(custIconKey)
-        ? this.add.image(cx, areaY, custIconKey).setDisplaySize(80, 130).setOrigin(0.5).setDepth(155).setAlpha(0)
-        : this.add.text(cx, areaY, '💺', { fontSize: '28px' }).setOrigin(0.5).setDepth(155).setAlpha(0);
+        ? this.add.image(cx, areaY + 3, custIconKey).setDisplaySize(80, 130).setOrigin(0.5).setDepth(155).setAlpha(0)
+        : this.add.text(cx, areaY + 3, '💺', { fontSize: '28px' }).setOrigin(0.5).setDepth(155).setAlpha(0);
       custIcon._isImage = this.textures.exists(custIconKey);
 
-      // Order bubble
+      // Order bubble — hidden, recipe shown in recipeLabel below instead
       const orderBubble = this.add.text(cx, areaY - 32, '', {
         fontSize: '10px', fontFamily: 'Courier New', color: '#333', align: 'center',
         backgroundColor: '#ffffffdd', padding: { x: 4, y: 2 }
-      }).setOrigin(0.5).setDepth(156).setAlpha(0);
+      }).setOrigin(0.5).setDepth(156).setAlpha(0).setVisible(false);
 
-      // Patience bar background
+      // Patience bar — aligned with bottom of portrait (areaY + 3 + 65 = areaY + 68)
       const pbw = w * 0.26;
-      this.add.rectangle(cx, areaY + 42, pbw, 6, 0x333333).setDepth(155);
-      const patienceBarFill = this.add.rectangle(cx - pbw / 2, areaY + 42, pbw, 6, 0x4caf50)
-        .setOrigin(0, 0.5).setDepth(156);
+      const patienceBarBg = this.add.rectangle(cx, areaY + 68, pbw, 6, 0x333333).setDepth(155).setAlpha(0);
+      const patienceBarFill = this.add.rectangle(cx - pbw / 2, areaY + 68, pbw, 6, 0x4caf50)
+        .setOrigin(0, 0.5).setDepth(156).setAlpha(0);
 
       // Happiness
       const happinessText = this.add.text(cx + pbw / 2 + 6, areaY + 12, '', { fontSize: '14px' })
         .setOrigin(0.5).setDepth(156);
+
+      // Recipe name label (top of portrait)
+      const recipeLabel = this.add.text(cx, areaY - 62, '', {
+        fontSize: '10px', fontFamily: 'Courier New', color: '#1a0f08', align: 'center',
+        stroke: '#ffffff', strokeThickness: 2
+      }).setOrigin(0.5, 0).setDepth(157).setAlpha(0);
 
       // Hit area
       const hit = this.add.rectangle(cx, areaY, w * 0.3, 140, 0xffffff, 0)
         .setDepth(157).setInteractive({ useHandCursor: true });
       hit.on('pointerdown', () => this.tsTapCustomer(i));
 
-      return { cx, custIcon, orderBubble, patienceBarFill, happinessText, hit, active: false };
+      return { cx, custIcon, orderBubble, recipeLabel, patienceBarBg, patienceBarFill, happinessText, hit, active: false };
     });
   }
 
@@ -2197,14 +2219,13 @@ export default class PuzzleScene extends Phaser.Scene {
 
     const equipY = 130, cupY = 370, areaY = h - 100;
     const steps = [
-      { x: 70,    y: equipY, r: 38,  text: 'Step 1 of 6 — Tap the FAUCET\nto fill the teapot with water.' },
+      { x: 70,    y: equipY, r: 38,  text: 'Step 1 of 5 — Tap the FAUCET\nto fill the teapot with water.' },
       { x: w / 2, y: equipY, r: 38,  text: 'Filling... wait for the teapot to be ready.' },
-      { x: w / 2, y: equipY, r: 38,  text: 'Step 2 of 6 — Tap the TEAPOT\nto pour water into a cup.' },
-      { x: w / 2, y: cupY,   r: 100, text: 'Step 3 of 6 — Tap the CUP\nto choose a recipe.' },
-      { x: 0,     y: 0,      r: 0,   text: 'Step 4 of 6 — Choose a recipe from the list\nto start brewing.' },
+      { x: w / 2, y: equipY, r: 38,  text: 'Step 2 of 5 — Tap the TEAPOT\nto pour water into a cup.' },
+      { x: 0,     y: 0,       r: 0,   text: 'Step 3 of 5 — Tap the highlighted\nINGREDIENTS, then tap the CUP to brew.' },
       { x: w / 2, y: cupY,   r: 100, text: 'Brewing... wait for the drink to be ready.' },
-      { x: w / 2, y: cupY,   r: 100, text: 'Step 5 of 6 — The drink is ready!\nTap the CUP to prepare to serve.' },
-      { x: w * 0.5, y: areaY, r: 45, text: 'Step 6 of 6 — A customer is waiting!\nTap the CUSTOMER to deliver the drink.' },
+      { x: w / 2, y: cupY,   r: 100, text: 'Step 4 of 5 — The drink is ready!\nTap the CUP to prepare to serve.' },
+      { x: w * 0.17, y: areaY, r: 45, text: 'Step 5 of 5 — A customer is waiting!\nTap the CUSTOMER to deliver the drink.' },
     ];
 
     const data = steps[tut.step];
@@ -2245,7 +2266,7 @@ export default class PuzzleScene extends Phaser.Scene {
   }
 
   tsTutSpawnCustomer() {
-    const slot = 1;
+    const slot = 0;
     if (this.ts.customers[slot]) return;
     const charName = 'vera_default';
     const fav = this.ts.custFavorites[charName] || { recipeId: 'tea', isCold: false };
@@ -2268,10 +2289,15 @@ export default class PuzzleScene extends Phaser.Scene {
     } else {
       vis.custIcon.setText('👤').setAlpha(1);
     }
-    vis.orderBubble.setText(`${recipe.label}\n${isCold ? '❄️' : '🔥'}`).setAlpha(1);
+    vis.orderBubble.setText(recipe.label).setAlpha(1);
+    vis.recipeLabel.setText(recipe.label).setAlpha(1);
+    vis.patienceBarBg.setAlpha(1);
     vis.patienceBarFill.scaleX = 1;
+    vis.patienceBarFill.setAlpha(1);
     vis.happinessText.setText('');
     this.tweens.add({ targets: [vis.custIcon, vis.orderBubble], alpha: 1, y: '-=6', duration: 300, ease: 'Back.out' });
+    this.tweens.add({ targets: vis.recipeLabel, alpha: 1, duration: 300 });
+    this.tsHighlightIngredients();
   }
 
   tsTutComplete() {
@@ -2329,6 +2355,7 @@ export default class PuzzleScene extends Phaser.Scene {
       happinessText:   this.ts.customerVisuals[emptySlot].happinessText,
     };
     this.ts.customers[emptySlot] = cust;
+    this.ts.usedChars.add(charName);
     this.ts.score.totalCustomers = (this.ts.score.totalCustomers || 0) + 1;
 
     const vis = this.ts.customerVisuals[emptySlot];
@@ -2338,11 +2365,16 @@ export default class PuzzleScene extends Phaser.Scene {
     } else {
       vis.custIcon.setText('👤').setAlpha(1);
     }
-    vis.orderBubble.setText(`${recipe.label}\n${isCold ? '❄️' : '🔥'}`).setAlpha(1);
+    vis.orderBubble.setText(recipe.label).setAlpha(1);
+    vis.recipeLabel.setText(recipe.label).setAlpha(1);
+    vis.patienceBarBg.setAlpha(1);
     vis.patienceBarFill.scaleX = 1;
+    vis.patienceBarFill.setAlpha(1);
     vis.happinessText.setText('');
 
     this.tweens.add({ targets: [vis.custIcon, vis.orderBubble], alpha: 1, y: '-=6', duration: 300, ease: 'Back.out' });
+    this.tweens.add({ targets: vis.recipeLabel, alpha: 1, duration: 300 });
+    this.tsHighlightIngredients();
   }
 
   tsCustomerLeave(slot, satisfied) {
@@ -2360,9 +2392,17 @@ export default class PuzzleScene extends Phaser.Scene {
           vis.active = false;
           vis.custIcon.setAlpha(0).setY(vis.custIcon.y - 10); // undo tween drift
           vis.orderBubble.setAlpha(0);
+          vis.recipeLabel.setAlpha(0).setY(this.cameras.main.height - 162);
           vis.happinessText.setText('');
+          vis.patienceBarBg.setAlpha(0);
           vis.patienceBarFill.scaleX = 1;
-          vis.patienceBarFill.setFillStyle(0x4caf50);
+          vis.patienceBarFill.setAlpha(0).setFillStyle(0x4caf50);
+          this.ts.customers[slot] = null;
+          if (slot === 0) {
+            this.tsSlideCustomersLeft();
+          } else {
+            this.tsHighlightIngredients();
+          }
         }
       });
     };
@@ -2372,9 +2412,9 @@ export default class PuzzleScene extends Phaser.Scene {
       vis.custIcon.setTexture(`tea_char_${cust.charName}_happy`).setDisplaySize(80, 130);
       this.tweens.add({
         targets: vis.custIcon,
-        scaleX: vis.custIcon.scaleX * 1.1, scaleY: vis.custIcon.scaleY * 1.1,
+        scaleX: vis.custIcon.scaleX * 1.08, scaleY: vis.custIcon.scaleY * 1.08,
         duration: 250, yoyo: true, ease: 'Sine.easeOut',
-        onComplete: doLeave
+        onComplete: () => { vis.custIcon.setDisplaySize(80, 130); doLeave(); }
       });
     } else {
       doLeave();
@@ -2389,7 +2429,6 @@ export default class PuzzleScene extends Phaser.Scene {
       this.tweens.add({ targets: txt, y: msgY - 25, alpha: 0, duration: 900, onComplete: () => txt.destroy() });
     }
 
-    this.ts.customers[slot] = null;
   }
 
   tsTapFaucet() {
@@ -2430,14 +2469,6 @@ export default class PuzzleScene extends Phaser.Scene {
     if (this.ts.tut?.active && this.ts.tut.step === 0) this.tsTutAdvance();
   }
 
-  tsTapIce() {
-    const tp = this.ts.teapot;
-    if (!tp || tp.state === 'empty') { this.tsFlash('Fill the teapot first!'); return; }
-    tp.cold = !tp.cold;
-    this.tsUpdateTeapotVis();
-    this.tsFlash(tp.cold ? 'Chilled! ❄️' : 'Heated! 🔥');
-  }
-
   tsTapTeapot() {
     const tp = this.ts.teapot;
     if (!tp || tp.state !== 'ready') {
@@ -2446,9 +2477,10 @@ export default class PuzzleScene extends Phaser.Scene {
     }
     const emptyIdx = this.ts.cups.findIndex(c => c.state === 'empty');
     if (emptyIdx === -1) { this.tsFlash('No empty teacup!'); return; }
+    // Pour water into cup
     this.ts.cups[emptyIdx].state = 'withWater';
     this.ts.cups[emptyIdx].cold = tp.cold;
-    // Assign teacup character from first waiting customer
+    this.ts.cups[emptyIdx].selectedIngredients = {};
     const firstCust = this.ts.customers.find(c => c && c.active);
     this.ts.cups[emptyIdx].charName = firstCust ? this.tsCustToTeacup(firstCust.charName) : 'vera';
     tp.state = 'empty'; tp.cold = false;
@@ -2464,7 +2496,22 @@ export default class PuzzleScene extends Phaser.Scene {
   tsTapCup(i) {
     const cup = this.ts.cups[i];
     if (cup.state === 'empty') return;
-    if (cup.state === 'withWater') { if (this.ts.tut?.active && this.ts.tut.step === 3) this.tsTutAdvance(); return; }
+    if (cup.state === 'withWater') {
+      const selected = cup.selectedIngredients || {};
+      if (Object.keys(selected).length === 0) { this.tsFlash('Add ingredients first!'); return; }
+      // Find matching recipe
+      const match = Object.entries(this.ts.recipes).find(([id, r]) => {
+        const rKeys = Object.keys(r.ingredients);
+        const sKeys = Object.keys(selected);
+        return rKeys.length === sKeys.length && rKeys.every(k => selected[k] >= r.ingredients[k]);
+      });
+      if (!match) { this.tsFlash('That combination doesn\'t make anything!'); return; }
+      // Clear checkmarks
+      Object.keys(this.ts.invCheckmarks).forEach(k => this.ts.invCheckmarks[k].setAlpha(0));
+      if (this.ts.tut?.active && this.ts.tut.step === 3) this.tsTutAdvance();
+      this.tsSelectRecipe(i, match[0], match[1]);
+      return;
+    }
     if (cup.state === 'brewing') {
       const secLeft = Math.ceil((cup.recipe.brewMs - cup.brewElapsed) / 1000);
       this.tsFlash(`Brewing... ${secLeft}s left`);
@@ -2472,29 +2519,44 @@ export default class PuzzleScene extends Phaser.Scene {
     }
     if (cup.state === 'ready') {
       if (this.ts.serveMode && this.ts.selectedCup === i) this.tsExitServeMode();
-      else { this.tsEnterServeMode(i); if (this.ts.tut?.active && this.ts.tut.step === 6) this.tsTutAdvance(); }
+      else { this.tsEnterServeMode(i); if (this.ts.tut?.active && this.ts.tut.step === 5) this.tsTutAdvance(); }
     }
   }
 
   tsTapCustomer(slot) {
     if (!this.ts.serveMode) return;
+    if (slot !== 0) { this.tsFlash('Serve the first customer in line!'); return; }
     if (!this.ts.customers[slot]) { this.tsFlash('No customer here!'); return; }
-    if (this.ts.tut?.active && this.ts.tut.step === 7) this.tsTutAdvance();
+    if (this.ts.tut?.active && this.ts.tut.step === 6) this.tsTutAdvance();
     this.tsServe(slot);
   }
 
+  tsTapIngredient(key) {
+    const cupIdx = this.ts.cups.findIndex(c => c.state === 'withWater');
+    if (cupIdx === -1) return; // only active during ingredient selection
+    const cup = this.ts.cups[cupIdx];
+    cup.selectedIngredients = cup.selectedIngredients || {};
+    // Toggle: tap again to deselect
+    if (cup.selectedIngredients[key]) {
+      delete cup.selectedIngredients[key];
+      if (this.ts.invCheckmarks[key]) this.ts.invCheckmarks[key].setAlpha(0);
+    } else {
+      cup.selectedIngredients[key] = 1;
+      if (this.ts.invCheckmarks[key]) this.ts.invCheckmarks[key].setAlpha(1);
+    }
+    // Pulse the icon
+    const img = this.ts.invIconImgs[key];
+    if (img) this.tweens.add({ targets: img, scaleX: img.scaleX * 1.2, scaleY: img.scaleY * 1.2, duration: 100, yoyo: true });
+  }
+
   tsSelectRecipe(cupIndex, recipeId, recipe) {
-    // Deduct ingredients
-    Object.entries(recipe.ingredients).forEach(([k, v]) => {
-      this.ts.inventory[k] = (this.ts.inventory[k] || 0) - v;
-      if (this.ts.invTexts[k]) this.ts.invTexts[k].setText(`${this.ts.inventory[k]}`);
-    });
+    // Ingredients already deducted on tap — nothing to deduct here
     const cup = this.ts.cups[cupIndex];
     cup.state = 'brewing';
     cup.recipe = { ...recipe, id: recipeId };
     cup.brewElapsed = 0;
     this.tsUpdateCupVis(cupIndex);
-    if (this.ts.tut?.active && this.ts.tut.step === 4) this.tsTutAdvance();
+    // step 3 already advanced in tsTapCup; brewing begins (step 4 = "brewing" display)
 
     // Brew timer using time event (updates elapsed for display)
     const vis = this.ts.cupVisuals[cupIndex];
@@ -2511,7 +2573,7 @@ export default class PuzzleScene extends Phaser.Scene {
       vis.barFill.setAlpha(0);
       this.tsUpdateCupVis(cupIndex);
       this.tweens.add({ targets: vis.icon, scaleX: 1.2, scaleY: 1.2, duration: 200, yoyo: true });
-      if (this.ts.tut?.active && this.ts.tut.step === 5) this.tsTutAdvance();
+      if (this.ts.tut?.active && this.ts.tut.step === 4) this.tsTutAdvance();
     });
   }
 
@@ -2520,9 +2582,8 @@ export default class PuzzleScene extends Phaser.Scene {
     this.ts.selectedCup = cupIndex;
     this.ts.cupVisuals.forEach((cv, i) => cv.icon.setAlpha(i === cupIndex ? 1 : 0.45));
     this.ts.serveModeLabel.setText('Tap a customer to serve');
-    this.ts.customerVisuals.forEach(cv => {
-      if (cv.active) this.tweens.add({ targets: cv.custIcon, scaleX: 1.15, scaleY: 1.15, duration: 200 });
-    });
+    const cv0 = this.ts.customerVisuals[0];
+    if (cv0.active) this.tweens.add({ targets: cv0.custIcon, scaleX: cv0.custIcon.scaleX * 1.08, scaleY: cv0.custIcon.scaleY * 1.08, duration: 200 });
   }
 
   tsExitServeMode() {
@@ -2530,7 +2591,9 @@ export default class PuzzleScene extends Phaser.Scene {
     this.ts.selectedCup = -1;
     this.ts.cupVisuals.forEach(cv => cv.icon.setAlpha(1).setScale(1));
     this.ts.serveModeLabel.setText('');
-    this.ts.customerVisuals.forEach(cv => cv.custIcon.setScale(1));
+    this.ts.customerVisuals.forEach(cv => {
+      if (cv.custIcon._isImage) cv.custIcon.setDisplaySize(80, 130);
+    });
   }
 
   tsServe(slot) {
@@ -2538,17 +2601,23 @@ export default class PuzzleScene extends Phaser.Scene {
     const cup = this.ts.cups[this.ts.selectedCup];
     if (!cust || cup.state !== 'ready') return;
 
-    const correctRecipe = cup.recipe.id === cust.recipeId;
-    const correctWater  = cup.cold === cust.isCold;
-    const isCorrect = correctRecipe && correctWater;
+    const isCorrect = cup.recipe.id === cust.recipeId;
+    if (!isCorrect) { this.tsFlash(`${cust.charName.split('_')[0]} wants ${cust.recipe.label}!`); return; }
 
     const frac = cust.patienceMs / this.ts.customerPatienceMs;
     let multiplier = isCorrect ? (frac > 0.66 ? 1.5 : frac > 0.33 ? 1.0 : 0.5) : 0.25;
     const earned = isCorrect ? Math.round(multiplier) : 0; // 0 or 1 teacup
 
     this.ts.score.teacupsEarned += earned;
+    this.tsUpdateTeacupCounter();
     if (isCorrect) this.ts.score.served++;
     else this.ts.score.missed++;
+
+    // End game early if all characters have been served
+    if (this.ts.score.served >= this.ts.custChars.length) {
+      this.ts.sessionActive = false;
+      this.ts.sessionEnded = true;
+    }
 
     // Feedback float
     const vis = this.ts.customerVisuals[slot];
@@ -2572,14 +2641,7 @@ export default class PuzzleScene extends Phaser.Scene {
   tsDiscardCup(i) {
     const cup = this.ts.cups[i];
     if (cup.state === 'empty') return;
-    // Return ingredients if brewing/ready
-    if (cup.recipe && (cup.state === 'brewing' || cup.state === 'ready')) {
-      if (cup._brewTween) cup._brewTween.stop();
-      Object.entries(cup.recipe.ingredients).forEach(([k, v]) => {
-        this.ts.inventory[k] = (this.ts.inventory[k] || 0) + v;
-        if (this.ts.invTexts[k]) this.ts.invTexts[k].setText(`${this.ts.inventory[k]}`);
-      });
-    }
+    if (cup._brewTween) cup._brewTween.stop();
     this.ts.cups[i] = { state: 'empty', cold: false, recipe: null, charName: null };
     this.tsUpdateCupVis(i);
   }
@@ -2588,7 +2650,7 @@ export default class PuzzleScene extends Phaser.Scene {
     const map = {
       addie_default: 'addie', da_default: 'da',
       rainie_default: 'rainie', vera_default: 'vera',
-      genlteman_paper: 'gentleman_paper',
+      gentleman_paper: 'gentleman_paper',
       cultist_bookkeeper: 'cultist_bookkeeper',
       cultist_enforcer: 'cultist_enforcer',
       cultist_guard: 'cultist_guard',
@@ -2604,12 +2666,12 @@ export default class PuzzleScene extends Phaser.Scene {
     if (icon.setTexture) {
       // Image-based teapot icon
       if (tp.state === 'empty')   { icon.setTexture('icon_teapot_bear'); waterLbl.setText(''); }
-      if (tp.state === 'filling') { icon.setTexture('icon_teapot_bear'); waterLbl.setText(tp.cold ? '❄️' : '🔥'); }
-      if (tp.state === 'ready')   { icon.setTexture(tp.cold ? 'icon_teapot_green' : 'icon_teapot_bird'); waterLbl.setText(tp.cold ? '❄️' : '🔥'); }
+      if (tp.state === 'filling') { icon.setTexture('icon_teapot_bear'); waterLbl.setText(''); }
+      if (tp.state === 'ready')   { icon.setTexture('icon_teapot_bear'); waterLbl.setText(''); }
     } else {
       if (tp.state === 'empty')   { icon.setText('🫖'); waterLbl.setText(''); }
-      if (tp.state === 'filling') { icon.setText('🫖'); waterLbl.setText(tp.cold ? '❄️' : '🔥'); }
-      if (tp.state === 'ready')   { icon.setText('🫖'); waterLbl.setText(tp.cold ? '❄️' : '🔥'); }
+      if (tp.state === 'filling') { icon.setText('🫖'); waterLbl.setText(''); }
+      if (tp.state === 'ready')   { icon.setText('🫖'); waterLbl.setText(''); }
     }
   }
 
@@ -2618,18 +2680,20 @@ export default class PuzzleScene extends Phaser.Scene {
     const vis = this.ts.cupVisuals[i];
     const tints = {
       empty:     0xffffff,
-      withWater: cup.cold ? 0x88ccff : 0xffaa88,
-      brewing:   0xffaa44,
-      ready:     0x88ff99,
+      withWater: 0xffffff,
+      brewing:   0xffffff,
+      ready:     0xffffff,
     };
     const alphas = { empty: 1, withWater: 1, brewing: 1, ready: 1 };
+    const waitingCust = this.ts.customers.find(c => c);
+    const wantedTea = waitingCust ? waitingCust.recipe.label : '';
     const labels = {
-      empty:     'Empty',
-      withWater: 'Tap to brew',
+      empty:     wantedTea || 'Empty',
+      withWater: wantedTea || 'Add ingredients',
       brewing:   cup.recipe?.label || 'Brewing',
       ready:     'Ready! Tap to serve',
     };
-    const water = cup.state === 'empty' ? '' : (cup.cold ? '❄️' : '🔥');
+
 
     if (vis.icon._isImage) {
       const teacupChar = cup.charName || 'vera';
@@ -2641,8 +2705,106 @@ export default class PuzzleScene extends Phaser.Scene {
       vis.icon.setText(textIcon).setTint(tints[cup.state]);
     }
     vis.stateLbl.setText(labels[cup.state]);
-    vis.waterIcon.setText(water);
+    vis.waterIcon.setText('');
     if (cup.state !== 'brewing') { vis.barBg.setAlpha(0); vis.barFill.setAlpha(0); }
+  }
+
+  tsHighlightIngredients() {
+    const needed = new Set();
+    const firstCust = this.ts.customers[0];
+    if (firstCust) Object.keys(firstCust.recipe.ingredients).forEach(k => needed.add(k));
+    Object.entries(this.ts.invIconImgs || {}).forEach(([k, img]) => {
+      if (needed.has(k)) {
+        img.clearTint().setAlpha(1).setDisplaySize(56 * 1.08, 56 * 1.08);
+      } else {
+        img.clearTint().setAlpha(0.4).setDisplaySize(56, 56);
+      }
+    });
+  }
+
+  tsUpdateTeacupCounter() {
+    const n = this.ts.score.teacupsEarned;
+    const key = n === 0 ? 'icon_teacup_empty'
+               : n === 1 ? 'icon_teacup_one'
+               : n === 2 ? 'icon_teacup_two'
+               : 'icon_teacup_full';
+    if (this.ts.teacupCounterIcon) this.ts.teacupCounterIcon.setTexture(key).setDisplaySize(96, 96);
+  }
+
+  tsSlideCustomersLeft() {
+    const hasSlot1 = !!this.ts.customers[1];
+    const hasSlot2 = !!this.ts.customers[2];
+    if (!hasSlot1 && !hasSlot2) {
+      this.tsHighlightIngredients();
+      this.tsUpdateCupVis(0);
+      if (this.ts.sessionEnded) this.time.delayedCall(800, () => this.tsShowSummary());
+      return;
+    }
+    const vis1 = this.ts.customerVisuals[1];
+    const vis2 = this.ts.customerVisuals[2];
+    const cx0 = this.ts.customerVisuals[0].cx;
+    const cx1 = this.ts.customerVisuals[1].cx;
+    const slideTargets = [];
+    if (hasSlot1) slideTargets.push({ objs: [vis1.custIcon, vis1.recipeLabel, vis1.happinessText], toCx: cx0 });
+    if (hasSlot2) slideTargets.push({ objs: [vis2.custIcon, vis2.recipeLabel, vis2.happinessText], toCx: cx1 });
+    let done = 0;
+    slideTargets.forEach(({ objs, toCx }) => {
+      this.tweens.add({
+        targets: objs, x: toCx, duration: 300, ease: 'Sine.easeOut',
+        onComplete: () => {
+          done++;
+          if (done === slideTargets.length) {
+            this.ts.customers[0] = this.ts.customers[1];
+            this.ts.customers[1] = this.ts.customers[2];
+            this.ts.customers[2] = null;
+            this.tsRefreshCustomerVisuals();
+            this.tsHighlightIngredients();
+            this.tsUpdateCupVis(0);
+            if (this.ts.sessionEnded && this.ts.customers.every(c => !c)) {
+              this.time.delayedCall(800, () => this.tsShowSummary());
+            }
+          }
+        }
+      });
+    });
+  }
+
+  tsRefreshCustomerVisuals() {
+    const w = this.cameras.main.width;
+    const pbw = w * 0.26;
+    const areaY = this.cameras.main.height - 100;
+    for (let slot = 0; slot < 3; slot++) {
+      const cust = this.ts.customers[slot];
+      const vis = this.ts.customerVisuals[slot];
+      const cx = vis.cx;
+      vis.custIcon.setX(cx);
+      vis.recipeLabel.setX(cx).setY(areaY - 62);
+      vis.happinessText.setX(cx + pbw / 2 + 6);
+      if (cust) {
+        const iconState = cust.happiness === 'mad' ? 'irritated' : (cust.happiness || 'neutral');
+        if (vis.custIcon._isImage) {
+          vis.custIcon.setTexture(`tea_char_${cust.charName}_${iconState}`).setDisplaySize(80, 130).setAlpha(1);
+        } else {
+          vis.custIcon.setText('👤').setAlpha(1);
+        }
+        vis.recipeLabel.setText(cust.recipe.label).setAlpha(1);
+        const frac = cust.patienceMs / this.ts.customerPatienceMs;
+        vis.patienceBarBg.setAlpha(1);
+        vis.patienceBarFill.scaleX = frac;
+        vis.patienceBarFill.setAlpha(1).setFillStyle(frac > 0.66 ? 0x4caf50 : frac > 0.33 ? 0xffc107 : 0xf44336);
+        vis.active = true;
+        cust.patienceBarFill = vis.patienceBarFill;
+        cust.happinessText = vis.happinessText;
+      } else {
+        vis.custIcon.setAlpha(0);
+        vis.recipeLabel.setText('').setAlpha(0);
+        vis.happinessText.setText('');
+        vis.patienceBarBg.setAlpha(0);
+        vis.patienceBarFill.scaleX = 1;
+        vis.patienceBarFill.setAlpha(0).setFillStyle(0x4caf50);
+        vis.active = false;
+      }
+    }
   }
 
   tsFlash(msg) {
@@ -2664,6 +2826,8 @@ export default class PuzzleScene extends Phaser.Scene {
   }
 
   tsShowSummary() {
+    if (this.ts.summaryShown) return;
+    this.ts.summaryShown = true;
     const w = this.cameras.main.width;
     const h = this.cameras.main.height;
     const { served, missed } = this.ts.score;

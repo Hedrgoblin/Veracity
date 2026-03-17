@@ -4,7 +4,7 @@
   "act": 2,
   "description": "A journey north begins, racing against time.",
   "assets": {
-    "background": "placeholder_bg",
+    "background": "train_ext",
     "music": null,
     "characters": [
       "vera",
@@ -34,11 +34,11 @@
       },
       {
         "speaker": "Rainie",
-        "text": "Rest? How can you rest? We're on an adventure! Save the Professor, find out with the creepers want with his pocket watch, save the day!"
+        "text": "Rest? How can you rest? We're on an adventure! Save the Professor, find out what the creepers want with his pocket watch, save the day!"
       },
       {
         "speaker": "Addie",
-        "text": "ht mkee you think it's a pocket watch?"
+        "text": "what makes you think it's a pocket watch?"
       },
       {
         "speaker": "Rainie",
@@ -46,7 +46,10 @@
       },
       {
         "speaker": "Veracity",
-        "text": "Every time I close my eyes, I see Da in danger."
+        "text": "Every time I close my eyes, I see Da in danger.",
+        "expression": {
+          "vera": "sad"
+        }
       },
       {
         "speaker": "Rainie",
@@ -58,7 +61,13 @@
       },
       {
         "speaker": "Narrator",
-        "text": "A gentleman in fine clothes sits across from you, reading. He glances over the pages."
+        "launchTeaPuzzle": true
+      },
+      {
+        "speaker": "Narrator",
+        "text": "A gentleman in fine clothes sits across from you, reading. He glances over the pages.",
+        "background": "train_carraige",
+        "showCharacters": ["gentleman_paper"]
       },
       {
         "speaker": "Gentleman",
@@ -131,6 +140,20 @@
       3200,
       4000
     ]
+  },
+  "teaPuzzle": {
+    "type": "tea_service",
+    "title": "Brewing Comfort",
+    "instructions": "Serve tea to the guests before their patience runs out!",
+    "sessionDuration": 120,
+    "startingCups": 1,
+    "inventory": {
+      "black_tea": 10,
+      "herbal": 8,
+      "cream": 6,
+      "lemon": 6,
+      "sugar": 6
+    }
   },
   "storyFlags": {
     "chapter5_complete": true,

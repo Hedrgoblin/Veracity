@@ -1139,6 +1139,21 @@ export default class ChapterScene extends Phaser.Scene {
       return;
     }
 
+    if (line.launchTeaPuzzle && this.chapterData.teaPuzzle) {
+      this.teaPuzzleCompleted = true;
+      this.scene.launch('PuzzleScene', {
+        puzzleData: this.chapterData.teaPuzzle,
+        chapterNumber: this.chapterNumber,
+        onComplete: () => {
+          this.scene.stop('PuzzleScene');
+          this.scene.resume();
+          if (onComplete) onComplete();
+        }
+      });
+      this.scene.pause();
+      return;
+    }
+
     if (line.launchGearPuzzle && this.chapterData.puzzle?.type === 'gear_clockmakers') {
       this.gearPuzzleDone = true;
       console.log('[GearPuzzle] launching mid-dialogue, chapter:', this.chapterNumber);
