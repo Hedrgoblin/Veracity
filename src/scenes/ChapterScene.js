@@ -481,7 +481,8 @@ export default class ChapterScene extends Phaser.Scene {
     };
     const npcScales = {
       'gentleman_paper': 0.299 * 1.12 * 1.20,
-      'da_moth': 0.299 * 1.20 * 1.10,
+      'da_default': 0.299 * 1.12 * 1.20,
+      'da_moth': 0.299 * 1.12 * 1.20,
       'cultist_guard': 0.299 * 1.20,
       'cultist_guard_staff': 0.299 * 1.20,
       'guildmaster': 0.299 * 1.20,
