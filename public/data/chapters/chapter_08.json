@@ -103,7 +103,7 @@
       },
       {
         "speaker": "Narrator",
-        "text": "The woman standing in the doorway stares at you with blind eyes. She looks familiar.",
+        "text": "The woman stares at you with blind eyes. She looks familiar.",
         "hideCharacters": true,
         "showCharacters": ["guildmaster"],
         "moveCharacters": { "guildmaster": "center" },
@@ -168,34 +168,27 @@
       {
         "speaker": "Veracity",
         "text": "I'm listening...",
-        "hideCharacters": ["guildmaster"],
-        "showCharacters": ["vera"]
+        "hideCharacters": true
       },
       {
         "speaker": "Guildmaster",
         "text": "Once upon a time, there was a little girl. She had a mother and a father...",
-        "hideCharacters": ["vera"],
-        "showCharacters": ["guildmaster"],
-        "moveCharacters": { "guildmaster": "center" }
+        "hideCharacters": true
       },
       {
         "speaker": "Veracity",
         "text": "and a Bear to protect her, and a raccoon to love her...",
-        "hideCharacters": ["guildmaster"],
-        "showCharacters": ["vera"]
+        "hideCharacters": true
       },
       {
         "speaker": "Guildmaster",
         "text": "She had a mother that loved her very much. The father took something from the mother, and sent her far far away...",
-        "hideCharacters": ["vera"],
-        "showCharacters": ["guildmaster"],
-        "moveCharacters": { "guildmaster": "center" }
+        "hideCharacters": true
       },
       {
         "speaker": "Veracity",
         "text": "I'm far far away...",
-        "hideCharacters": ["guildmaster"],
-        "showCharacters": ["vera"]
+        "hideCharacters": true
       },
       {
         "speaker": "Narrator",
