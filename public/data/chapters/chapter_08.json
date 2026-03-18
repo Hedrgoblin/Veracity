@@ -30,7 +30,10 @@
         "speaker": "Father",
         "text": "I'm so sorry. I never wanted you involved in this. The Order... they're obsessed with controlling time itself.",
         "hideCharacters": true,
-        "showCharacters": ["da_default"]
+        "showCharacters": ["da_default"],
+        "expression": {
+          "da_default": "sad"
+        }
       },
       {
         "speaker": "Veracity",
