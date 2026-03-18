@@ -767,6 +767,20 @@ export default class ChapterScene extends Phaser.Scene {
     }
   }
 
+  moveCharacterToX(charName, targetX) {
+    [`${charName}_body`, `${charName}_expression`].forEach(key => {
+      const sprite = this.characters[key];
+      if (sprite && sprite.x !== undefined) {
+        this.tweens.add({
+          targets: sprite,
+          x: targetX,
+          duration: 600,
+          ease: 'Cubic.out'
+        });
+      }
+    });
+  }
+
   showOnlyVera() {
     // Show only Vera at normal size, hide companions
     Object.keys(this.characters).forEach(key => {
@@ -1341,6 +1355,15 @@ export default class ChapterScene extends Phaser.Scene {
     }
     if (line.showOnlyVera === true) {
       this.showOnlyVera();
+    }
+
+    // Move characters to new x positions
+    if (line.moveCharacters) {
+      const width = this.cameras.main.width;
+      Object.entries(line.moveCharacters).forEach(([charName, position]) => {
+        const targetX = position === 'center' ? width / 2 : position * width;
+        this.moveCharacterToX(charName, targetX);
+      });
     }
 
     // Check if expressions should change

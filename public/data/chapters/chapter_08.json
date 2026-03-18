@@ -91,7 +91,8 @@
         "speaker": "Guildmaster",
         "text": "How touching. A family reunion.",
         "hideCharacters": true,
-        "showCharacters": ["guildmaster"]
+        "showCharacters": ["guildmaster"],
+        "moveCharacters": { "guildmaster": "center" }
       },
       {
         "speaker": "Addie",
@@ -111,7 +112,8 @@
         "speaker": "Guildmaster",
         "text": "I would think you might.",
         "hideCharacters": ["vera", "addie"],
-        "showCharacters": ["guildmaster"]
+        "showCharacters": ["guildmaster"],
+        "moveCharacters": { "guildmaster": "center" }
       },
       {
         "speaker": "Father",
@@ -123,7 +125,8 @@
         "speaker": "Guildmaster",
         "text": "Come closer my love. My eyes are not what they once where...",
         "hideCharacters": ["da_default"],
-        "showCharacters": ["guildmaster"]
+        "showCharacters": ["guildmaster"],
+        "moveCharacters": { "guildmaster": "center" }
       },
       {
         "speaker": "Veracity",
@@ -135,7 +138,8 @@
         "speaker": "Guildmaster",
         "text": "You did. What a kind young woman you have turned out to be.",
         "hideCharacters": ["vera"],
-        "showCharacters": ["guildmaster"]
+        "showCharacters": ["guildmaster"],
+        "moveCharacters": { "guildmaster": "center" }
       },
       {
         "speaker": "Narrator",
@@ -149,7 +153,8 @@
       {
         "speaker": "Guildmaster",
         "text": "Listen to me.",
-        "showCharacters": ["guildmaster"]
+        "showCharacters": ["guildmaster"],
+        "moveCharacters": { "guildmaster": "center" }
       },
       {
         "speaker": "Veracity",
@@ -161,7 +166,8 @@
         "speaker": "Guildmaster",
         "text": "Once upon a time, there was a little girl. She had a mother and a father...",
         "hideCharacters": ["vera"],
-        "showCharacters": ["guildmaster"]
+        "showCharacters": ["guildmaster"],
+        "moveCharacters": { "guildmaster": "center" }
       },
       {
         "speaker": "Veracity",
@@ -173,7 +179,8 @@
         "speaker": "Guildmaster",
         "text": "She had a mother that loved her very much. The father took something from the mother, and sent her far far away...",
         "hideCharacters": ["vera"],
-        "showCharacters": ["guildmaster"]
+        "showCharacters": ["guildmaster"],
+        "moveCharacters": { "guildmaster": "center" }
       },
       {
         "speaker": "Veracity",
