@@ -156,7 +156,8 @@
       {
         "speaker": "Narrator",
         "text": "Suddenly, the crystal in her walking stick illuminates. The light is blinding. You can hear your father and friends shouting in the distance, and then everything goes black.",
-        "hideCharacters": true
+        "hideCharacters": true,
+        "background": "ill_power_01"
       },
       {
         "speaker": "Guildmaster",

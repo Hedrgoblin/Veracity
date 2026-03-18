@@ -70,6 +70,7 @@ export default class ChapterScene extends Phaser.Scene {
       'northern_sanctuary_hallway_02_alarm',
       'northern_sanctuary_hallway_02_armed',
       'northern_sanctuary_library_small',
+      'ill_power_01',
       'northern_sanctuary_service_entrance',
       'train_carraige',
       'train_ext',
