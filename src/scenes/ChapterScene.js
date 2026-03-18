@@ -481,26 +481,32 @@ export default class ChapterScene extends Phaser.Scene {
     };
     const npcScales = {
       'gentleman_paper': 0.299 * 1.12 * 1.20,
-      'da_moth': 0.299 * 1.20,
+      'da_moth': 0.299 * 1.20 * 1.10,
       'cultist_guard': 0.299 * 1.20,
       'cultist_guard_staff': 0.299 * 1.20,
       'guildmaster': 0.299 * 1.20,
+    };
+    const npcFlipX = {
+      'guildmaster': true,
     };
     npcs.forEach(npcName => {
       if (this.chapterData.assets?.characters?.includes(npcName)) {
         const npcScale = npcScales[npcName] ?? 0.299;
         const npcX = npcPositions[npcName] ?? width / 2;
         const npcY = girlY;
+        const flipX = npcFlipX[npcName] ?? false;
 
         if (this.textures.exists(`${npcName}_body`)) {
           this.characters[`${npcName}_body`] = this.add.image(npcX, npcY, `${npcName}_body`)
             .setScale(npcScale)
+            .setFlipX(flipX)
             .setAlpha(0)
             .setDepth(12);
 
           if (this.textures.exists(`${npcName}_neutral`)) {
             this.characters[`${npcName}_expression`] = this.add.image(npcX, npcY, `${npcName}_neutral`)
               .setScale(npcScale)
+              .setFlipX(flipX)
               .setAlpha(0)
               .setDepth(12);
           }
