@@ -142,6 +142,12 @@ export default class ChapterScene extends Phaser.Scene {
       this.loadCharacterImagesWithPrefix(rainieVariant, rainieVariant);
     }
 
+    // Closing character folder swaps (e.g. costume changes mid-chapter)
+    const closingFolders = chapterJson.assets?.closingCharacterFolders || {};
+    if (closingFolders.vera) this.loadCharacterImagesWithPrefix(closingFolders.vera, closingFolders.vera);
+    if (closingFolders.addie) this.loadCharacterImagesWithPrefix(closingFolders.addie, closingFolders.addie);
+    if (closingFolders.rainie) this.loadCharacterImagesWithPrefix(closingFolders.rainie, closingFolders.rainie);
+
     // NPCs — load by character ID (maps directly to folder/file prefix)
     const npcs = ['crone_default', 'cultist_bookkeeper', 'cultist_enforcer', 'cultist_guard_staff',
                   'gentleman_paper', 'da_default', 'da_moth', 'guildmaster'];
@@ -794,6 +800,25 @@ export default class ChapterScene extends Phaser.Scene {
     }
   }
 
+  swapCharacterOutfits(newFolders) {
+    Object.entries(newFolders).forEach(([baseName, newVariant]) => {
+      // Swap body texture
+      const bodySprite = this.characters[`${baseName}_body`];
+      if (bodySprite && this.textures.exists(`${newVariant}_body`)) {
+        bodySprite.setTexture(`${newVariant}_body`);
+      }
+      // Swap expression texture back to neutral for the new outfit
+      const exprSprite = this.characters[`${baseName}_expression`];
+      if (exprSprite && this.textures.exists(`${newVariant}_neutral`)) {
+        exprSprite.setTexture(`${newVariant}_neutral`);
+      }
+      // Update characterFolders so future setCharacterExpression calls use the new variant
+      if (this.chapterData.assets.characterFolders) {
+        this.chapterData.assets.characterFolders[baseName] = newVariant;
+      }
+    });
+  }
+
   showItem(itemKey) {
     const width = this.cameras.main.width;
     const height = this.cameras.main.height;
@@ -1221,6 +1246,11 @@ export default class ChapterScene extends Phaser.Scene {
       });
     }
 
+    // Swap character outfits if requested
+    if (line.swapCharacters && this.chapterData.assets?.closingCharacterFolders) {
+      this.swapCharacterOutfits(this.chapterData.assets.closingCharacterFolders);
+    }
+
     // Check if background should change
     if (line.background && this.backgroundImage) {
       this.changeBackground(line.background);
@@ -1429,7 +1459,15 @@ export default class ChapterScene extends Phaser.Scene {
     if (this.chapterData.puzzle) {
       const puzzleType = this.chapterData.puzzle.type;
 
-      if (puzzleType === 'gear_clockmakers') {
+      if (puzzleType === 'infiltration') {
+        this.scene.launch('InfiltrationScene', {
+          chapterNumber: this.chapterNumber,
+          onComplete: () => {
+            this.scene.resume();
+            this.onPuzzleComplete();
+          }
+        });
+      } else if (puzzleType === 'gear_clockmakers') {
         if (this.gearPuzzleDone) {
           // Already launched mid-dialogue — skip straight to next step
           this.checkForDeskPuzzle();

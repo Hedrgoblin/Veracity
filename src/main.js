@@ -9,6 +9,7 @@ import ChapterScene from './scenes/ChapterScene.js';
 import PuzzleScene from './scenes/PuzzleScene.js';
 import MazeScene from './scenes/MazeScene.js';
 import TrainMapScene from './scenes/TrainMapScene.js';
+import InfiltrationScene from './scenes/InfiltrationScene.js';
 import GearPuzzleScene from './scenes/GearPuzzleScene.js';
 import SettingsScene from './scenes/SettingsScene.js';
 import EndingScene from './scenes/EndingScene.js';
@@ -41,6 +42,7 @@ const config = {
     PuzzleScene,
     MazeScene,
     TrainMapScene,
+    InfiltrationScene,
     GearPuzzleScene,
     SettingsScene,
     EndingScene,

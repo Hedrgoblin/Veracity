@@ -15,6 +15,11 @@
       "vera": "vera_default",
       "addie": "addie_default",
       "rainie": "rainie_default"
+    },
+    "closingCharacterFolders": {
+      "vera": "vera_clockworker",
+      "addie": "addie_clockworker",
+      "rainie": "rainier_clockworker"
     }
   },
   "companions": [
@@ -25,19 +30,20 @@
     "opening": [
       {
         "speaker": "Narrator",
-        "text": "The sanctuary rises from the mountainside, wreathed in steam and shadow."
+        "text": "After a long train ride across the countryside, and a walk from a small mining town up a steep mountain path, you arrive at the Northern Sanctuary.",
+        "hideCharacters": true
       },
       {
         "speaker": "Rainie",
-        "text": "That's it? That's where they're holding your father? It's huge!"
+        "text": "This must be the place. The compass is pointing right at it."
       },
       {
         "speaker": "Addie",
-        "text": "And heavily guarded, Vera. Look\u2014patrol routes, watchtowers. We can't just walk in."
+        "text": "It looks heavily guarded, Vera. Look, guards, watchtowers. We can't just walk in."
       },
       {
         "speaker": "Veracity",
-        "text": "Then we find another way. Da's in there. The moth compass is clear."
+        "text": "Then we find another way. Da's in there."
       },
       {
         "speaker": "Narrator",
@@ -49,13 +55,15 @@
       },
       {
         "speaker": "Rainie",
-        "text": "Or we use these steam vents! Climb up through the ventilation system!"
+        "text": "Let's go!"
       }
     ],
     "closing": [
       {
         "speaker": "Narrator",
-        "text": "Inside\u2014a maze of corridors and workshops. Construction echoes everywhere."
+        "text": "Once inside, you see a maze of corridors and workshops. Construction echoes everywhere.",
+        "hideCharacters": true,
+        "swapCharacters": true
       },
       {
         "speaker": "Veracity",
@@ -63,7 +71,7 @@
       },
       {
         "speaker": "Addie",
-        "text": "Look at these blueprints on the wall. It's... some kind of massive device. Like a clock, but wrong."
+        "text": "It's... some kind of massive device. Like a clock, but wrong."
       },
       {
         "speaker": "Rainie",
@@ -71,7 +79,7 @@
       },
       {
         "speaker": "Narrator",
-        "text": "A blueprint fragment catches your eye. Father's handwriting: 'Component missing. Core will not stabilize without\u2014' The rest torn away."
+        "text": "A fragment of handwriting catches your eye. Father's handwriting: 'Component missing. Core will not stabilize without ...' The rest is torn away."
       },
       {
         "speaker": "Veracity",
@@ -79,64 +87,8 @@
       }
     ]
   },
-  "choices": [
-    {
-      "text": "Take the worker entrance. Disguise ourselves, move slowly, avoid suspicion.",
-      "companion": "addie",
-      "consequences": {
-        "disguised_entry": true
-      }
-    },
-    {
-      "text": "Climb through the vents. Fast, direct, and we can scout from above.",
-      "companion": "rainie",
-      "consequences": {
-        "vent_infiltration": true
-      }
-    }
-  ],
   "puzzle": {
-    "type": "connection",
-    "title": "Threading the Watchful Eye",
-    "instructions": "Rewire the security panel to disable the alarms without being detected.",
-    "points": [
-      {
-        "id": "power1",
-        "x": -250,
-        "y": -80,
-        "pair": "bypass1"
-      },
-      {
-        "id": "bypass1",
-        "x": -50,
-        "y": -80,
-        "pair": "power1"
-      },
-      {
-        "id": "power2",
-        "x": -250,
-        "y": 0,
-        "pair": "bypass2"
-      },
-      {
-        "id": "bypass2",
-        "x": -50,
-        "y": 0,
-        "pair": "power2"
-      },
-      {
-        "id": "power3",
-        "x": -250,
-        "y": 80,
-        "pair": "bypass3"
-      },
-      {
-        "id": "bypass3",
-        "x": -50,
-        "y": 80,
-        "pair": "power3"
-      }
-    ]
+    "type": "infiltration"
   },
   "storyFlags": {
     "chapter6_complete": true,
