@@ -471,14 +471,20 @@ export default class ChapterScene extends Phaser.Scene {
     }
 
     // Other NPCs (cultists, gentleman, da, guildmaster, etc.)
-    const npcs = ['cultist_bookkeeper', 'cultist_enforcer', 'cultist_guard_staff', 'gentleman_paper', 'da_default', 'da_moth', 'guildmaster'];
+    const npcs = ['cultist_bookkeeper', 'cultist_enforcer', 'cultist_guard', 'cultist_guard_staff', 'gentleman_paper', 'da_default', 'da_moth', 'guildmaster'];
     const npcPositions = {
       'cultist_bookkeeper': width * 0.65,
       'gentleman_paper': width / 2 + 30,
+      'cultist_guard': width * 0.20,
+      'cultist_guard_staff': width * 0.50,
+      'guildmaster': width * 0.80,
     };
     const npcScales = {
       'gentleman_paper': 0.299 * 1.12 * 1.20,
       'da_moth': 0.299 * 1.20,
+      'cultist_guard': 0.299 * 1.20,
+      'cultist_guard_staff': 0.299 * 1.20,
+      'guildmaster': 0.299 * 1.20,
     };
     npcs.forEach(npcName => {
       if (this.chapterData.assets?.characters?.includes(npcName)) {

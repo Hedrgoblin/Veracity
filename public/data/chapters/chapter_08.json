@@ -12,6 +12,8 @@
       "addie",
       "rainie",
       "da_default",
+      "cultist_guard",
+      "cultist_guard_staff",
       "guildmaster"
     ],
     "characterFolders": {
@@ -70,7 +72,8 @@
       },
       {
         "speaker": "Narrator",
-        "text": "Your father's eyes flit to the door, then back to you."
+        "text": "Your father's eyes flit to the door, then back to you.",
+        "hideCharacters": true
       },
       {
         "speaker": "Father",
@@ -81,7 +84,8 @@
       {
         "speaker": "Narrator",
         "text": "The door bursts open. Cultists surround you.",
-        "hideCharacters": ["da_default"]
+        "hideCharacters": ["da_default"],
+        "showCharacters": ["cultist_guard", "cultist_guard_staff", "guildmaster"]
       },
       {
         "speaker": "Guildmaster",
