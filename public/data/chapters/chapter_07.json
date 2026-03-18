@@ -11,6 +11,7 @@
       "addie",
       "rainie",
       "da_default",
+      "da_moth",
       "cultist_guard_staff"
     ],
     "characterFolders": {
@@ -81,7 +82,10 @@
     "closing": [
       {
         "speaker": "Narrator",
-        "text": "Through the chaos, into a... lovely warm cozy study. There, at a bench\u2014your father."
+        "text": "You step out of the hallway into a... lovely warm cozy study. There, at a bench, you see the moth. And your father.",
+        "background": "northern_sanctuary_library_small",
+        "hideCharacters": true,
+        "showCharacters": ["da_moth"]
       },
       {
         "speaker": "Veracity",
