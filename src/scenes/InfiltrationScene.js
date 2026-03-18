@@ -51,9 +51,9 @@ export default class InfiltrationScene extends Phaser.Scene {
     const magentaPos = this.findColorCenter(0xd2, 0x00, 0xff); // Steal  — #d200ff
 
     this.steps = [
-      { key: 'hide_vera',  x: greenPos.x,   y: greenPos.y },
-      { key: 'sneak_vera', x: bluePos.x,    y: bluePos.y },
-      { key: 'steal_vera', x: magentaPos.x, y: magentaPos.y }
+      { key: 'hide_vera',  x: greenPos.x,   y: greenPos.y,   label: 'Hide!'  },
+      { key: 'sneak_vera', x: bluePos.x,    y: bluePos.y,    label: 'Sneak!' },
+      { key: 'steal_vera', x: magentaPos.x, y: magentaPos.y, label: 'Yoink!' }
     ];
 
     // Title
@@ -156,9 +156,26 @@ export default class InfiltrationScene extends Phaser.Scene {
     // Fade in
     this.tweens.add({ targets: img, alpha: 1, duration: 400 });
 
-    // Click: wiggle then fade out
+    // Click: spawn floating label, wiggle then fade out
     img.once('pointerdown', () => {
       img.disableInteractive();
+
+      // Floating label
+      const label = this.add.text(step.x, step.y - 60, step.label, {
+        fontSize: '22px',
+        fontFamily: 'Courier New',
+        color: '#ffffff',
+        fontStyle: 'bold'
+      }).setOrigin(0.5).setDepth(20);
+
+      this.tweens.add({
+        targets: label,
+        y: step.y - 130,
+        alpha: 0,
+        duration: 1000,
+        ease: 'Cubic.out',
+        onComplete: () => label.destroy()
+      });
 
       this.tweens.add({
         targets: img,

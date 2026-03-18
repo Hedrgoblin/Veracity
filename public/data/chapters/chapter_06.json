@@ -5,6 +5,7 @@
   "description": "A fortress of stone and steam guards its secrets jealously.",
   "assets": {
     "background": "northern_sanctuary_ext",
+    "suppressAutoShow": true,
     "music": null,
     "characters": [
       "vera",
@@ -19,7 +20,7 @@
     "closingCharacterFolders": {
       "vera": "vera_clockworker",
       "addie": "addie_clockworker",
-      "rainie": "rainier_clockworker"
+      "rainie": "rainie_clockworker"
     }
   },
   "companions": [
@@ -52,18 +53,26 @@
       {
         "speaker": "Addie",
         "text": "There. A service entrance on the east side. It's used by workers. Maybe we can blend in."
-      },
-      {
-        "speaker": "Rainie",
-        "text": "Let's go!"
       }
     ],
     "closing": [
       {
         "speaker": "Narrator",
-        "text": "Once inside, you see a maze of corridors and workshops. Construction echoes everywhere.",
+        "text": "You arrive at the side entrance.",
         "hideCharacters": true,
-        "swapCharacters": true
+        "swapCharacters": true,
+        "background": "northern_sanctuary_service_entrance"
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Let's go!"
+      },
+      {
+        "speaker": "Narrator",
+        "text": "Inside, you see what looks like the inner workings of a large mechanical device down a long hallway.",
+        "hideCharacters": true,
+        "swapCharacters": true,
+        "background": "northern_sanctuary_hallway"
       },
       {
         "speaker": "Veracity",
@@ -71,19 +80,15 @@
       },
       {
         "speaker": "Addie",
-        "text": "It's... some kind of massive device. Like a clock, but wrong."
+        "text": "It's like a clock, but wrong."
       },
       {
         "speaker": "Rainie",
-        "text": "The Temporal Resonance Device. That's what they called it, right, Vera?"
-      },
-      {
-        "speaker": "Narrator",
-        "text": "A fragment of handwriting catches your eye. Father's handwriting: 'Component missing. Core will not stabilize without ...' The rest is torn away."
+        "text": "It must be the time device?"
       },
       {
         "speaker": "Veracity",
-        "text": "Da knew it wouldn't work. He was trying to stop them all along."
+        "text": "They must be further along than Da thought."
       }
     ]
   },

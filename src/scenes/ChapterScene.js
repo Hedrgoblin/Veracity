@@ -509,20 +509,23 @@ export default class ChapterScene extends Phaser.Scene {
     });
 
     // Fade in companion/vera characters only — NPCs appear via showCharacters in dialogue
-    const autoShowKeys = ['vera_body', 'vera_expression', 'vera',
-                          'addie_body', 'addie_expression', 'addie',
-                          'rainie_body', 'rainie_expression', 'rainie'];
-    Object.keys(this.characters).forEach(key => {
-      if (autoShowKeys.includes(key)) {
-        const char = this.characters[key];
-        this.tweens.add({
-          targets: char,
-          alpha: 1,
-          duration: 1000,
-          ease: 'Power2'
-        });
-      }
-    });
+    // Skip auto-show if chapter sets suppressAutoShow (characters appear only via dialogue)
+    if (!this.chapterData.assets?.suppressAutoShow) {
+      const autoShowKeys = ['vera_body', 'vera_expression', 'vera',
+                            'addie_body', 'addie_expression', 'addie',
+                            'rainie_body', 'rainie_expression', 'rainie'];
+      Object.keys(this.characters).forEach(key => {
+        if (autoShowKeys.includes(key)) {
+          const char = this.characters[key];
+          this.tweens.add({
+            targets: char,
+            alpha: 1,
+            duration: 1000,
+            ease: 'Power2'
+          });
+        }
+      });
+    }
   }
 
   changeBackground(newBackgroundKey) {
@@ -1464,6 +1467,8 @@ export default class ChapterScene extends Phaser.Scene {
           chapterNumber: this.chapterNumber,
           onComplete: () => {
             this.scene.resume();
+            // Immediately hide all characters to prevent flash before closing dialogue
+            Object.values(this.characters).forEach(c => { if (c) c.setAlpha(0); });
             this.onPuzzleComplete();
           }
         });
