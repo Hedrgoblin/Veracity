@@ -53,6 +53,11 @@
       {
         "speaker": "Narrator",
         "text": "Alarms blare. Red lights flash. The guards jump up, look at each other, and run towards the sounds.",
+        "expression": {
+          "vera": "surprised",
+          "addie": "surprised",
+          "rainie": "surprised"
+        },
         "flashBackground": {
           "backgrounds": ["northern_sanctuary_hallway_02", "northern_sanctuary_hallway_02_alarm"],
           "count": 10,
