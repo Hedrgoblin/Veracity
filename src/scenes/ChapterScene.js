@@ -478,6 +478,7 @@ export default class ChapterScene extends Phaser.Scene {
     };
     const npcScales = {
       'gentleman_paper': 0.299 * 1.12 * 1.20,
+      'da_moth': 0.299 * 1.20,
     };
     npcs.forEach(npcName => {
       if (this.chapterData.assets?.characters?.includes(npcName)) {
