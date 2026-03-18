@@ -149,7 +149,7 @@ export default class ChapterScene extends Phaser.Scene {
     if (closingFolders.rainie) this.loadCharacterImagesWithPrefix(closingFolders.rainie, closingFolders.rainie);
 
     // NPCs — load by character ID (maps directly to folder/file prefix)
-    const npcs = ['crone_default', 'cultist_bookkeeper', 'cultist_enforcer', 'cultist_guard_staff',
+    const npcs = ['crone_default', 'cultist_bookkeeper', 'cultist_enforcer', 'cultist_guard', 'cultist_guard_staff',
                   'gentleman_paper', 'da_default', 'da_moth', 'guildmaster'];
     npcs.forEach(npcId => {
       if (characters.includes(npcId)) {
