@@ -37,7 +37,7 @@
       },
       {
         "speaker": "Veracity",
-        "text": "The device\u2014the Temporal Resonance Device. Can it really work?",
+        "text": "This Device. Can it really work?",
         "hideCharacters": ["da_default"],
         "showCharacters": ["vera"]
       },
@@ -55,23 +55,23 @@
       },
       {
         "speaker": "Father",
-        "text": "Because they don't understand. The device needs a stabilizing core\u2014something that exists outside of time's flow. I wrote about a theoretical component, but it doesn't exist.",
+        "text": "Because once, many years ago, I had a theory. I built a prototype, just a little thing. But the wrong person found it. I destroyed it, but it was too late.",
         "hideCharacters": ["vera"],
         "showCharacters": ["da_default"]
       },
       {
         "speaker": "Veracity",
-        "text": "What kind of component?",
+        "text": "So it isn't really theoretical then?",
         "hideCharacters": ["da_default"],
         "showCharacters": ["vera"]
       },
       {
         "speaker": "Narrator",
-        "text": "His eyes flit to the door, then to you."
+        "text": "Your father's eyes flit to the door, then back to you."
       },
       {
         "speaker": "Father",
-        "text": "We dont have time to talk about this now...We must be quick. They're  trying to forcing me to complete the device, but I can't. If they realize\u2014",
+        "text": "We dont have time to talk about this now... They're  trying to forcing me to complete the device, but I can't. It will never be what they are asking for.",
         "hideCharacters": ["vera"],
         "showCharacters": ["da_default"]
       },
