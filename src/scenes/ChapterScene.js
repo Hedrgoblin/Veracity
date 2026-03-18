@@ -529,6 +529,12 @@ export default class ChapterScene extends Phaser.Scene {
   }
 
   changeBackground(newBackgroundKey) {
+    // Cancel any running flash animation
+    if (typeof this._cancelFlash === 'function') {
+      this._cancelFlash();
+      this._cancelFlash = null;
+    }
+
     if (!this.textures.exists(newBackgroundKey)) {
       console.warn(`Background '${newBackgroundKey}' not found`);
       return;
@@ -572,9 +578,15 @@ export default class ChapterScene extends Phaser.Scene {
   }
 
   flashBackground(bgA, bgB, count, interval, onComplete) {
+    // Cancel any previously running flash
+    this._cancelFlash = true;
+    let cancelled = false;
+    this._cancelFlash = () => { cancelled = true; };
+
     let current = 0;
-    const total = count * 2; // each toggle = 2 swaps (A→B→A...)
+    const total = count * 2;
     const step = () => {
+      if (cancelled) return;
       const key = current % 2 === 0 ? bgB : bgA;
       if (this.textures.exists(key)) {
         const width = this.cameras.main.width;
@@ -590,7 +602,7 @@ export default class ChapterScene extends Phaser.Scene {
         this.time.delayedCall(interval, step);
       } else {
         // Settle on bgB (alarm background) at the end
-        if (this.textures.exists(bgB)) {
+        if (!cancelled && this.textures.exists(bgB)) {
           const width = this.cameras.main.width;
           const height = this.cameras.main.height;
           const finalBg = this.add.image(width / 2, height / 2, bgB);
