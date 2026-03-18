@@ -92,7 +92,8 @@
         "text": "How touching. A family reunion.",
         "hideCharacters": true,
         "showCharacters": ["guildmaster"],
-        "moveCharacters": { "guildmaster": "center" }
+        "moveCharacters": { "guildmaster": "center" },
+        "expression": { "guildmaster": "smirk" }
       },
       {
         "speaker": "Addie",
@@ -102,7 +103,11 @@
       },
       {
         "speaker": "Narrator",
-        "text": "The woman standing in the doorway smiles at you. She looks familiar."
+        "text": "The woman standing in the doorway smiles at you. She looks familiar.",
+        "hideCharacters": true,
+        "showCharacters": ["guildmaster"],
+        "moveCharacters": { "guildmaster": "center" },
+        "expression": { "guildmaster": "neutral" }
       },
       {
         "speaker": "Veracity",
