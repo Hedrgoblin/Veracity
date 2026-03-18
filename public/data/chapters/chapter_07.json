@@ -89,7 +89,9 @@
       },
       {
         "speaker": "Veracity",
-        "text": "Da!"
+        "text": "Da!",
+        "showCharacters": ["vera"],
+        "hideCharacters": ["da_moth"]
       },
       {
         "speaker": "Father",
