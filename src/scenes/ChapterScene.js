@@ -1537,7 +1537,11 @@ export default class ChapterScene extends Phaser.Scene {
       }
       this.scene.pause();
     } else {
-      this.completeChapter();
+      if (this.chapterData.dialogue?.closing) {
+        this.showDialogue(this.chapterData.dialogue.closing, () => this.completeChapter());
+      } else {
+        this.completeChapter();
+      }
     }
   }
 
