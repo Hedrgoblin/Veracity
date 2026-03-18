@@ -1326,29 +1326,17 @@ export default class ChapterScene extends Phaser.Scene {
       });
     }
 
-    // Black screen overlay (persists until next line clears it)
+    // Black screen — fade background image to black, restore on next line
     if (line.blackScreen) {
-      if (!this.blackScreenOverlay) {
-        const width = this.cameras.main.width;
-        const height = this.cameras.main.height;
-        this.blackScreenOverlay = this.add.rectangle(width / 2, height / 2, width, height, 0x000000, 0)
-          .setDepth(5);
-        this.tweens.add({
-          targets: this.blackScreenOverlay,
-          alpha: 1,
-          duration: 400,
-          ease: 'Linear'
-        });
+      if (this.backgroundImage) {
+        this.tweens.add({ targets: this.backgroundImage, alpha: 0, duration: 400, ease: 'Linear' });
       }
-    } else if (this.blackScreenOverlay) {
-      const overlay = this.blackScreenOverlay;
-      this.blackScreenOverlay = null;
-      this.tweens.add({
-        targets: overlay,
-        alpha: 0,
-        duration: 400,
-        onComplete: () => overlay.destroy()
-      });
+      this._blackScreenActive = true;
+    } else if (this._blackScreenActive) {
+      this._blackScreenActive = false;
+      if (this.backgroundImage) {
+        this.tweens.add({ targets: this.backgroundImage, alpha: 1, duration: 400, ease: 'Linear' });
+      }
     }
 
     // Brief fade to black transition
