@@ -571,6 +571,40 @@ export default class ChapterScene extends Phaser.Scene {
     });
   }
 
+  flashBackground(bgA, bgB, count, interval, onComplete) {
+    let current = 0;
+    const total = count * 2; // each toggle = 2 swaps (A→B→A...)
+    const step = () => {
+      const key = current % 2 === 0 ? bgB : bgA;
+      if (this.textures.exists(key)) {
+        const width = this.cameras.main.width;
+        const height = this.cameras.main.height;
+        const newBg = this.add.image(width / 2, height / 2, key);
+        const scale = Math.max(width / newBg.width, height / newBg.height);
+        newBg.setScale(scale).setDepth(-1);
+        if (this.backgroundImage) this.backgroundImage.destroy();
+        this.backgroundImage = newBg;
+      }
+      current++;
+      if (current < total) {
+        this.time.delayedCall(interval, step);
+      } else {
+        // Settle on bgB (alarm background) at the end
+        if (this.textures.exists(bgB)) {
+          const width = this.cameras.main.width;
+          const height = this.cameras.main.height;
+          const finalBg = this.add.image(width / 2, height / 2, bgB);
+          const scale = Math.max(width / finalBg.width, height / finalBg.height);
+          finalBg.setScale(scale).setDepth(-1);
+          if (this.backgroundImage) this.backgroundImage.destroy();
+          this.backgroundImage = finalBg;
+        }
+        if (onComplete) onComplete();
+      }
+    };
+    step();
+  }
+
   introduceCompanion(companion) {
     if (this.companionIntroduced[companion]) return;
 
@@ -1252,6 +1286,14 @@ export default class ChapterScene extends Phaser.Scene {
     // Swap character outfits if requested
     if (line.swapCharacters && this.chapterData.assets?.closingCharacterFolders) {
       this.swapCharacterOutfits(this.chapterData.assets.closingCharacterFolders);
+    }
+
+    // Check if background should flash (alarm effect)
+    if (line.flashBackground) {
+      const { backgrounds, count = 6, interval = 250 } = line.flashBackground;
+      if (backgrounds && backgrounds.length === 2) {
+        this.flashBackground(backgrounds[0], backgrounds[1], count, interval, null);
+      }
     }
 
     // Check if background should change
