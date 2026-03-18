@@ -72,6 +72,7 @@ export default class ChapterScene extends Phaser.Scene {
       'northern_sanctuary_library_small',
       'ill_power_01',
       'ill_essense',
+      'ill_addie_growl_01',
       'northern_sanctuary_service_entrance',
       'train_carraige',
       'train_ext',
@@ -1322,6 +1323,47 @@ export default class ChapterScene extends Phaser.Scene {
           this.currentItem.destroy();
           this.currentItem = null;
         }
+      });
+    }
+
+    // Black screen overlay (persists until next line clears it)
+    if (line.blackScreen) {
+      if (!this.blackScreenOverlay) {
+        const width = this.cameras.main.width;
+        const height = this.cameras.main.height;
+        this.blackScreenOverlay = this.add.rectangle(width / 2, height / 2, width, height, 0x000000, 0)
+          .setDepth(5);
+        this.tweens.add({
+          targets: this.blackScreenOverlay,
+          alpha: 1,
+          duration: 400,
+          ease: 'Linear'
+        });
+      }
+    } else if (this.blackScreenOverlay) {
+      const overlay = this.blackScreenOverlay;
+      this.blackScreenOverlay = null;
+      this.tweens.add({
+        targets: overlay,
+        alpha: 0,
+        duration: 400,
+        onComplete: () => overlay.destroy()
+      });
+    }
+
+    // Brief fade to black transition
+    if (line.fadeToBlack) {
+      const width = this.cameras.main.width;
+      const height = this.cameras.main.height;
+      const blackOverlay = this.add.rectangle(width / 2, height / 2, width, height, 0x000000, 1)
+        .setDepth(500);
+      this.time.delayedCall(250, () => {
+        this.tweens.add({
+          targets: blackOverlay,
+          alpha: 0,
+          duration: 250,
+          onComplete: () => blackOverlay.destroy()
+        });
       });
     }
 

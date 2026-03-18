@@ -57,7 +57,7 @@
       },
       {
         "speaker": "Father",
-        "text": "Because once, many years ago, I had a theory. I built a prototype, just a little thing. But the wrong person found it. I destroyed it, but it was too late.",
+        "text": "Because once, many years ago, I had a theory. I built a prototype, just a little thing. But the wrong person found it. I thought I had destroyed it, but it was too late.",
         "hideCharacters": ["vera"],
         "showCharacters": ["da_default"]
       },
@@ -157,6 +157,7 @@
         "speaker": "Narrator",
         "text": "Suddenly, the crystal in her walking stick illuminates. The light is blinding. You can hear your father and friends shouting in the distance, and then everything goes black.",
         "hideCharacters": true,
+        "fadeToBlack": true,
         "background": "ill_power_01"
       },
       {
@@ -187,91 +188,29 @@
       },
       {
         "speaker": "Veracity",
-        "text": "I'm far far away...",
+        "text": "I am far far away...",
         "hideCharacters": true
       },
       {
         "speaker": "Narrator",
         "text": "In the distance, you can hear Addie. She's roaring. You can hear screaming, who is screaming? Everything is so black",
-        "hideCharacters": true
+        "hideCharacters": true,
+        "blackScreen": true
       },
       {
         "speaker": "Addie",
         "text": "If ANY of you touch her again. I will kill you all.",
-        "showCharacters": ["addie"]
+        "background": "ill_addie_growl_01",
+        "hideCharacters": true
       },
       {
         "speaker": "Narrator",
         "text": "you fade to black again",
-        "hideCharacters": true
+        "hideCharacters": true,
+        "blackScreen": true
       }
     ],
-    "closing": [
-      {
-        "speaker": "Father",
-        "text": "Something untouched by time's passage. Something that remains constant while everything else changes. In my paper, I called it a 'temporal anchor.'",
-        "hideCharacters": true,
-        "showCharacters": ["da_default"]
-      },
-      {
-        "speaker": "Narrator",
-        "text": "Your companion sparks again. Something strange\u2014the pattern's consistent. Unchanging. A heartbeat that never varies."
-      },
-      {
-        "speaker": "Veracity",
-        "text": "Da... my companions. You built them. What did you use for their core processors?",
-        "hideCharacters": ["da_default"],
-        "showCharacters": ["vera"]
-      },
-      {
-        "speaker": "Father",
-        "text": "A crystalline matrix I discovered years ago. Very rare. It maintains perfect consistency in all conditions\u2014",
-        "hideCharacters": ["vera"],
-        "showCharacters": ["da_default"]
-      },
-      {
-        "speaker": "Narrator",
-        "text": "His face pales."
-      },
-      {
-        "speaker": "Father",
-        "text": "No. No, that's why you came with them. The Order doesn't know. They can't know.",
-        "hideCharacters": ["vera"],
-        "showCharacters": ["da_default"]
-      },
-      {
-        "speaker": "Veracity",
-        "text": "My companions... they're the missing piece?",
-        "hideCharacters": ["da_default"],
-        "showCharacters": ["vera"]
-      }
-    ]
-  },
-  "choices": [
-    {
-      "text": "We protect them both. We find another way out of this that doesn't sacrifice anyone.",
-      "companion": "addie",
-      "consequences": {
-        "protective_choice": true
-      }
-    },
-    {
-      "text": "We use this knowledge. Make the Order think we'll cooperate, then turn their own device against them.",
-      "companion": "rainie",
-      "consequences": {
-        "deceptive_cooperation": true
-      }
-    }
-  ],
-  "puzzle": {
-    "type": "gather_sort",
-    "title": "Mending a Metal Heart",
-    "instructions": "Gather tools and parts to repair your injured companion. They need you now.",
-    "slots": [
-      "tools",
-      "parts",
-      "power"
-    ]
+    "closing": []
   },
   "storyFlags": {
     "chapter8_complete": true,
