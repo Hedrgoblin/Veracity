@@ -95,7 +95,12 @@
       },
       {
         "speaker": "Father",
-        "text": "My clever girl, as soon as I saw the moth, I knew you'd find me."
+        "text": "My clever girl, as soon as I saw the moth, I knew you'd find me.",
+        "showCharacters": ["da_moth"],
+        "hideCharacters": ["vera"],
+        "expression": {
+          "da_moth": "happy"
+        }
       }
     ]
   },
