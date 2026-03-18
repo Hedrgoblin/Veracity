@@ -4,7 +4,7 @@
   "act": 2,
   "description": "Deeper into the sanctuary, closer to father, closer to danger.",
   "assets": {
-    "background": "northern_sanctuary_hallway_02_armed",
+    "background": "northern_sanctuary_hallway_02",
     "music": null,
     "characters": [
       "vera",
@@ -27,7 +27,7 @@
     "opening": [
       {
         "speaker": "Narrator",
-        "text": "Through the corridors, heart pounding. Blue-uniformed workers pass without noticing."
+        "text": "Through the corridors, heart pounding. Blue-uniformed workers pass unnoticed."
       },
       {
         "speaker": "Addie",
@@ -35,27 +35,27 @@
       },
       {
         "speaker": "Rainie",
-        "text": "Or it's where they're keeping your father!"
+        "text": "And the lid says the moth is behind that door!"
       },
       {
         "speaker": "Veracity",
         "text": "We need to get past those guards."
       },
       {
+        "speaker": "Rainie",
+        "text": "I saw some gears back there... I wonder what happens if I move one... be right back."
+      },
+      {
         "speaker": "Narrator",
         "text": "Alarms blare. Red lights flash."
       },
       {
-        "speaker": "Guard",
-        "text": "Intruder alert! Sector seven! All units respond!"
+        "speaker": "Narrator",
+        "text": "The guards jump up, look at each other, and run towards the sounds."
       },
       {
         "speaker": "Rainie",
-        "text": "Uh oh. That might be my fault. I may have knocked something over in the vent..."
-      },
-      {
-        "speaker": "Narrator",
-        "text": "The guards jump up, look at each other, and run towards the sounds."
+        "text": "Did I miss anything?"
       },
       {
         "speaker": "Veracity",
