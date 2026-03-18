@@ -484,7 +484,7 @@ export default class ChapterScene extends Phaser.Scene {
       'da_default': 0.299 * 1.12 * 1.20,
       'da_moth': 0.299 * 1.12 * 1.20,
       'cultist_guard': 0.299 * 1.20,
-      'cultist_guard_staff': 0.299 * 1.20,
+      'cultist_guard_staff': 0.420,
       'guildmaster': 0.299 * 1.20,
     };
     const npcFlipX = {
