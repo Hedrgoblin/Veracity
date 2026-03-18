@@ -103,7 +103,7 @@
       },
       {
         "speaker": "Narrator",
-        "text": "The woman standing in the doorway smiles at you. She looks familiar.",
+        "text": "The woman standing in the doorway stares at you with blind eyes. She looks familiar.",
         "hideCharacters": true,
         "showCharacters": ["guildmaster"],
         "moveCharacters": { "guildmaster": "center" },
@@ -111,7 +111,9 @@
       },
       {
         "speaker": "Veracity",
-        "text": "I... know you."
+        "text": "I... know you.",
+        "hideCharacters": ["guildmaster"],
+        "showCharacters": ["vera", "addie", "rainie"]
       },
       {
         "speaker": "Guildmaster",
@@ -144,7 +146,8 @@
         "text": "You did. What a kind young woman you have turned out to be.",
         "hideCharacters": ["vera"],
         "showCharacters": ["guildmaster"],
-        "moveCharacters": { "guildmaster": "center" }
+        "moveCharacters": { "guildmaster": "center" },
+        "expression": { "guildmaster": "happy" }
       },
       {
         "speaker": "Narrator",
