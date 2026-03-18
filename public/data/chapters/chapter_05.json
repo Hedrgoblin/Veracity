@@ -67,6 +67,7 @@
         "speaker": "Narrator",
         "text": "A gentleman in fine clothes sits across from you, reading. He glances over the pages.",
         "background": "train_carraige",
+        "hideCharacters": true,
         "showCharacters": ["gentleman_paper"]
       },
       {

@@ -468,9 +468,12 @@ export default class ChapterScene extends Phaser.Scene {
     const npcPositions = {
       'cultist_bookkeeper': width * 0.65,
     };
+    const npcScales = {
+      'gentleman_paper': 0.299 * 1.2,
+    };
     npcs.forEach(npcName => {
       if (this.chapterData.assets?.characters?.includes(npcName)) {
-        const npcScale = 0.299;
+        const npcScale = npcScales[npcName] ?? 0.299;
         const npcX = npcPositions[npcName] ?? width / 2;
         const npcY = girlY;
 
@@ -1147,7 +1150,10 @@ export default class ChapterScene extends Phaser.Scene {
         onComplete: () => {
           this.scene.stop('PuzzleScene');
           this.scene.resume();
-          if (onComplete) onComplete();
+          // Defer dialogue continuation until scene management has processed (next frame)
+          this.time.delayedCall(0, () => {
+            if (onComplete) onComplete();
+          });
         }
       });
       this.scene.pause();
@@ -1212,16 +1218,15 @@ export default class ChapterScene extends Phaser.Scene {
       this.hideAllCharacters();
     } else if (line.hideCharacters === false) {
       this.showAllCharacters();
-    } else {
-      if (Array.isArray(line.hideCharacters)) {
-        line.hideCharacters.forEach(charName => this.hideCharacter(charName));
-      }
-      if (Array.isArray(line.showCharacters)) {
-        line.showCharacters.forEach(charName => this.showCharacter(charName));
-      }
-      if (line.showOnlyVera === true) {
-        this.showOnlyVera();
-      }
+    } else if (Array.isArray(line.hideCharacters)) {
+      line.hideCharacters.forEach(charName => this.hideCharacter(charName));
+    }
+    // showCharacters always runs, even after hideCharacters:true
+    if (Array.isArray(line.showCharacters)) {
+      line.showCharacters.forEach(charName => this.showCharacter(charName));
+    }
+    if (line.showOnlyVera === true) {
+      this.showOnlyVera();
     }
 
     // Check if expressions should change
@@ -1928,7 +1933,15 @@ export default class ChapterScene extends Phaser.Scene {
         ]
       }},
       { name: 'Follow the Moth', type: 'mothPuzzle', data: {} },
-      { name: 'Unlock Guild Door', type: 'gear_clockmakers', data: { type: 'gear_clockmakers' } }
+      { name: 'Unlock Guild Door', type: 'gear_clockmakers', data: { type: 'gear_clockmakers' } },
+      { name: 'Tea Time 2', type: 'tea_service', data: {
+        type: 'tea_service',
+        title: 'Brewing Comfort',
+        instructions: 'Serve tea to the guests before their patience runs out!',
+        sessionDuration: 120,
+        startingCups: 1,
+        inventory: { black_tea: 10, herbal: 8, cream: 6, lemon: 6, sugar: 6 }
+      }}
     ];
 
     // Dropdown menu
