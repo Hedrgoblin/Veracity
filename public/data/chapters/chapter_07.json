@@ -93,24 +93,6 @@
       }
     ]
   },
-  "choices": [
-    {
-      "text": "Stand between father and the cultists. Protect him, no matter what.",
-      "companion": "addie",
-      "consequences": {
-        "protective_stance": true,
-        "addie_damaged": true
-      }
-    },
-    {
-      "text": "Create a distraction. Knock over equipment, cause chaos, give father time to escape!",
-      "companion": "rainie",
-      "consequences": {
-        "chaos_distraction": true,
-        "rainie_damaged": true
-      }
-    }
-  ],
   "storyFlags": {
     "chapter7_complete": true,
     "found_father": true,
