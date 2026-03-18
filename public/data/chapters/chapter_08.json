@@ -63,7 +63,10 @@
         "speaker": "Veracity",
         "text": "So it isn't really theoretical then?",
         "hideCharacters": ["da_default"],
-        "showCharacters": ["vera"]
+        "showCharacters": ["vera"],
+        "expression": {
+          "vera": "thinking"
+        }
       },
       {
         "speaker": "Narrator",
