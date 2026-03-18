@@ -16,6 +16,7 @@ export default class ChapterScene extends Phaser.Scene {
   }
 
   init(data) {
+    console.log('[ChapterScene.init] chapterNumber:', data?.chapterNumber, '| stack:', new Error().stack.split('\n').slice(1, 5).join(' | '));
     this.chapterNumber = data.chapterNumber || 1;
     this.chapterData = null;
     this.currentDialogueIndex = 0;
@@ -467,9 +468,10 @@ export default class ChapterScene extends Phaser.Scene {
     const npcs = ['cultist_bookkeeper', 'cultist_enforcer', 'cultist_guard_staff', 'gentleman_paper', 'da_default', 'da_moth', 'guildmaster'];
     const npcPositions = {
       'cultist_bookkeeper': width * 0.65,
+      'gentleman_paper': width / 2 + 30,
     };
     const npcScales = {
-      'gentleman_paper': 0.299 * 1.2,
+      'gentleman_paper': 0.299 * 1.12 * 1.20,
     };
     npcs.forEach(npcName => {
       if (this.chapterData.assets?.characters?.includes(npcName)) {
@@ -1142,18 +1144,29 @@ export default class ChapterScene extends Phaser.Scene {
       return;
     }
 
+    if (line.launchTrainPuzzle) {
+      if (line.hideCharacters === true) this.hideAllCharacters();
+      this.scene.launch('TrainMapScene', {
+        chapterNumber: this.chapterNumber,
+        onComplete: () => {
+          this.scene.resume();
+          if (onComplete) onComplete();
+        }
+      });
+      this.scene.pause();
+      return;
+    }
+
     if (line.launchTeaPuzzle && this.chapterData.teaPuzzle) {
       this.teaPuzzleCompleted = true;
+      console.log('[ChapterScene] launching tea puzzle, chapter:', this.chapterNumber);
       this.scene.launch('PuzzleScene', {
         puzzleData: this.chapterData.teaPuzzle,
         chapterNumber: this.chapterNumber,
         onComplete: () => {
-          this.scene.stop('PuzzleScene');
+          console.log('[ChapterScene] tea puzzle onComplete fired');
           this.scene.resume();
-          // Defer dialogue continuation until scene management has processed (next frame)
-          this.time.delayedCall(0, () => {
-            if (onComplete) onComplete();
-          });
+          if (onComplete) onComplete();
         }
       });
       this.scene.pause();
@@ -1445,7 +1458,6 @@ export default class ChapterScene extends Phaser.Scene {
 
   onPuzzleComplete() {
     this.scene.resume();
-    this.scene.stop('PuzzleScene');
 
     // Show midpoint dialogue before desk puzzle (if available)
     if (this.chapterData.dialogue?.midpoint && !this.midpointShown) {
@@ -1496,7 +1508,6 @@ export default class ChapterScene extends Phaser.Scene {
 
   onDeskPuzzleComplete() {
     this.scene.resume();
-    this.scene.stop('PuzzleScene');
 
     // Check if there's a tea puzzle after desk puzzle
     if (this.chapterData.teaPuzzle && !this.teaPuzzleCompleted) {
@@ -1523,7 +1534,6 @@ export default class ChapterScene extends Phaser.Scene {
 
   onTeaPuzzleComplete() {
     this.scene.resume();
-    this.scene.stop('PuzzleScene');
 
     // Check if there's a gear (connection) puzzle that hasn't been solved
     const gearPuzzle = this.chapterData.choices?.find(c => c.puzzle?.type === 'connection')?.puzzle;
@@ -1707,7 +1717,6 @@ export default class ChapterScene extends Phaser.Scene {
 
   onMothPuzzleComplete() {
     this.scene.resume();
-    this.scene.stop('PuzzleScene');
 
     // Show midpoint dialogue if available
     if (this.chapterData.dialogue?.midpoint) {
@@ -1932,7 +1941,7 @@ export default class ChapterScene extends Phaser.Scene {
           { action: 'kick', count: 1, label: 'Kick' }
         ]
       }},
-      { name: 'Follow the Moth', type: 'mothPuzzle', data: {} },
+      { name: 'Follow the Moth', type: 'mothPuzzle', data: { type: 'mothPuzzle' } },
       { name: 'Unlock Guild Door', type: 'gear_clockmakers', data: { type: 'gear_clockmakers' } },
       { name: 'Tea Time 2', type: 'tea_service', data: {
         type: 'tea_service',
@@ -1941,7 +1950,8 @@ export default class ChapterScene extends Phaser.Scene {
         sessionDuration: 120,
         startingCups: 1,
         inventory: { black_tea: 10, herbal: 8, cream: 6, lemon: 6, sugar: 6 }
-      }}
+      }},
+      { name: 'Follow the Train', type: 'trainPuzzle', data: { type: 'trainPuzzle' } }
     ];
 
     // Dropdown menu
@@ -2026,6 +2036,18 @@ export default class ChapterScene extends Phaser.Scene {
       return;
     }
 
+    // Launch the train map puzzle
+    if (puzzleData.type === 'trainPuzzle') {
+      this.scene.launch('TrainMapScene', {
+        chapterNumber: this.chapterNumber,
+        onComplete: () => {
+          this.scene.resume();
+        }
+      });
+      this.scene.pause();
+      return;
+    }
+
     // Launch the chapter's moth maze
     if (puzzleData.type === 'mothPuzzle') {
       this.scene.launch('MazeScene', {
@@ -2044,8 +2066,6 @@ export default class ChapterScene extends Phaser.Scene {
       puzzleData: puzzleData,
       chapterNumber: this.chapterNumber,
       onComplete: () => {
-        // Return to chapter when done
-        this.scene.stop('PuzzleScene');
         this.scene.resume();
       }
     });

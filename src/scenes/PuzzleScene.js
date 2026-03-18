@@ -128,10 +128,10 @@ export default class PuzzleScene extends Phaser.Scene {
     // Add back button
     this.backButton = new BackButton(this, () => {
       console.log('Back button clicked - skipping puzzle');
-      // Return to chapter without completing puzzle
       if (this.onCompleteCallback) {
         const cb = this.onCompleteCallback;
         this.onCompleteCallback = null;
+        this.scene.stop(); // PuzzleScene stops itself
         cb();
       }
     });
@@ -2019,6 +2019,17 @@ export default class PuzzleScene extends Phaser.Scene {
     this.tsBuildStation(w, h);
     this.tsBuildCustomerArea(w, h);
 
+    // DEBUG: DONE button — skip tea game
+    const doneBtnW = 90, doneBtnH = 36;
+    const doneBtn = this.add.rectangle(w - doneBtnW / 2 - 10, h - doneBtnH / 2 - 10, doneBtnW, doneBtnH, 0x555555, 0.9)
+      .setStrokeStyle(1, 0x888888).setDepth(200).setInteractive({ useHandCursor: true });
+    this.add.text(w - doneBtnW / 2 - 10, h - doneBtnH / 2 - 10, 'DONE', {
+      fontSize: '14px', fontFamily: 'Courier New', color: '#ffffff', fontStyle: 'bold'
+    }).setOrigin(0.5).setDepth(201);
+    doneBtn.on('pointerdown', () => {
+      if (!this.ts.summaryShown) this.tsShowSummary();
+    });
+
     // Serve-mode label
     this.ts.serveModeLabel = this.add.text(w / 2, h - 195, '', {
       fontSize: '12px', fontFamily: 'Courier New', color: '#c4a575',
@@ -2824,7 +2835,7 @@ export default class PuzzleScene extends Phaser.Scene {
 
   tsFlash(msg) {
     const w = this.cameras.main.width;
-    const y = this.cameras.main.height / 2;
+    const y = this.cameras.main.height * 0.3;
     const t = this.add.text(w / 2, y, msg, {
       fontSize: '13px', fontFamily: 'Courier New', color: '#c4a575',
       stroke: '#000000', strokeThickness: 2
@@ -2878,6 +2889,7 @@ export default class PuzzleScene extends Phaser.Scene {
       if (this.onCompleteCallback) {
         const cb = this.onCompleteCallback;
         this.onCompleteCallback = null;
+        this.scene.stop(); // PuzzleScene stops itself
         cb();
       }
     });
@@ -2922,6 +2934,7 @@ export default class PuzzleScene extends Phaser.Scene {
           if (this.onCompleteCallback) {
             const cb = this.onCompleteCallback;
             this.onCompleteCallback = null;
+            this.scene.stop(); // PuzzleScene stops itself
             cb();
           }
         });

@@ -4,7 +4,7 @@
   "act": 2,
   "description": "A fortress of stone and steam guards its secrets jealously.",
   "assets": {
-    "background": "placeholder_bg",
+    "background": "northern_sanctuary_ext",
     "music": null,
     "characters": [
       "vera",
