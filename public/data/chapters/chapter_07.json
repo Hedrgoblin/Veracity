@@ -4,7 +4,7 @@
   "act": 2,
   "description": "Deeper into the sanctuary, closer to father, closer to danger.",
   "assets": {
-    "background": "placeholder_bg",
+    "background": "northern_sanctuary_hallway_02_armed",
     "music": null,
     "characters": [
       "vera",
@@ -14,9 +14,9 @@
       "cultist_guard_staff"
     ],
     "characterFolders": {
-      "vera": "vera_default",
-      "addie": "addie_default",
-      "rainie": "rainie_default"
+      "vera": "vera_clockworker",
+      "addie": "addie_clockworker",
+      "rainie": "rainie_clockworker"
     }
   },
   "companions": [

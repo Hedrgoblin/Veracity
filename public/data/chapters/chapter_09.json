@@ -13,9 +13,9 @@
       "da_default"
     ],
     "characterFolders": {
-      "vera": "vera_default",
-      "addie": "addie_default",
-      "rainie": "rainie_default"
+      "vera": "vera_clockworker",
+      "addie": "addie_clockworker",
+      "rainie": "rainie_clockworker"
     }
   },
   "companions": [
