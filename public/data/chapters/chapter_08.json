@@ -162,8 +162,8 @@
       {
         "speaker": "Guildmaster",
         "text": "Listen to me.",
-        "showCharacters": ["guildmaster"],
-        "moveCharacters": { "guildmaster": "center" }
+        "hideCharacters": true,
+        "background": "ill_essense"
       },
       {
         "speaker": "Veracity",
