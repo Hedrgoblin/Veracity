@@ -72,7 +72,8 @@
       },
       {
         "speaker": "Guildmaster",
-        "text": "No. NO! This was supposed to save us! To give me back what I have lost!"
+        "text": "No. NO! This was supposed to save us! To give me back what I have lost!",
+        "expression": { "guildmaster_black": "surprised" }
       },
       {
         "speaker": "Enforcer",
@@ -80,19 +81,23 @@
       },
       {
         "speaker": "Guildmaster",
-        "text": "Not without the Professor."
+        "text": "Not without the Professor.",
+        "expression": { "guildmaster_black": "sad" }
       },
       {
         "speaker": "Enforcer",
-        "text": "And yet, you let him go. You let them all go."
+        "text": "And yet, you let him go. You let them all go.",
+        "expression": { "cultist_enforcer": "angry" }
       },
       {
         "speaker": "Guildmaster",
-        "text": "They will return. She will come to me."
+        "text": "They will return. She will come to me.",
+        "expression": { "guildmaster_black": "smirk" }
       },
       {
         "speaker": "Enforcer",
-        "text": "How can you be so sure?"
+        "text": "How can you be so sure?",
+        "expression": { "cultist_enforcer": "thinking" }
       },
       {
         "speaker": "Guildmaster",
