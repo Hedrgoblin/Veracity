@@ -30,7 +30,8 @@
       },
       {
         "speaker": "Veracity",
-        "text": "what happened?"
+        "text": "what happened?",
+        "slideIn": ["rainie"]
       },
       {
         "speaker": "Rainie",
@@ -46,7 +47,7 @@
       },
       {
         "speaker": "Veracity",
-        "text": "It was like she was in my head. I could hear her inside my head."
+        "text": "It was as if I could hear her from inside my head."
       },
       {
         "speaker": "Rainie",
@@ -82,7 +83,7 @@
       },
       {
         "speaker": "Rainie",
-        "text": "MOST of the cult guys ran away but there was that one with a staff. He threw it at Addie and hit her dead in the shoulder!"
+        "text": "MOST of the cultists ran away but there was that one with a staff. He threw it at Addie and hit her dead in the shoulder!"
       },
       {
         "speaker": "Narrator",
@@ -92,14 +93,13 @@
         "speaker": "Veracity",
         "text": "Where is Addie? Is she ok? I need to see her!"
       },
-
       {
         "speaker": "Rainie",
         "text": "The professor said I was to tell you to stay right.... aaand there she goes. WAIT UP!"
       },
       {
         "speaker": "Narrator",
-        "text": "Still exhausted, you downstairs to your father's laboratory in the basement. And there she is. The Bear you have loved all your life, who has always been by your side.",
+        "text": "Still exhausted, you hurry downstairs to your father's laboratory in the basement. And there she is. The Bear you have loved all your life, who has always been by your side.",
         "background": "home_lab",
         "hideCharacters": true
       },
@@ -117,7 +117,18 @@
       },
       {
         "speaker": "Veracity",
-        "text": "Da, I can help..."
+        "text": "Da, I can help you..."
+      },
+      {
+        "speaker": "Father",
+        "text": "Vera, she will be alright. I promise. But for now, I need you upstairs, out of harm's way.",
+        "hideCharacters": true,
+        "showCharacters": ["da_lab"]
+      },
+      {
+        "speaker": "Narrator",
+        "text": "You get go back upstairs, get dressed, and wait.",
+        "hideCharacters": true
       }
     ],
     "closing": [
@@ -141,68 +152,8 @@
       }
     ]
   },
-  "choices": [
-    {
-      "text": "Use a false core. Buy time for father to sabotage the device from within.",
-      "companion": "addie",
-      "consequences": {
-        "sabotage_plan": true
-      }
-    },
-    {
-      "text": "Pretend to use a companion's core, but switch it at the last second with a decoy.",
-      "companion": "rainie",
-      "consequences": {
-        "deception_plan": true
-      }
-    }
-  ],
-  "puzzle": {
-    "type": "connection",
-    "title": "The Failsafe Deception",
-    "instructions": "Secretly rewire the device while pretending to install the core. Create a failsafe.",
-    "points": [
-      {
-        "id": "core1",
-        "x": -200,
-        "y": -100,
-        "pair": "failsafe1"
-      },
-      {
-        "id": "failsafe1",
-        "x": 0,
-        "y": -100,
-        "pair": "core1"
-      },
-      {
-        "id": "core2",
-        "x": -200,
-        "y": 0,
-        "pair": "failsafe2"
-      },
-      {
-        "id": "failsafe2",
-        "x": 0,
-        "y": 0,
-        "pair": "core2"
-      },
-      {
-        "id": "core3",
-        "x": -200,
-        "y": 100,
-        "pair": "shutdown"
-      },
-      {
-        "id": "shutdown",
-        "x": 200,
-        "y": 0,
-        "pair": "core3"
-      }
-    ]
-  },
   "storyFlags": {
     "chapter9_complete": true,
-    "device_sabotaged": true,
     "girl_taking_charge": true
   },
   "nextChapter": 10

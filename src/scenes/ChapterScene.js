@@ -1432,6 +1432,11 @@ export default class ChapterScene extends Phaser.Scene {
       this.introduceCompanion('rainie');
     }
 
+    // Explicit slide-in from JSON: "slideIn": ["rainie"] or ["addie"]
+    if (Array.isArray(line.slideIn)) {
+      line.slideIn.forEach(name => this.introduceCompanion(name));
+    }
+
     // Type out text effect
     const fullText = line.text;
     let currentChar = 0;
