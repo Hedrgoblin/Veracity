@@ -53,48 +53,48 @@
       },
       {
         "speaker": "Narrator",
-        "text": "The device shudders and sparks.",
+        "text": "The device shudders and stops. Suddenly steam and glass fly everywhere. The device goes dark.",
         "crossfadeBackground": "northern_sanctuary_device_broken"
       },
       {
-        "speaker": "Cultist",
-        "text": "Grand Architect! The readings! The temporal field is destabilizing!"
+        "speaker": "Book Keeper",
+        "text": "Grandmaster! The readings! The temporal field has destabilized!"
       },
       {
-        "speaker": "Guildmaster_black",
-        "text": "Impossible! The core should stabilize\u2014",
-        "hideCharacters": true
+        "speaker": "Guildmaster",
+        "text": "Impossible! The core should stabilize...What did you do?!"
       },
       {
-        "speaker": "Guildmaster_black",
-        "text": "What did you do?!",
-        "hideCharacters": true
-      }
-    ],
-    "closing": [
-      {
-        "speaker": "Veracity",
-        "text": "I gave you exactly what you asked for. A device that can affect time. Just not in the way you wanted."
+        "speaker": "Book Keeper",
+        "text": "I did exactly what you asked!"
       },
       {
-        "speaker": "Father",
-        "text": "The resonance feedback will destroy the device and everything within a hundred meters. We have minutes. Everyone, evacuate!"
+        "speaker": "Guildmaster",
+        "text": "No. NO! This was supposed to save us! To give me back what I have lost!"
       },
       {
-        "speaker": "Narrator",
-        "text": "Chaos. Cultists flee. Alarms blare. The Grand Architect stands frozen, staring at his collapsing dream."
+        "speaker": "Enforcer",
+        "text": "We can rebuild."
       },
       {
-        "speaker": "Guildmaster_black",
-        "text": "No. NO! This was supposed to save us! To give us back what we lost!"
+        "speaker": "Guildmaster",
+        "text": "Not without the Professor."
       },
       {
-        "speaker": "Veracity",
-        "text": "Some things can't be changed. Some losses... we have to carry them. But that doesn't mean we stop living."
+        "speaker": "Enforcer",
+        "text": "And yet, you let him go. You let them all go."
       },
       {
-        "speaker": "Narrator",
-        "text": "Father grabs your hand. Your companions flank you. You run."
+        "speaker": "Guildmaster",
+        "text": "They will return. She will come to me."
+      },
+      {
+        "speaker": "Enforcer",
+        "text": "How can you be so sure?"
+      },
+      {
+        "speaker": "Guildmaster",
+        "text": "Because she knows now. but only part. And, it's what I would do."
       }
     ]
   },
