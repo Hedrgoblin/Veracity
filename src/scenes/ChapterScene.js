@@ -74,6 +74,8 @@ export default class ChapterScene extends Phaser.Scene {
       'ill_essense',
       'ill_addie_growl_01',
       'home_bedroom_vera',
+      'home_lab',
+      'home_solarium',
       'northern_sanctuary_service_entrance',
       'train_carraige',
       'train_ext',
@@ -154,7 +156,7 @@ export default class ChapterScene extends Phaser.Scene {
 
     // NPCs — load by character ID (maps directly to folder/file prefix)
     const npcs = ['crone_default', 'cultist_bookkeeper', 'cultist_enforcer', 'cultist_guard', 'cultist_guard_staff',
-                  'gentleman_paper', 'da_default', 'da_moth', 'guildmaster'];
+                  'gentleman_paper', 'da_default', 'da_moth', 'da_lab', 'guildmaster'];
     npcs.forEach(npcId => {
       if (characters.includes(npcId)) {
         this.loadCharacterImagesWithPrefix(npcId, npcId);
@@ -475,7 +477,7 @@ export default class ChapterScene extends Phaser.Scene {
     }
 
     // Other NPCs (cultists, gentleman, da, guildmaster, etc.)
-    const npcs = ['cultist_bookkeeper', 'cultist_enforcer', 'cultist_guard', 'cultist_guard_staff', 'gentleman_paper', 'da_default', 'da_moth', 'guildmaster'];
+    const npcs = ['cultist_bookkeeper', 'cultist_enforcer', 'cultist_guard', 'cultist_guard_staff', 'gentleman_paper', 'da_default', 'da_moth', 'da_lab', 'guildmaster'];
     const npcPositions = {
       'cultist_bookkeeper': width * 0.65,
       'gentleman_paper': width / 2 + 30,
@@ -487,6 +489,7 @@ export default class ChapterScene extends Phaser.Scene {
       'gentleman_paper': 0.299 * 1.12 * 1.20,
       'da_default': 0.299 * 1.12 * 1.20,
       'da_moth': 0.299 * 1.12 * 1.20,
+      'da_lab': 0.299 * 1.12 * 1.20,
       'cultist_guard': 0.299 * 1.20,
       'cultist_guard_staff': 0.420,
       'guildmaster': 0.299 * 1.20,
@@ -834,6 +837,7 @@ export default class ChapterScene extends Phaser.Scene {
       'father': 'da_default',
       'da': 'da_default',
       'da_moth': 'da_moth',
+      'da_lab': 'da_lab',
       'guildmaster': 'guildmaster',
       'grand architect': 'guildmaster',
       'old woman': 'crone_default'

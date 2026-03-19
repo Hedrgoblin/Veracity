@@ -1,6 +1,6 @@
 {
   "chapterNumber": 9,
-  "title": "Now What?",
+  "title": "Afterwards",
   "act": 3,
   "description": "A choice must be made.",
   "assets": {
@@ -10,7 +10,7 @@
       "vera",
       "addie",
       "rainie",
-      "da_default"
+      "da_lab"
     ],
     "characterFolders": {
       "vera": "vera_pajamas",
@@ -34,7 +34,7 @@
       },
       {
         "speaker": "Rainie",
-        "text": "What didn't happen! We met the master of the entire Guild! and also, she thinks she is your mother."
+        "text": "What didn't happen! We met the master of the entire Guild! who might be your mother."
       },
       {
         "speaker": "Veracity",
@@ -42,11 +42,19 @@
       },
       {
         "speaker": "Rainie",
-        "text": "Maybe she didn't! and there was a crystal in her walking stick that was some kind of... I don't know, some kind of time suction device, only she did not expect to start sucking the time out of you but it did Vera! It did! We almost lost you!"
+        "text": "Maybe not! and then the crystal in her walking stick that was some kind of... I don't know, time suction device. When she got near you, it activated!"
       },
       {
         "speaker": "Veracity",
-        "text": "I was lost there for a minute, wasn't I?"
+        "text": "It was like she was in my head. I could hear her inside my head."
+      },
+      {
+        "speaker": "Rainie",
+        "text": "I don't think she meant that to happen..."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "I was lost for a minute, wasn't I?"
       },
       {
         "speaker": "Rainie",
@@ -62,11 +70,11 @@
       },
       {
         "speaker": "Veracity",
-        "text": "How did we end up here?"
+        "text": "And Da?"
       },
       {
         "speaker": "Rainie",
-        "text": "Addie grabbed you, and the professor like you were nothing. I grabbed all the notes I could find because, you know, and I ran after."
+        "text": "Addie grabbed you like you were nothing. The professor ran behind her. I grabbed all the notes I could find because, you know, and I ran after."
       },
       {
         "speaker": "Veracity",
@@ -91,15 +99,21 @@
       },
       {
         "speaker": "Narrator",
-        "text": "You wander downstairs to your father's laboratory in the basement. And there she is. The Bear you have loved all your life, who has always been by your side."
+        "text": "Still exhausted, you downstairs to your father's laboratory in the basement. And there she is. The Bear you have loved all your life, who has always been by your side.",
+        "background": "home_lab",
+        "hideCharacters": true
       },
       {
         "speaker": "Father",
-        "text": "I told you to keep her out of here today."
+        "text": "I told you to keep her out of here today.",
+        "hideCharacters": true,
+        "showCharacters": ["da_lab"]
       },
       {
         "speaker": "Rainie",
-        "text": "I tried"
+        "text": "I tried",
+        "hideCharacters": ["da_lab"],
+        "showCharacters": ["vera", "addie", "rainie"]
       },
       {
         "speaker": "Veracity",
@@ -113,7 +127,9 @@
       },
       {
         "speaker": "Father",
-        "text": "But you have everything you need, here"
+        "text": "But you have everything you need, here",
+        "hideCharacters": true,
+        "showCharacters": ["da_lab"]
       },
       {
         "speaker": "Veracity",
