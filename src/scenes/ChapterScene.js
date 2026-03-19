@@ -1398,6 +1398,36 @@ export default class ChapterScene extends Phaser.Scene {
       this.changeBackground(line.background);
     }
 
+    // Brightening pulse effect (white overlay that pulses, simulating building intensity)
+    if (line.brightenEffect) {
+      if (this._brightenOverlay) {
+        this.tweens.killTweensOf(this._brightenOverlay);
+        this._brightenOverlay.destroy();
+      }
+      const bw = this.cameras.main.width;
+      const bh = this.cameras.main.height;
+      const overlay = this.add.rectangle(bw / 2, bh / 2, bw, bh, 0xffffff, 0).setDepth(2);
+      this._brightenOverlay = overlay;
+      this.tweens.add({
+        targets: overlay,
+        alpha: 0.30,
+        duration: 1500,
+        ease: 'Sine.easeIn',
+        yoyo: true,
+        repeat: -1
+      });
+    }
+
+    // Crossfade to new background, also cancels any brighten pulse
+    if (line.crossfadeBackground) {
+      if (this._brightenOverlay) {
+        this.tweens.killTweensOf(this._brightenOverlay);
+        this._brightenOverlay.destroy();
+        this._brightenOverlay = null;
+      }
+      this.changeBackground(line.crossfadeBackground);
+    }
+
     // Check if characters should be hidden or shown
     if (line.hideCharacters === true) {
       this.hideAllCharacters();

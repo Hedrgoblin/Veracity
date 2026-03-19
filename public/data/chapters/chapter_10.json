@@ -48,16 +48,13 @@
       {
         "speaker": "Narrator",
         "text": "Something's wrong. The hum becomes a scream. Cultists look around in confusion and fear.",
-        "flashBackground": {
-          "backgrounds": ["northern_sanctuary_device", "northern_sanctuary_device_broken"],
-          "count": 6,
-          "interval": 300
-        }
+        "hideCharacters": true,
+        "brightenEffect": true
       },
       {
         "speaker": "Narrator",
         "text": "The device shudders and sparks.",
-        "background": "northern_sanctuary_device_broken"
+        "crossfadeBackground": "northern_sanctuary_device_broken"
       },
       {
         "speaker": "Cultist",
