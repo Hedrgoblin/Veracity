@@ -142,22 +142,22 @@
       },
       {
         "speaker": "Veracity",
-        "text": "I know. You're right. I'm still trying to understand.",
+        "text": "I know. You're right. I'm still trying to understandthe last few days.",
         "swapCharacters": true
       },
       {
         "speaker": "Rainie",
-        "text": "You mean, if your mother is alive and some crazy old insane woman kidnapping inventors all over the place?",
+        "text": "You mean, why some crazy old insane woman is kidnapping inventors all over the place, pretending to be your mother, and trying to create a device to stop time itself?",
         "hideCharacters": true,
-        "showCharacters": ["da_lab"]
+        "showCharacters": ["vera", "rainie"]
       },
       {
         "speaker": "Veracity",
-        "text": "That. And what was that device. Da was not telling the whole truth. And what as that crystal? and how..."
+        "text": "Yes, that. And what was that device? Da was not telling the whole truth. And what as that crystal? and how..."
       },
       {
         "speaker": "Rainie",
-        "text": "So many puzzles Vera! We'll never be bored again!"
+        "text": "We have so many puzzles to solve Vera! We'll never be bored again!"
       }
     ]
   },
