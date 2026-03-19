@@ -73,6 +73,7 @@ export default class ChapterScene extends Phaser.Scene {
       'ill_power_01',
       'ill_essense',
       'ill_addie_growl_01',
+      'home_bedroom_vera',
       'northern_sanctuary_service_entrance',
       'train_carraige',
       'train_ext',

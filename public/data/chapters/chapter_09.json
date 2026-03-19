@@ -1,10 +1,10 @@
 {
   "chapterNumber": 9,
-  "title": "The Activation",
+  "title": "Now What?",
   "act": 3,
-  "description": "The Grand Architect demands completion. A choice must be made.",
+  "description": "A choice must be made.",
   "assets": {
-    "background": "placeholder_bg",
+    "background": "home_bedroom_vera",
     "music": null,
     "characters": [
       "vera",
@@ -13,9 +13,9 @@
       "da_default"
     ],
     "characterFolders": {
-      "vera": "vera_clockworker",
-      "addie": "addie_clockworker",
-      "rainie": "rainie_clockworker"
+      "vera": "vera_pajamas",
+      "addie": "addie_home",
+      "rainie": "rainie_default"
     }
   },
   "companions": [
