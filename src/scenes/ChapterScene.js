@@ -1988,7 +1988,7 @@ export default class ChapterScene extends Phaser.Scene {
     console.log('[completeChapter] chapter:', this.chapterNumber, '→ nextChapter:', nextChapter, 'subscribed:', gameStateManager.isSubscribed());
 
     this.time.delayedCall(1000, () => {
-      if (nextChapter <= 14) {
+      if (nextChapter != null && typeof nextChapter === 'number') {
         // Continue to next chapter
         gameStateManager.setCurrentChapter(nextChapter);
         this.scene.start('ChapterScene', { chapterNumber: nextChapter });

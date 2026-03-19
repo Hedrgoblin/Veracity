@@ -58,13 +58,11 @@
       },
       {
         "speaker": "Book Keeper",
-        "text": "Grandmaster! The readings! The temporal field has destabilized!",
-        "expression": { "cultist_bookkeeper": "surprised" }
+        "text": "Grandmaster! The readings! The temporal field has destabilized!"
       },
       {
         "speaker": "Guildmaster",
-        "text": "Impossible! The core should stabilize...What did you do?!",
-        "expression": { "guildmaster_black": "angry" }
+        "text": "Impossible! The core has to stabilize...What did you do?!"
       },
       {
         "speaker": "Book Keeper",
@@ -72,8 +70,7 @@
       },
       {
         "speaker": "Guildmaster",
-        "text": "No. NO! This was supposed to save us! To give me back what I have lost!",
-        "expression": { "guildmaster_black": "surprised" }
+        "text": "No. NO! This was supposed to save us! To give me back what I have lost!"
       },
       {
         "speaker": "Enforcer",
@@ -81,23 +78,19 @@
       },
       {
         "speaker": "Guildmaster",
-        "text": "Not without the Professor.",
-        "expression": { "guildmaster_black": "sad" }
+        "text": "Not without the Professor."
       },
       {
         "speaker": "Enforcer",
-        "text": "And yet, you let him go. You let them all go.",
-        "expression": { "cultist_enforcer": "angry" }
+        "text": "And yet, you let him go. You let them all go."
       },
       {
         "speaker": "Guildmaster",
-        "text": "They will return. She will come to me.",
-        "expression": { "guildmaster_black": "smirk" }
+        "text": "They will return. She will come to me."
       },
       {
         "speaker": "Enforcer",
-        "text": "How can you be so sure?",
-        "expression": { "cultist_enforcer": "thinking" }
+        "text": "How can you be so sure?"
       },
       {
         "speaker": "Guildmaster",
@@ -110,5 +103,5 @@
     "device_destroyed": true,
     "escaped_sanctuary": true
   },
-  "nextChapter": 11
+  "nextChapter": null
 }

@@ -2,7 +2,6 @@
  * EndingScene - Game ending with credits
  */
 import Phaser from 'phaser';
-import gameStateManager from '../systems/GameStateManager.js';
 import BackButton from '../components/BackButton.js';
 
 export default class EndingScene extends Phaser.Scene {
@@ -19,9 +18,6 @@ export default class EndingScene extends Phaser.Scene {
 
     // Fade in
     this.cameras.main.fadeIn(2000, 0, 0, 0);
-
-    // Get final state
-    const state = gameStateManager.getState();
 
     // Ending title
     const titleStyle = {
@@ -42,28 +38,6 @@ export default class EndingScene extends Phaser.Scene {
       alpha: 1,
       duration: 2000,
       delay: 2000
-    });
-
-    // Ending narrative
-    let endingText = this.determineEnding(state);
-
-    const narrativeStyle = {
-      fontSize: '22px',
-      fontFamily: 'Courier New',
-      color: '#ffffff',
-      align: 'center',
-      wordWrap: { width: 800 }
-    };
-
-    const narrative = this.add.text(width / 2, height / 2, endingText, narrativeStyle)
-      .setOrigin(0.5)
-      .setAlpha(0);
-
-    this.tweens.add({
-      targets: narrative,
-      alpha: 1,
-      duration: 2000,
-      delay: 4000
     });
 
     // Final tease
@@ -102,23 +76,6 @@ export default class EndingScene extends Phaser.Scene {
         this.showCredits();
       });
     });
-  }
-
-  determineEnding(state) {
-    // Determine ending based on player choices
-    const confidence = state.girl.confidence;
-    const agency = state.girl.agency;
-
-    if (confidence > agency) {
-      // Cautious ending - worked with Addie more
-      return `Through careful planning and steady courage, she found her father.\n\nThe cult was exposed, the device destroyed.\n\nShe learned that true strength comes from knowing when to be cautious\nand when to be brave.\n\nAnd she was never alone.`;
-    } else if (agency > confidence) {
-      // Adventurous ending - worked with Rainie more
-      return `With bold action and unwavering determination, she rescued her father.\n\nThe cult scattered, the device shattered.\n\nShe discovered that her own agency could change the world,\nthat the risks she took defined who she would become.\n\nAnd her companions stood by her side.`;
-    } else {
-      // Balanced ending
-      return `Through both caution and courage, planning and action,\nshe saved her father and found herself.\n\nThe cult fell, the device unmade.\n\nShe learned that wisdom lies in balance—\nknowing when to be bold and when to be careful.\n\nAnd she was never alone in her journey.`;
-    }
   }
 
   showCredits() {
