@@ -4,14 +4,15 @@
   "act": 3,
   "description": "The device activates. Reality trembles. Everything hangs in the balance.",
   "assets": {
-    "background": "placeholder_bg",
+    "background": "northern_sanctuary_device",
+    "suppressAutoShow": true,
     "music": null,
     "characters": [
-      "vera",
-      "addie",
-      "rainie",
-      "da_default",
-      "guildmaster"
+      "guildmaster_black",
+      "cultist_guard",
+      "cultist_guard_staff",
+      "cultist_bookkeeper",
+      "cultist_enforcer"
     ],
     "characterFolders": {
       "vera": "vera_default",
@@ -27,38 +28,44 @@
     "opening": [
       {
         "speaker": "Narrator",
-        "text": "The device hums to life. Gears spin faster. The air shimmers and bends."
+        "text": "Back at the Northern Sanctuary, the device hums to life. Gears spin faster. The air shimmers and bends."
       },
       {
-        "speaker": "Grand Architect",
+        "speaker": "Guildmaster",
         "text": "Yes! YES! The temporal resonance is building! We will reshape history itself!"
       },
       {
-        "speaker": "Father",
+        "speaker": "Cultist_enforcer",
         "text": "*whispers* The failsafe. When I give the signal, activate it."
       },
       {
-        "speaker": "Veracity",
+        "speaker": "Guildmaster",
         "text": "*whispers* I'm ready."
       },
       {
         "speaker": "Narrator",
-        "text": "Something's wrong. The hum becomes a scream. Cultists look around in confusion and fear."
+        "text": "Something's wrong. The hum becomes a scream. Cultists look around in confusion and fear.",
+        "flashBackground": {
+          "backgrounds": ["northern_sanctuary_device", "northern_sanctuary_device_broken"],
+          "count": 6,
+          "interval": 300
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "The device shudders and sparks.",
+        "background": "northern_sanctuary_device_broken"
       },
       {
         "speaker": "Cultist",
         "text": "Grand Architect! The readings! The temporal field is destabilizing!"
       },
       {
-        "speaker": "Grand Architect",
+        "speaker": "Guildmaster_black",
         "text": "Impossible! The core should stabilize\u2014"
       },
       {
-        "speaker": "Narrator",
-        "text": "He turns to you, eyes furious."
-      },
-      {
-        "speaker": "Grand Architect",
+        "speaker": "Guildmaster_black",
         "text": "What did you do?!"
       }
     ],
@@ -76,7 +83,7 @@
         "text": "Chaos. Cultists flee. Alarms blare. The Grand Architect stands frozen, staring at his collapsing dream."
       },
       {
-        "speaker": "Grand Architect",
+        "speaker": "Guildmaster_black",
         "text": "No. NO! This was supposed to save us! To give us back what we lost!"
       },
       {
@@ -87,37 +94,6 @@
         "speaker": "Narrator",
         "text": "Father grabs your hand. Your companions flank you. You run."
       }
-    ]
-  },
-  "choices": [
-    {
-      "text": "Try to save the Grand Architect. Even now, a life is a life.",
-      "companion": "addie",
-      "consequences": {
-        "saved_architect": true,
-        "compassionate_ending": true
-      }
-    },
-    {
-      "text": "Focus on escape. He made his choice. We make ours.",
-      "companion": "rainie",
-      "consequences": {
-        "left_architect": true,
-        "pragmatic_ending": true
-      }
-    }
-  ],
-  "puzzle": {
-    "type": "rhythm",
-    "title": "Racing the Collapse",
-    "instructions": "Match your pace to your heartbeat. Don't panic. Keep moving.",
-    "pattern": [
-      600,
-      1200,
-      1800,
-      2400,
-      3000,
-      3600
     ]
   },
   "storyFlags": {

@@ -76,6 +76,8 @@ export default class ChapterScene extends Phaser.Scene {
       'home_bedroom_vera',
       'home_lab',
       'home_solarium',
+      'northern_sanctuary_device',
+      'northern_sanctuary_device_broken',
       'northern_sanctuary_service_entrance',
       'train_carraige',
       'train_ext',
@@ -156,7 +158,7 @@ export default class ChapterScene extends Phaser.Scene {
 
     // NPCs — load by character ID (maps directly to folder/file prefix)
     const npcs = ['crone_default', 'cultist_bookkeeper', 'cultist_enforcer', 'cultist_guard', 'cultist_guard_staff',
-                  'gentleman_paper', 'da_default', 'da_moth', 'da_lab', 'guildmaster'];
+                  'gentleman_paper', 'da_default', 'da_moth', 'da_lab', 'guildmaster', 'guildmaster_black'];
     npcs.forEach(npcId => {
       if (characters.includes(npcId)) {
         this.loadCharacterImagesWithPrefix(npcId, npcId);
@@ -477,7 +479,7 @@ export default class ChapterScene extends Phaser.Scene {
     }
 
     // Other NPCs (cultists, gentleman, da, guildmaster, etc.)
-    const npcs = ['cultist_bookkeeper', 'cultist_enforcer', 'cultist_guard', 'cultist_guard_staff', 'gentleman_paper', 'da_default', 'da_moth', 'da_lab', 'guildmaster'];
+    const npcs = ['cultist_bookkeeper', 'cultist_enforcer', 'cultist_guard', 'cultist_guard_staff', 'gentleman_paper', 'da_default', 'da_moth', 'da_lab', 'guildmaster', 'guildmaster_black'];
     const npcPositions = {
       'cultist_bookkeeper': width * 0.65,
       'gentleman_paper': width / 2 + 30,
@@ -493,9 +495,11 @@ export default class ChapterScene extends Phaser.Scene {
       'cultist_guard': 0.299 * 1.20,
       'cultist_guard_staff': 0.420,
       'guildmaster': 0.299 * 1.20,
+      'guildmaster_black': 0.299 * 1.20,
     };
     const npcFlipX = {
       'guildmaster': true,
+      'guildmaster_black': true,
     };
     npcs.forEach(npcName => {
       if (this.chapterData.assets?.characters?.includes(npcName)) {
@@ -839,12 +843,17 @@ export default class ChapterScene extends Phaser.Scene {
       'da_moth': 'da_moth',
       'da_lab': 'da_lab',
       'guildmaster': 'guildmaster',
+      'guildmaster_black': 'guildmaster_black',
       'grand architect': 'guildmaster',
       'old woman': 'crone_default'
     };
 
-    const prefix = speakerMap[speaker];
+    let prefix = speakerMap[speaker];
     if (!prefix) return;
+    // If mapped to 'guildmaster' but only guildmaster_black is loaded, use that instead
+    if (prefix === 'guildmaster' && !this.characters['guildmaster_body'] && this.characters['guildmaster_black_body']) {
+      prefix = 'guildmaster_black';
+    }
 
     // Find and show the character
     Object.keys(this.characters).forEach(key => {
@@ -1299,7 +1308,13 @@ export default class ChapterScene extends Phaser.Scene {
       return;
     }
 
-    this.speakerText.setText(line.speaker || '');
+    const speakerDisplayNames = {
+      'guildmaster_black': 'Guildmaster',
+      'guildmaster': 'Guildmaster',
+    };
+    const rawSpeaker = line.speaker || '';
+    const displaySpeaker = speakerDisplayNames[rawSpeaker.toLowerCase()] || rawSpeaker;
+    this.speakerText.setText(displaySpeaker);
     this.dialogueText.setText('');
 
     // Remove item and overlay from previous dialogue (if any)
@@ -1421,7 +1436,9 @@ export default class ChapterScene extends Phaser.Scene {
       (Array.isArray(line.hideCharacters) && line.hideCharacters.includes(speaker));
     const isNpc = !['veracity', 'vera', 'addie', 'rainie', 'narrator'].includes(speaker);
     // NPCs (crone, cultists, etc.) must be shown via showCharacters in JSON — not auto-shown
-    if (speaker !== 'narrator' && !speakerExplicitlyHidden && line.showOnlyVera !== true && !isNpc) {
+    // Exception: guildmaster_black auto-shows when she speaks
+    const autoShowNpc = ['guildmaster_black', 'guildmaster', 'cultist_enforcer'].includes(speaker);
+    if (speaker !== 'narrator' && !speakerExplicitlyHidden && line.showOnlyVera !== true && (!isNpc || autoShowNpc)) {
       this.ensureSpeakerVisible(speaker);
     }
 
