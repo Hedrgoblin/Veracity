@@ -63,7 +63,8 @@
       },
       {
         "speaker": "Guildmaster",
-        "text": "Impossible! The core should stabilize...What did you do?!"
+        "text": "Impossible! The core should stabilize...What did you do?!",
+        "expression": { "guildmaster_black": "angry" }
       },
       {
         "speaker": "Book Keeper",
