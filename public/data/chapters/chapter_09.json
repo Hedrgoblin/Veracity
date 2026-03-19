@@ -30,7 +30,7 @@
       },
       {
         "speaker": "Rainie",
-        "text": "What didn't happen! That old lady was the master of the entire Guild! and also, she thinks she is your mother."
+        "text": "What didn't happen! We met the master of the entire Guild! and also, she thinks she is your mother."
       },
       {
         "speaker": "Veracity",
@@ -38,7 +38,7 @@
       },
       {
         "speaker": "Rainie",
-        "text": "I guess she didn't! and her staff was some kind of... I don't know, some kind of life suction device, only she did not expect to start sucking the life out of you but it did Vera! It did! We almost lost you!"
+        "text": "Maybe she didn't! and there was a crystal in her walking stick that was some kind of... I don't know, some kind of time suction device, only she did not expect to start sucking the time out of you but it did Vera! It did! We almost lost you!"
       },
       {
         "speaker": "Veracity",
@@ -46,7 +46,15 @@
       },
       {
         "speaker": "Rainie",
-        "text": "yes! But then Addie went all BEAR, did you she could do that? she went absolutely feral, and knocked the staff out of the Guildmaster's hands. You went flying, the Guildmaster went flying, Addie scared all those cultists, they'd never seen anything like her before! I tell you Vera, I haven't either!"
+        "text": "yes! But then Addie went all BEAR, did you know she could do that?!"
+      },
+      {
+        "speaker": "Veracity",
+        "text": "I did not."
+      },
+      {
+        "speaker": "Rainie",
+        "text": "She went absolutely feral! She knocked the staff out of the Guildmaster's hands. You went flying, the Guildmaster went flying, Addie growled, and all the cultists ran away!"
       },
       {
         "speaker": "Veracity",
@@ -54,16 +62,25 @@
       },
       {
         "speaker": "Rainie",
-        "text": "Addie grabbed you, and the professor like you were nothing. I grabbed all the notes I could find bcause, you know, and I ran after. MOST of the cult guys ran away but there was one with a staff and he threw it at Addie and hit her dead in the shoulder!"
-      },
-      {
-        "speaker": "Narrator",
-        "text": "Suddenly, the world comes into very sharp focus"
+        "text": "Addie grabbed you, and the professor like you were nothing. I grabbed all the notes I could find because, you know, and I ran after."
       },
       {
         "speaker": "Veracity",
-        "text": "Where is Addie? Is she ok? I need to see her, right now!"
+        "text": "Was everybody ok?"
       },
+      {
+        "speaker": "Rainie",
+        "text": "MOST of the cult guys ran away but there was that one with a staff. He threw it at Addie and hit her dead in the shoulder!"
+      },
+      {
+        "speaker": "Narrator",
+        "text": "Suddenly, the world feels very real again."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Where is Addie? Is she ok? I need to see her!"
+      },
+
       {
         "speaker": "Rainie",
         "text": "The professor said I was to tell you to stay right.... aaand there she goes. WAIT UP!"
