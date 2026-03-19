@@ -16,6 +16,9 @@
       "vera": "vera_pajamas",
       "addie": "addie_home",
       "rainie": "rainie_default"
+    },
+    "closingCharacterFolders": {
+      "vera": "vera_green"
     }
   },
   "companions": [
@@ -105,13 +108,13 @@
       },
       {
         "speaker": "Father",
-        "text": "I told you to keep her out of here today.",
+        "text": "Rainie, I told you to keep her out of here today.",
         "hideCharacters": true,
         "showCharacters": ["da_lab"]
       },
       {
         "speaker": "Rainie",
-        "text": "I tried",
+        "text": "I tried!",
         "hideCharacters": ["da_lab"],
         "showCharacters": ["vera", "addie", "rainie"]
       },
@@ -121,35 +124,40 @@
       },
       {
         "speaker": "Father",
-        "text": "Vera, she will be alright. I promise. But for now, I need you upstairs, out of harm's way.",
+        "text": "Vera, Addie will be alright. I promise. But for now, I need you upstairs, out of harm's way.",
         "hideCharacters": true,
         "showCharacters": ["da_lab"]
       },
       {
         "speaker": "Narrator",
-        "text": "You get go back upstairs, get dressed, and wait.",
+        "text": "You go back upstairs, get dressed, and wait.",
         "background": "home_solarium",
         "hideCharacters": true
-      }
-    ],
-    "closing": [
-      {
-        "speaker": "Veracity",
-        "text": "Someday, I will need to go back to her"
       },
       {
-        "speaker": "Father",
-        "text": "But you have everything you need, here",
+        "speaker": "Rainie",
+        "text": "Don't worry Vera, the professor is very good at this.",
+        "hideCharacters": true,
+        "showCharacters": ["rainie"]
+      },
+      {
+        "speaker": "Veracity",
+        "text": "I know. You're right. I'm still trying to understand.",
+        "swapCharacters": true
+      },
+      {
+        "speaker": "Rainie",
+        "text": "You mean, if your mother is alive and some crazy old insane woman kidnapping inventors all over the place?",
         "hideCharacters": true,
         "showCharacters": ["da_lab"]
       },
       {
         "speaker": "Veracity",
-        "text": "Some things can't be changed. Some losses... we have to carry them. But that doesn't mean we stop living."
+        "text": "That. And what was that device. Da was not telling the whole truth. And what as that crystal? and how..."
       },
       {
-        "speaker": "Narrator",
-        "text": "Father grabs your hand. Your companions flank you. You wait."
+        "speaker": "Rainie",
+        "text": "So many puzzles Vera! We'll never be bored again!"
       }
     ]
   },
