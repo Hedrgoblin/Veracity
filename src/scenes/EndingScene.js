@@ -103,23 +103,23 @@ export default class EndingScene extends Phaser.Scene {
 A Narrative Puzzle Adventure
 
 
-Created with Phaser 3
+Art Direction
+Heather Capelli
 
 
-Game Design & Story
-[Your Name]
+Game Design and Story
+Heather Capelli
+
+
+Bugs and Misc Confusion
+Heather Capelli
 
 
 Programming
-Claude Sonnet 4.5
+Claude Sonnet 4.6
 
 
-Playtesting
-[Thank you to playtesters]
-
-
-Special Thanks
-All who supported this journey
+Created with Phaser 3
 
 
 Made with love and gears
