@@ -32,15 +32,18 @@
       },
       {
         "speaker": "Guildmaster",
-        "text": "Yes! YES! The temporal resonance is building! We will reshape history itself!"
+        "text": "Yes! YES! The temporal resonance is building! We will reshape history itself!",
+        "hideCharacters": true
       },
       {
-        "speaker": "Cultist_enforcer",
-        "text": "*whispers* The failsafe. When I give the signal, activate it."
+        "speaker": "Enforcer",
+        "text": "The failsafe. When I give the signal, activate it!",
+        "hideCharacters": true
       },
       {
         "speaker": "Guildmaster",
-        "text": "*whispers* I'm ready."
+        "text": "*whispers* I'm ready.",
+        "hideCharacters": true
       },
       {
         "speaker": "Narrator",
@@ -62,11 +65,13 @@
       },
       {
         "speaker": "Guildmaster_black",
-        "text": "Impossible! The core should stabilize\u2014"
+        "text": "Impossible! The core should stabilize\u2014",
+        "hideCharacters": true
       },
       {
         "speaker": "Guildmaster_black",
-        "text": "What did you do?!"
+        "text": "What did you do?!",
+        "hideCharacters": true
       }
     ],
     "closing": [

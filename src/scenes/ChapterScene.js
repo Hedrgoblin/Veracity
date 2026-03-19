@@ -481,11 +481,13 @@ export default class ChapterScene extends Phaser.Scene {
     // Other NPCs (cultists, gentleman, da, guildmaster, etc.)
     const npcs = ['cultist_bookkeeper', 'cultist_enforcer', 'cultist_guard', 'cultist_guard_staff', 'gentleman_paper', 'da_default', 'da_moth', 'da_lab', 'guildmaster', 'guildmaster_black'];
     const npcPositions = {
+      'cultist_enforcer': width * 0.40,
       'cultist_bookkeeper': width * 0.65,
       'gentleman_paper': width / 2 + 30,
       'cultist_guard': width * 0.20,
       'cultist_guard_staff': width * 0.50,
-      'guildmaster': width * 0.80,
+      'guildmaster': width * 0.69,
+      'guildmaster_black': width * 0.69,
     };
     const npcScales = {
       'gentleman_paper': 0.299 * 1.12 * 1.20,
@@ -831,6 +833,9 @@ export default class ChapterScene extends Phaser.Scene {
       'crone': 'crone_default',
       'cultist_bookkeeper': 'cultist_bookkeeper',
       'cultist_enforcer': 'cultist_enforcer',
+      'enforcer': 'cultist_enforcer',
+      'cultist_bookkeeper': 'cultist_bookkeeper',
+      'book keeper': 'cultist_bookkeeper',
       'cultist_guard_staff': 'cultist_guard_staff',
       'cultist 1': 'cultist_enforcer',
       'cultist 2': 'cultist_bookkeeper',
@@ -1436,10 +1441,18 @@ export default class ChapterScene extends Phaser.Scene {
       (Array.isArray(line.hideCharacters) && line.hideCharacters.includes(speaker));
     const isNpc = !['veracity', 'vera', 'addie', 'rainie', 'narrator'].includes(speaker);
     // NPCs (crone, cultists, etc.) must be shown via showCharacters in JSON — not auto-shown
-    // Exception: guildmaster_black auto-shows when she speaks
-    const autoShowNpc = ['guildmaster_black', 'guildmaster', 'cultist_enforcer'].includes(speaker);
-    if (speaker !== 'narrator' && !speakerExplicitlyHidden && line.showOnlyVera !== true && (!isNpc || autoShowNpc)) {
-      this.ensureSpeakerVisible(speaker);
+    // Exception: these NPCs auto-show when speaking, even after hideCharacters:true (only blocked if named explicitly)
+    const autoShowNpc = ['guildmaster_black', 'guildmaster', 'cultist_enforcer', 'enforcer', 'cultist_bookkeeper', 'book keeper'].includes(speaker);
+    // These NPCs always appear alone — hide everyone else automatically
+    const autoSoloNpc = ['guildmaster_black', 'guildmaster', 'cultist_bookkeeper', 'book keeper'].includes(speaker);
+    const autoShowNpcBlocked = Array.isArray(line.hideCharacters) && line.hideCharacters.includes(speaker);
+    if (speaker !== 'narrator' && line.showOnlyVera !== true) {
+      if (autoShowNpc && !autoShowNpcBlocked) {
+        if (autoSoloNpc && line.hideCharacters == null) this.hideAllCharacters();
+        this.ensureSpeakerVisible(speaker);
+      } else if (!isNpc && !speakerExplicitlyHidden) {
+        this.ensureSpeakerVisible(speaker);
+      }
     }
 
     // Check if a companion needs to slide in
