@@ -1456,13 +1456,6 @@ export default class ChapterScene extends Phaser.Scene {
       });
     }
 
-    // Check if expressions should change
-    if (line.expression) {
-      Object.keys(line.expression).forEach(character => {
-        this.setCharacterExpression(character, line.expression[character]);
-      });
-    }
-
     // Check if an item should be shown
     if (line.showItem) {
       this.showItem(line.showItem);
@@ -1486,6 +1479,13 @@ export default class ChapterScene extends Phaser.Scene {
       } else if (!isNpc && !speakerExplicitlyHidden) {
         this.ensureSpeakerVisible(speaker);
       }
+    }
+
+    // Check if expressions should change (after show logic so texture is set on visible sprite)
+    if (line.expression) {
+      Object.keys(line.expression).forEach(character => {
+        this.setCharacterExpression(character, line.expression[character]);
+      });
     }
 
     // Check if a companion needs to slide in
