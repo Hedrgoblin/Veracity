@@ -25,6 +25,10 @@
   "dialogue": {
     "opening": [
       {
+        "speaker": "Narrator",
+        "text": "You find yourself back in your bedroom at home."
+      },
+      {
         "speaker": "Veracity",
         "text": "what happened?"
       },
