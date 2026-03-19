@@ -28,7 +28,7 @@
     "opening": [
       {
         "speaker": "Narrator",
-        "text": "Back at the Northern Sanctuary, the device hums to life. Gears spin faster. The air shimmers and bends."
+        "text": "Back at the Northern Sanctuary, a strange device hums to life. Gears spin faster. The air shimmers and bends."
       },
       {
         "speaker": "Guildmaster",
@@ -53,12 +53,13 @@
       },
       {
         "speaker": "Narrator",
-        "text": "The device shudders and stops. Suddenly steam and glass fly everywhere. The device goes dark.",
+        "text": "The device shudders and stops. Steam and glass fly everywhere. The device goes dark.",
         "crossfadeBackground": "northern_sanctuary_device_broken"
       },
       {
         "speaker": "Book Keeper",
-        "text": "Grandmaster! The readings! The temporal field has destabilized!"
+        "text": "Grandmaster! The readings! The temporal field has destabilized!",
+        "expression": { "cultist_bookkeeper": "surprised" }
       },
       {
         "speaker": "Guildmaster",

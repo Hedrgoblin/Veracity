@@ -482,7 +482,7 @@ export default class ChapterScene extends Phaser.Scene {
     const npcs = ['cultist_bookkeeper', 'cultist_enforcer', 'cultist_guard', 'cultist_guard_staff', 'gentleman_paper', 'da_default', 'da_moth', 'da_lab', 'guildmaster', 'guildmaster_black'];
     const npcPositions = {
       'cultist_enforcer': width * 0.40,
-      'cultist_bookkeeper': width * 0.65,
+      'cultist_bookkeeper': width * 0.35,
       'gentleman_paper': width / 2 + 30,
       'cultist_guard': width * 0.20,
       'cultist_guard_staff': width * 0.50,
@@ -494,6 +494,8 @@ export default class ChapterScene extends Phaser.Scene {
       'da_default': 0.299 * 1.12 * 1.20,
       'da_moth': 0.299 * 1.12 * 1.20,
       'da_lab': 0.299 * 1.12 * 1.20,
+      'cultist_enforcer': 0.359,
+      'cultist_bookkeeper': 0.359,
       'cultist_guard': 0.299 * 1.20,
       'cultist_guard_staff': 0.420,
       'guildmaster': 0.299 * 1.20,
@@ -502,6 +504,7 @@ export default class ChapterScene extends Phaser.Scene {
     const npcFlipX = {
       'guildmaster': true,
       'guildmaster_black': true,
+      'cultist_bookkeeper': true,
     };
     npcs.forEach(npcName => {
       if (this.chapterData.assets?.characters?.includes(npcName)) {
@@ -1474,7 +1477,7 @@ export default class ChapterScene extends Phaser.Scene {
     // Exception: these NPCs auto-show when speaking, even after hideCharacters:true (only blocked if named explicitly)
     const autoShowNpc = ['guildmaster_black', 'guildmaster', 'cultist_enforcer', 'enforcer', 'cultist_bookkeeper', 'book keeper'].includes(speaker);
     // These NPCs always appear alone — hide everyone else automatically
-    const autoSoloNpc = ['guildmaster_black', 'guildmaster', 'cultist_bookkeeper', 'book keeper'].includes(speaker);
+    const autoSoloNpc = ['guildmaster_black', 'guildmaster', 'cultist_bookkeeper', 'book keeper', 'cultist_enforcer', 'enforcer'].includes(speaker);
     const autoShowNpcBlocked = Array.isArray(line.hideCharacters) && line.hideCharacters.includes(speaker);
     if (speaker !== 'narrator' && line.showOnlyVera !== true) {
       if (autoShowNpc && !autoShowNpcBlocked) {
