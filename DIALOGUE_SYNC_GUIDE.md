@@ -104,7 +104,7 @@ These stay in JSON files only:
 2. **Speaker format** - `**Name:** text`
 3. **Narrator format** - `*text*`
 4. **Expressions** - Next line after dialogue
-5. **Character names** - Use: Vera, Addie, Rainie, Crone (not girl, vera_body, etc.)
+5. **Character names** - Use: Vera, Addie, Rainie, Crone, Guildmaster, Da, Gentleman_paper, Cultist_enforcer, Cultist_bookkeeper, Cultist_guard, Cultist_guard_staff (not vera_body, girl, etc.)
 6. **Midpoint sections** - Optional middle section between opening and closing
 
 ---

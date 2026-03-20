@@ -1,10 +1,11 @@
-# Steampunk Journey - Technical Design Document
-## Master Reference for Complete Game Rebuild
+# Veracity - Technical Design Document
+## Master Reference for the Complete Game
 
-**Version:** 1.0
-**Last Updated:** 2026-02-27
+**Version:** 1.1
+**Last Updated:** 2026-03-20
 **Engine:** Phaser 3 + Vite
 **Language:** JavaScript (ES6+)
+**Deployed at:** https://hedrgoblin.github.io/Veracity/
 
 ---
 
@@ -26,21 +27,23 @@
 ## Game Overview
 
 ### Concept
-A Florence-inspired narrative puzzle game about 10-year-old Veracity whose scientist father has been kidnapped by the Order of Temporal Ascension cult. With her robot companions (Addie the bear and Rainie the raccoon), she must solve puzzles and discover her own agency.
+A steampunk narrative puzzle adventure about Veracity ("Vera"), a young woman whose scientist father (Da, The Professor) has gone missing. With her clockwork companions Addie (a bear) and Rainie (a raccoon), she must solve puzzles, confront the Guildmaster, and discover a truth about her own family.
 
 ### Key Features
-- 14 chapters across 3 acts
+- 10 chapters across 3 acts
 - Branching narrative based on companion choices
-- Multiple puzzle types (Connection, Puzzle Pieces, Collection, Sequence, Maze)
-- Dynamic character expressions and visibility
+- Multiple puzzle types (Connection, Puzzle Pieces, Tea Service, Moth Maze, Gear Puzzle, Sequence, Infiltration)
+- Dynamic character expressions (16 for main characters, 8 for NPCs)
+- NPC auto-show and auto-solo logic
 - Asset replacement without code changes
 - Save/load system with auto-save
 - Mobile-optimized touch controls
+- Subscription gate before Chapter 3
 
 ### Story Structure
-- **Act 1 (Chapters 1-4):** Discovery - Father kidnapped, learns about cult
-- **Act 2 (Chapters 5-10):** Journey - Travels north, infiltrates sanctuary
-- **Act 3 (Chapters 11-14):** Resolution - Rescues father, grows in confidence
+- **Act 1 (Chapters 1-3):** Discovery — Da is missing; Clockmaker's Guild
+- **Act 2 (Chapters 4-7):** Journey — Travels north, infiltrates the sanctuary
+- **Act 3 (Chapters 8-10):** Resolution — Confronts the Guildmaster, rescues Da
 
 ---
 
@@ -74,7 +77,7 @@ steampunk-journey/
 │   │       ├── music/
 │   │       └── sfx/
 │   └── data/
-│       └── chapters/                 # chapter_01.json - chapter_14.json
+│       └── chapters/                 # chapter_01.json - chapter_10.json
 ├── src/
 │   ├── main.js                       # Phaser config & game entry
 │   ├── scenes/
@@ -105,7 +108,7 @@ steampunk-journey/
 - **Language:** JavaScript ES6+
 - **Data Format:** JSON for chapters, PNG for images, MP3/OGG for audio
 - **Storage:** localStorage for saves
-- **Deployment:** Static hosting (Netlify, Vercel, itch.io)
+- **Deployment:** GitHub Pages (https://hedrgoblin.github.io/Veracity/)
 
 ### Build Commands
 ```bash
@@ -255,8 +258,12 @@ AudioManager.setSFXVolume(volume)             // 0.0 - 1.0
 
 **Character Variants:**
 Characters can have multiple variants for different contexts:
-- Base variant: `vera`, `addie`, `rainie`
-- Context variants: `vera_pajamas`, `addie_home`, `rainie_clockworker`
+- Vera: `vera`, `vera_pajamas`, `vera_green`, `vera_clockworker`
+- Addie: `addie`, `addie_home`, `addie_clockworker`
+- Rainie: `rainie`, `rainie_pajamas`, `rainie_clockworker`
+- Guildmaster: `guildmaster`, `guildmaster_black`
+- Da: `da_default`, `da_moth`, `da_lab`
+- NPCs: `crone_default`, `gentleman_paper`, `cultist_bookkeeper`, `cultist_enforcer`, `cultist_guard`, `cultist_guard_staff`
 
 ### Asset Structure
 
@@ -357,7 +364,8 @@ setCharacterExpression(character, expression) {
 ```
 
 **Expression Mapping:**
-- neutral, happy, sad, surprised, calm, angry, smirk, thinking
+- Main characters (vera variants, addie variants, rainie variants, guildmaster, guildmaster_black): 16 expressions defined in the `CHARACTER_EXPRESSIONS` constant
+- Supporting NPCs (cultists, da variants, crone, gentleman_paper): 8 expressions
 - Each expression = separate PNG file
 - Must exist for each variant: `vera_pajamas_happy.png`, `vera_happy.png`, etc.
 
@@ -389,9 +397,14 @@ hideCharacter(charName)                      // Hide specific character
 ### NPC Characters
 
 **Special Handling:**
-- Crone: Centered (width/2), horizontally flipped (setFlipX(true))
-- Cultists/Gentleman: Centered (width/2), no flip
+- Crone, Guildmaster, Bookkeeper, Gentleman Paper, Guards: Centered (width/2), horizontally flipped (setFlipX(true))
+- Cultist Enforcer: Centered (width/2), no flip
 - All NPCs: Depth 12 (between Vera and Rainie)
+
+**Auto-Show / Auto-Solo Rules:**
+- `guildmaster` and `cultist_enforcer`: Always appear when speaking; cannot be suppressed by `hideCharacters: true`
+- `guildmaster`, `cultist_enforcer`, `cultist_bookkeeper`: autoSolo — appear alone, hiding all other characters
+- Other NPCs: Must be shown via `showCharacters` in dialogue JSON
 
 ---
 
@@ -592,33 +605,25 @@ const layout = [
 - Flying "kick" text: white, 0.7 alpha, moves to top-right
 - Completion: Hide all UI, show "Click to continue"
 
-### 5. Maze Puzzle
+### 5. Moth Maze
 
-**Type:** `maze` (planned, not yet implemented)
-**Description:** Choose correct path through branching choices
+**Type:** `maze`
+**Description:** Navigate a branching moth maze
+**Chapter:** 3 (first of two Chapter 3 puzzles)
+**Triggered by:** `launchMothPuzzle` directive in dialogue JSON
 
-**Configuration:**
-```json
-{
-  "type": "maze",
-  "title": "Follow the Moth",
-  "instructions": "The moth darts ahead. Choose the correct path.",
-  "paths": [
-    {
-      "id": "left",
-      "label": "Left Path - Narrow alley",
-      "correct": false,
-      "failMessage": "The moth's light disappears!"
-    },
-    {
-      "id": "center",
-      "label": "Center Path - Main street",
-      "correct": true,
-      "successMessage": "The moth's glow remains steady!"
-    }
-  ]
-}
-```
+### 6. Gear Puzzle (Clockmakers Lock)
+
+**Type:** `gear` (clockmakers)
+**Description:** Solve the clockmakers gear lock
+**Chapter:** 3 (second of two Chapter 3 puzzles)
+**Triggered by:** `launchGearPuzzle` directive in dialogue JSON
+
+### 7. Infiltration Puzzle
+
+**Type:** `infiltration`
+**Description:** Sneaking game — click each icon 3 times to get past guards
+**Chapters:** 5-6
 
 ---
 
@@ -670,11 +675,22 @@ const layout = [
   "speaker": "Narrator",
   "text": "You step into the darkness.",
   "background": "clockmakers_guild_hall_01",  // Change background
+  "crossfadeBackground": "new_bg_key",         // Cross-fade to new background
+  "brightenEffect": true,                      // Screen brighten effect
   "hideCharacters": true,                      // Hide all characters
   "showCharacters": ["vera", "addie"],         // Show specific ones
-  "hideCharacters": ["crone"],                 // Hide specific one
+  "hideCharacters": ["crone"],                 // Hide specific one (array form)
   "showOnlyVera": true,                        // Show only Vera
-  "showItem": "notebook_01"                    // Display story item
+  "showItem": "notebook_01",                   // Display story item
+  "slideIn": "addie",                          // Slide character in from off-screen
+  "swapCharacters": ["vera", "rainie"],        // Swap visible characters
+  "moveCharacters": { "vera": "left" },        // Move characters
+  "launchMothPuzzle": true,                    // Launch moth maze
+  "launchGearPuzzle": true,                    // Launch clockmakers gear puzzle
+  "fadeToBlack": true,                         // Fade to black
+  "blackScreen": true,                         // Instant black screen
+  "suppressAutoShow": true,                    // Prevent auto-show of speaker
+  "placeholder": true                          // Placeholder marker
 }
 ```
 
@@ -693,15 +709,20 @@ const layout = [
 **Speaker Mapping:**
 ```javascript
 const speakerMap = {
-  'narrator': null,                    // No character sprite
-  'veracity': 'vera_',
-  'vera': 'vera_',
+  'narrator': null,                          // No character sprite
+  'veracity': 'vera',
+  'vera': 'vera',
   'addie': 'addie',
   'rainie': 'rainie',
-  'crone': 'crone',
+  'crone': 'crone_default',
+  'guildmaster': 'guildmaster',
   'cultist_bookkeeper': 'cultist_bookkeeper',
   'cultist_enforcer': 'cultist_enforcer',
-  'gentleman': 'gentleman_paper'
+  'cultist_guard': 'cultist_guard',
+  'cultist_guard_staff': 'cultist_guard_staff',
+  'gentleman_paper': 'gentleman_paper',
+  'father': 'da_default',
+  'da': 'da_default'
 };
 ```
 
@@ -1367,7 +1388,7 @@ this.scene.start('ChapterScene', {
 
 ### Ending Flow
 
-**After Chapter 14:**
+**After Chapter 10:**
 1. Calculate ending based on choices
 2. Transition to EndingScene
 3. Show ending narrative
@@ -1377,56 +1398,29 @@ this.scene.start('ChapterScene', {
 
 ---
 
-## Implementation Checklist
+## Implementation Status
 
-### Phase 1: Foundation
-- [ ] Initialize Vite + Phaser project
-- [ ] Create folder structure
-- [ ] Implement GameStateManager
-- [ ] Implement SaveManager
-- [ ] Create BootScene with loading bar
-- [ ] Create MainMenuScene
-- [ ] Create ChapterScene skeleton
-- [ ] Create PuzzleScene skeleton
-
-### Phase 2: Core Systems
-- [ ] Implement character loading system
-- [ ] Implement variant folder system
-- [ ] Implement expression changing
-- [ ] Implement dialogue display with typewriter
-- [ ] Implement character visibility controls
-- [ ] Implement background changing
-- [ ] Implement item display
-
-### Phase 3: Puzzle Mechanics
-- [ ] Implement Connection puzzle
-- [ ] Implement Puzzle Pieces puzzle
-- [ ] Implement Collection puzzle
-- [ ] Implement Sequence puzzle
-- [ ] Implement Maze puzzle (optional)
-
-### Phase 4: Content
-- [ ] Create Chapter 1 JSON
-- [ ] Create Chapter 2 JSON
-- [ ] Create remaining 12 chapters
-- [ ] Implement choice system
-- [ ] Implement consequence tracking
-- [ ] Create all dialogue
-
-### Phase 5: Polish
-- [ ] Add audio system
-- [ ] Add settings menu
-- [ ] Add ending variations
-- [ ] Implement dialogue export/import
-- [ ] Test all puzzles
-- [ ] Test save/load system
-- [ ] Optimize asset loading
-
-### Phase 6: Deployment
-- [ ] Production build
-- [ ] Test on multiple devices
-- [ ] Deploy to hosting
-- [ ] Create player documentation
+### Completed
+- [x] Vite + Phaser 3 project setup
+- [x] All 10 chapter JSON files
+- [x] GameStateManager, SaveManager, AudioManager
+- [x] All scene types (BootScene, MainMenuScene, ChapterScene, PuzzleScene, SettingsScene, EndingScene, SubscriptionScene, SubscriptionGateScene)
+- [x] Full character variant system with expression layers
+- [x] Dialogue system with typewriter, expressions, visibility controls
+- [x] All dialogue directives (hideCharacters, showCharacters, showOnlyVera, showItem, crossfadeBackground, slideIn, swapCharacters, moveCharacters, launchMothPuzzle, launchGearPuzzle, fadeToBlack, blackScreen, suppressAutoShow, placeholder)
+- [x] NPC auto-show and auto-solo logic
+- [x] Connection puzzle
+- [x] Puzzle Pieces puzzle
+- [x] Tea service minigame (Collection)
+- [x] Sequence puzzle
+- [x] Moth maze puzzle
+- [x] Gear puzzle (clockmakers lock)
+- [x] Infiltration puzzle (chapters 5-6)
+- [x] Subscription gate (before Chapter 3)
+- [x] Save/load system (auto + 3 manual slots)
+- [x] JUMP debug button (chapters 1-10)
+- [x] Dialogue export/import sync tools
+- [x] Production build — deployed to GitHub Pages
 
 ---
 
@@ -1482,7 +1476,10 @@ TYPEWRITER_DELAY = 30ms
 ## Version History
 
 - **v1.0** (2026-02-27): Initial comprehensive technical design document
+- **v1.1** (2026-03-20): Updated to reflect finished 10-chapter game; removed chapters 11-14; added all NPC characters, full puzzle list, new dialogue directives
 
 ---
 
-**This document contains everything needed to rebuild Steampunk Journey from scratch.**
+**This document reflects the finished state of Veracity — a 10-chapter steampunk narrative puzzle adventure.**
+
+**Credits:** Art Direction & Story & Game Design: Heather Capelli | Programming: Claude Sonnet 4.6

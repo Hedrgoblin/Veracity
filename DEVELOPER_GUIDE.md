@@ -1,4 +1,4 @@
-# Developer Guide - Steampunk Journey
+# Developer Guide - Veracity
 
 This guide is for developers who want to understand and extend the game's codebase.
 
@@ -30,7 +30,6 @@ gameStateManager.setFlag(flagName, value)
 - **Features**:
   - Auto-save after each chapter
   - Multiple manual save slots (3)
-  - Save import/export functionality
   - Version checking
 
 **Key Methods**:
@@ -39,21 +38,6 @@ saveManager.save(slotName)
 saveManager.load(slotName)
 saveManager.autoSave()
 saveManager.hasSave(slotName)
-```
-
-#### ChapterManager (`src/systems/ChapterManager.js`)
-- **Purpose**: Load and process chapter data from JSON
-- **Features**:
-  - Dynamic chapter loading from `/public/data/chapters/`
-  - Chapter caching for performance
-  - Conditional narrative branching
-  - Next chapter determination
-
-**Key Methods**:
-```javascript
-await chapterManager.loadChapter(number)
-chapterManager.getCurrentChapter()
-chapterManager.getNextChapter()
 ```
 
 #### AudioManager (`src/systems/AudioManager.js`)
@@ -86,7 +70,7 @@ BootScene -> MainMenuScene -> ChapterScene <-> PuzzleScene -> EndingScene
 - Transitions to MainMenuScene
 
 ### MainMenuScene
-- New Game / Continue / Settings
+- New Game / Continue / Settings / Subscribe
 - Checks for save files
 - Launches appropriate scene
 
@@ -99,23 +83,30 @@ BootScene -> MainMenuScene -> ChapterScene <-> PuzzleScene -> EndingScene
 - Handles chapter completion
 
 **Lifecycle**:
-1. `init(data)` - Receive chapter number
-2. `create()` - Load chapter, setup scene
-3. `startNarrative()` - Show opening dialogue
-4. `checkForChoices()` - Present choices
-5. `checkForPuzzle()` - Launch puzzle if exists
-6. `onPuzzleComplete()` - Show closing dialogue
-7. `completeChapter()` - Save and transition
+1. `init(data)` — Receive chapter number
+2. `create()` — Load chapter, setup scene
+3. `startNarrative()` — Show opening dialogue
+4. `checkForChoices()` — Present choices
+5. `checkForPuzzle()` — Launch puzzle if exists
+6. `onPuzzleComplete()` — Show closing dialogue
+7. `completeChapter()` — Save and transition
 
 ### PuzzleScene
-- Handles all three puzzle types
+- Handles all puzzle types
 - Spawned as overlay on ChapterScene
 - Returns control when complete
 
 **Puzzle Types**:
-1. **Connection Puzzle** - Connect matching points with lines
-2. **Rhythm Puzzle** - Tap pattern at correct timing
-3. **Gather Sort Puzzle** - Drag items to correct slots
+1. `connection` — Connect matching points with lines
+2. `puzzle_pieces` — Drag torn fragments to reconstruct image
+3. `match_three` — Tea service collection minigame
+4. `sequence` — Perform actions in correct order
+5. `maze` — Moth maze navigation
+6. `infiltration` — Click each icon 3 times
+
+### SubscriptionGateScene
+- Appears before Chapter 3 for non-subscribers
+- Chapters 1-2 are free; Chapter 3+ requires subscription
 
 ### SettingsScene
 - Volume controls
@@ -139,55 +130,99 @@ BootScene -> MainMenuScene -> ChapterScene <-> PuzzleScene -> EndingScene
   "assets": {
     "background": "filename_without_extension",
     "music": "filename_without_extension",
-    "characters": ["girl", "addie", "rainie"]
+    "characters": ["vera", "addie", "rainie"],
+    "characterFolders": {
+      "vera": "vera_pajamas",
+      "addie": "addie_home",
+      "rainie": "rainie_pajamas"
+    }
   },
 
   "companions": ["addie", "rainie"],
 
   "dialogue": {
     "opening": [
-      { "speaker": "Name", "text": "Dialogue text" }
+      {
+        "speaker": "Name",
+        "text": "Dialogue text",
+        "expression": { "vera": "sad", "rainie": "neutral" },
+        "background": "new_background_key",
+        "hideCharacters": ["crone"],
+        "showCharacters": ["vera", "addie"],
+        "showOnlyVera": true,
+        "showItem": "notebook_01",
+        "launchMothPuzzle": true,
+        "launchGearPuzzle": true,
+        "fadeToBlack": true,
+        "blackScreen": true,
+        "suppressAutoShow": true,
+        "placeholder": true
+      }
     ],
-    "closing": [
-      { "speaker": "Name", "text": "Dialogue text" }
-    ]
+    "midpoint": [ /* optional middle section */ ],
+    "closing": [ /* dialogue lines */ ]
   },
 
   "choices": [
     {
       "text": "Choice description",
-      "companion": "addie" | "rainie",
+      "companion": "addie",
       "consequences": {
         "flag_name": true
-      }
+      },
+      "puzzle": { /* optional per-choice puzzle override */ }
     }
   ],
 
   "puzzle": {
-    "type": "connection" | "rhythm" | "gather_sort",
+    "type": "connection",
     "title": "Puzzle Title",
-    "instructions": "Puzzle instructions",
-    // Type-specific config here
+    "instructions": "Instructions..."
   },
 
   "storyFlags": {
     "flag_name": true
   },
 
-  "nextChapter": 2 | null,
-
-  "branches": [
-    {
-      "condition": {
-        "flag": "flag_name",
-        "value": true
-      },
-      "dialogue": { /* Override dialogue */ },
-      "assets": { /* Override assets */ }
-    }
-  ]
+  "nextChapter": 2
 }
 ```
+
+## Character System
+
+### Character Variants
+Each character has one or more variant folders:
+- `vera`, `vera_pajamas`, `vera_green`, `vera_clockworker`
+- `addie`, `addie_home`, `addie_clockworker` (note: `addie` is the default, not `addie_default` in folders)
+- `rainie`, `rainie_pajamas`, `rainie_clockworker`
+- `guildmaster`, `guildmaster_black`
+- `da_default`, `da_moth`, `da_lab`
+- `crone_default`, `gentleman_paper`
+- `cultist_bookkeeper`, `cultist_enforcer`, `cultist_guard`, `cultist_guard_staff`
+
+### Expression System
+Defined in the `CHARACTER_EXPRESSIONS` constant in `ChapterScene.js`:
+- Main characters (vera variants, addie variants, rainie variants, guildmaster, guildmaster_black): 16 expressions
+- Supporting NPCs (cultists, da variants, crone, gentleman_paper): 8 expressions
+
+Each expression is a separate PNG file: `{variant}_{expression}.png`
+
+### NPC Auto-Show Rules
+- `guildmaster` and `cultist_enforcer` always appear when speaking — they cannot be suppressed by `hideCharacters: true`
+- `guildmaster`, `cultist_enforcer`, and `cultist_bookkeeper` are autoSolo — they appear alone, hiding other characters
+- Other NPCs must be explicitly shown via `showCharacters` in the dialogue JSON
+
+### Character Positioning
+- Vera: centered (width/2), depth 10
+- Addie: left of center (width/2 - 75), depth 5 (behind Vera)
+- Rainie: right of center (width/2 + 90), depth 15 (in front)
+- NPCs (Crone, Cultists, etc.): centered (width/2), depth 12
+- Crone, Bookkeeper, Gentleman, Guards: horizontally flipped (setFlipX(true))
+
+### Character Scales
+- Vera: 0.299
+- Addie: 0.358
+- Rainie: 0.239
 
 ## Adding New Features
 
@@ -215,8 +250,7 @@ createYourNewPuzzle() {
   "puzzle": {
     "type": "your_new_type",
     "title": "Your Puzzle",
-    "instructions": "How to solve",
-    "customConfig": "type-specific data"
+    "instructions": "How to solve"
   }
 }
 ```
@@ -230,39 +264,14 @@ Use the `branches` array in chapter JSON:
   "branches": [
     {
       "condition": {
-        "flag": "saved_architect",
+        "flag": "some_flag",
         "value": true
       },
       "dialogue": {
         "opening": [
-          { "speaker": "Grand Architect", "text": "You saved me..." }
+          { "speaker": "Veracity", "text": "Alternate dialogue..." }
         ]
       }
-    }
-  ]
-}
-```
-
-### Adding New Companion Actions
-
-In `GameStateManager.js`:
-
-```javascript
-performCompanionAction(companionName, action) {
-  const companion = this.state.companions[companionName];
-  // Implement action logic
-}
-```
-
-In chapter JSON:
-```json
-{
-  "choices": [
-    {
-      "text": "Send Addie ahead to scout",
-      "companion": "addie",
-      "action": "scout",
-      "consequences": { "scouted": true }
     }
   ]
 }
@@ -273,65 +282,24 @@ In chapter JSON:
 ### Jump to Specific Chapter
 ```javascript
 // In browser console
-game.scene.start('ChapterScene', { chapterNumber: 7 });
+game.scene.start('ChapterScene', { chapterNumber: 5 });
 ```
 
 ### Inspect Game State
 ```javascript
-// Check current state
 console.log(gameStateManager.getState());
-
-// Set a flag for testing
 gameStateManager.setFlag('test_flag', true);
-
-// Damage a companion
-gameStateManager.damageCompanion('addie', 50);
-```
-
-### Test Puzzle Independently
-```javascript
-game.scene.start('PuzzleScene', {
-  puzzleData: {
-    type: 'connection',
-    title: 'Test Puzzle',
-    instructions: 'Test instructions',
-    points: [
-      { id: 'a', x: -100, y: 0, pair: 'b' },
-      { id: 'b', x: 100, y: 0, pair: 'a' }
-    ]
-  },
-  chapterNumber: 1,
-  onComplete: () => console.log('Puzzle complete!')
-});
 ```
 
 ### Clear Save Data
 ```javascript
-// Clear all saves
 localStorage.clear();
-
-// Or specific save
-saveManager.deleteSave('auto');
 ```
 
-## Performance Optimization
-
-### Asset Loading
-- Use sprite sheets for characters with multiple poses
-- Compress PNG files (use tools like TinyPNG)
-- Keep backgrounds under 1MB
-- Use OGG for better compression vs MP3
-
-### Chapter Preloading
+### Reset Tutorial Flag
 ```javascript
-// Preload next 2 chapters for smooth transitions
-await chapterManager.preloadChapters([currentChapter + 1, currentChapter + 2]);
+gameStateManager.setFlag('merge_tutorial_seen', false);
 ```
-
-### Memory Management
-- Destroy unused graphics in scenes
-- Clear texture cache when changing acts
-- Use object pooling for repeated elements
 
 ## Build Configuration
 
@@ -341,32 +309,14 @@ npm run dev
 ```
 - Fast hot-reload
 - Source maps enabled
-- No minification
 
 ### Production Build
 ```bash
 npm run build
 ```
 - Minified code
-- Optimized assets
 - Output in `/dist`
-
-### Custom Build Settings
-Edit `vite.config.js`:
-```javascript
-export default defineConfig({
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          phaser: ['phaser'],
-          // Add more chunks as needed
-        }
-      }
-    }
-  }
-});
-```
+- Deploy to GitHub Pages
 
 ## Debugging
 
@@ -380,7 +330,6 @@ export default defineConfig({
 **Dialogue Not Advancing**
 - Check for missing `onComplete` callbacks
 - Verify dialogue array is not empty
-- Test click zone is properly sized
 
 **Puzzles Not Completing**
 - Add console.log to completion checks
@@ -389,7 +338,6 @@ export default defineConfig({
 
 **Save/Load Issues**
 - Check localStorage quota in browser
-- Verify JSON serialization doesn't fail
 - Test in incognito for localStorage issues
 
 ## Code Style Guide
@@ -398,7 +346,6 @@ export default defineConfig({
 - **Classes**: PascalCase (`GameStateManager`)
 - **Variables**: camelCase (`currentChapter`)
 - **Constants**: UPPER_SNAKE_CASE (`SAVE_KEY`)
-- **Private methods**: Prefix with `_` (`_validateData`)
 
 ### Scene Methods Order
 1. `constructor()`
@@ -409,26 +356,14 @@ export default defineConfig({
 6. `update()`
 7. `shutdown()`
 
-### Comments
-- Use JSDoc for public methods
-- Explain "why" not "what"
-- Document complex algorithms
-- Mark TODOs and FIXMEs
-
 ## Contributing
 
 ### Before Submitting Changes
-1. Test all 14 chapters
+1. Test all 10 chapters
 2. Verify save/load works
-3. Check all 3 puzzle types
+3. Check all puzzle types function
 4. Test on different browsers
 5. Ensure no console errors
-
-### Submitting Art Assets
-- Follow asset specifications in README
-- Include character concept if new character
-- Provide background story context
-- Test in-game before submitting
 
 ## Additional Resources
 
@@ -436,8 +371,7 @@ export default defineConfig({
 - [Vite Documentation](https://vitejs.dev/guide/)
 - [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API)
 
-## Questions?
+## Credits
 
-Check the game console for errors and warnings. Most issues will be logged there with helpful messages.
-
-Happy developing! 🎮✨
+**Art Direction & Story & Game Design:** Heather Capelli
+**Programming:** Claude Sonnet 4.6
