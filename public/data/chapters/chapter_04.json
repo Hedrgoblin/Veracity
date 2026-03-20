@@ -2,7 +2,7 @@
   "chapterNumber": 4,
   "title": "Voices in the Dark",
   "act": 1,
-  "description": "Inside the cult's meeting house, you learn the terrible truth.",
+  "description": "Inside the Guild Hall.",
   "assets": {
     "background": "clockmakers_guild_hall_01",
     "music": null,
@@ -33,7 +33,7 @@
         "speaker": "Rainie",
         "text": "What is this place?",
         "expression": {
-          "rainie": "neutral",
+          "rainie": "confused",
           "vera": "neutral",
           "addie": "neutral"
         }
@@ -44,16 +44,16 @@
         "expression": {
           "vera": "neutral",
           "addie": "neutral",
-          "rainie": "neutral"
+          "rainie": "confused"
         }
       },
       {
         "speaker": "Addie",
         "text": "(whispering) I hear voices. Hide!",
         "expression": {
-          "addie": "neutral",
-          "vera": "neutral",
-          "rainie": "neutral"
+          "addie": "scared",
+          "vera": "worried",
+          "rainie": "scared"
         }
       },
       {
