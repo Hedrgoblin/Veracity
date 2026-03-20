@@ -69,11 +69,21 @@ export default class InfiltrationScene extends Phaser.Scene {
     // Instructions bar
     this.add.rectangle(width / 2, 85, width - 40, 44, 0x000000, 0.7)
       .setStrokeStyle(2, 0x8b5c31).setDepth(20);
-    this.add.text(width / 2, 85, 'Tap each action as it appears.', {
+    this.add.text(width / 2, 85, 'Tap each action three times to complete it.', {
       fontSize: '14px',
       fontFamily: 'Courier New',
       color: '#ffffff',
       wordWrap: { width: width - 60 },
+      align: 'center'
+    }).setOrigin(0.5).setDepth(21);
+
+    // Progress dots bar
+    this.progressBg = this.add.rectangle(width / 2, height - 40, width - 40, 40, 0x000000, 0.7)
+      .setStrokeStyle(2, 0x8b5c31).setDepth(20);
+    this.progressText = this.add.text(width / 2, height - 40, '', {
+      fontSize: '20px',
+      fontFamily: 'Courier New',
+      color: '#c4a575',
       align: 'center'
     }).setOrigin(0.5).setDepth(21);
 
@@ -143,6 +153,11 @@ export default class InfiltrationScene extends Phaser.Scene {
     }
 
     const step = this.steps[this.currentStep];
+    const CLICKS_REQUIRED = 3;
+    let clickCount = 0;
+
+    this.updateProgressDots(clickCount, CLICKS_REQUIRED);
+
     const img = this.add.image(step.x, step.y, step.key)
       .setAlpha(0)
       .setDepth(10)
@@ -156,9 +171,9 @@ export default class InfiltrationScene extends Phaser.Scene {
     // Fade in
     this.tweens.add({ targets: img, alpha: 1, duration: 400 });
 
-    // Click: spawn floating label, wiggle then fade out
-    img.once('pointerdown', () => {
-      img.disableInteractive();
+    img.on('pointerdown', () => {
+      clickCount++;
+      this.updateProgressDots(clickCount, CLICKS_REQUIRED);
 
       // Floating label
       const label = this.add.text(step.x, step.y - 60, step.label, {
@@ -177,6 +192,7 @@ export default class InfiltrationScene extends Phaser.Scene {
         onComplete: () => label.destroy()
       });
 
+      // Wiggle
       this.tweens.add({
         targets: img,
         angle: -5,
@@ -184,8 +200,12 @@ export default class InfiltrationScene extends Phaser.Scene {
         yoyo: true,
         repeat: 3,
         ease: 'Sine.inOut',
-        onComplete: () => {
-          img.setAngle(0);
+        onComplete: () => img.setAngle(0)
+      });
+
+      if (clickCount >= CLICKS_REQUIRED) {
+        img.disableInteractive();
+        this.time.delayedCall(400, () => {
           this.tweens.add({
             targets: img,
             alpha: 0,
@@ -196,8 +216,15 @@ export default class InfiltrationScene extends Phaser.Scene {
               this.showStep();
             }
           });
-        }
-      });
+        });
+      }
     });
+  }
+
+  updateProgressDots(current, total) {
+    const filled = '● '.repeat(current).trim();
+    const empty  = '○ '.repeat(total - current).trim();
+    const text   = [filled, empty].filter(Boolean).join(' ');
+    this.progressText.setText(text);
   }
 }
