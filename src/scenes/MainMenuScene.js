@@ -20,6 +20,9 @@ export default class MainMenuScene extends Phaser.Scene {
     if (!this.textures.exists('logo_thumbnail')) {
       this.load.image('logo_thumbnail', `${BASE}assets/images/ui/logo_thumbnail.png`);
     }
+    if (!this.textures.exists('ill_cover')) {
+      this.load.image('ill_cover', `${BASE}assets/images/backgrounds/ill_cover.png`);
+    }
   }
 
   create() {
@@ -34,26 +37,17 @@ export default class MainMenuScene extends Phaser.Scene {
     // Background
     this.add.rectangle(width / 2, height / 2, width, height, 0x1a1a1a);
 
+    // Cover illustration (behind logo)
+    if (this.textures.exists('ill_cover')) {
+      const cover = this.add.image(width / 2, height / 2, 'ill_cover').setOrigin(0.5);
+      const coverScale = Math.max(width / cover.width, height / cover.height);
+      cover.setScale(coverScale).setDepth(0);
+    }
+
     // Logo (scaled to fit screen width)
-    const logo = this.add.image(width / 2, 120, 'logo');
+    const logo = this.add.image(width / 2, 120, 'logo').setDepth(1);
     const logoScale = Math.min((width * 0.8) / logo.width, 180 / logo.height);
     logo.setScale(logoScale);
-
-    // Calculate subtitle position below logo with spacing
-    const logoHeight = logo.displayHeight;
-    const subtitleY = 120 + (logoHeight / 2) + 40;
-
-    // Subtitle (mobile-optimized)
-    const subtitleStyle = {
-      fontSize: '14px',
-      fontFamily: 'Courier New',
-      color: '#c4a575',
-      fontStyle: 'italic',
-      wordWrap: { width: width - 40 }
-    };
-    this.add.text(width / 2, subtitleY, 'A Journey of Discovery\nand Courage', subtitleStyle)
-      .setOrigin(0.5)
-      .setAlign('center');
 
     // Check if there's a save file
     const hasSave = saveManager.hasSave('auto');
@@ -61,9 +55,9 @@ export default class MainMenuScene extends Phaser.Scene {
     // Check subscription status
     const isSubscribed = gameStateManager.isSubscribed();
 
-    // Menu buttons (mobile-optimized spacing)
-    const buttonY = 320;
-    const buttonSpacing = 70;
+    // Menu buttons — positioned to match cover illustration zones
+    const buttonY = Math.round(height * 0.607);
+    const buttonSpacing = Math.round(height * 0.08);
 
     if (hasSave) {
       this.createMenuButton(width / 2, buttonY, 'Continue', () => this.continueGame());
