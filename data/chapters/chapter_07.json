@@ -1,0 +1,137 @@
+{
+  "chapterNumber": 7,
+  "title": "Shadows and Gears",
+  "act": 2,
+  "description": "Deeper into the sanctuary, closer to father, closer to danger.",
+  "assets": {
+    "background": "northern_sanctuary_hallway_02_armed",
+    "music": null,
+    "characters": [
+      "vera",
+      "addie",
+      "rainie",
+      "da_default",
+      "da_moth",
+      "cultist_guard_staff"
+    ],
+    "characterFolders": {
+      "vera": "vera_clockworker",
+      "addie": "addie_clockworker",
+      "rainie": "rainie_clockworker"
+    }
+  },
+  "companions": [
+    "addie",
+    "rainie"
+  ],
+  "dialogue": {
+    "opening": [
+      {
+        "speaker": "Narrator",
+        "text": "You walk through the corridors, heart pounding. Blue-uniformed workers pass unnoticed."
+      },
+      {
+        "speaker": "Addie",
+        "text": "There. That door has extra guards. Whatever they're protecting, it must be important.",
+        "expression": {
+          "addie": "distrust",
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "And the lid says the moth is behind that door!",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "We need to get past those guards.",
+        "expression": {
+          "vera": "thinking",
+          "addie": "thinking",
+          "rainie": "thinking"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "I saw some gears that looked important back there... I wonder what happens if I move one... be right back.",
+        "expression": {
+          "rainie": "excited",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "Alarms blare. Red lights flash. The guards jump up, look at each other, and run towards the sounds.",
+        "hideCharacters": ["rainie"],
+        "expression": {
+          "vera": "surprised",
+          "addie": "surprised"
+        },
+        "flashBackground": {
+          "backgrounds": ["northern_sanctuary_hallway_02", "northern_sanctuary_hallway_02_alarm"],
+          "count": 10,
+          "interval": 500
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Did I miss anything?",
+        "expression": {
+          "rainie": "excited",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Well done Rainie!",
+        "expression": {
+          "vera": "happy",
+          "addie": "happy",
+          "rainie": "happy"
+        }
+      }
+    ],
+    "closing": [
+      {
+        "speaker": "Narrator",
+        "text": "You step out of the hallway into a... lovely warm cozy study. There, you see the moth. And your father.",
+        "background": "northern_sanctuary_library_small",
+        "hideCharacters": true,
+        "showCharacters": ["da_moth"]
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Da!",
+        "showCharacters": ["vera"],
+        "hideCharacters": ["da_moth"],
+        "expression": {
+          "vera": "surprised"
+        }
+      },
+      {
+        "speaker": "Father",
+        "text": "My clever girl, as soon as I saw the moth, I knew you'd find me.",
+        "showCharacters": ["da_moth"],
+        "hideCharacters": ["vera"],
+        "expression": {
+          "da_moth": "happy"
+        }
+      }
+    ]
+  },
+  "storyFlags": {
+    "chapter7_complete": true,
+    "found_father": true,
+    "confronted_grand_architect": true,
+    "companion_injured": true
+  },
+  "nextChapter": 8
+}

@@ -1,0 +1,150 @@
+{
+  "chapterNumber": 6,
+  "title": "The Northern Sanctuary",
+  "act": 2,
+  "description": "A fortress of stone and steam guards its secrets jealously.",
+  "assets": {
+    "background": "northern_sanctuary_ext",
+    "suppressAutoShow": true,
+    "music": null,
+    "characters": [
+      "vera",
+      "addie",
+      "rainie"
+    ],
+    "characterFolders": {
+      "vera": "vera_default",
+      "addie": "addie_default",
+      "rainie": "rainie_default"
+    },
+    "closingCharacterFolders": {
+      "vera": "vera_clockworker",
+      "addie": "addie_clockworker",
+      "rainie": "rainie_clockworker"
+    }
+  },
+  "companions": [
+    "addie",
+    "rainie"
+  ],
+  "dialogue": {
+    "opening": [
+      {
+        "speaker": "Narrator",
+        "text": "After a long train ride across the countryside, and a walk from a small mining town up a steep mountain path, you arrive at the Northern Sanctuary.",
+        "hideCharacters": true
+      },
+      {
+        "speaker": "Rainie",
+        "text": "This must be the place. The compass is pointing right at it.",
+        "expression": {
+          "rainie": "happy",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
+      },
+      {
+        "speaker": "Addie",
+        "text": "It looks heavily guarded, Vera. Look, guards, watchtowers. We can't just walk in.",
+        "expression": {
+          "addie": "worried",
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Then we find another way. Da's in there.",
+        "expression": {
+          "vera": "serious",
+          "addie": "worried",
+          "rainie": "neutral"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "From the rocks, you study the sanctuary. Steam vents line the walls. Machinery clangs in the distance.",
+        "hideCharacters": true
+      },
+      {
+        "speaker": "Addie",
+        "text": "There. A service entrance on the east side. It's used by workers. Maybe we can blend in.",
+        "expression": {
+          "addie": "worried",
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
+      }
+    ],
+    "closing": [
+      {
+        "speaker": "Narrator",
+        "text": "You arrive at the side entrance.",
+        "hideCharacters": true,
+        "swapCharacters": true,
+        "background": "northern_sanctuary_service_entrance"
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Let's go!",
+        "expression": {
+          "rainie": "happy",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "Inside, you see what looks like the inner workings of a large mechanical device down a long hallway.",
+        "hideCharacters": true,
+        "swapCharacters": true,
+        "background": "northern_sanctuary_hallway"
+      },
+      {
+        "speaker": "Veracity",
+        "text": "What are they building?",
+        "expression": {
+          "vera": "surprised",
+          "addie": "neutral",
+          "rainie": "neutral"
+        }
+      },
+      {
+        "speaker": "Addie",
+        "text": "It's like a clock, but wrong.",
+        "expression": {
+          "addie": "serious",
+          "vera": "surprised",
+          "rainie": "neutral"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "It must be the time device?",
+        "expression": {
+          "rainie": "surprised",
+          "vera": "surprised",
+          "addie": "worried"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "They must be further along than Da thought.",
+        "expression": {
+          "vera": "sad",
+          "addie": "sad",
+          "rainie": "sad"
+        }
+      }
+    ]
+  },
+  "puzzle": {
+    "type": "infiltration"
+  },
+  "storyFlags": {
+    "chapter6_complete": true,
+    "infiltrated_sanctuary": true,
+    "found_blueprint_fragment": true
+  },
+  "nextChapter": 7
+}

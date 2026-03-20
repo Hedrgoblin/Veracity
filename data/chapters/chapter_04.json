@@ -1,0 +1,274 @@
+{
+  "chapterNumber": 4,
+  "title": "Voices in the Dark",
+  "act": 1,
+  "description": "Inside the Guild Hall.",
+  "assets": {
+    "background": "clockmakers_guild_hall_01",
+    "music": null,
+    "characters": [
+      "vera",
+      "addie",
+      "rainie",
+      "cultist_bookkeeper",
+      "cultist_enforcer"
+    ],
+    "characterFolders": {
+      "vera": "vera_default",
+      "addie": "addie_default",
+      "rainie": "rainie_default"
+    }
+  },
+  "companions": [
+    "addie",
+    "rainie"
+  ],
+  "dialogue": {
+    "opening": [
+      {
+        "speaker": "Narrator",
+        "text": "The door opens. You enter cautiously."
+      },
+      {
+        "speaker": "Rainie",
+        "text": "What is this place?",
+        "expression": {
+          "rainie": "confused",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "(whispering) This is the Clockmaker's Guild. Da used to take me here when I was little.",
+        "expression": {
+          "vera": "neutral",
+          "addie": "neutral",
+          "rainie": "confused"
+        }
+      },
+      {
+        "speaker": "Addie",
+        "text": "(whispering) I hear voices. Hide!",
+        "expression": {
+          "addie": "scared",
+          "vera": "worried",
+          "rainie": "scared"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "You duck behind a pillar.",
+        "background": "clockmakers_guild_hall_01_hide",
+        "hideCharacters": true
+      },
+      {
+        "speaker": "Narrator",
+        "text": "Two robed figures walk down the corridor near you. They speak in hushed tones.",
+        "background": "clockmakers_guild_hall_01"
+      },
+      {
+        "speaker": "Cultist_enforcer",
+        "text": "Does he have the device?",
+        "background": "clockmakers_guild_hall_01",
+        "showCharacters": ["cultist_enforcer"],
+        "hideCharacters": ["cultist_bookkeeper"],
+        "expression": {
+          "cultist_enforcer": "neutral"
+        }
+      },
+      {
+        "speaker": "Cultist_bookkeeper",
+        "text": "He refuses to cooperate. He claims the Temporal Resonance Device is an impossible theoretical.",
+        "showCharacters": ["cultist_bookkeeper"],
+        "hideCharacters": ["cultist_enforcer"],
+        "expression": {
+          "cultist_bookkeeper": "neutral"
+        }
+      },
+      {
+        "speaker": "Cultist_enforcer",
+        "text": "He lies. We know that it is not. It MUST be completed. We will force him if necessary.",
+        "showCharacters": ["cultist_enforcer"],
+        "hideCharacters": ["cultist_bookkeeper"],
+        "expression": {
+          "cultist_enforcer": "angry"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "*whispers* They have him. They really have him.",
+        "background": "clockmakers_guild_hall_01_hide",
+        "hideCharacters": ["cultist_enforcer", "cultist_bookkeeper"],
+        "expression": {
+          "vera": "neutral"
+        }
+      },
+      {
+        "speaker": "Cultist_enforcer",
+        "text": "We're moving him to the northern sanctuary as we speak. There, he will have no choice but to finish the device.",
+        "background": "clockmakers_guild_hall_01",
+        "showCharacters": ["cultist_enforcer"],
+        "hideCharacters": ["cultist_bookkeeper"],
+        "expression": {
+          "cultist_enforcer": "smirk"
+        }
+      },
+      {
+        "speaker": "Cultist_bookkeeper",
+        "text": "And if he refuses?",
+        "showCharacters": ["cultist_bookkeeper"],
+        "hideCharacters": ["cultist_enforcer", "vera"],
+        "expression": {
+          "cultist_bookkeeper": "neutral"
+        }
+      },
+      {
+        "speaker": "Cultist_enforcer",
+        "text": "Then we take what he has already built and find someone else to complete it. The device will reshape time itself.",
+        "showCharacters": ["cultist_enforcer"],
+        "hideCharacters": ["cultist_bookkeeper"],
+        "expression": {
+          "cultist_enforcer": "disgusted"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "The men continue walking. They don't see you. Your mind races.",
+        "hideCharacters": true
+      },
+      {
+        "speaker": "Veracity",
+        "text": "The Northern Sanctuary. We have to get there.",
+        "expression": {
+          "vera": "neutral"
+        }
+      },
+      {
+        "speaker": "Addie",
+        "text": "But we don't know where it is.",
+        "expression": {
+          "addie": "neutral",
+          "vera": "neutral"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Follow the moth!",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
+      },
+      {
+        "speaker": "Addie",
+        "text": "The moth will travel through the air... we are more earthbound.",
+        "expression": {
+          "addie": "neutral",
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "If only we had a map...",
+        "expression": {
+          "vera": "neutral",
+          "addie": "neutral",
+          "rainie": "neutral"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "You mean like that one over there?",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
+      },
+      {
+        "speaker": "Addie",
+        "text": "Over where?",
+        "expression": {
+          "addie": "neutral",
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "Rainie points to a small room filled with maps. The door is open.",
+        "background": "clockmakers_guild_maproom",
+        "hideCharacters": true
+      },
+      {
+        "speaker": "Veracity",
+        "text": "That works.",
+        "expression": {
+          "vera": "neutral"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Quick, let's grab the map.",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral"
+        }
+      },
+      {
+        "speaker": "Addie",
+        "text": "I can't condone theft.",
+        "expression": {
+          "addie": "neutral",
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "What if I promise to give it back as soon as we find Da?",
+        "expression": {
+          "vera": "neutral",
+          "addie": "neutral",
+          "rainie": "neutral"
+        }
+      },
+      {
+        "speaker": "Addie",
+        "text": "That sounds more like illicit borrowing... which is acceptable.",
+        "expression": {
+          "addie": "neutral",
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "(worried) I think I hear someone coming!",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Let's get out of here!",
+        "expression": {
+          "vera": "neutral",
+          "addie": "neutral",
+          "rainie": "neutral"
+        }
+      }
+    ]
+  },
+  "storyFlags": {
+    "chapter4_complete": true,
+    "overheard_cult_plan": true,
+    "know_northern_sanctuary": true
+  },
+  "nextChapter": 5
+}

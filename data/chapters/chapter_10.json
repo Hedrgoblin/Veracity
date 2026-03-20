@@ -1,0 +1,111 @@
+{
+  "chapterNumber": 10,
+  "title": "Temporal Resonance",
+  "act": 3,
+  "description": "The device activates. Reality trembles. Everything hangs in the balance.",
+  "assets": {
+    "background": "northern_sanctuary_device",
+    "suppressAutoShow": true,
+    "music": null,
+    "characters": [
+      "guildmaster_black",
+      "cultist_guard",
+      "cultist_guard_staff",
+      "cultist_bookkeeper",
+      "cultist_enforcer"
+    ],
+    "characterFolders": {}
+  },
+  "companions": [],
+  "dialogue": {
+    "opening": [
+      {
+        "speaker": "Narrator",
+        "text": "Back at the Northern Sanctuary, a strange device hums to life. The air begins to shimmer and bend."
+      },
+      {
+        "speaker": "Guildmaster",
+        "text": "Yes! YES! The temporal resonance is building! We will reshape history itself!",
+        "expression": { "guildmaster_black": "excited" }
+      },
+      {
+        "speaker": "Enforcer",
+        "text": "The failsafe. When I give the signal, activate it!",
+        "expression": { "cultist_enforcer": "thinking" }
+      },
+      {
+        "speaker": "Guildmaster",
+        "text": "*whispers* I'm ready.",
+        "hideCharacters": true,
+        "expression": { "guildmaster_black": "smirk" }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "Something's wrong. The hum becomes a scream. Cultists look around in confusion and fear.",
+        "hideCharacters": true,
+        "brightenEffect": true
+      },
+      {
+        "speaker": "Narrator",
+        "text": "The device shudders and stops. Steam and glass fly everywhere. The device goes dark.",
+        "crossfadeBackground": "northern_sanctuary_device_broken"
+      },
+      {
+        "speaker": "Book Keeper",
+        "text": "Grandmaster! The readings! The temporal field has destabilized!",
+        "expression": { "cultist_bookkeeper": "surprised" }
+      },
+      {
+        "speaker": "Guildmaster",
+        "text": "Impossible! The core has to stabilize...What did you do?!",
+        "expression": { "guildmaster_black": "outraged" }
+      },
+      {
+        "speaker": "Book Keeper",
+        "text": "I did exactly what you asked!",
+        "expression": { "cultist_bookkeeper": "surprised" }
+      },
+      {
+        "speaker": "Guildmaster",
+        "text": "No. NO! This was supposed to save us! To give me back what I have lost!",
+        "expression": { "guildmaster_black": "surprised" }
+      },
+      {
+        "speaker": "Enforcer",
+        "text": "We can rebuild.",
+        "expression": { "cultist_enforcer": "neutral" }
+      },
+      {
+        "speaker": "Guildmaster",
+        "text": "Not without the Professor.",
+        "expression": { "guildmaster_black": "scared" }
+      },
+      {
+        "speaker": "Enforcer",
+        "text": "And yet, you let him go. You let them all go.",
+        "expression": { "cultist_enforcer": "angry" }
+      },
+      {
+        "speaker": "Guildmaster",
+        "text": "They will return. She will come to me.",
+        "expression": { "guildmaster_black": "smirk" }
+      },
+      {
+        "speaker": "Enforcer",
+        "text": "How can you be so sure?",
+        "expression": { "cultist_enforcer": "thinking" }
+      },
+      {
+        "speaker": "Guildmaster",
+        "text": "Because she knows now. but only part. And, it's what I would do.",
+        "expression": { "guildmaster_black": "smirk" }
+      }
+    ]
+  },
+  "storyFlags": {
+    "chapter10_complete": true,
+    "device_destroyed": true,
+    "escaped_sanctuary": true
+  },
+  "nextChapter": null
+}

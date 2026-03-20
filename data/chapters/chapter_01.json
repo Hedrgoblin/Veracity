@@ -1,0 +1,188 @@
+{
+  "chapterNumber": 1,
+  "title": "The Workshop",
+  "act": 1,
+  "description": "A quiet morning in father's workshop. The gears turn, the machines hum, and everything feels safe.",
+  "assets": {
+    "background": "home_hallway_day",
+    "music": null,
+    "characters": [
+      "vera",
+      "addie",
+      "rainie"
+    ],
+    "characterFolders": {
+      "vera": "vera_pajamas",
+      "addie": "addie_home",
+      "rainie": "rainie_pajamas"
+    }
+  },
+  "companions": [
+    "addie",
+    "rainie"
+  ],
+  "dialogue": {
+    "opening": [
+      {
+        "speaker": "Narrator",
+        "text": "You are standing in the front hall of the home you grew up in. Morning light streams through the windows in the kitchen behind you. The door to your father's study is closed. That's odd."
+      },
+      {
+        "speaker": "Addie",
+        "text": "Good morning, Vera! Did you sleep well?",
+        "expression": {
+          "addie_home": "grateful",
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "I did, thank you, but I thought I heard strange noises...",
+        "expression": {
+          "vera": "worried",
+          "addie_home": "grateful",
+          "rainie": "neutral"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "I heard them too! I think they came from the study.",
+        "expression": {
+          "rainie": "scared",
+          "vera": "worried",
+          "addie_home": "worried"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Da's been working on something new. He seems... distracted. Worried, even.",
+        "expression": {
+          "rainie": "worried",
+          "vera": "worried",
+          "addie_home": "worried"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "You approach the study door. The machine that controls the lock has been disconnected."
+      },
+      {
+        "speaker": "Addie",
+        "text": "No point in trying to start the day on an empty stomach. Who's for a cup of tea?",
+        "expression": {
+          "addie_home": "grateful",
+          "vera": "worried",
+          "rainie": "thinking"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "No time for tea! Look, the gears are disconnected.",
+        "expression": {
+          "rainie": "worried",
+          "addie_home": "worried",
+          "vera": "worried"
+        }
+      }
+    ],
+    "closing": [
+      {
+        "speaker": "Narrator",
+        "text": "You approach the study door. After a moment's effort, the lock mechanism gives way. The door swings open."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Da never leaves his door like this. Why would he—",
+        "expression": {
+          "vera": "distrust",
+          "rainie": "distrust",
+          "addie_home": "distrust"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "You step inside. Papers scattered everywhere. Books pulled from shelves. And the chair... empty.",
+        "hideCharacters": true,
+        "background": "home_office_ransacked_day"
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Da? ...Da!",
+        "expression": {
+          "vera": "surprised",
+          "rainie": "surprised",
+          "addie_home": "surprised"
+        },
+        "showOnlyVera": true
+      }
+    ]
+  },
+  "choices": [
+    {
+      "text": "We should reconnect the gear system open the door",
+      "companion": "rainie",
+      "consequences": {
+        "careful_approach": true
+      },
+      "puzzle": {
+        "type": "connection",
+        "title": "The Study Lock",
+        "instructions": "The gears controlling the study door are disconnected. Connect them to unlock the door.",
+        "points": [
+          {
+            "id": "gear1",
+            "x": -200,
+            "y": -100,
+            "pair": "gear2"
+          },
+          {
+            "id": "gear2",
+            "x": 200,
+            "y": -100,
+            "pair": "gear1"
+          },
+          {
+            "id": "spring1",
+            "x": -200,
+            "y": 100,
+            "pair": "spring2"
+          },
+          {
+            "id": "spring2",
+            "x": 200,
+            "y": 100,
+            "pair": "spring1"
+          }
+        ]
+      }
+    },
+    {
+      "text": "But first, a cup of tea would be nice.",
+      "companion": "addie",
+      "consequences": {
+        "tea_break": true
+      },
+      "puzzle": {
+        "type": "tea_service",
+        "title": "Brewing Comfort",
+        "instructions": "Serve tea to the guests before their patience runs out!",
+        "sessionDuration": 120,
+        "startingCups": 1,
+        "inventory": {
+          "black_tea": 10,
+          "herbal": 8,
+          "cream": 6,
+          "lemon": 6,
+          "sugar": 6
+        }
+      }
+    }
+  ],
+  "storyFlags": {
+    "chapter1_complete": true,
+    "met_companions": true,
+    "workshop_familiar": true
+  },
+  "nextChapter": 2
+}

@@ -1,0 +1,225 @@
+{
+  "chapterNumber": 3,
+  "title": "Leaving Home",
+  "act": 1,
+  "description": "The city holds shadows and secrets.",
+  "assets": {
+    "background": "london_alley",
+    "music": null,
+    "characters": [
+      "vera",
+      "addie",
+      "rainie",
+      "crone_default"
+    ],
+    "characterFolders": {
+      "vera": "vera_default",
+      "addie": "addie_default",
+      "rainie": "rainie_default",
+      "crone": "crone_default"
+    }
+  },
+  "companions": [
+    "addie",
+    "rainie"
+  ],
+  "dialogue": {
+    "opening": [
+      {
+        "speaker": "Narrator",
+        "text": "You step out into the alley behind your home."
+      },
+      {
+        "speaker": "Addie",
+        "text": "Are we ready?",
+        "expression": {
+          "addie": "worried",
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "We're with you every step of the way!",
+        "expression": {
+          "rainie": "happy",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "You take a deep breath and carefully open the cedar box. Inside, a beautiful mechanical moth rests on velvet. Its brass wings catch the light."
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Look at the inside of the lid!",
+        "expression": {
+          "rainie": "surprised",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "Etched into the lid is a simple compass. Three dark lights for south, east, and west. The northern light pulses brightly.",
+        "showItem": "lide_compass"
+      },
+      {
+        "speaker": "Veracity",
+        "text": "This must track the moth. Da always thinks of everything.",
+        "expression": {
+          "vera": "neutral",
+          "addie": "neutral",
+          "rainie": "neutral"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "You gently lift the mechanical moth. It whirs to life in your palm, wings beginning to flutter.",
+        "showItem": "moth"
+      },
+      {
+        "speaker": "Veracity",
+        "text": "(whispering) Find him. Please.",
+        "expression": {
+          "vera": "sad",
+          "addie": "neutral",
+          "rainie": "neutral"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "You release the moth. It spirals upward, catching the light, then darts north into the fog.",
+        "hideCharacters": true
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Now all we have to do is follow it.",
+        "expression": {
+          "rainie": "grateful"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "The moth immediately disappears into the night sky.",
+        "hideCharacters": true
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Oh no... I guess it's lucky we have that lid.",
+        "expression": {
+          "rainie": "sad"
+        }
+      },
+      {
+        "speaker": "Addie",
+        "text": "Stay close. These streets are not safe, especially for a young girl and two companions.",
+        "expression": {
+          "addie": "distrust",
+          "rainie": "sad"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "launchMothPuzzle": true,
+        "hideCharacters": true
+      },
+      {
+        "speaker": "Narrator",
+        "text": "You find yourself in front of the Watchmaker's Guild. Standing on the steps, you a see a blind old woman, begging.",
+        "background": "clockmakers_guild_door"
+      },
+      {
+        "speaker": "Crone",
+        "text": "Spare a penny?",
+        "showCharacters": ["crone"],
+        "expression": {
+          "crone": "neutral"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "You pull a penny out of your bag and put it in the woman's hand. Her blind eyes feel like they are looking right through you."
+      },
+      {
+        "speaker": "Crone",
+        "text": "what a lovely young woman you've turned out to be.",
+        "expression": {
+          "crone": "happy"
+        }
+      },
+      {
+        "speaker": "Vera",
+        "text": "Do I know you?",
+        "expression": {
+          "vera": "grateful"
+        },
+        "hideCharacters": ["crone"]
+      },
+      {
+        "speaker": "Narrator",
+        "text": "the woman stares blankly and wanders away.",
+        "showCharacters": ["crone"],
+        "hideCharacters": ["vera", "addie", "rainie"],
+        "expression": {
+          "crone": "happy"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "why does she feel so familiar?",
+        "hideCharacters": ["crone"],
+        "expression": {
+          "vera": "confused"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Come on! the moth is in there.",
+        "expression": {
+          "vera": "neutral",
+          "rainie": "grateful"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "you carefully try the door. It's locked, but you recognize the lock. It looks like the kind of lock your father makes."
+      }
+    ],
+    "midpoint": [
+      {
+        "speaker": "Veracity",
+        "text": "I know how to open this!",
+        "expression": {
+          "rainie": "happy",
+          "vera": "neutral",
+          "addie": "neutral"
+        },
+        "launchGearPuzzle": true
+      }
+    ],
+    "closing": [
+      {
+        "speaker": "Narrator",
+        "text": "The lock clicks. The door swings open."
+      }
+    ]
+  },
+  "mothPuzzle": {
+    "type": "maze",
+    "title": "Follow the Moth",
+    "instructions": "The moth darts ahead into the fog. Follow its glow through the streets."
+  },
+  "puzzle": {
+    "type": "gear_clockmakers",
+    "title": "The Spiral Lock",
+    "instructions": "Connect the gears to unlock the door."
+  },
+  "storyFlags": {
+    "chapter3_complete": true,
+    "reached_cult_location": true,
+    "met_old_woman": true
+  },
+  "nextChapter": 4
+}

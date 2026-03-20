@@ -1,0 +1,276 @@
+{
+  "chapterNumber": 8,
+  "title": "Discovered",
+  "act": 2,
+  "description": "Captured, but not defeated. The truth begins to emerge.",
+  "assets": {
+    "background": "northern_sanctuary_library_small",
+    "suppressAutoShow": true,
+    "music": null,
+    "characters": [
+      "vera",
+      "addie",
+      "rainie",
+      "da_default",
+      "cultist_guard",
+      "cultist_guard_staff",
+      "guildmaster"
+    ],
+    "characterFolders": {
+      "vera": "vera_clockworker",
+      "addie": "addie_clockworker",
+      "rainie": "rainie_clockworker"
+    }
+  },
+  "companions": [
+    "addie",
+    "rainie"
+  ],
+  "dialogue": {
+    "opening": [
+      {
+        "speaker": "Father",
+        "text": "I'm so sorry. I never wanted you involved in this. The Order... they're obsessed with controlling time itself.",
+        "hideCharacters": true,
+        "showCharacters": ["da_default"],
+        "expression": {
+          "da_default": "sad"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "This Device. Can it really work?",
+        "hideCharacters": ["da_default"],
+        "showCharacters": ["vera"],
+        "expression": {
+          "vera": "confused"
+        }
+      },
+      {
+        "speaker": "Father",
+        "text": "No. Maybe. No. It was a thought experiment, nothing more.",
+        "hideCharacters": ["vera"],
+        "showCharacters": ["da_default"],
+        "expression": {
+          "da_default": "thinking"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Why do they think they can force you to build it?",
+        "hideCharacters": ["da_default"],
+        "showCharacters": ["vera"],
+        "expression": {
+          "vera": "confused"
+        }
+      },
+      {
+        "speaker": "Father",
+        "text": "Because once, many years ago, I built a prototype, just a little thing. But the wrong person found it. I meant to destroy it, but it was too late.",
+        "hideCharacters": ["vera"],
+        "showCharacters": ["da_default"],
+        "expression": {
+          "da_default": "sad"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "So it's more than a thought experiment.",
+        "hideCharacters": ["da_default"],
+        "showCharacters": ["vera"],
+        "expression": {
+          "vera": "serious"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "Your father's eyes flit to the door, then back to you.",
+        "hideCharacters": true
+      },
+      {
+        "speaker": "Father",
+        "text": "We dont have time to talk about this now... They want me to complete their version of a time travel device, but I can't. I won't. It will never be what she wants.",
+        "hideCharacters": ["vera"],
+        "showCharacters": ["da_default"],
+        "expression": {
+          "da_default": "sad"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "The door bursts open. Cultists surround you.",
+        "hideCharacters": ["da_default"],
+        "showCharacters": ["cultist_guard", "cultist_guard_staff"],
+        "expression": {
+          "cultist_guard": "angry",
+          "cultist_guard_staff": "angry"
+        }
+      },
+      {
+        "speaker": "Guildmaster",
+        "text": "How touching. A family reunion.",
+        "hideCharacters": true,
+        "showCharacters": ["guildmaster"],
+        "moveCharacters": { "guildmaster": "center" },
+        "expression": { "guildmaster": "smirk" }
+      },
+      {
+        "speaker": "Addie",
+        "text": "Vera, behind me. Now.",
+        "hideCharacters": ["guildmaster"],
+        "showCharacters": ["vera", "addie"],
+        "expression": {
+          "vera": "outraged",
+          "addie": "outraged"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "The woman stares at you with blind eyes. She looks familiar.",
+        "hideCharacters": true,
+        "showCharacters": ["guildmaster"],
+        "moveCharacters": { "guildmaster": "center" },
+        "expression": { "guildmaster": "neutral" }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "I... know you.",
+        "hideCharacters": ["guildmaster"],
+        "showCharacters": ["vera", "addie", "rainie"],
+        "expression": {
+          "vera": "confused",
+          "addie": "serious",
+          "rainie": "outraged"
+        }
+      },
+      {
+        "speaker": "Guildmaster",
+        "text": "I would think you might.",
+        "hideCharacters": ["vera", "addie"],
+        "showCharacters": ["guildmaster"],
+        "moveCharacters": { "guildmaster": "center" },
+        "expression": {
+          "guildmaster": "grateful",
+          "rainie": "outraged"
+        }
+      },
+      {
+        "speaker": "Father",
+        "text": "Liona, stop.",
+        "hideCharacters": ["guildmaster"],
+        "showCharacters": ["da_default"],
+        "expression": {
+          "da_default": "sad",
+          "rainie": "outraged"
+        }
+      },
+      {
+        "speaker": "Guildmaster",
+        "text": "Come closer my love. My eyes are not what they once where...",
+        "hideCharacters": ["da_default"],
+        "showCharacters": ["guildmaster"],
+        "moveCharacters": { "guildmaster": "center" },
+        "expression": {
+          "guildmaster": "confused",
+          "rainie": "outraged"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "You're the old woman we met in front of the Clockworker's Guild. I gave you a penny.",
+        "hideCharacters": ["guildmaster"],
+        "showCharacters": ["vera"],
+        "expression": {
+          "vera": "confused",
+          "rainie": "scared"
+        }
+      },
+      {
+        "speaker": "Guildmaster",
+        "text": "You did. What a kind young woman you have turned out to be.",
+        "hideCharacters": ["vera"],
+        "showCharacters": ["guildmaster"],
+        "moveCharacters": { "guildmaster": "center" },
+        "expression": { "guildmaster": "smirk", "rainie": "outraged" }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "You find yourself strangely drawn towards this woman.",
+        "expression": { "guildmaster": "serious" }
+      },
+      {
+        "speaker": "Father",
+        "text": "LIONA, NO!",
+        "hideCharacters": ["guildmaster"],
+        "showCharacters": ["da_default"],
+        "expression": {
+          "da_default": "surprised",
+          "rainie": "outraged"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "Suddenly, the crystal in her walking stick illuminates. The light is blinding. You can hear your father and friends shouting in the distance, and then everything goes black.",
+        "hideCharacters": true,
+        "fadeToBlack": true,
+        "background": "ill_power_01"
+      },
+      {
+        "speaker": "Guildmaster",
+        "text": "Listen to me.",
+        "hideCharacters": true,
+        "background": "ill_essense"
+      },
+      {
+        "speaker": "Veracity",
+        "text": "I'm listening...",
+        "hideCharacters": true
+      },
+      {
+        "speaker": "Guildmaster",
+        "text": "Once upon a time, there was a little girl. She had a mother and a father...",
+        "hideCharacters": true
+      },
+      {
+        "speaker": "Veracity",
+        "text": "and a Bear to protect her, and a raccoon to love her...",
+        "hideCharacters": true
+      },
+      {
+        "speaker": "Guildmaster",
+        "text": "She had a mother that loved her very much. The father took something from the mother, and sent her far far away...",
+        "hideCharacters": true
+      },
+      {
+        "speaker": "Veracity",
+        "text": "I am far far away...",
+        "hideCharacters": true
+      },
+      {
+        "speaker": "Narrator",
+        "text": "In the distance, you can hear Addie. She's roaring. You can hear screaming, who is screaming? Everything is so black",
+        "hideCharacters": true,
+        "blackScreen": true
+      },
+      {
+        "speaker": "Addie",
+        "text": "If ANY of you touch her again. I will kill you all.",
+        "background": "ill_addie_growl_01",
+        "hideCharacters": true
+      },
+      {
+        "speaker": "Narrator",
+        "text": "you fade to black again",
+        "hideCharacters": true,
+        "blackScreen": true
+      }
+    ],
+    "closing": []
+  },
+  "storyFlags": {
+    "chapter8_complete": true,
+    "discovered_truth": true,
+    "companions_are_key": true
+  },
+  "nextChapter": 9
+}

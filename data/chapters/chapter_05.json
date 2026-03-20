@@ -1,0 +1,182 @@
+{
+  "chapterNumber": 5,
+  "title": "The Clockwork Train",
+  "act": 2,
+  "description": "A journey north begins, racing against time.",
+  "assets": {
+    "background": "train_ext",
+    "music": null,
+    "characters": [
+      "vera",
+      "addie",
+      "rainie",
+      "gentleman_paper"
+    ],
+    "characterFolders": {
+      "vera": "vera_default",
+      "addie": "addie_default",
+      "rainie": "rainie_default"
+    }
+  },
+  "companions": [
+    "addie",
+    "rainie"
+  ],
+  "dialogue": {
+    "opening": [
+      {
+        "speaker": "Narrator",
+        "text": "Dawn. The northern train departs."
+      },
+      {
+        "speaker": "Addie",
+        "text": "Vera, we should rest while we can. The journey will take all day.",
+        "expression": {
+          "addie": "neutral",
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Rest? How can you rest? We're on an adventure! Save the Professor, find out what the creepers want with his pocket watch, save the day!",
+        "expression": {
+          "rainie": "confused",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
+      },
+      {
+        "speaker": "Addie",
+        "text": "what makes you think it's a pocket watch?",
+        "expression": {
+          "addie": "confused",
+          "vera": "confused",
+          "rainie": "confused"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Everything the professor does, involves a pocket watch. I have one right here... so do you, somewhere...",
+        "expression": {
+          "rainie": "excited",
+          "vera": "neutral",
+          "addie": "confused"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Every time I close my eyes, I see Da in danger.",
+        "expression": {
+          "vera": "sad",
+          "addie": "sad",
+          "rainie": "sad"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "I know a trick...",
+        "expression": {
+          "rainie": "grateful",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
+      },
+      {
+        "speaker": "Addie",
+        "text": "So do I. Tea. It never fails.",
+        "expression": {
+          "addie": "grateful",
+          "vera": "grateful",
+          "rainie": "grateful"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "Addie produces her tea service. The familiar ritual of brewing begins.",
+        "launchTeaPuzzle": true,
+        "background": "train_carraige"
+      },
+      {
+        "speaker": "Narrator",
+        "text": "A gentleman in fine clothes stands across from you, reading. He glances over the pages.",
+        "background": "train_carraige",
+        "hideCharacters": true,
+        "showCharacters": ["gentleman_paper"]
+      },
+      {
+        "speaker": "Gentleman",
+        "text": "Traveling alone, young miss? That's quite unusual. Do your parents know where you are?",
+        "hideCharacters": ["vera", "addie", "rainie"],
+        "showCharacters": ["gentleman_paper"],
+        "expression": {
+          "gentleman_paper": "neutral"
+        }
+      },
+      {
+        "speaker": "Addie",
+        "text": "Sir. She's hardly alone.",
+        "hideCharacters": ["gentleman_paper"],
+        "expression": {
+          "addie": "outraged"
+        }
+      },
+      {
+        "speaker": "Gentleman",
+        "text": "Beg your pardon...",
+        "hideCharacters": ["vera", "addie", "rainie"],
+        "showCharacters": ["gentleman_paper"],
+        "expression": {
+          "gentleman_paper": "surprised"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "I'm visiting my aunt up north. My... my companions keep me safe.",
+        "hideCharacters": ["gentleman_paper"],
+        "expression": {
+          "vera": "neutral"
+        }
+      },
+      {
+        "speaker": "Gentleman",
+        "text": "Ah, clockwork companions. Marvelous craftsmanship.",
+        "hideCharacters": ["vera", "addie", "rainie"],
+        "showCharacters": ["gentleman_paper"],
+        "expression": {
+          "gentleman_paper": "smirk"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "His tone unsettles you. You say nothing. He returns to his newspaper."
+      },
+      {
+        "speaker": "Narrator",
+        "text": "You settle back into your seat and look out at the scenery.",
+        "hideCharacters": true,
+        "launchTrainPuzzle": true
+      }
+    ]
+  },
+  "teaPuzzle": {
+    "type": "tea_service",
+    "title": "Tea on the Train",
+    "instructions": "Serve tea to your companions. The journey is long — a little comfort goes a long way.",
+    "sessionDuration": 120,
+    "startingCups": 1,
+    "inventory": {
+      "black_tea": 10,
+      "herbal": 8,
+      "cream": 6,
+      "lemon": 6,
+      "sugar": 6
+    }
+  },
+  "storyFlags": {
+    "chapter5_complete": true,
+    "met_mysterious_gentleman": true,
+    "traveling_north": true
+  },
+  "nextChapter": 6
+}

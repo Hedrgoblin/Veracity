@@ -1,0 +1,268 @@
+{
+  "chapterNumber": 9,
+  "title": "Home",
+  "act": 3,
+  "description": "Home again.",
+  "assets": {
+    "background": "home_bedroom_vera",
+    "music": null,
+    "characters": [
+      "vera",
+      "addie",
+      "rainie",
+      "da_lab"
+    ],
+    "characterFolders": {
+      "vera": "vera_pajamas",
+      "addie": "addie_home",
+      "rainie": "rainie_default"
+    },
+    "closingCharacterFolders": {
+      "vera": "vera_green"
+    }
+  },
+  "companions": [
+    "addie",
+    "rainie"
+  ],
+  "dialogue": {
+    "opening": [
+      {
+        "speaker": "Narrator",
+        "text": "You find yourself back in your bedroom at home."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "what happened?",
+        "slideIn": ["rainie"],
+        "expression": {
+          "vera": "sad",
+          "rainie": "neutral"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "What didn't happen! We met the master of the entire Guild! who might be your mother.",
+        "expression": {
+          "rainie": "scared",
+          "vera": "sad"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "My Mother died when I was a baby.",
+        "expression": {
+          "vera": "confused",
+          "rainie": "confused"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Maybe not! and then the crystal in her walking stick that was some kind of... I don't know, time suction device. When she got near you, it activated!",
+        "expression": {
+          "rainie": "confused",
+          "vera": "outraged"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "It was as if I could hear her from inside my head.",
+        "expression": {
+          "vera": "thinking",
+          "rainie": "confused"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "I don't think she meant that to happen...",
+        "expression": {
+          "rainie": "confused",
+          "vera": "sad"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "I was lost for a minute, wasn't I?",
+        "expression": {
+          "vera": "worried",
+          "rainie": "sad"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "yes! But then Addie went all BEAR, did you know she could do that?!",
+        "expression": {
+          "rainie": "worried",
+          "vera": "scared"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "I did not.",
+        "expression": {
+          "vera": "scared",
+          "rainie": "worried"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "She went absolutely feral! She knocked the staff out of the Guildmaster's hands. You went flying, the Guildmaster went flying, Addie growled, and all the cultists ran away!",
+        "expression": {
+          "rainie": "worried",
+          "vera": "worried"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "And Da?",
+        "expression": {
+          "vera": "worried",
+          "rainie": "neutral"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Addie grabbed you like you were nothing. The professor ran behind her. I grabbed all the notes I could find because, you know, and I ran after.",
+        "expression": {
+          "rainie": "confused",
+          "vera": "worried"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Was everybody ok?",
+        "expression": {
+          "vera": "worried",
+          "rainie": "confused"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "MOST of the cultists ran away but there was that one with a staff. He threw it at Addie and hit her dead in the shoulder!",
+        "expression": {
+          "rainie": "sad",
+          "vera": "sad"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "Suddenly, the world feels very real again."
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Where is Addie? Is she ok? I need to see her!",
+        "expression": {
+          "vera": "outraged",
+          "rainie": "sad"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "The professor said I was to tell you to stay right.... aaand there she goes. WAIT UP!",
+        "expression": {
+          "rainie": "worried",
+          "vera": "outraged"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "Still exhausted, you hurry downstairs to your father's laboratory in the basement. And there she is. The Bear you have loved all your life, who has always been by your side.",
+        "background": "home_lab",
+        "hideCharacters": true
+      },
+      {
+        "speaker": "Father",
+        "text": "Rainie, I told you to keep her out of here today.",
+        "hideCharacters": true,
+        "showCharacters": ["da_lab"],
+        "expression": {
+          "da_lab": "angry"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "I tried!",
+        "hideCharacters": ["da_lab"],
+        "showCharacters": ["vera", "addie", "rainie"],
+        "expression": {
+          "rainie": "worried",
+          "vera": "outraged",
+          "addie": "worried"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Da, I can help you...",
+        "expression": {
+          "vera": "worried",
+          "addie": "neutral",
+          "rainie": "scared"
+        }
+      },
+      {
+        "speaker": "Father",
+        "text": "Vera, Addie will be alright. I promise. But for now, I need you upstairs, out of harm's way.",
+        "hideCharacters": true,
+        "showCharacters": ["da_lab"],
+        "expression": {
+          "da_lab": "sad"
+        }
+      },
+      {
+        "speaker": "Narrator",
+        "text": "You go back upstairs, get dressed, and wait.",
+        "background": "home_solarium",
+        "hideCharacters": true
+      },
+      {
+        "speaker": "Rainie",
+        "text": "Don't worry Vera, the professor is very good at this.",
+        "hideCharacters": true,
+        "showCharacters": ["rainie"],
+        "expression": {
+          "rainie": "sad"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "I know. You're right. I'm still trying to understand what happened in the last few days.",
+        "swapCharacters": true,
+        "expression": {
+          "vera": "thinking",
+          "rainie": "confused"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "You mean, why some crazy old insane woman is kidnapping inventors all over the place, pretending to be your mother, and trying to create a device to stop time itself?",
+        "hideCharacters": true,
+        "showCharacters": ["vera", "rainie"],
+        "expression": {
+          "rainie": "excited",
+          "vera": "grateful"
+        }
+      },
+      {
+        "speaker": "Veracity",
+        "text": "Yes, that. And what was that device? Da was not telling the whole truth. And what was that crystal? and how...",
+        "expression": {
+          "vera": "smirk",
+          "rainie": "excited"
+        }
+      },
+      {
+        "speaker": "Rainie",
+        "text": "We have so many puzzles to solve Vera! We'll never be bored again!",
+        "expression": {
+          "rainie": "excited",
+          "vera": "smirk"
+        }
+      }
+    ]
+  },
+  "storyFlags": {
+    "chapter9_complete": true,
+    "girl_taking_charge": true
+  },
+  "nextChapter": 10
+}
