@@ -1,8 +1,8 @@
 {
   "chapterNumber": 9,
-  "title": "Afterwards",
+  "title": "Home",
   "act": 3,
-  "description": "A choice must be made.",
+  "description": "Home again.",
   "assets": {
     "background": "home_bedroom_vera",
     "music": null,
@@ -36,7 +36,7 @@
         "text": "what happened?",
         "slideIn": ["rainie"],
         "expression": {
-          "vera": "neutral",
+          "vera": "sad",
           "rainie": "neutral"
         }
       },
@@ -44,79 +44,79 @@
         "speaker": "Rainie",
         "text": "What didn't happen! We met the master of the entire Guild! who might be your mother.",
         "expression": {
-          "rainie": "neutral",
-          "vera": "neutral"
+          "rainie": "scared",
+          "vera": "sad"
         }
       },
       {
         "speaker": "Veracity",
         "text": "My Mother died when I was a baby.",
         "expression": {
-          "vera": "neutral",
-          "rainie": "neutral"
+          "vera": "confused",
+          "rainie": "confused"
         }
       },
       {
         "speaker": "Rainie",
         "text": "Maybe not! and then the crystal in her walking stick that was some kind of... I don't know, time suction device. When she got near you, it activated!",
         "expression": {
-          "rainie": "neutral",
-          "vera": "neutral"
+          "rainie": "confused",
+          "vera": "outraged"
         }
       },
       {
         "speaker": "Veracity",
         "text": "It was as if I could hear her from inside my head.",
         "expression": {
-          "vera": "neutral",
-          "rainie": "neutral"
+          "vera": "thinking",
+          "rainie": "confused"
         }
       },
       {
         "speaker": "Rainie",
         "text": "I don't think she meant that to happen...",
         "expression": {
-          "rainie": "neutral",
-          "vera": "neutral"
+          "rainie": "confused",
+          "vera": "sad"
         }
       },
       {
         "speaker": "Veracity",
         "text": "I was lost for a minute, wasn't I?",
         "expression": {
-          "vera": "neutral",
-          "rainie": "neutral"
+          "vera": "worried",
+          "rainie": "sad"
         }
       },
       {
         "speaker": "Rainie",
         "text": "yes! But then Addie went all BEAR, did you know she could do that?!",
         "expression": {
-          "rainie": "neutral",
-          "vera": "neutral"
+          "rainie": "worried",
+          "vera": "scared"
         }
       },
       {
         "speaker": "Veracity",
         "text": "I did not.",
         "expression": {
-          "vera": "neutral",
-          "rainie": "neutral"
+          "vera": "scared",
+          "rainie": "worried"
         }
       },
       {
         "speaker": "Rainie",
         "text": "She went absolutely feral! She knocked the staff out of the Guildmaster's hands. You went flying, the Guildmaster went flying, Addie growled, and all the cultists ran away!",
         "expression": {
-          "rainie": "neutral",
-          "vera": "neutral"
+          "rainie": "worried",
+          "vera": "worried"
         }
       },
       {
         "speaker": "Veracity",
         "text": "And Da?",
         "expression": {
-          "vera": "neutral",
+          "vera": "worried",
           "rainie": "neutral"
         }
       },
@@ -124,24 +124,24 @@
         "speaker": "Rainie",
         "text": "Addie grabbed you like you were nothing. The professor ran behind her. I grabbed all the notes I could find because, you know, and I ran after.",
         "expression": {
-          "rainie": "neutral",
-          "vera": "neutral"
+          "rainie": "confused",
+          "vera": "worried"
         }
       },
       {
         "speaker": "Veracity",
         "text": "Was everybody ok?",
         "expression": {
-          "vera": "neutral",
-          "rainie": "neutral"
+          "vera": "worried",
+          "rainie": "confused"
         }
       },
       {
         "speaker": "Rainie",
         "text": "MOST of the cultists ran away but there was that one with a staff. He threw it at Addie and hit her dead in the shoulder!",
         "expression": {
-          "rainie": "neutral",
-          "vera": "neutral"
+          "rainie": "sad",
+          "vera": "sad"
         }
       },
       {
@@ -152,16 +152,16 @@
         "speaker": "Veracity",
         "text": "Where is Addie? Is she ok? I need to see her!",
         "expression": {
-          "vera": "neutral",
-          "rainie": "neutral"
+          "vera": "outraged",
+          "rainie": "sad"
         }
       },
       {
         "speaker": "Rainie",
         "text": "The professor said I was to tell you to stay right.... aaand there she goes. WAIT UP!",
         "expression": {
-          "rainie": "neutral",
-          "vera": "neutral"
+          "rainie": "worried",
+          "vera": "outraged"
         }
       },
       {
@@ -176,7 +176,7 @@
         "hideCharacters": true,
         "showCharacters": ["da_lab"],
         "expression": {
-          "da_lab": "neutral"
+          "da_lab": "angry"
         }
       },
       {
@@ -185,18 +185,18 @@
         "hideCharacters": ["da_lab"],
         "showCharacters": ["vera", "addie", "rainie"],
         "expression": {
-          "rainie": "neutral",
-          "vera": "neutral",
-          "addie": "neutral"
+          "rainie": "worried",
+          "vera": "outraged",
+          "addie": "worried"
         }
       },
       {
         "speaker": "Veracity",
         "text": "Da, I can help you...",
         "expression": {
-          "vera": "neutral",
+          "vera": "worried",
           "addie": "neutral",
-          "rainie": "neutral"
+          "rainie": "scared"
         }
       },
       {
@@ -205,7 +205,7 @@
         "hideCharacters": true,
         "showCharacters": ["da_lab"],
         "expression": {
-          "da_lab": "neutral"
+          "da_lab": "sad"
         }
       },
       {
@@ -220,7 +220,7 @@
         "hideCharacters": true,
         "showCharacters": ["rainie"],
         "expression": {
-          "rainie": "neutral"
+          "rainie": "sad"
         }
       },
       {
@@ -228,8 +228,8 @@
         "text": "I know. You're right. I'm still trying to understand what happened in the last few days.",
         "swapCharacters": true,
         "expression": {
-          "vera": "neutral",
-          "rainie": "neutral"
+          "vera": "thinking",
+          "rainie": "confused"
         }
       },
       {
@@ -238,24 +238,24 @@
         "hideCharacters": true,
         "showCharacters": ["vera", "rainie"],
         "expression": {
-          "rainie": "neutral",
-          "vera": "neutral"
+          "rainie": "excited",
+          "vera": "grateful"
         }
       },
       {
         "speaker": "Veracity",
         "text": "Yes, that. And what was that device? Da was not telling the whole truth. And what was that crystal? and how...",
         "expression": {
-          "vera": "neutral",
-          "rainie": "neutral"
+          "vera": "smirk",
+          "rainie": "excited"
         }
       },
       {
         "speaker": "Rainie",
         "text": "We have so many puzzles to solve Vera! We'll never be bored again!",
         "expression": {
-          "rainie": "neutral",
-          "vera": "neutral"
+          "rainie": "excited",
+          "vera": "smirk"
         }
       }
     ]

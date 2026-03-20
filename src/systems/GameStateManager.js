@@ -11,7 +11,7 @@ class GameStateManager {
     this.state = {
       currentChapter: 1,
       completedChapters: [],
-      subscribed: true, // Track subscription status (true for dev/testing)
+      subscribed: false,
       teacups: 0, // Currency earned from tea service minigame
       companions: {
         addie: {
