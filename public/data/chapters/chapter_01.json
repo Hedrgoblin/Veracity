@@ -31,7 +31,7 @@
         "speaker": "Addie",
         "text": "Good morning, Vera! Did you sleep well?",
         "expression": {
-          "addie_home": "neutral",
+          "addie_home": "grateful",
           "vera": "neutral",
           "rainie": "neutral"
         }
@@ -40,8 +40,8 @@
         "speaker": "Veracity",
         "text": "I did, thank you, but I thought I heard strange noises...",
         "expression": {
-          "vera": "thinking",
-          "addie_home": "neutral",
+          "vera": "worried",
+          "addie_home": "grateful",
           "rainie": "neutral"
         }
       },
@@ -49,18 +49,18 @@
         "speaker": "Rainie",
         "text": "I heard them too! I think they came from the study.",
         "expression": {
-          "rainie": "thinking",
-          "vera": "thinking",
-          "addie_home": "neutral"
+          "rainie": "scared",
+          "vera": "worried",
+          "addie_home": "worried"
         }
       },
       {
         "speaker": "Veracity",
         "text": "Da's been working on something new. He seems... distracted. Worried, even.",
         "expression": {
-          "rainie": "neutral",
-          "vera": "neutral",
-          "addie_home": "neutral"
+          "rainie": "worried",
+          "vera": "worried",
+          "addie_home": "worried"
         }
       },
       {
@@ -71,18 +71,18 @@
         "speaker": "Addie",
         "text": "No point in trying to start the day on an empty stomach. Who's for a cup of tea?",
         "expression": {
-          "addie_home": "neutral",
-          "vera": "neutral",
-          "rainie": "neutral"
+          "addie_home": "grateful",
+          "vera": "worried",
+          "rainie": "thinking"
         }
       },
       {
         "speaker": "Rainie",
         "text": "No time for tea! Look, the gears are disconnected.",
         "expression": {
-          "rainie": "thinking",
-          "addie_home": "neutral",
-          "vera": "neutral"
+          "rainie": "worried",
+          "addie_home": "worried",
+          "vera": "worried"
         }
       }
     ],
@@ -95,9 +95,9 @@
         "speaker": "Veracity",
         "text": "Da never leaves his door like this. Why would he—",
         "expression": {
-          "vera": "sad",
-          "rainie": "surprised",
-          "addie_home": "surprised"
+          "vera": "distrust",
+          "rainie": "distrust",
+          "addie_home": "distrust"
         }
       },
       {
