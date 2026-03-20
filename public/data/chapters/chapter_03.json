@@ -34,14 +34,18 @@
         "speaker": "Addie",
         "text": "Are we ready?",
         "expression": {
-          "addie_home": "sad"
+          "addie_home": "sad",
+          "vera": "neutral",
+          "rainie": "neutral"
         }
       },
       {
         "speaker": "Rainie",
         "text": "We're with you every step of the way!",
         "expression": {
-          "rainie": "happy"
+          "rainie": "happy",
+          "vera": "neutral",
+          "addie_home": "neutral"
         }
       },
       {
@@ -52,7 +56,9 @@
         "speaker": "Rainie",
         "text": "Look at the inside of the lid!",
         "expression": {
-          "rainie": "surprised"
+          "rainie": "surprised",
+          "vera": "neutral",
+          "addie_home": "neutral"
         }
       },
       {
@@ -64,7 +70,9 @@
         "speaker": "Veracity",
         "text": "This must track the moth. Da always thinks of everything.",
         "expression": {
-          "vera": "happy"
+          "vera": "happy",
+          "addie_home": "neutral",
+          "rainie": "neutral"
         }
       },
       {
@@ -76,7 +84,9 @@
         "speaker": "Veracity",
         "text": "(whispering) Find him. Please.",
         "expression": {
-          "vera": "sad"
+          "vera": "sad",
+          "addie_home": "neutral",
+          "rainie": "neutral"
         }
       },
       {
@@ -160,13 +170,17 @@
       {
         "speaker": "Veracity",
         "text": "why does she feel so familiar?",
-        "hideCharacters": ["crone"]
+        "hideCharacters": ["crone"],
+        "expression": {
+          "vera": "neutral"
+        }
       },
       {
         "speaker": "Rainie",
         "text": "Come on! the moth is in there.",
         "expression": {
-          "vera": "neutral"
+          "vera": "neutral",
+          "rainie": "neutral"
         }
       },
       {
@@ -179,7 +193,9 @@
         "speaker": "Veracity",
         "text": "I know how to open this!",
         "expression": {
-          "rainie": "happy"
+          "rainie": "happy",
+          "vera": "neutral",
+          "addie_home": "neutral"
         },
         "launchGearPuzzle": true
       }

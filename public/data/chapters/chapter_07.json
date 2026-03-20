@@ -32,11 +32,21 @@
       },
       {
         "speaker": "Addie",
-        "text": "There. That door has extra guards. Whatever they're protecting, it must be important."
+        "text": "There. That door has extra guards. Whatever they're protecting, it must be important.",
+        "expression": {
+          "addie": "neutral",
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Rainie",
-        "text": "And the lid says the moth is behind that door!"
+        "text": "And the lid says the moth is behind that door!",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
       },
       {
         "speaker": "Veracity",
@@ -49,7 +59,12 @@
       },
       {
         "speaker": "Rainie",
-        "text": "I saw some gears that looked important back there... I wonder what happens if I move one... be right back."
+        "text": "I saw some gears that looked important back there... I wonder what happens if I move one... be right back.",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
       },
       {
         "speaker": "Narrator",
@@ -67,7 +82,12 @@
       },
       {
         "speaker": "Rainie",
-        "text": "Did I miss anything?"
+        "text": "Did I miss anything?",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
       },
       {
         "speaker": "Veracity",
@@ -91,7 +111,10 @@
         "speaker": "Veracity",
         "text": "Da!",
         "showCharacters": ["vera"],
-        "hideCharacters": ["da_moth"]
+        "hideCharacters": ["da_moth"],
+        "expression": {
+          "vera": "neutral"
+        }
       },
       {
         "speaker": "Father",

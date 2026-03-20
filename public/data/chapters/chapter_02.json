@@ -30,7 +30,9 @@
         "speaker": "Veracity",
         "text": "It doesn't seem real.",
         "expression": {
-          "vera": "sad"
+          "vera": "sad",
+          "addie": "neutral",
+          "rainie": "neutral"
         }
       },
       {
@@ -44,17 +46,29 @@
       },
       {
         "speaker": "Rainie",
-        "text": "Look at all these ripped up papers! Someone was looking for something."
+        "text": "Look at all these ripped up papers! Someone was looking for something.",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
       },
       {
         "speaker": "Veracity",
-        "text": "I see a piece of paper with my name on it."
+        "text": "I see a piece of paper with my name on it.",
+        "expression": {
+          "vera": "neutral",
+          "addie": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Rainie",
         "text": "Here's another one! it looks like a note!",
         "expression": {
-          "rainie": "surprised"
+          "rainie": "surprised",
+          "vera": "neutral",
+          "addie": "neutral"
         }
       },
       {
@@ -65,13 +79,20 @@
     "midpoint": [
       {
         "speaker": "Rainie",
-        "text": "What do you think the note meant?"
+        "text": "What do you think the note meant?",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
       },
       {
         "speaker": "Veracity",
         "text": "Da was trying to warn me. He showed me a secret panel once... let's see if it's still there...",
         "expression": {
-          "vera": "neutral"
+          "vera": "neutral",
+          "addie": "neutral",
+          "rainie": "neutral"
         }
       },
       {
@@ -119,7 +140,9 @@
         "speaker": "Addie",
         "text": "Wait, Vera. There's another note here.",
         "expression": {
-          "addie": "surprised"
+          "addie": "surprised",
+          "vera": "neutral",
+          "rainie": "neutral"
         }
       },
       {
@@ -131,7 +154,8 @@
         "text": "Addie, we have to find him.",
         "expression": {
           "vera": "neutral",
-          "addie": "sad"
+          "addie": "sad",
+          "rainie": "neutral"
         },
         "showItem": "note_dear_vera_02"
       },
@@ -140,7 +164,8 @@
         "text": "It's dangerous out there, for clockwork animals like Rainie and myself. To say nothing of the quality of tea one finds while traveling... But yes. We can't leave him alone out there.",
         "expression": {
           "addie": "neutral",
-          "vera": "sad"
+          "vera": "sad",
+          "rainie": "neutral"
         }
       },
       {
@@ -148,14 +173,17 @@
         "text": "Adventure! We'll find him, Vera. Don't worry!",
         "expression": {
           "rainie": "happy",
-          "vera": "neutral"
+          "vera": "neutral",
+          "addie": "neutral"
         }
       },
       {
         "speaker": "Addie",
         "text": "I'll start packing.",
         "expression": {
-          "addie": "neutral"
+          "addie": "neutral",
+          "vera": "neutral",
+          "rainie": "neutral"
         }
       }
     ]

@@ -34,59 +34,115 @@
       {
         "speaker": "Veracity",
         "text": "what happened?",
-        "slideIn": ["rainie"]
+        "slideIn": ["rainie"],
+        "expression": {
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Rainie",
-        "text": "What didn't happen! We met the master of the entire Guild! who might be your mother."
+        "text": "What didn't happen! We met the master of the entire Guild! who might be your mother.",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral"
+        }
       },
       {
         "speaker": "Veracity",
-        "text": "My Mother died when I was a baby."
+        "text": "My Mother died when I was a baby.",
+        "expression": {
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Rainie",
-        "text": "Maybe not! and then the crystal in her walking stick that was some kind of... I don't know, time suction device. When she got near you, it activated!"
+        "text": "Maybe not! and then the crystal in her walking stick that was some kind of... I don't know, time suction device. When she got near you, it activated!",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral"
+        }
       },
       {
         "speaker": "Veracity",
-        "text": "It was as if I could hear her from inside my head."
+        "text": "It was as if I could hear her from inside my head.",
+        "expression": {
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Rainie",
-        "text": "I don't think she meant that to happen..."
+        "text": "I don't think she meant that to happen...",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral"
+        }
       },
       {
         "speaker": "Veracity",
-        "text": "I was lost for a minute, wasn't I?"
+        "text": "I was lost for a minute, wasn't I?",
+        "expression": {
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Rainie",
-        "text": "yes! But then Addie went all BEAR, did you know she could do that?!"
+        "text": "yes! But then Addie went all BEAR, did you know she could do that?!",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral"
+        }
       },
       {
         "speaker": "Veracity",
-        "text": "I did not."
+        "text": "I did not.",
+        "expression": {
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Rainie",
-        "text": "She went absolutely feral! She knocked the staff out of the Guildmaster's hands. You went flying, the Guildmaster went flying, Addie growled, and all the cultists ran away!"
+        "text": "She went absolutely feral! She knocked the staff out of the Guildmaster's hands. You went flying, the Guildmaster went flying, Addie growled, and all the cultists ran away!",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral"
+        }
       },
       {
         "speaker": "Veracity",
-        "text": "And Da?"
+        "text": "And Da?",
+        "expression": {
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Rainie",
-        "text": "Addie grabbed you like you were nothing. The professor ran behind her. I grabbed all the notes I could find because, you know, and I ran after."
+        "text": "Addie grabbed you like you were nothing. The professor ran behind her. I grabbed all the notes I could find because, you know, and I ran after.",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral"
+        }
       },
       {
         "speaker": "Veracity",
-        "text": "Was everybody ok?"
+        "text": "Was everybody ok?",
+        "expression": {
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Rainie",
-        "text": "MOST of the cultists ran away but there was that one with a staff. He threw it at Addie and hit her dead in the shoulder!"
+        "text": "MOST of the cultists ran away but there was that one with a staff. He threw it at Addie and hit her dead in the shoulder!",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral"
+        }
       },
       {
         "speaker": "Narrator",
@@ -94,11 +150,19 @@
       },
       {
         "speaker": "Veracity",
-        "text": "Where is Addie? Is she ok? I need to see her!"
+        "text": "Where is Addie? Is she ok? I need to see her!",
+        "expression": {
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Rainie",
-        "text": "The professor said I was to tell you to stay right.... aaand there she goes. WAIT UP!"
+        "text": "The professor said I was to tell you to stay right.... aaand there she goes. WAIT UP!",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral"
+        }
       },
       {
         "speaker": "Narrator",
@@ -110,23 +174,39 @@
         "speaker": "Father",
         "text": "Rainie, I told you to keep her out of here today.",
         "hideCharacters": true,
-        "showCharacters": ["da_lab"]
+        "showCharacters": ["da_lab"],
+        "expression": {
+          "da_lab": "neutral"
+        }
       },
       {
         "speaker": "Rainie",
         "text": "I tried!",
         "hideCharacters": ["da_lab"],
-        "showCharacters": ["vera", "addie", "rainie"]
+        "showCharacters": ["vera", "addie", "rainie"],
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
       },
       {
         "speaker": "Veracity",
-        "text": "Da, I can help you..."
+        "text": "Da, I can help you...",
+        "expression": {
+          "vera": "neutral",
+          "addie": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Father",
         "text": "Vera, Addie will be alright. I promise. But for now, I need you upstairs, out of harm's way.",
         "hideCharacters": true,
-        "showCharacters": ["da_lab"]
+        "showCharacters": ["da_lab"],
+        "expression": {
+          "da_lab": "neutral"
+        }
       },
       {
         "speaker": "Narrator",
@@ -138,26 +218,45 @@
         "speaker": "Rainie",
         "text": "Don't worry Vera, the professor is very good at this.",
         "hideCharacters": true,
-        "showCharacters": ["rainie"]
+        "showCharacters": ["rainie"],
+        "expression": {
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Veracity",
         "text": "I know. You're right. I'm still trying to understand what happened in the last few days.",
-        "swapCharacters": true
+        "swapCharacters": true,
+        "expression": {
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Rainie",
         "text": "You mean, why some crazy old insane woman is kidnapping inventors all over the place, pretending to be your mother, and trying to create a device to stop time itself?",
         "hideCharacters": true,
-        "showCharacters": ["vera", "rainie"]
+        "showCharacters": ["vera", "rainie"],
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral"
+        }
       },
       {
         "speaker": "Veracity",
-        "text": "Yes, that. And what was that device? Da was not telling the whole truth. And what was that crystal? and how..."
+        "text": "Yes, that. And what was that device? Da was not telling the whole truth. And what was that crystal? and how...",
+        "expression": {
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Rainie",
-        "text": "We have so many puzzles to solve Vera! We'll never be bored again!"
+        "text": "We have so many puzzles to solve Vera! We'll never be bored again!",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral"
+        }
       }
     ]
   },

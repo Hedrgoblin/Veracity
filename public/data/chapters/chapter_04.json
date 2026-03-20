@@ -31,15 +31,30 @@
       },
       {
         "speaker": "Rainie",
-        "text": "What is this place?"
+        "text": "What is this place?",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
       },
       {
         "speaker": "Veracity",
-        "text": "(whispering) This is the Clockmaker's Guild. Da used to take me here when I was little."
+        "text": "(whispering) This is the Clockmaker's Guild. Da used to take me here when I was little.",
+        "expression": {
+          "vera": "neutral",
+          "addie": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Addie",
-        "text": "(whispering) I hear voices. Hide!"
+        "text": "(whispering) I hear voices. Hide!",
+        "expression": {
+          "addie": "neutral",
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Narrator",
@@ -57,13 +72,19 @@
         "text": "Does he have the device?",
         "background": "clockmakers_guild_hall_01",
         "showCharacters": ["cultist_enforcer"],
-        "hideCharacters": ["cultist_bookkeeper"]
+        "hideCharacters": ["cultist_bookkeeper"],
+        "expression": {
+          "cultist_enforcer": "neutral"
+        }
       },
       {
         "speaker": "Cultist_bookkeeper",
         "text": "He refuses to cooperate. He claims the Temporal Resonance Device is an impossible theoretical.",
         "showCharacters": ["cultist_bookkeeper"],
-        "hideCharacters": ["cultist_enforcer"]
+        "hideCharacters": ["cultist_enforcer"],
+        "expression": {
+          "cultist_bookkeeper": "neutral"
+        }
       },
       {
         "speaker": "Cultist_enforcer",
@@ -78,7 +99,10 @@
         "speaker": "Veracity",
         "text": "*whispers* They have him. They really have him.",
         "background": "clockmakers_guild_hall_01_hide",
-        "hideCharacters": ["cultist_enforcer", "cultist_bookkeeper"]
+        "hideCharacters": ["cultist_enforcer", "cultist_bookkeeper"],
+        "expression": {
+          "vera": "neutral"
+        }
       },
       {
         "speaker": "Cultist_enforcer",
@@ -94,7 +118,10 @@
         "speaker": "Cultist_bookkeeper",
         "text": "And if he refuses?",
         "showCharacters": ["cultist_bookkeeper"],
-        "hideCharacters": ["cultist_enforcer", "vera"]
+        "hideCharacters": ["cultist_enforcer", "vera"],
+        "expression": {
+          "cultist_bookkeeper": "neutral"
+        }
       },
       {
         "speaker": "Cultist_enforcer",
@@ -112,31 +139,63 @@
       },
       {
         "speaker": "Veracity",
-        "text": "The Northern Sanctuary. We have to get there."
+        "text": "The Northern Sanctuary. We have to get there.",
+        "expression": {
+          "vera": "neutral"
+        }
       },
       {
         "speaker": "Addie",
-        "text": "But we don't know where it is."
+        "text": "But we don't know where it is.",
+        "expression": {
+          "addie": "neutral",
+          "vera": "neutral"
+        }
       },
       {
         "speaker": "Rainie",
-        "text": "Follow the moth!"
+        "text": "Follow the moth!",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
       },
       {
         "speaker": "Addie",
-        "text": "The moth will travel through the air... we are more earthbound."
+        "text": "The moth will travel through the air... we are more earthbound.",
+        "expression": {
+          "addie": "neutral",
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Veracity",
-        "text": "If only we had a map..."
+        "text": "If only we had a map...",
+        "expression": {
+          "vera": "neutral",
+          "addie": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Rainie",
-        "text": "You mean like that one over there?"
+        "text": "You mean like that one over there?",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
       },
       {
         "speaker": "Addie",
-        "text": "Over where?"
+        "text": "Over where?",
+        "expression": {
+          "addie": "neutral",
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Narrator",
@@ -146,31 +205,63 @@
       },
       {
         "speaker": "Veracity",
-        "text": "That works."
+        "text": "That works.",
+        "expression": {
+          "vera": "neutral"
+        }
       },
       {
         "speaker": "Rainie",
-        "text": "Quick, let's grab the map."
+        "text": "Quick, let's grab the map.",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral"
+        }
       },
       {
         "speaker": "Addie",
-        "text": "I can't condone theft."
+        "text": "I can't condone theft.",
+        "expression": {
+          "addie": "neutral",
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Veracity",
-        "text": "What if I promise to give it back as soon as we find Da?"
+        "text": "What if I promise to give it back as soon as we find Da?",
+        "expression": {
+          "vera": "neutral",
+          "addie": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Addie",
-        "text": "That sounds more like illicit borrowing... which is acceptable."
+        "text": "That sounds more like illicit borrowing... which is acceptable.",
+        "expression": {
+          "addie": "neutral",
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Rainie",
-        "text": "(worried) I think I hear someone coming!"
+        "text": "(worried) I think I hear someone coming!",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
       },
       {
         "speaker": "Veracity",
-        "text": "Let's get out of here!"
+        "text": "Let's get out of here!",
+        "expression": {
+          "vera": "neutral",
+          "addie": "neutral",
+          "rainie": "neutral"
+        }
       }
     ]
   },

@@ -41,25 +41,37 @@
         "speaker": "Veracity",
         "text": "This Device. Can it really work?",
         "hideCharacters": ["da_default"],
-        "showCharacters": ["vera"]
+        "showCharacters": ["vera"],
+        "expression": {
+          "vera": "neutral"
+        }
       },
       {
         "speaker": "Father",
         "text": "No. Maybe. No. It was a thought experiment, nothing more. But I made the mistake of showing my ideas to the wrong person. The Order believes it can reshape history, undo their regrets.",
         "hideCharacters": ["vera"],
-        "showCharacters": ["da_default"]
+        "showCharacters": ["da_default"],
+        "expression": {
+          "da_default": "neutral"
+        }
       },
       {
         "speaker": "Veracity",
         "text": "Why do they think they can force you to build it?",
         "hideCharacters": ["da_default"],
-        "showCharacters": ["vera"]
+        "showCharacters": ["vera"],
+        "expression": {
+          "vera": "neutral"
+        }
       },
       {
         "speaker": "Father",
         "text": "Because once, many years ago, I had a theory. I built a prototype, just a little thing. But the wrong person found it. I thought I had destroyed it, but it was too late.",
         "hideCharacters": ["vera"],
-        "showCharacters": ["da_default"]
+        "showCharacters": ["da_default"],
+        "expression": {
+          "da_default": "neutral"
+        }
       },
       {
         "speaker": "Veracity",
@@ -79,7 +91,10 @@
         "speaker": "Father",
         "text": "We dont have time to talk about this now... They're  trying to force me to complete the device, but I can't. I won't. It will never be what she wants.",
         "hideCharacters": ["vera"],
-        "showCharacters": ["da_default"]
+        "showCharacters": ["da_default"],
+        "expression": {
+          "da_default": "neutral"
+        }
       },
       {
         "speaker": "Narrator",
@@ -99,7 +114,11 @@
         "speaker": "Addie",
         "text": "Vera, behind me. Now.",
         "hideCharacters": ["guildmaster"],
-        "showCharacters": ["vera", "addie"]
+        "showCharacters": ["vera", "addie"],
+        "expression": {
+          "vera": "neutral",
+          "addie": "neutral"
+        }
       },
       {
         "speaker": "Narrator",
@@ -113,33 +132,54 @@
         "speaker": "Veracity",
         "text": "I... know you.",
         "hideCharacters": ["guildmaster"],
-        "showCharacters": ["vera", "addie", "rainie"]
+        "showCharacters": ["vera", "addie", "rainie"],
+        "expression": {
+          "vera": "neutral",
+          "addie": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Guildmaster",
         "text": "I would think you might.",
         "hideCharacters": ["vera", "addie"],
         "showCharacters": ["guildmaster"],
-        "moveCharacters": { "guildmaster": "center" }
+        "moveCharacters": { "guildmaster": "center" },
+        "expression": {
+          "guildmaster": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Father",
         "text": "Liona, no.",
         "hideCharacters": ["guildmaster"],
-        "showCharacters": ["da_default"]
+        "showCharacters": ["da_default"],
+        "expression": {
+          "da_default": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Guildmaster",
         "text": "Come closer my love. My eyes are not what they once where...",
         "hideCharacters": ["da_default"],
         "showCharacters": ["guildmaster"],
-        "moveCharacters": { "guildmaster": "center" }
+        "moveCharacters": { "guildmaster": "center" },
+        "expression": {
+          "guildmaster": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Veracity",
         "text": "You're the old woman we met in front of the Clockworker's Guild. I gave you a penny.",
         "hideCharacters": ["guildmaster"],
-        "showCharacters": ["vera"]
+        "showCharacters": ["vera"],
+        "expression": {
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Guildmaster",
@@ -147,7 +187,7 @@
         "hideCharacters": ["vera"],
         "showCharacters": ["guildmaster"],
         "moveCharacters": { "guildmaster": "center" },
-        "expression": { "guildmaster": "happy" }
+        "expression": { "guildmaster": "happy", "rainie": "neutral" }
       },
       {
         "speaker": "Narrator",

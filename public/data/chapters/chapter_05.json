@@ -30,34 +30,66 @@
       },
       {
         "speaker": "Addie",
-        "text": "Vera, we should rest while we can. The journey will take all day."
+        "text": "Vera, we should rest while we can. The journey will take all day.",
+        "expression": {
+          "addie": "neutral",
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Rainie",
-        "text": "Rest? How can you rest? We're on an adventure! Save the Professor, find out what the creepers want with his pocket watch, save the day!"
+        "text": "Rest? How can you rest? We're on an adventure! Save the Professor, find out what the creepers want with his pocket watch, save the day!",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
       },
       {
         "speaker": "Addie",
-        "text": "what makes you think it's a pocket watch?"
+        "text": "what makes you think it's a pocket watch?",
+        "expression": {
+          "addie": "neutral",
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Rainie",
-        "text": "Everything the professor does, involves a pocket watch. I have one right here... so do you, somewhere..."
+        "text": "Everything the professor does, involves a pocket watch. I have one right here... so do you, somewhere...",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
       },
       {
         "speaker": "Veracity",
         "text": "Every time I close my eyes, I see Da in danger.",
         "expression": {
-          "vera": "sad"
+          "vera": "sad",
+          "addie": "neutral",
+          "rainie": "neutral"
         }
       },
       {
         "speaker": "Rainie",
-        "text": "I know a trick..."
+        "text": "I know a trick...",
+        "expression": {
+          "rainie": "neutral",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
       },
       {
         "speaker": "Addie",
-        "text": "So do I. Tea. It never fails."
+        "text": "So do I. Tea. It never fails.",
+        "expression": {
+          "addie": "neutral",
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Narrator",
@@ -76,7 +108,10 @@
         "speaker": "Gentleman",
         "text": "Traveling alone, young miss? That's quite unusual. Do your parents know where you are?",
         "hideCharacters": ["vera", "addie", "rainie"],
-        "showCharacters": ["gentleman_paper"]
+        "showCharacters": ["gentleman_paper"],
+        "expression": {
+          "gentleman_paper": "neutral"
+        }
       },
       {
         "speaker": "Addie",
@@ -98,13 +133,19 @@
       {
         "speaker": "Veracity",
         "text": "I'm visiting my aunt up north. My... my companions keep me safe.",
-        "hideCharacters": ["gentleman_paper"]
+        "hideCharacters": ["gentleman_paper"],
+        "expression": {
+          "vera": "neutral"
+        }
       },
       {
         "speaker": "Gentleman",
         "text": "Ah, clockwork companions. Marvelous craftsmanship.",
         "hideCharacters": ["vera", "addie", "rainie"],
-        "showCharacters": ["gentleman_paper"]
+        "showCharacters": ["gentleman_paper"],
+        "expression": {
+          "gentleman_paper": "neutral"
+        }
       },
       {
         "speaker": "Narrator",

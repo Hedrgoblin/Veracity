@@ -29,13 +29,20 @@
       },
       {
         "speaker": "Addie",
-        "text": "Good morning, Vera! Did you sleep well?"
+        "text": "Good morning, Vera! Did you sleep well?",
+        "expression": {
+          "addie_home": "neutral",
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Veracity",
         "text": "I did, thank you, but I thought I heard strange noises...",
         "expression": {
-          "vera": "thinking"
+          "vera": "thinking",
+          "addie_home": "neutral",
+          "rainie": "neutral"
         }
       },
       {
@@ -43,14 +50,17 @@
         "text": "I heard them too! I think they came from the study.",
         "expression": {
           "rainie": "thinking",
-          "vera": "thinking"
+          "vera": "thinking",
+          "addie_home": "neutral"
         }
       },
       {
         "speaker": "Veracity",
         "text": "Da's been working on something new. He seems... distracted. Worried, even.",
         "expression": {
-          "rainie": "neutral"
+          "rainie": "neutral",
+          "vera": "neutral",
+          "addie_home": "neutral"
         }
       },
       {
@@ -61,7 +71,9 @@
         "speaker": "Addie",
         "text": "No point in trying to start the day on an empty stomach. Who's for a cup of tea?",
         "expression": {
-          "addie_home": "neutral"
+          "addie_home": "neutral",
+          "vera": "neutral",
+          "rainie": "neutral"
         }
       },
       {
@@ -69,7 +81,8 @@
         "text": "No time for tea! Look, the gears are disconnected.",
         "expression": {
           "rainie": "thinking",
-          "addie_home": "neutral"
+          "addie_home": "neutral",
+          "vera": "neutral"
         }
       }
     ],
