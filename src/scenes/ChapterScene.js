@@ -1504,7 +1504,7 @@ export default class ChapterScene extends Phaser.Scene {
     // These NPCs always appear alone — hide everyone else automatically
     const autoSoloNpc = ['guildmaster_black', 'guildmaster', 'cultist_bookkeeper', 'book keeper', 'cultist_enforcer', 'enforcer'].includes(speaker);
     // NPCs that always appear when speaking — hideCharacters:true cannot suppress them, only an array naming them explicitly can
-    const alwaysShowNpc = ['guildmaster', 'guildmaster_black'].includes(speaker);
+    const alwaysShowNpc = ['guildmaster', 'guildmaster_black', 'enforcer', 'cultist_enforcer'].includes(speaker);
     const autoShowNpcBlocked = alwaysShowNpc
       ? (Array.isArray(line.hideCharacters) && line.hideCharacters.includes(speaker))
       : (line.hideCharacters === true || (Array.isArray(line.hideCharacters) && line.hideCharacters.includes(speaker)));
