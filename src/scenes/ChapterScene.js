@@ -530,6 +530,13 @@ export default class ChapterScene extends Phaser.Scene {
       'guildmaster_black': true,
       'cultist_guard_staff': true,
     };
+
+    // Chapter-specific overrides
+    if (this.chapterNumber === 10) {
+      npcPositions['cultist_bookkeeper'] = width * 0.25;
+      npcFlipX['cultist_bookkeeper'] = true;
+    }
+
     npcs.forEach(npcName => {
       if (this.chapterData.assets?.characters?.includes(npcName)) {
         const npcScale = npcScales[npcName] ?? 0.299;
