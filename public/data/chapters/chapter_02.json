@@ -98,7 +98,8 @@
       },
       {
         "speaker": "Narrator",
-        "text": "You walk over to the front panel on your father's desk. What was the secret combination again? If only you could remember it..."
+        "text": "You walk over to the front panel on your father's desk. What was the secret combination again? If only you could remember it...",
+        "hideCharacters": true
       }
     ],
     "closing": [
