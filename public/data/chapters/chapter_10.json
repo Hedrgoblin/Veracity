@@ -26,7 +26,6 @@
       {
         "speaker": "Guildmaster",
         "text": "Yes! YES! The temporal resonance is building! We will reshape history itself!",
-        "hideCharacters": true,
         "expression": { "guildmaster_black": "happy" }
       },
       {
