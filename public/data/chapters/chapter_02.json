@@ -39,7 +39,7 @@
         "speaker": "Addie",
         "text": "This isn't right. The professor would never leave the room like this.",
         "expression": {
-          "addie": "distrust",
+          "addie": "worried",
           "vera": "confused",
           "rainie": "distrust"
         }
@@ -73,8 +73,7 @@
       },
       {
         "speaker": "Narrator",
-        "text": "You search carefully. More torn pieces lie scattered across the floor.",
-        "hideCharacters": true
+        "text": "You search carefully. More torn pieces lie scattered across the floor."
       }
     ],
     "midpoint": [
@@ -93,13 +92,12 @@
         "expression": {
           "vera": "thinking",
           "addie": "worried",
-          "rainie": "worried"
+          "rainie": "thinking"
         }
       },
       {
         "speaker": "Narrator",
-        "text": "You walk over to the front panel on your father's desk. What was the secret combination again? If only you could remember it...",
-        "hideCharacters": true
+        "text": "You walk over to the front panel on your father's desk. What was the secret combination again? If only you could remember it..."
       }
     ],
     "closing": [
@@ -142,7 +140,7 @@
         "speaker": "Addie",
         "text": "Wait, Vera. There's another note here.",
         "expression": {
-          "addie": "surprised",
+          "addie": "worried",
           "vera": "neutral",
           "rainie": "neutral"
         }
@@ -165,7 +163,7 @@
         "speaker": "Addie",
         "text": "It's dangerous out there, for clockwork animals like Rainie and myself. To say nothing of the quality of tea one finds while traveling... But yes. We can't leave him alone out there.",
         "expression": {
-          "addie": "serious",
+          "addie": "worried",
           "vera": "serious",
           "rainie": "neutral"
         }
@@ -176,14 +174,14 @@
         "expression": {
           "rainie": "excited",
           "vera": "serious",
-          "addie": "serious"
+          "addie": "worried"
         }
       },
       {
         "speaker": "Addie",
         "text": "I'll start packing.",
         "expression": {
-          "addie": "serious",
+          "addie": "worried",
           "vera": "neutral",
           "rainie": "excited"
         }
