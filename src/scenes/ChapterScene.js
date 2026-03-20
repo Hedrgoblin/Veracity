@@ -274,7 +274,6 @@ export default class ChapterScene extends Phaser.Scene {
       this.setupUI();
       this.setupBackButton();
       this.setupJumpMenu(); // DEBUG: Remove this later
-      this.setupPuzzleJumpMenu(); // DEBUG: Remove this later
 
       // Play chapter music
       if (this.chapterData.assets && this.chapterData.assets.music) {
@@ -2047,7 +2046,7 @@ export default class ChapterScene extends Phaser.Scene {
     this.jumpMenuContainer.add([jumpButton, jumpText]);
 
     // Dropdown menu (initially hidden) - positioned from top
-    const dropdownHeight = 370; // Height for 14 chapters
+    const dropdownHeight = 270; // Height for 10 chapters
     const dropdownTop = buttonY + buttonHeight / 2 + 5; // Just below button
 
     this.jumpDropdown = this.add.container(buttonX, dropdownTop + dropdownHeight / 2);
@@ -2063,7 +2062,7 @@ export default class ChapterScene extends Phaser.Scene {
     const buttonSpacing = 26;
     const startY = -(dropdownHeight / 2) + 20; // Start from top with padding
 
-    for (let i = 1; i <= 14; i++) {
+    for (let i = 1; i <= 10; i++) {
       const yPos = startY + (i - 1) * buttonSpacing;
       const chapterButton = this.add.rectangle(0, yPos, 130, 24, 0x333333);
       chapterButton.setInteractive({ useHandCursor: true });

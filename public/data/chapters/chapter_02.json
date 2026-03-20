@@ -30,7 +30,7 @@
         "speaker": "Veracity",
         "text": "It doesn't seem real.",
         "expression": {
-          "vera": "sad",
+          "vera": "confused",
           "addie": "neutral",
           "rainie": "neutral"
         }
@@ -39,36 +39,36 @@
         "speaker": "Addie",
         "text": "This isn't right. The professor would never leave the room like this.",
         "expression": {
-          "addie": "sad",
-          "vera": "sad",
-          "rainie": "sad"
+          "addie": "distrust",
+          "vera": "confused",
+          "rainie": "distrust"
         }
       },
       {
         "speaker": "Rainie",
         "text": "Look at all these ripped up papers! Someone was looking for something.",
         "expression": {
-          "rainie": "neutral",
-          "vera": "neutral",
-          "addie": "neutral"
+          "rainie": "confused",
+          "vera": "worried",
+          "addie": "distrust"
         }
       },
       {
         "speaker": "Veracity",
         "text": "I see a piece of paper with my name on it.",
         "expression": {
-          "vera": "neutral",
-          "addie": "neutral",
-          "rainie": "neutral"
+          "vera": "worried",
+          "addie": "distrust",
+          "rainie": "distrust"
         }
       },
       {
         "speaker": "Rainie",
         "text": "Here's another one! it looks like a note!",
         "expression": {
-          "rainie": "surprised",
-          "vera": "neutral",
-          "addie": "neutral"
+          "rainie": "worried",
+          "vera": "worried",
+          "addie": "worried"
         }
       },
       {
@@ -81,18 +81,18 @@
         "speaker": "Rainie",
         "text": "What do you think the note meant?",
         "expression": {
-          "rainie": "neutral",
-          "vera": "neutral",
-          "addie": "neutral"
+          "rainie": "worried",
+          "vera": "worried",
+          "addie": "worried"
         }
       },
       {
         "speaker": "Veracity",
         "text": "Da was trying to warn me. He showed me a secret panel once... let's see if it's still there...",
         "expression": {
-          "vera": "neutral",
-          "addie": "neutral",
-          "rainie": "neutral"
+          "vera": "thinking",
+          "addie": "worried",
+          "rainie": "worried"
         }
       },
       {
@@ -122,14 +122,14 @@
         "speaker": "Rainie",
         "text": "What do we do now?",
         "expression": {
-          "rainie": "sad"
+          "rainie": "excited"
         }
       },
       {
         "speaker": "Veracity",
         "text": "I guess we read the journal.",
         "expression": {
-          "vera": "neutral"
+          "vera": "thinking"
         }
       },
       {
@@ -153,9 +153,9 @@
         "speaker": "Veracity",
         "text": "Addie, we have to find him.",
         "expression": {
-          "vera": "neutral",
-          "addie": "sad",
-          "rainie": "neutral"
+          "vera": "worried",
+          "addie": "worried",
+          "rainie": "worried"
         },
         "showItem": "note_dear_vera_02"
       },
@@ -163,8 +163,8 @@
         "speaker": "Addie",
         "text": "It's dangerous out there, for clockwork animals like Rainie and myself. To say nothing of the quality of tea one finds while traveling... But yes. We can't leave him alone out there.",
         "expression": {
-          "addie": "neutral",
-          "vera": "sad",
+          "addie": "serious",
+          "vera": "serious",
           "rainie": "neutral"
         }
       },
@@ -172,18 +172,18 @@
         "speaker": "Rainie",
         "text": "Adventure! We'll find him, Vera. Don't worry!",
         "expression": {
-          "rainie": "happy",
-          "vera": "neutral",
-          "addie": "neutral"
+          "rainie": "excited",
+          "vera": "serious",
+          "addie": "serious"
         }
       },
       {
         "speaker": "Addie",
         "text": "I'll start packing.",
         "expression": {
-          "addie": "neutral",
+          "addie": "serious",
           "vera": "neutral",
-          "rainie": "neutral"
+          "rainie": "excited"
         }
       }
     ]
