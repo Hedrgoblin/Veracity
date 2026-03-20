@@ -152,7 +152,7 @@
       },
       {
         "speaker": "Father",
-        "text": "Liona, no.",
+        "text": "Liona, stop.",
         "hideCharacters": ["guildmaster"],
         "showCharacters": ["da_default"],
         "expression": {
@@ -191,8 +191,18 @@
       },
       {
         "speaker": "Narrator",
-        "text": "You find yourself strangely drawn towards this woman."
+        "text": "You find yourself strangely drawn towards this woman.",
+        "expression": { "guildmaster": "serious" }
       },
+      {
+        "speaker": "Father",
+        "text": "LIONA, NO!",
+        "hideCharacters": ["guildmaster"],
+        "showCharacters": ["da_default"],
+        "expression": {
+          "da_default": "surprised",
+          "rainie": "outraged"
+        }
       {
         "speaker": "Narrator",
         "text": "Suddenly, the crystal in her walking stick illuminates. The light is blinding. You can hear your father and friends shouting in the distance, and then everything goes black.",
