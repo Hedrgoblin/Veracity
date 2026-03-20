@@ -10,6 +10,31 @@ import BackButton from '../components/BackButton.js';
 
 const BASE = import.meta.env.BASE_URL;
 
+// Available expressions per character variant (only what actually exists as files)
+const CHARACTER_EXPRESSIONS = {
+  'addie_clockworker': ['angry','confused','disgusted','distrust','excited','grateful','happy','neutral','outraged','sad','scared','serious','smirk','surprised','thinking','worried'],
+  'addie_default':     ['angry','confused','disgusted','distrust','excited','grateful','happy','neutral','outraged','sad','scared','serious','smirk','surprised','thinking','worried'],
+  'addie_home':        ['angry','confused','disgusted','distrust','excited','grateful','happy','neutral','outraged','sad','scared','serious','smirk','surprised','thinking','worried'],
+  'crone_default':     ['disgusted','happy','neutral','sad','smirk','surprised','thinking'],
+  'cultist_bookkeeper':['angry','disgusted','happy','neutral','sad','smirk','surprised','thinking'],
+  'cultist_enforcer':  ['angry','disgusted','happy','neutral','sad','smirk','surprised','thinking'],
+  'cultist_guard':     ['angry','disgusted','happy','neutral','sad','smirk','surprised','thinking'],
+  'cultist_guard_staff':['angry','disgusted','happy','neutral','sad','smirk','surprised','thinking'],
+  'da_default':        ['angry','disgusted','happy','neutral','sad','smirk','surprised','thinking'],
+  'da_lab':            ['angry','disgusted','happy','neutral','sad','smirk','surprised','thinking'],
+  'da_moth':           ['angry','disgusted','happy','neutral','sad','smirk','surprised','thinking'],
+  'gentleman_paper':   ['angry','disgusted','happy','neutral','sad','smirk','surprised','thinking'],
+  'guildmaster':       ['angry','confused','disgusted','distrust','excited','grateful','happy','neutral','outraged','sad','scared','serious','smirk','surprised','thinking','worried'],
+  'guildmaster_black': ['angry','confused','disgusted','distrust','excited','grateful','happy','neutral','outraged','sad','scared','serious','smirk','surprised','thinking','worried'],
+  'rainie_clockworker':['angry','confused','disgusted','distrust','excited','grateful','happy','neutral','outraged','sad','scared','serious','smirk','surprised','thinking','worried'],
+  'rainie_default':    ['angry','confused','disgusted','distrust','excited','grateful','happy','neutral','outraged','sad','scared','serious','smirk','surprised','thinking','worried'],
+  'rainie_pajamas':    ['angry','confused','disgusted','distrust','excited','grateful','happy','neutral','outraged','sad','scared','serious','smirk','surprised','thinking','worried'],
+  'vera_clockworker':  ['angry','disgusted','happy','neutral','sad','smirk','surprised','thinking'],
+  'vera_default':      ['angry','confused','disgusted','distrust','excited','grateful','happy','neutral','outraged','sad','scared','serious','smirk','surprised','thinking','worried'],
+  'vera_green':        ['angry','confused','disgusted','distrust','excited','grateful','happy','neutral','outraged','sad','scared','serious','smirk','surprised','thinking','worried'],
+  'vera_pajamas':      ['angry','confused','disgusted','distrust','excited','grateful','happy','neutral','outraged','sad','scared','serious','smirk','surprised','thinking','worried'],
+};
+
 export default class ChapterScene extends Phaser.Scene {
   constructor() {
     super({ key: 'ChapterScene' });
@@ -188,7 +213,7 @@ export default class ChapterScene extends Phaser.Scene {
     }
 
     // Load expressions (only log errors, don't fail)
-    const expressions = ['neutral', 'happy', 'sad', 'angry', 'disgusted', 'surprised', 'smirk', 'thinking', 'grateful', 'worried', 'scared', 'excited', 'serious', 'distrust', 'confused', 'outraged'];
+    const expressions = CHARACTER_EXPRESSIONS[folder] || ['neutral', 'happy', 'sad', 'angry', 'disgusted', 'surprised', 'smirk', 'thinking'];
     expressions.forEach(expr => {
       const key = `${characterName}_${expr}`;
       const file = `${filePrefix}_${expr}.png`;
@@ -223,7 +248,7 @@ export default class ChapterScene extends Phaser.Scene {
     });
 
     // Load expressions
-    const expressions = ['neutral', 'happy', 'sad', 'angry', 'disgusted', 'surprised', 'smirk', 'thinking', 'grateful', 'worried', 'scared', 'excited', 'serious', 'distrust', 'confused', 'outraged'];
+    const expressions = CHARACTER_EXPRESSIONS[folderName] || ['neutral', 'happy', 'sad', 'angry', 'disgusted', 'surprised', 'smirk', 'thinking'];
     expressions.forEach(expr => {
       const key = `${texturePrefix}_${expr}`;
       const file = `${filePrefix}_${expr}.png`;
