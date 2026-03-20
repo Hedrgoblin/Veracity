@@ -188,7 +188,7 @@ export default class ChapterScene extends Phaser.Scene {
     }
 
     // Load expressions (only log errors, don't fail)
-    const expressions = ['neutral', 'happy', 'sad', 'angry', 'disgusted', 'surprised', 'smirk', 'thinking'];
+    const expressions = ['neutral', 'happy', 'sad', 'angry', 'disgusted', 'surprised', 'smirk', 'thinking', 'grateful', 'worried', 'scared', 'excited', 'serious', 'distrust', 'confused', 'outraged'];
     expressions.forEach(expr => {
       const key = `${characterName}_${expr}`;
       const file = `${filePrefix}_${expr}.png`;
@@ -223,7 +223,7 @@ export default class ChapterScene extends Phaser.Scene {
     });
 
     // Load expressions
-    const expressions = ['neutral', 'happy', 'sad', 'angry', 'disgusted', 'surprised', 'smirk', 'thinking'];
+    const expressions = ['neutral', 'happy', 'sad', 'angry', 'disgusted', 'surprised', 'smirk', 'thinking', 'grateful', 'worried', 'scared', 'excited', 'serious', 'distrust', 'confused', 'outraged'];
     expressions.forEach(expr => {
       const key = `${texturePrefix}_${expr}`;
       const file = `${filePrefix}_${expr}.png`;
