@@ -508,10 +508,10 @@ export default class ChapterScene extends Phaser.Scene {
       'cultist_enforcer': width * 0.40,
       'cultist_bookkeeper': width * 0.65,
       'gentleman_paper': width / 2 + 30,
-      'cultist_guard': width * 0.30,
+      'cultist_guard': width * 0.40,
       'cultist_guard_staff': width * 0.70,
-      'guildmaster': width * 0.69,
-      'guildmaster_black': width * 0.69,
+      'guildmaster': width * 0.85,
+      'guildmaster_black': width * 0.85,
     };
     const npcScales = {
       'gentleman_paper': 0.299 * 1.12 * 1.20,

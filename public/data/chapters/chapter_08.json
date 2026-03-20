@@ -100,7 +100,11 @@
         "speaker": "Narrator",
         "text": "The door bursts open. Cultists surround you.",
         "hideCharacters": ["da_default"],
-        "showCharacters": ["cultist_guard", "cultist_guard_staff"]
+        "showCharacters": ["cultist_guard", "cultist_guard_staff"],
+        "expression": {
+          "cultist_guard": "angry",
+          "cultist_guard_staff": "angry"
+        }
       },
       {
         "speaker": "Guildmaster",
@@ -177,7 +181,7 @@
         "hideCharacters": ["guildmaster"],
         "showCharacters": ["vera"],
         "expression": {
-          "vera": "neutral",
+          "vera": "confused",
           "rainie": "scared"
         }
       },
