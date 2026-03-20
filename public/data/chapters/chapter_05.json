@@ -41,7 +41,7 @@
         "speaker": "Rainie",
         "text": "Rest? How can you rest? We're on an adventure! Save the Professor, find out what the creepers want with his pocket watch, save the day!",
         "expression": {
-          "rainie": "neutral",
+          "rainie": "confused",
           "vera": "neutral",
           "addie": "neutral"
         }
@@ -50,18 +50,18 @@
         "speaker": "Addie",
         "text": "what makes you think it's a pocket watch?",
         "expression": {
-          "addie": "neutral",
-          "vera": "neutral",
-          "rainie": "neutral"
+          "addie": "confused",
+          "vera": "confused",
+          "rainie": "confused"
         }
       },
       {
         "speaker": "Rainie",
         "text": "Everything the professor does, involves a pocket watch. I have one right here... so do you, somewhere...",
         "expression": {
-          "rainie": "neutral",
+          "rainie": "excited",
           "vera": "neutral",
-          "addie": "neutral"
+          "addie": "confused"
         }
       },
       {
@@ -69,15 +69,15 @@
         "text": "Every time I close my eyes, I see Da in danger.",
         "expression": {
           "vera": "sad",
-          "addie": "neutral",
-          "rainie": "neutral"
+          "addie": "sad",
+          "rainie": "sad"
         }
       },
       {
         "speaker": "Rainie",
         "text": "I know a trick...",
         "expression": {
-          "rainie": "neutral",
+          "rainie": "grateful",
           "vera": "neutral",
           "addie": "neutral"
         }
@@ -86,9 +86,9 @@
         "speaker": "Addie",
         "text": "So do I. Tea. It never fails.",
         "expression": {
-          "addie": "neutral",
-          "vera": "neutral",
-          "rainie": "neutral"
+          "addie": "grateful",
+          "vera": "grateful",
+          "rainie": "grateful"
         }
       },
       {
@@ -118,7 +118,7 @@
         "text": "Sir. She's hardly alone.",
         "hideCharacters": ["gentleman_paper"],
         "expression": {
-          "addie": "angry"
+          "addie": "outraged"
         }
       },
       {
@@ -144,7 +144,7 @@
         "hideCharacters": ["vera", "addie", "rainie"],
         "showCharacters": ["gentleman_paper"],
         "expression": {
-          "gentleman_paper": "neutral"
+          "gentleman_paper": "smirk"
         }
       },
       {

@@ -36,23 +36,44 @@
       },
       {
         "speaker": "Rainie",
-        "text": "This must be the place. The compass is pointing right at it."
+        "text": "This must be the place. The compass is pointing right at it.",
+        "expression": {
+          "rainie": "happy",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
       },
       {
         "speaker": "Addie",
-        "text": "It looks heavily guarded, Vera. Look, guards, watchtowers. We can't just walk in."
+        "text": "It looks heavily guarded, Vera. Look, guards, watchtowers. We can't just walk in.",
+        "expression": {
+          "addie": "worried",
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Veracity",
-        "text": "Then we find another way. Da's in there."
+        "text": "Then we find another way. Da's in there.",
+        "expression": {
+          "vera": "serious",
+          "addie": "worried",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Narrator",
-        "text": "From the rocks, you study the sanctuary. Steam vents line the walls. Machinery clangs in the distance."
+        "text": "From the rocks, you study the sanctuary. Steam vents line the walls. Machinery clangs in the distance.",
+        "hideCharacters": true
       },
       {
         "speaker": "Addie",
-        "text": "There. A service entrance on the east side. It's used by workers. Maybe we can blend in."
+        "text": "There. A service entrance on the east side. It's used by workers. Maybe we can blend in.",
+        "expression": {
+          "addie": "thinking",
+          "vera": "neutral",
+          "rainie": "neutral"
+        }
       }
     ],
     "closing": [
@@ -65,7 +86,12 @@
       },
       {
         "speaker": "Rainie",
-        "text": "Let's go!"
+        "text": "Let's go!",
+        "expression": {
+          "rainie": "happy",
+          "vera": "neutral",
+          "addie": "neutral"
+        }
       },
       {
         "speaker": "Narrator",
@@ -76,19 +102,39 @@
       },
       {
         "speaker": "Veracity",
-        "text": "What are they building?"
+        "text": "What are they building?",
+        "expression": {
+          "vera": "surprised",
+          "addie": "neutral",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Addie",
-        "text": "It's like a clock, but wrong."
+        "text": "It's like a clock, but wrong.",
+        "expression": {
+          "addie": "disgusted",
+          "vera": "surprised",
+          "rainie": "neutral"
+        }
       },
       {
         "speaker": "Rainie",
-        "text": "It must be the time device?"
+        "text": "It must be the time device?",
+        "expression": {
+          "rainie": "surprised",
+          "vera": "surprised",
+          "addie": "worried"
+        }
       },
       {
         "speaker": "Veracity",
-        "text": "They must be further along than Da thought."
+        "text": "They must be further along than Da thought.",
+        "expression": {
+          "vera": "sad",
+          "addie": "sad",
+          "rainie": "sad"
+        }
       }
     ]
   },
