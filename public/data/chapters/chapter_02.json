@@ -30,7 +30,7 @@
         "speaker": "Veracity",
         "text": "It doesn't seem real.",
         "expression": {
-          "vera": "confused",
+          "vera": "worried",
           "addie": "neutral",
           "rainie": "neutral"
         }
@@ -73,7 +73,8 @@
       },
       {
         "speaker": "Narrator",
-        "text": "You search carefully. More torn pieces lie scattered across the floor."
+        "text": "You search carefully. More torn pieces lie scattered across the floor.",
+        "hideCharacters": true
       }
     ],
     "midpoint": [
