@@ -15,7 +15,6 @@
     "characterFolders": {
       "vera": "vera_default",
       "addie": "addie_default",
-      "addie_home": "addie_home",
       "rainie": "rainie_default",
       "crone": "crone_default"
     }
@@ -34,7 +33,7 @@
         "speaker": "Addie",
         "text": "Are we ready?",
         "expression": {
-          "addie_home": "sad",
+          "addie": "sad",
           "vera": "neutral",
           "rainie": "neutral"
         }
@@ -45,7 +44,7 @@
         "expression": {
           "rainie": "happy",
           "vera": "neutral",
-          "addie_home": "neutral"
+          "addie": "neutral"
         }
       },
       {
@@ -58,7 +57,7 @@
         "expression": {
           "rainie": "surprised",
           "vera": "neutral",
-          "addie_home": "neutral"
+          "addie": "neutral"
         }
       },
       {
@@ -71,7 +70,7 @@
         "text": "This must track the moth. Da always thinks of everything.",
         "expression": {
           "vera": "happy",
-          "addie_home": "neutral",
+          "addie": "neutral",
           "rainie": "neutral"
         }
       },
@@ -85,7 +84,7 @@
         "text": "(whispering) Find him. Please.",
         "expression": {
           "vera": "sad",
-          "addie_home": "neutral",
+          "addie": "neutral",
           "rainie": "neutral"
         }
       },
@@ -117,7 +116,7 @@
         "speaker": "Addie",
         "text": "Stay close. These streets are not safe, especially for a young girl and two companions.",
         "expression": {
-          "addie_home": "sad",
+          "addie": "sad",
           "rainie": "sad"
         }
       },
@@ -195,7 +194,7 @@
         "expression": {
           "rainie": "happy",
           "vera": "neutral",
-          "addie_home": "neutral"
+          "addie": "neutral"
         },
         "launchGearPuzzle": true
       }
