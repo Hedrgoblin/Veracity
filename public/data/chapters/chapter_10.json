@@ -21,22 +21,24 @@
     "opening": [
       {
         "speaker": "Narrator",
-        "text": "Back at the Northern Sanctuary, a strange device hums to life. Gears spin faster. The air shimmers and bends."
+        "text": "Back at the Northern Sanctuary, a strange device hums to life. The air begins to shimmer and bend."
       },
       {
         "speaker": "Guildmaster",
         "text": "Yes! YES! The temporal resonance is building! We will reshape history itself!",
-        "expression": { "guildmaster_black": "happy" }
+        "expression": { "guildmaster_black": "excited" }
       },
       {
         "speaker": "Enforcer",
         "text": "The failsafe. When I give the signal, activate it!",
+        "hideCharacters": true,
         "expression": { "cultist_enforcer": "thinking" }
       },
       {
         "speaker": "Guildmaster",
         "text": "*whispers* I'm ready.",
-        "expression": { "guildmaster_black": "neutral" }
+        "hideCharacters": true,
+        "expression": { "guildmaster_black": "smirk" }
       },
       {
         "speaker": "Narrator",
@@ -57,12 +59,12 @@
       {
         "speaker": "Guildmaster",
         "text": "Impossible! The core has to stabilize...What did you do?!",
-        "expression": { "guildmaster_black": "angry" }
+        "expression": { "guildmaster_black": "outraged" }
       },
       {
         "speaker": "Book Keeper",
         "text": "I did exactly what you asked!",
-        "expression": { "cultist_bookkeeper": "angry" }
+        "expression": { "cultist_bookkeeper": "surprised" }
       },
       {
         "speaker": "Guildmaster",
@@ -72,12 +74,12 @@
       {
         "speaker": "Enforcer",
         "text": "We can rebuild.",
-        "expression": { "cultist_enforcer": "thinking" }
+        "expression": { "cultist_enforcer": "neutral" }
       },
       {
         "speaker": "Guildmaster",
         "text": "Not without the Professor.",
-        "expression": { "guildmaster_black": "sad" }
+        "expression": { "guildmaster_black": "scared" }
       },
       {
         "speaker": "Enforcer",
