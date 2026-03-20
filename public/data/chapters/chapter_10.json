@@ -31,7 +31,6 @@
       {
         "speaker": "Enforcer",
         "text": "The failsafe. When I give the signal, activate it!",
-        "hideCharacters": true,
         "expression": { "cultist_enforcer": "thinking" }
       },
       {
