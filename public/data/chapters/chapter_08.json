@@ -48,7 +48,7 @@
       },
       {
         "speaker": "Father",
-        "text": "No. Maybe. No. It was a thought experiment, nothing more. But I made the mistake of showing my ideas to the wrong person. The Order believes it can reshape history, undo their regrets.",
+        "text": "No. Maybe. No. It was a thought experiment, nothing more.",
         "hideCharacters": ["vera"],
         "showCharacters": ["da_default"],
         "expression": {
@@ -61,12 +61,12 @@
         "hideCharacters": ["da_default"],
         "showCharacters": ["vera"],
         "expression": {
-          "vera": "outraged"
+          "vera": "confused"
         }
       },
       {
         "speaker": "Father",
-        "text": "Because once, many years ago, I had a theory. I built a prototype, just a little thing. But the wrong person found it. I thought I had destroyed it, but it was too late.",
+        "text": "Because once, many years ago, I built a prototype, just a little thing. But the wrong person found it. I meant to destroy it, but it was too late.",
         "hideCharacters": ["vera"],
         "showCharacters": ["da_default"],
         "expression": {
@@ -75,11 +75,11 @@
       },
       {
         "speaker": "Veracity",
-        "text": "So it isn't really theoretical then?",
+        "text": "So it's more than a thought experiment.",
         "hideCharacters": ["da_default"],
         "showCharacters": ["vera"],
         "expression": {
-          "vera": "thinking"
+          "vera": "serious"
         }
       },
       {
@@ -89,7 +89,7 @@
       },
       {
         "speaker": "Father",
-        "text": "We dont have time to talk about this now... They're  trying to force me to complete the device, but I can't. I won't. It will never be what she wants.",
+        "text": "We dont have time to talk about this now... They want me to complete their version of a time travel device, but I can't. I won't. It will never be what she wants.",
         "hideCharacters": ["vera"],
         "showCharacters": ["da_default"],
         "expression": {
@@ -100,7 +100,7 @@
         "speaker": "Narrator",
         "text": "The door bursts open. Cultists surround you.",
         "hideCharacters": ["da_default"],
-        "showCharacters": ["cultist_guard", "cultist_guard_staff", "guildmaster"]
+        "showCharacters": ["cultist_guard", "cultist_guard_staff"]
       },
       {
         "speaker": "Guildmaster",

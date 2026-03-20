@@ -528,6 +528,7 @@ export default class ChapterScene extends Phaser.Scene {
     const npcFlipX = {
       'guildmaster': true,
       'guildmaster_black': true,
+      'cultist_guard_staff': true,
     };
     npcs.forEach(npcName => {
       if (this.chapterData.assets?.characters?.includes(npcName)) {
