@@ -914,7 +914,8 @@ export default class ChapterScene extends Phaser.Scene {
       });
     }
     const baseCharacter = variantToBase[character] || character;
-    const characterVariant = this.chapterData.assets?.characterFolders?.[baseCharacter] || `${baseCharacter}_default`;
+    const defaultVariant = this.textures.exists(`${baseCharacter}_default_body`) ? `${baseCharacter}_default` : baseCharacter;
+    const characterVariant = this.chapterData.assets?.characterFolders?.[baseCharacter] || defaultVariant;
     const expressionKey = `${characterVariant}_${expression}`;
     const expressionSprite = this.characters[`${baseCharacter}_expression`];
 
