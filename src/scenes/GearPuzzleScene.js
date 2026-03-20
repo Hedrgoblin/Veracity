@@ -6,8 +6,6 @@ const BG_PATH   = `${BASE}assets/images/backgrounds/`;
 
 // Exact debug-map colours with ±40 tolerance
 const COLOURS = {
-  yellow:  { r: 222, g: 255, b: 0   }, // #deff00 → gear_light indicator
-  magenta: { r: 210, g: 0,   b: 255 }, // #d200ff → gear_light_purple (decoration)
   green:   { r: 0,   g: 255, b: 48  }, // #00ff30 → gear_05
   blue:    { r: 0,   g: 120, b: 255 }, // #0078ff → gear_04
   purple:  { r: 150, g: 0,   b: 255 }, // #9600ff → gear_06
@@ -76,13 +74,9 @@ export default class GearPuzzleScene extends Phaser.Scene {
     bg('gcm_bg',    'puzzle_gear_clockmakers_01.png');
     bg('gcm_debug', 'puzzle_gear_clockmakers_01_debug.png');
 
-    gear('gear_04',           'gear_04.png');
-    gear('gear_05',           'gear_05.png');
-    gear('gear_06',           'gear_06.png');
-    gear('gear_light_purple', 'gear_light_purple.png');
-    gear('gear_light_green',  'gear_light_green.png');
-    gear('gear_light_red',    'gear_light_red.png');
-    gear('gear_light_off',    'gear_light_off.png');
+    gear('gear_04', 'gear_04.png');
+    gear('gear_05', 'gear_05.png');
+    gear('gear_06', 'gear_06.png');
   }
 
   create() {
@@ -120,8 +114,6 @@ export default class GearPuzzleScene extends Phaser.Scene {
         h: b.h  * debugScaleY,
       }));
 
-    const yellowBlobs  = blobs('yellow');
-    const magentaBlobs = blobs('magenta');
     // Interactive gears: exactly one each — take the largest blob
     const largest = (list) => list.length === 0 ? [] : [list.reduce((a, b) => (a.w * a.h > b.w * b.h ? a : b))];
     const greenBlobs  = largest(blobs('green'));
@@ -129,26 +121,10 @@ export default class GearPuzzleScene extends Phaser.Scene {
     const purpleBlobs = largest(blobs('purple'));
 
     console.log('GearPuzzle blobs:', {
-      yellow:  yellowBlobs.map(b  => `(${Math.round(b.x)},${Math.round(b.y)}) ${Math.round(b.w)}×${Math.round(b.h)}`),
-      magenta: magentaBlobs.map(b => `(${Math.round(b.x)},${Math.round(b.y)}) ${Math.round(b.w)}×${Math.round(b.h)}`),
-      green:   greenBlobs.map(b  => `(${Math.round(b.x)},${Math.round(b.y)}) ${Math.round(b.w)}×${Math.round(b.h)}`),
-      blue:    blueBlobs.map(b   => `(${Math.round(b.x)},${Math.round(b.y)}) ${Math.round(b.w)}×${Math.round(b.h)}`),
-      purple:  purpleBlobs.map(b => `(${Math.round(b.x)},${Math.round(b.y)}) ${Math.round(b.w)}×${Math.round(b.h)}`),
+      green:  greenBlobs.map(b  => `(${Math.round(b.x)},${Math.round(b.y)}) ${Math.round(b.w)}×${Math.round(b.h)}`),
+      blue:   blueBlobs.map(b   => `(${Math.round(b.x)},${Math.round(b.y)}) ${Math.round(b.w)}×${Math.round(b.h)}`),
+      purple: purpleBlobs.map(b => `(${Math.round(b.x)},${Math.round(b.y)}) ${Math.round(b.w)}×${Math.round(b.h)}`),
     });
-
-    // ── Place gear_light_purple decorations (magenta, behind gears) ──
-    magentaBlobs.forEach(b => {
-      this.add.image(b.x, b.y, 'gear_light_purple')
-        .setScale(this.imgScale)
-        .setDepth(1);
-    });
-
-    // ── Place gear_light indicators (yellow, top-most layer) ─────────
-    this.indicators = yellowBlobs.map(b =>
-      this.add.image(b.x, b.y, 'gear_light_off')
-        .setScale(this.imgScale * 0.5)
-        .setDepth(10)
-    );
 
     // ── Rotating interactive gears ────────────────────────────────────
     const GEAR_Y_OFFSET = 30;
@@ -261,21 +237,12 @@ export default class GearPuzzleScene extends Phaser.Scene {
         });
       });
 
-      const idx = this.completedSteps - 1;
-      if (this.indicators[idx]) this.indicators[idx].setTexture('gear_light_green');
-
       if (this.completedSteps >= this.sequence.length - 1) {
         this.triggerWin();
       } else {
         this.statusText.setText('Connection made! Continue...');
       }
     } else {
-      this.indicators.forEach(ind => {
-        if (ind.texture.key === 'gear_light_off') {
-          ind.setTexture('gear_light_red');
-          this.time.delayedCall(900, () => ind.setTexture('gear_light_off'));
-        }
-      });
       this.statusText.setText('Wrong connection — try again');
       this.time.delayedCall(1200, () => this.statusText.setText(''));
     }
@@ -283,7 +250,6 @@ export default class GearPuzzleScene extends Phaser.Scene {
 
   triggerWin() {
     this.solved = true;
-    this.indicators.forEach(ind => ind.setTexture('gear_light_green'));
     const W = this.cameras.main.width;
     const H = this.cameras.main.height;
     this.time.delayedCall(600, () => {

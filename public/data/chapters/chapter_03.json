@@ -33,7 +33,7 @@
         "speaker": "Addie",
         "text": "Are we ready?",
         "expression": {
-          "addie": "sad",
+          "addie": "worried",
           "vera": "neutral",
           "rainie": "neutral"
         }
@@ -69,7 +69,7 @@
         "speaker": "Veracity",
         "text": "This must track the moth. Da always thinks of everything.",
         "expression": {
-          "vera": "happy",
+          "vera": "neutral",
           "addie": "neutral",
           "rainie": "neutral"
         }
@@ -97,7 +97,7 @@
         "speaker": "Rainie",
         "text": "Now all we have to do is follow it.",
         "expression": {
-          "rainie": "happy"
+          "rainie": "grateful"
         }
       },
       {
@@ -116,7 +116,7 @@
         "speaker": "Addie",
         "text": "Stay close. These streets are not safe, especially for a young girl and two companions.",
         "expression": {
-          "addie": "sad",
+          "addie": "distrust",
           "rainie": "sad"
         }
       },
@@ -153,7 +153,7 @@
         "speaker": "Vera",
         "text": "Do I know you?",
         "expression": {
-          "vera": "thinking"
+          "vera": "grateful"
         },
         "hideCharacters": ["crone"]
       },
@@ -171,7 +171,7 @@
         "text": "why does she feel so familiar?",
         "hideCharacters": ["crone"],
         "expression": {
-          "vera": "neutral"
+          "vera": "confused"
         }
       },
       {
@@ -179,7 +179,7 @@
         "text": "Come on! the moth is in there.",
         "expression": {
           "vera": "neutral",
-          "rainie": "neutral"
+          "rainie": "grateful"
         }
       },
       {
