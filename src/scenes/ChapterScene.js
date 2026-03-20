@@ -509,7 +509,7 @@ export default class ChapterScene extends Phaser.Scene {
       'cultist_bookkeeper': width * 0.65,
       'gentleman_paper': width / 2 + 30,
       'cultist_guard': width * 0.20,
-      'cultist_guard_staff': width * 0.50,
+      'cultist_guard_staff': width * 0.80,
       'guildmaster': width * 0.69,
       'guildmaster_black': width * 0.69,
     };
