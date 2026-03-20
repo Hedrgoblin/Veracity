@@ -34,7 +34,7 @@
         "speaker": "Addie",
         "text": "There. That door has extra guards. Whatever they're protecting, it must be important.",
         "expression": {
-          "addie": "neutral",
+          "addie": "distrust",
           "vera": "neutral",
           "rainie": "neutral"
         }
@@ -61,7 +61,7 @@
         "speaker": "Rainie",
         "text": "I saw some gears that looked important back there... I wonder what happens if I move one... be right back.",
         "expression": {
-          "rainie": "neutral",
+          "rainie": "excited",
           "vera": "neutral",
           "addie": "neutral"
         }
@@ -84,7 +84,7 @@
         "speaker": "Rainie",
         "text": "Did I miss anything?",
         "expression": {
-          "rainie": "neutral",
+          "rainie": "excited",
           "vera": "neutral",
           "addie": "neutral"
         }
@@ -102,7 +102,7 @@
     "closing": [
       {
         "speaker": "Narrator",
-        "text": "You step out of the hallway into a... lovely warm cozy study. There, at a bench, you see the moth. And your father.",
+        "text": "You step out of the hallway into a... lovely warm cozy study. There, you see the moth. And your father.",
         "background": "northern_sanctuary_library_small",
         "hideCharacters": true,
         "showCharacters": ["da_moth"]
@@ -113,7 +113,7 @@
         "showCharacters": ["vera"],
         "hideCharacters": ["da_moth"],
         "expression": {
-          "vera": "neutral"
+          "vera": "surprised"
         }
       },
       {

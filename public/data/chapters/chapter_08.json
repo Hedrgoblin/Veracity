@@ -43,7 +43,7 @@
         "hideCharacters": ["da_default"],
         "showCharacters": ["vera"],
         "expression": {
-          "vera": "neutral"
+          "vera": "confused"
         }
       },
       {
@@ -52,7 +52,7 @@
         "hideCharacters": ["vera"],
         "showCharacters": ["da_default"],
         "expression": {
-          "da_default": "neutral"
+          "da_default": "thinking"
         }
       },
       {
@@ -61,7 +61,7 @@
         "hideCharacters": ["da_default"],
         "showCharacters": ["vera"],
         "expression": {
-          "vera": "neutral"
+          "vera": "outraged"
         }
       },
       {
@@ -70,7 +70,7 @@
         "hideCharacters": ["vera"],
         "showCharacters": ["da_default"],
         "expression": {
-          "da_default": "neutral"
+          "da_default": "sad"
         }
       },
       {
@@ -93,7 +93,7 @@
         "hideCharacters": ["vera"],
         "showCharacters": ["da_default"],
         "expression": {
-          "da_default": "neutral"
+          "da_default": "sad"
         }
       },
       {
@@ -116,8 +116,8 @@
         "hideCharacters": ["guildmaster"],
         "showCharacters": ["vera", "addie"],
         "expression": {
-          "vera": "neutral",
-          "addie": "neutral"
+          "vera": "outraged",
+          "addie": "outraged"
         }
       },
       {
@@ -134,9 +134,9 @@
         "hideCharacters": ["guildmaster"],
         "showCharacters": ["vera", "addie", "rainie"],
         "expression": {
-          "vera": "neutral",
-          "addie": "neutral",
-          "rainie": "neutral"
+          "vera": "confused",
+          "addie": "serious",
+          "rainie": "outraged"
         }
       },
       {
@@ -146,8 +146,8 @@
         "showCharacters": ["guildmaster"],
         "moveCharacters": { "guildmaster": "center" },
         "expression": {
-          "guildmaster": "neutral",
-          "rainie": "neutral"
+          "guildmaster": "grateful",
+          "rainie": "outraged"
         }
       },
       {
@@ -156,8 +156,8 @@
         "hideCharacters": ["guildmaster"],
         "showCharacters": ["da_default"],
         "expression": {
-          "da_default": "neutral",
-          "rainie": "neutral"
+          "da_default": "sad",
+          "rainie": "outraged"
         }
       },
       {
@@ -167,8 +167,8 @@
         "showCharacters": ["guildmaster"],
         "moveCharacters": { "guildmaster": "center" },
         "expression": {
-          "guildmaster": "neutral",
-          "rainie": "neutral"
+          "guildmaster": "confused",
+          "rainie": "outraged"
         }
       },
       {
@@ -178,7 +178,7 @@
         "showCharacters": ["vera"],
         "expression": {
           "vera": "neutral",
-          "rainie": "neutral"
+          "rainie": "scared"
         }
       },
       {
@@ -187,7 +187,7 @@
         "hideCharacters": ["vera"],
         "showCharacters": ["guildmaster"],
         "moveCharacters": { "guildmaster": "center" },
-        "expression": { "guildmaster": "happy", "rainie": "neutral" }
+        "expression": { "guildmaster": "smirk", "rainie": "outraged" }
       },
       {
         "speaker": "Narrator",
