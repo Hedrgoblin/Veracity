@@ -36,7 +36,6 @@
       {
         "speaker": "Guildmaster",
         "text": "*whispers* I'm ready.",
-        "hideCharacters": true,
         "expression": { "guildmaster_black": "neutral" }
       },
       {
