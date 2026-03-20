@@ -70,7 +70,7 @@
         "speaker": "Addie",
         "text": "There. A service entrance on the east side. It's used by workers. Maybe we can blend in.",
         "expression": {
-          "addie": "thinking",
+          "addie": "worried",
           "vera": "neutral",
           "rainie": "neutral"
         }
@@ -113,7 +113,7 @@
         "speaker": "Addie",
         "text": "It's like a clock, but wrong.",
         "expression": {
-          "addie": "disgusted",
+          "addie": "serious",
           "vera": "surprised",
           "rainie": "neutral"
         }
