@@ -59,7 +59,7 @@ export default class SubscriptionGateScene extends Phaser.Scene {
     this.add.text(
       width / 2,
       height / 2 - 10,
-      'We hope you have enjoyed Chapter 1.\n\nTo continue, please subscribe.',
+      'We hope you enjoyed chapters one and two.\n\nTo continue, please subscribe.',
       messageStyle
     ).setOrigin(0.5);
 

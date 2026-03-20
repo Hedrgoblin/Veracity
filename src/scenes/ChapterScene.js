@@ -31,8 +31,8 @@ export default class ChapterScene extends Phaser.Scene {
     // Clear cached chapter data to ensure fresh JSON is used (avoids stale characterFolders)
     chapterManager.clearCache();
 
-    // Check subscription for chapters 2+
-    if (this.chapterNumber >= 2 && !gameStateManager.isSubscribed()) {
+    // Check subscription for chapters 3+
+    if (this.chapterNumber >= 3 && !gameStateManager.isSubscribed()) {
       // Show subscription gate instead
       this.scene.start('SubscriptionGateScene', { nextChapter: this.chapterNumber });
       return;
