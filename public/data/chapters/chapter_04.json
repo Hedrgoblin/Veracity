@@ -129,7 +129,7 @@
         "showCharacters": ["cultist_enforcer"],
         "hideCharacters": ["cultist_bookkeeper"],
         "expression": {
-          "cultist_enforcer": "disgust"
+          "cultist_enforcer": "disgusted"
         }
       },
       {
