@@ -2020,7 +2020,7 @@ export default class ChapterScene extends Phaser.Scene {
     this.cameras.main.fadeOut(1000, 0, 0, 0);
 
     // Determine next chapter — use chapterData directly to avoid stale manager state
-    const nextChapter = this.chapterData?.nextChapter ?? (this.chapterNumber + 1);
+    const nextChapter = this.chapterData?.nextChapter;
     console.log('[completeChapter] chapter:', this.chapterNumber, '→ nextChapter:', nextChapter, 'subscribed:', gameStateManager.isSubscribed());
 
     this.time.delayedCall(1000, () => {
