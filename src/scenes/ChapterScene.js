@@ -29,7 +29,7 @@ const CHARACTER_EXPRESSIONS = {
   'rainie_clockworker':['angry','confused','disgusted','distrust','excited','grateful','happy','neutral','outraged','sad','scared','serious','smirk','surprised','thinking','worried'],
   'rainie_default':    ['angry','confused','disgusted','distrust','excited','grateful','happy','neutral','outraged','sad','scared','serious','smirk','surprised','thinking','worried'],
   'rainie_pajamas':    ['angry','confused','disgusted','distrust','excited','grateful','happy','neutral','outraged','sad','scared','serious','smirk','surprised','thinking','worried'],
-  'vera_clockworker':  ['angry','disgusted','happy','neutral','sad','smirk','surprised','thinking'],
+  'vera_clockworker':  ['angry','confused','disgusted','distrust','excited','grateful','happy','neutral','outraged','sad','scared','serious','smirk','surprised','thinking','worried'],
   'vera_default':      ['angry','confused','disgusted','distrust','excited','grateful','happy','neutral','outraged','sad','scared','serious','smirk','surprised','thinking','worried'],
   'vera_green':        ['angry','confused','disgusted','distrust','excited','grateful','happy','neutral','outraged','sad','scared','serious','smirk','surprised','thinking','worried'],
   'vera_pajamas':      ['angry','confused','disgusted','distrust','excited','grateful','happy','neutral','outraged','sad','scared','serious','smirk','surprised','thinking','worried'],
