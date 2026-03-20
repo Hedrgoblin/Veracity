@@ -14,16 +14,9 @@
       "cultist_bookkeeper",
       "cultist_enforcer"
     ],
-    "characterFolders": {
-      "vera": "vera_default",
-      "addie": "addie_default",
-      "rainie": "rainie_default"
-    }
+    "characterFolders": {}
   },
-  "companions": [
-    "addie",
-    "rainie"
-  ],
+  "companions": [],
   "dialogue": {
     "opening": [
       {
@@ -33,17 +26,20 @@
       {
         "speaker": "Guildmaster",
         "text": "Yes! YES! The temporal resonance is building! We will reshape history itself!",
-        "hideCharacters": true
+        "hideCharacters": true,
+        "expression": { "guildmaster_black": "happy" }
       },
       {
         "speaker": "Enforcer",
         "text": "The failsafe. When I give the signal, activate it!",
-        "hideCharacters": true
+        "hideCharacters": true,
+        "expression": { "cultist_enforcer": "thinking" }
       },
       {
         "speaker": "Guildmaster",
         "text": "*whispers* I'm ready.",
-        "hideCharacters": true
+        "hideCharacters": true,
+        "expression": { "guildmaster_black": "neutral" }
       },
       {
         "speaker": "Narrator",
@@ -58,43 +54,53 @@
       },
       {
         "speaker": "Book Keeper",
-        "text": "Grandmaster! The readings! The temporal field has destabilized!"
+        "text": "Grandmaster! The readings! The temporal field has destabilized!",
+        "expression": { "cultist_bookkeeper": "surprised" }
       },
       {
         "speaker": "Guildmaster",
-        "text": "Impossible! The core has to stabilize...What did you do?!"
+        "text": "Impossible! The core has to stabilize...What did you do?!",
+        "expression": { "guildmaster_black": "angry" }
       },
       {
         "speaker": "Book Keeper",
-        "text": "I did exactly what you asked!"
+        "text": "I did exactly what you asked!",
+        "expression": { "cultist_bookkeeper": "angry" }
       },
       {
         "speaker": "Guildmaster",
-        "text": "No. NO! This was supposed to save us! To give me back what I have lost!"
+        "text": "No. NO! This was supposed to save us! To give me back what I have lost!",
+        "expression": { "guildmaster_black": "surprised" }
       },
       {
         "speaker": "Enforcer",
-        "text": "We can rebuild."
+        "text": "We can rebuild.",
+        "expression": { "cultist_enforcer": "thinking" }
       },
       {
         "speaker": "Guildmaster",
-        "text": "Not without the Professor."
+        "text": "Not without the Professor.",
+        "expression": { "guildmaster_black": "sad" }
       },
       {
         "speaker": "Enforcer",
-        "text": "And yet, you let him go. You let them all go."
+        "text": "And yet, you let him go. You let them all go.",
+        "expression": { "cultist_enforcer": "angry" }
       },
       {
         "speaker": "Guildmaster",
-        "text": "They will return. She will come to me."
+        "text": "They will return. She will come to me.",
+        "expression": { "guildmaster_black": "smirk" }
       },
       {
         "speaker": "Enforcer",
-        "text": "How can you be so sure?"
+        "text": "How can you be so sure?",
+        "expression": { "cultist_enforcer": "thinking" }
       },
       {
         "speaker": "Guildmaster",
-        "text": "Because she knows now. but only part. And, it's what I would do."
+        "text": "Because she knows now. but only part. And, it's what I would do.",
+        "expression": { "guildmaster_black": "smirk" }
       }
     ]
   },
